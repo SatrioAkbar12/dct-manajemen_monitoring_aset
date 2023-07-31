@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dokumen_kendaraan');
+        Schema::dropIfExists('tipe_dokumen_kendaraan');
     }
 };

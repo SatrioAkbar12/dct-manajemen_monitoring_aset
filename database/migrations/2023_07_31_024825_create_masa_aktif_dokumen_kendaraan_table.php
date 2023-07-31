@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger("id_kendaraan");
-            $table->unsignedBigInteger("id_dokumen_kendaraan");
+            $table->unsignedBigInteger("id_tipe_dokumen");
             $table->date("tanggal_masa_berlaku");
 
-            $table->foreign("id_kendaraan")->references("id")->on("kendaraan");
-            $table->foreign("id_dokumen_kendaraan")->references("id")->on("dokumen_kendaraan");
+            $table->foreign("id_kendaraan")->references("id")->on("kendaraan")->onDelete("cascade");
+            $table->foreign("id_tipe_dokumen")->references("id")->on("tipe_dokumen_kendaraan")->onDelete("cascade");
 
             $table->softDeletes();
         });

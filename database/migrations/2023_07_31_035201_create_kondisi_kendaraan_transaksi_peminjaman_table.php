@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('kondisi_kendaraan_transaksi_peminjaman', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger("id_transaksi_peminjaman");
+            $table->unsignedBigInteger("id_transaksi");
             $table->string("status_kondisi");
             $table->text("deskripsi");
             $table->string("foto");
+
+            $table->foreign("id_transaksi")->references("id")->on("transaksi_peminjaman")->onDelete("cascade");
 
             $table->softDeletes();
         });
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kondisi_kendaraan');
+        Schema::dropIfExists('kondisi_kendaraan_transaksi_peminjaman');
     }
 };

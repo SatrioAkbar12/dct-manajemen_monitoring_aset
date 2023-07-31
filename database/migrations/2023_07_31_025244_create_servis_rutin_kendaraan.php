@@ -26,6 +26,8 @@ return new class extends Migration
             $table->boolean("cek_ac");
             $table->date("tanggal_servis");
 
+            $table->foreign("id_kendaraan")->references("id")->on("kendaraan")->onDelete("cascade");
+
             $table->softDeletes();
         });
     }

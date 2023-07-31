@@ -24,8 +24,8 @@ return new class extends Migration
             $table->text("kendala_kondisi");
             $table->string("foto_kondisi");
 
-            $table->foreign("id_kendaraan")->references("id")->on("kendaraan");
-            // $table->foreign("id_user")->references("id")->on("users");           menyesuaikan kalau sudah ada user
+            $table->foreign("id_kendaraan")->references("id")->on("kendaraan")->onDelete("cascade");
+            $table->foreign("id_user")->references("id")->on("users")->onDelete("cascade");
 
             $table->softDeletes();
         });
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('peminjaman_kendaraan');
+        Schema::dropIfExists('transaksi_peminjaman');
     }
 };
