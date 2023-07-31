@@ -322,12 +322,17 @@ return [
         [
             'text' => 'Transaksi Peminjaman',
             'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-list',
         ],
         [
             'text' => 'Servis Rutin',
             'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-fw fa-wrench',
+        ],
+        [
+            'text' => 'Masa Berlaku Dokumen Kendaraan',
+            'url'  => 'admin/settings',
+            'icon' => 'fas fa-fw fa-clock',
         ],
         [
             'text'    => 'Master Data',
@@ -336,14 +341,17 @@ return [
                 [
                     'text' => 'User',
                     'url'  => '#',
+                    'icon' => 'fas fa-fw fa-user'
                 ],
                 [
                     'text' => 'Kendaraan',
                     'url'  => '#',
+                    'icon' => 'fas fa-fw fa-car'
                 ],
                 [
                     'text' => 'Jenis Dokumen Kendaraan',
                     'url'  => '#',
+                    'icon' => 'fas fa-fw fa-file'
                 ],
             ],
         ],
