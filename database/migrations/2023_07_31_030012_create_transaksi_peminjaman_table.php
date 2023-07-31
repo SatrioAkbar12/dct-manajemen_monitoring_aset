@@ -18,11 +18,8 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger("id_kendaraan");
             $table->unsignedBigInteger("id_user");
-            $table->dateTime("tanggal_waktu_kembali");
+            $table->dateTime("target_tanggal_waktu_kembali");
             $table->boolean("aktif");
-            $table->string("status_kondisi");
-            $table->text("kendala_kondisi");
-            $table->string("foto_kondisi");
 
             $table->foreign("id_kendaraan")->references("id")->on("kendaraan")->onDelete("cascade");
             $table->foreign("id_user")->references("id")->on("users")->onDelete("cascade");
