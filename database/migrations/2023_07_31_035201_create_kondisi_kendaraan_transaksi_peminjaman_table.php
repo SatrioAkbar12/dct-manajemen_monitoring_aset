@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('kondisi_kendaraan_transaksi_peminjaman', function (Blueprint $table) {
             $table->id();
-            $table->string("username")->unique();
-            $table->string('nama');
-            $table->string('email')->unique();
-            // $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
             $table->timestamps();
-            $table->boolean("memiliki_sim");
+            $table->unsignedBigInteger("id_transaksi_peminjaman");
+            $table->string("status_kondisi");
+            $table->text("deskripsi");
+            $table->string("foto");
 
             $table->softDeletes();
         });
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('kondisi_kendaraan');
     }
 };

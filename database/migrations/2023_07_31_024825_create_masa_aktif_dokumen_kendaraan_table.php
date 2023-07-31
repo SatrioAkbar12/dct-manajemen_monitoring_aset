@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('masa_aktif_dokumen_kendaraan', function (Blueprint $table) {
             $table->id();
-            $table->string("username")->unique();
-            $table->string('nama');
-            $table->string('email')->unique();
-            // $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
             $table->timestamps();
-            $table->boolean("memiliki_sim");
+            $table->unsignedBigInteger("id_kendaraan");
+            $table->unsignedBigInteger("id_dokumen_kendaraan");
+            $table->date("tanggal_masa_berlaku");
+
+            $table->foreign("id_kendaraan")->references("id")->on("kendaraan");
+            $table->foreign("id_dokumen_kendaraan")->references("id")->on("dokumen_kendaraan");
 
             $table->softDeletes();
         });
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('masa_aktif_dokumen_kendaraan');
     }
 };
