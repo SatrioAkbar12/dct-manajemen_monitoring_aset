@@ -13,7 +13,7 @@ class DokumenController extends Controller
         return view('dokumen.index', ['data' => $data]);
     }
 
-    public function create(Request $request) {
+    public function store(Request $request) {
         TipeDokumenKendaraan::create([
             'nama_dokumen' => $request->nama
         ]);
