@@ -1,0 +1,40 @@
+@extends('adminlte::page')
+
+@section('title', 'Update Data User')
+
+@section('content_header')
+    <h1>Update User</h1>
+@stop
+
+@section('content')
+    <div class="card">
+        <form action="/user/{{ $data->id }}/update" method="POST">
+            {{ csrf_field() }}
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="username" value="{{ $data->username }}" required>
+                </div>
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" class="form-control" name="nama" value="{{ $data->nama }}" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email" value="{{ $data->email }}" required>
+                </div>
+                <div class="form-group">
+                    <label>Memiliki SIM</label>
+                    <input type="checkbox" class="form-control" name="memiliki_sim" {{ $data->memiliki_sim == 1 ? "checked" : ""}}>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success">Simpan</button>
+            </div>
+        </form>
+    </div>
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
