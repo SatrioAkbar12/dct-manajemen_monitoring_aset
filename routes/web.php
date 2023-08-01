@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DokumenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/kendaraan', function () {
     return view('kendaraan.index');
 });
+
+Route::get('/tipe-dokumen', [DokumenController::class, 'index']);
+Route::post('/tipe-dokumen', [DokumenController::class, 'create']);
+Route::get('/tipe-dokumen/{id}/update', [DokumenController::class, 'show']);
+Route::post('/tipe-dokumen/{id}/update', [DokumenController::class, 'update']);
+Route::get('/tipe-dokumen/{id}/delete', [DokumenController::class, 'del']);
