@@ -345,12 +345,12 @@ return [
                 ],
                 [
                     'text' => 'Kendaraan',
-                    'url'  => '#',
+                    'url'  => 'kendaraan',
                     'icon' => 'fas fa-fw fa-car'
                 ],
                 [
                     'text' => 'Jenis Dokumen Kendaraan',
-                    'url'  => '#',
+                    'url'  => 'tipe-dokumen',
                     'icon' => 'fas fa-fw fa-file'
                 ],
             ],
