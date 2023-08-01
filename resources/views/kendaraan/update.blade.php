@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Tambah Data Kendaraan')
+@section('title', 'Update Data Kendaraan')
 
 @section('content_header')
     <h1>Update Data Kendaraan</h1>

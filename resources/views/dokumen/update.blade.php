@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Tambah Data Tipe Dokumen')
+@section('title', 'Update Data Tipe Dokumen')
 
 @section('content_header')
     <h1>Update Tipe Dokumen Kendaraan</h1>
