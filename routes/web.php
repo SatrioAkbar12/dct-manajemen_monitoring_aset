@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/user', [UserController::class, 'index']);
+Route::post('/user', [UserController::class, 'store']);
+Route::get('/user/{id}/update', [UserController::class, 'show']);
+Route::post('/user/{id}/update', [UserController::class, 'update']);
+Route::get('/user/{id}/delete', [UserController::class, 'del']);
 
 Route::get('/kendaraan', [KendaraanController::class, 'index']);
 Route::post('/kendaraan', [KendaraanController::class, 'store']);
