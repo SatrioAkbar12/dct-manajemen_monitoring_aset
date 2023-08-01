@@ -340,7 +340,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'User',
-                    'url'  => '#',
+                    'url'  => 'user',
                     'icon' => 'fas fa-fw fa-user'
                 ],
                 [
