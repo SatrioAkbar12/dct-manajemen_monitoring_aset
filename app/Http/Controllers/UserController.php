@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -20,7 +21,7 @@ class UserController extends Controller
             'username' => $request->username,
             'nama' => $request->nama,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'memiliki_sim' => $request->memiliki_sim == 'on' ? 1 : 0
         ]);
 
