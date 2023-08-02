@@ -9,14 +9,12 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index() {
-        $data = User::all();
+        $data = User::paginate(10);
 
         return view('user.index', ['data' => $data]);
     }
 
     public function store(Request $request) {
-        // return $request->memiliki_sim
-
         User::create([
             'username' => $request->username,
             'nama' => $request->nama,

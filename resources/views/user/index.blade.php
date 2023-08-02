@@ -14,31 +14,42 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
             <hr>
 
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Username</th>
-                        <th>Nama Lengkap</th>
-                        <th>Memiliki SIM</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($data as $d)
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td>{{ $d->id }}</td>
-                            <td>{{ $d->username }}</td>
-                            <td>{{ $d->nama }}</td>
-                            <td><input type="checkbox" class="form-control" {{ $d->memiliki_sim == 1 ? 'checked' : '' }} disabled></td>
-                            <td class="text-center">
-                                <a href="/user/{{ $d->id }}/update"><button type="button" class="btn btn-warning">Update</button></a>
-                                <a href="/user/{{ $d->id }}/delete"><button type="button" class="btn btn-danger">Delete</button></a>
-                            </td>
+                            <th>Id</th>
+                            <th>Username</th>
+                            <th>Nama Lengkap</th>
+                            <th>Memiliki SIM</th>
+                            <th>Aksi</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $d)
+                            <tr>
+                                <td>{{ $d->id }}</td>
+                                <td>{{ $d->username }}</td>
+                                <td>{{ $d->nama }}</td>
+                                <td class="text-center">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" {{ $d->memiliki_sim == 1 ? 'checked' : '' }} disabled>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <a href="/user/{{ $d->id }}/update"><button type="button" class="btn btn-warning">Update</button></a>
+                                    <a href="/user/{{ $d->id }}/delete"><button type="button" class="btn btn-danger">Delete</button></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+            <div class="d-flex justify-content-center">
+                {{ $data->links() }}
+            </div>
         </div>
     </div>
 
@@ -68,9 +79,9 @@
                             <label>Password</label>
                             <input type="password" class="form-control" name="password" required>
                         </div>
-                        <div class="form-group">
-                            <label>Memiliki SIM?</label>
-                            <input type="checkbox" class="form-control" name="memiliki_sim">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="memilikiSim" name="memiliki_sim">
+                            <label class="form-check-label" for="memilikiSim">Memiliki SIM?</label>
                         </div>
                     </div>
                     <div class="modal-footer">
