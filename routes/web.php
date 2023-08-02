@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\MasaAktifDokumenController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,3 +42,5 @@ Route::post('/tipe-dokumen', [DokumenController::class, 'store']);
 Route::get('/tipe-dokumen/{id}/update', [DokumenController::class, 'show']);
 Route::post('/tipe-dokumen/{id}/update', [DokumenController::class, 'update']);
 Route::get('/tipe-dokumen/{id}/delete', [DokumenController::class, 'del']);
+
+Route::get('/masa-aktif-dokumen', [MasaAktifDokumenController::class, 'index']);
