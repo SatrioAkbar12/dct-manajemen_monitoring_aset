@@ -10,86 +10,43 @@
     <p>Semua data mengenai aset kendaraan yang dimiliki</p>
 
     <div class="card">
-        {{-- <div class="card-header">
-            <div class="card-title">
-            </div>
-        </div> --}}
         <div class="card-body">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
             <hr>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nomor Polisi</th>
-                        <th>Merk</th>
-                        <th>Jenis Kendaraan</th>
-                        <th>Warna</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                {{-- <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>B 123 A</td>
-                        <td>Daihatsu</td>
-                        <td>Van</td>
-                        <td>Putih</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-warning">Update</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>B 123 B</td>
-                        <td>Daihatsu</td>
-                        <td>Van</td>
-                        <td>Putih</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-warning">Update</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>B 123 C</td>
-                        <td>Daihatsu</td>
-                        <td>Van</td>
-                        <td>Putih</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-warning">Update</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>B 123 D</td>
-                        <td>Daihatsu</td>
-                        <td>Van</td>
-                        <td>Putih</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-warning">Update</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                </tbody> --}}
-                <tbody>
-                    @foreach ($data as $d)
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td>{{ $d->id }}</td>
-                            <td>{{ $d->nopol}}</td>
-                            <td>{{ $d->merk }}</td>
-                            <td>{{ $d->jenis_kendaraan }}</td>
-                            <td>{{ $d->warna }}</td>
-                            <td class="text-center">
-                                <a href="/kendaraan/{{ $d->id }}/update"><button type="button" class="btn btn-warning">Update</button></a>
-                                <a href="/kendaraan/{{ $d->id }}/delete"><button type="button" class="btn btn-danger">Delete</button></a>
-                            </td>
+                            <th>Id</th>
+                            <th>Nomor Polisi</th>
+                            <th>Merk</th>
+                            <th>Jenis Kendaraan</th>
+                            <th>Warna</th>
+                            <th>Aksi</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $d)
+                            <tr>
+                                <td>{{ $d->id }}</td>
+                                <td>{{ $d->nopol}}</td>
+                                <td>{{ $d->merk }}</td>
+                                <td>{{ $d->jenis_kendaraan }}</td>
+                                <td>{{ $d->warna }}</td>
+                                <td class="text-center">
+                                    <a href="/kendaraan/{{ $d->id }}/update"><button type="button" class="btn btn-warning">Update</button></a>
+                                    <a href="/kendaraan/{{ $d->id }}/delete"><button type="button" class="btn btn-danger">Delete</button></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+            <div class="d-flex justify-content-center">
+                {{ $data->links() }}
+            </div>
         </div>
     </div>
 
