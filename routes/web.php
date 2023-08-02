@@ -44,3 +44,7 @@ Route::post('/tipe-dokumen/{id}/update', [DokumenController::class, 'update']);
 Route::get('/tipe-dokumen/{id}/delete', [DokumenController::class, 'del']);
 
 Route::get('/masa-aktif-dokumen', [MasaAktifDokumenController::class, 'index']);
+Route::get('/masa-aktif-dokumen/{id_kendaraan}', [MasaAktifDokumenController::class, 'getKendaraan']);
+Route::post('/masa-aktif-dokumen/{id_kendaraan}', [MasaAktifDokumenController::class, 'store']);
+Route::post('/masa-aktif-dokumen/{id_kendaraan}/{id}', [MasaAktifDokumenController::class, 'update']);
+Route::get('/masa-aktif-dokumen/{id_kendaraan}/{id}/delete', [MasaAktifDokumenController::class, 'del']);
