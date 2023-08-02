@@ -79,9 +79,12 @@
                             <label>Password</label>
                             <input type="password" class="form-control" name="password" required>
                         </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="memilikiSim" name="memiliki_sim">
-                            <label class="form-check-label" for="memilikiSim">Memiliki SIM?</label>
+                        <div class="form-group">
+                            <label>Memiliki SIM</label>
+                            <select class="form-control" name="memiliki_sim">
+                                <option value="1">Ya</option>
+                                <option value="0">Tidak</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">

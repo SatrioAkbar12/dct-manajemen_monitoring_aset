@@ -20,7 +20,7 @@ class UserController extends Controller
             'nama' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'memiliki_sim' => $request->memiliki_sim == 'on' ? 1 : 0
+            'memiliki_sim' => $request->memiliki_sim
         ]);
 
         return redirect('/user');
@@ -37,7 +37,7 @@ class UserController extends Controller
             'nama' => $request->nama,
             'username' => $request->username,
             'email' => $request->email,
-            'memiliki_sim' => $request->memiliki_sim == 'on' ? 1 : 0
+            'memiliki_sim' => $request->memiliki_sim
         ]);
 
         return redirect('/user');

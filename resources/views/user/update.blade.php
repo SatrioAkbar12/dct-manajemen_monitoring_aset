@@ -25,7 +25,10 @@
                 </div>
                 <div class="form-group">
                     <label>Memiliki SIM</label>
-                    <input type="checkbox" class="form-control" name="memiliki_sim" {{ $data->memiliki_sim == 1 ? "checked" : ""}}>
+                    <select class="form-control" name="memiliki_sim">
+                        <option value="1">Ya</option>
+                        <option value="0">Tidak</option>
+                    </select>
                 </div>
             </div>
             <div class="card-footer">
