@@ -51,3 +51,5 @@ Route::post('/masa-aktif-dokumen/{id_kendaraan}/{id}', [MasaAktifDokumenControll
 Route::get('/masa-aktif-dokumen/{id_kendaraan}/{id}/delete', [MasaAktifDokumenController::class, 'del']);
 
 Route::get('/servis-rutin', [ServisRutinKendaraanController::class, 'index']);
+Route::get('/servis-rutin/{id_kendaraan}', [ServisRutinKendaraanController::class, 'getKendaraan']);
+Route::post('/servis-rutin/{id_kendaraan}', [ServisRutinKendaraanController::class, 'store']);
