@@ -55,61 +55,63 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah baru</button>
             <hr>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Dokumen</th>
-                        <th>Masa Aktif Hingga</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($data_masa_aktif as $dokumen)
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>{{ $dokumen->tipeDokumen->id }}</td>
-                            <td>{{ $dokumen->tipeDokumen->nama_dokumen }}</td>
-                            <td>{{ $dokumen->tanggal_masa_berlaku }}</td>
-                            <td>
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $dokumen->id_tipe_dokumen }}">Update</button>
-                                <a href="/masa-aktif-dokumen/{{ $dokumen->id_kendaraan }}/{{ $dokumen->id }}/delete"><button type="button" class="btn btn-danger">Hapus</button></a>
-                            </td>
+                            <th>#</th>
+                            <th>Dokumen</th>
+                            <th>Masa Aktif Hingga</th>
+                            <th>Aksi</th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data_masa_aktif as $dokumen)
+                            <tr>
+                                <td>{{ $dokumen->tipeDokumen->id }}</td>
+                                <td>{{ $dokumen->tipeDokumen->nama_dokumen }}</td>
+                                <td>{{ $dokumen->tanggal_masa_berlaku }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $dokumen->id_tipe_dokumen }}">Update</button>
+                                    <a href="/masa-aktif-dokumen/{{ $dokumen->id_kendaraan }}/{{ $dokumen->id }}/delete"><button type="button" class="btn btn-danger">Hapus</button></a>
+                                </td>
+                            </tr>
 
-                        <div class="modal fade" id="modalUpdate{{ $dokumen->id_tipe_dokumen }}" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Update masa aktif dokumen</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <div class="modal fade" id="modalUpdate{{ $dokumen->id_tipe_dokumen }}" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Update masa aktif dokumen</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <form action="/masa-aktif-dokumen/{{ $dokumen->id_kendaraan }}/{{ $dokumen->id }}" method="POST">
+                                            {{ csrf_field() }}
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label>Kendaraan</label>
+                                                    <input type="text" class="form-control" value="{{ $dokumen->kendaraan->nopol . " - " . $dokumen->kendaraan->jenis_kendaraan . " " . $dokumen->kendaraan->merk . " " . $dokumen->kendaraan->warna }}" disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Dokumen</label>
+                                                    <input type="text" class="form-control" value="{{ $dokumen->tipeDokumen->nama_dokumen }}" disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Masa aktif hingga</label>
+                                                    <input type="date" class="form-control" name="masa_aktif" value="{{ $dokumen->tanggal_masa_berlaku }}" required>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-defaul" data-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <form action="/masa-aktif-dokumen/{{ $dokumen->id_kendaraan }}/{{ $dokumen->id }}" method="POST">
-                                        {{ csrf_field() }}
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label>Kendaraan</label>
-                                                <input type="text" class="form-control" value="{{ $dokumen->kendaraan->nopol . " - " . $dokumen->kendaraan->jenis_kendaraan . " " . $dokumen->kendaraan->merk . " " . $dokumen->kendaraan->warna }}" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Dokumen</label>
-                                                <input type="text" class="form-control" value="{{ $dokumen->tipeDokumen->nama_dokumen }}" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Masa aktif hingga</label>
-                                                <input type="date" class="form-control" name="masa_aktif" value="{{ $dokumen->tanggal_masa_berlaku }}" required>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-defaul" data-dismiss="modal">Batal</button>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
-                </tbody>
-            </table>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

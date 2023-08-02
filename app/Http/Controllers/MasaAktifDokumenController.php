@@ -10,11 +10,8 @@ use Illuminate\Http\Request;
 class MasaAktifDokumenController extends Controller
 {
     public function index() {
-        // $masa_aktif = MasaAktifDokumenKendaraan::all();
-        // $dokumen = TipeDokumenKendaraan::all();
-        $kendaraan = Kendaraan::all();
+        $kendaraan = Kendaraan::paginate(10);
 
-        // return view('masaAktif.index', ['data_masa_aktif' => $masa_aktif, 'data_dokumen' => $dokumen, 'data_kendaraan' => $kendaraan]);
         return view('masaAktif.index', ['data_kendaraan' => $kendaraan]);
     }
 
