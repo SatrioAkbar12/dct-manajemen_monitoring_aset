@@ -331,7 +331,7 @@ return [
         ],
         [
             'text' => 'Masa Berlaku Dokumen Kendaraan',
-            'url'  => 'admin/settings',
+            'url'  => 'masa-aktif-dokumen',
             'icon' => 'fas fa-fw fa-clock',
         ],
         [
