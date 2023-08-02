@@ -326,7 +326,7 @@ return [
         ],
         [
             'text' => 'Servis Rutin',
-            'url'  => 'admin/settings',
+            'url'  => 'servis-rutin',
             'icon' => 'fas fa-fw fa-wrench',
         ],
         [
