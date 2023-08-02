@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ServisRutinKendaraan extends Model
@@ -23,4 +24,8 @@ class ServisRutinKendaraan extends Model
         'cek_ac',
         'tanggal_servis'
     ];
+
+    public function kendaraan(): BelongsTo {
+        return $this->belongsTo(Kendaraan::class, 'id_kendaraan', 'id');
+    }
 }

@@ -23,4 +23,8 @@ class Kendaraan extends Model
     public function masaAktifDokumen(): HasMany {
         return $this->hasMany(MasaAktifDokumenKendaraan::class, 'id_kendaraan', 'id');
     }
+
+    public function servisRuting(): HasMany {
+        return $this->hasMany(ServisRutinKendaraan::class, 'id_kendaraan', 'id');
+    }
 }
