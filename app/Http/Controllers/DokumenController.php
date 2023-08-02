@@ -8,7 +8,7 @@ use App\Models\TipeDokumenKendaraan;
 class DokumenController extends Controller
 {
     public function index() {
-        $data = TipeDokumenKendaraan::all();
+        $data = TipeDokumenKendaraan::paginate(10);
 
         return view('dokumen.index', ['data' => $data]);
     }
