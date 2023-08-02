@@ -27,4 +27,8 @@ class Kendaraan extends Model
     public function servisRutin(): HasMany {
         return $this->hasMany(ServisRutinKendaraan::class, 'id_kendaraan', 'id');
     }
+
+    public function transaksiPeminjaman(): HasMany {
+        return $this->hasMany(TransaksiPeminjaman::class, 'id_kendaraan', 'id');
+    }
 }
