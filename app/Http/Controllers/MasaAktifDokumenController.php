@@ -10,10 +10,42 @@ use Illuminate\Http\Request;
 class MasaAktifDokumenController extends Controller
 {
     public function index() {
-        $masa_aktif = MasaAktifDokumenKendaraan::all();
-        $dokumen = TipeDokumenKendaraan::all();
+        // $masa_aktif = MasaAktifDokumenKendaraan::all();
+        // $dokumen = TipeDokumenKendaraan::all();
         $kendaraan = Kendaraan::all();
 
-        return view('masaAktif.index', ['data_masa_aktif' => $masa_aktif, 'data_dokumen' => $dokumen, 'data_kendaraan' => $kendaraan]);
+        // return view('masaAktif.index', ['data_masa_aktif' => $masa_aktif, 'data_dokumen' => $dokumen, 'data_kendaraan' => $kendaraan]);
+        return view('masaAktif.index', ['data_kendaraan' => $kendaraan]);
+    }
+
+    public function getKendaraan($id_kendaraan) {
+        $masa_aktif = MasaAktifDokumenKendaraan::where('id_kendaraan', $id_kendaraan)->get();
+        $tipe_dokumen = TipeDokumenKendaraan::all();
+
+        return view('masaAktif.show', ['data_masa_aktif' => $masa_aktif, 'data_tipe_dokumen' => $tipe_dokumen]);
+    }
+
+    public function store($id_kendaraan, Request $request) {
+        MasaAktifDokumenKendaraan::create([
+            'id_kendaraan' => $id_kendaraan,
+            'id_tipe_dokumen' => $request->tipe_dokumen,
+            'tanggal_masa_berlaku' => $request->masa_aktif
+        ]);
+
+        return redirect('/masa-aktif-dokumen/' . $id_kendaraan);
+    }
+
+    public function update($id_kendaraan, $id, Request $request) {
+        MasaAktifDokumenKendaraan::where('id', $id)->update([
+            'tanggal_masa_berlaku' => $request->masa_aktif
+        ]);
+
+        return redirect('/masa-aktif-dokumen/' . $id_kendaraan);
+    }
+
+    public function del($id_kendaraan, $id) {
+        MasaAktifDokumenKendaraan::where('id', $id)->delete();
+
+        return redirect('/masa-aktif-dokumen/' . $id_kendaraan);
     }
 }
