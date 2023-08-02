@@ -17,7 +17,7 @@
                     <p>Nomor Polisi</p>
                 </div>
                 <div class="col-8 col-md-10">
-                    <p>: {{ $data_masa_aktif[0]->kendaraan->nopol }}</p>
+                    <p>: {{ $data_kendaraan->nopol }}</p>
                 </div>
             </div>
             <div class="row">
@@ -25,7 +25,7 @@
                     <p>Merk</p>
                 </div>
                 <div class="col-8 col-md-10">
-                    <p>: {{ $data_masa_aktif[0]->kendaraan->merk }}</p>
+                    <p>: {{ $data_kendaraan->merk }}</p>
                 </div>
             </div>
             <div class="row">
@@ -33,7 +33,7 @@
                     <p>Jenis kendaraan</p>
                 </div>
                 <div class="col-8 col-md-10">
-                    <p>: {{ $data_masa_aktif[0]->kendaraan->jenis_kendaraan }}</p>
+                    <p>: {{ $data_kendaraan->jenis_kendaraan }}</p>
                 </div>
             </div>
             <div class="row">
@@ -41,7 +41,7 @@
                     <p>Warna</p>
                 </div>
                 <div class="col-8 col-md-10">
-                    <p>: {{ $data_masa_aktif[0]->kendaraan->warna }}</p>
+                    <p>: {{ $data_kendaraan->warna }}</p>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Masa aktif hingga</label>
-                                                <input type="date" class="form-control" name="masa_aktif" value="{{ $dokumen->tanggal_masa_berlaku }}">
+                                                <input type="date" class="form-control" name="masa_aktif" value="{{ $dokumen->tanggal_masa_berlaku }}" required>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -120,16 +120,16 @@
                     <h4 class="modal-title">Tambah data baru</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="/masa-aktif-dokumen/{{ $data_masa_aktif[0]->id_kendaraan }}" method="POST">
+                <form action="/masa-aktif-dokumen/{{ $data_kendaraan->id }}" method="POST">
                     {{ csrf_field() }}
                     <div class="card-body">
                         <div class="form-group">
                             <label>Kendaraan</label>
-                            <input type="text" class="form-control" value="{{ $data_masa_aktif[0]->kendaraan->nopol . " - " . $data_masa_aktif[0]->kendaraan->jenis_kendaraan . " " . $data_masa_aktif[0]->kendaraan->merk . " " . $data_masa_aktif[0]->kendaraan->warna }}" disabled>
+                            <input type="text" class="form-control" value="{{ $data_kendaraan->nopol . " - " . $data_kendaraan->jenis_kendaraan . " " . $data_kendaraan->merk . " " . $data_kendaraan->warna }}" disabled>
                         </div>
                         <div class="form-group">
                             <label>Dokumen</label>
-                            <select class="form-control" name="tipe_dokumen">
+                            <select class="form-control" name="tipe_dokumen" required>
                                 @foreach ($data_tipe_dokumen as $dokumen)
                                     <option value="{{ $dokumen->id }}">{{ $dokumen->nama_dokumen }}</option>
                                 @endforeach
@@ -137,7 +137,7 @@
                         </div>
                         <div class="form-group">
                             <label>Masa aktif hingga</label>
-                            <input type="date" class="form-control" name="masa_aktif">
+                            <input type="date" class="form-control" name="masa_aktif" required>
                         </div>
                     </div>
                     <div class="modal-footer">
