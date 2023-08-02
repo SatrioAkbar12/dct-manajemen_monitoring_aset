@@ -20,7 +20,7 @@ return new class extends Migration
             $table->boolean("penggantian_oli");
             $table->boolean("cek_aki");
             $table->boolean("cek_rem");
-            $table->boolean("cek kopling");
+            $table->boolean("cek_kopling");
             $table->boolean("cek_ban");
             $table->boolean("cek_lampu");
             $table->boolean("cek_ac");
