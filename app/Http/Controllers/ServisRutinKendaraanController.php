@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ServisRutinKendaraanController extends Controller
 {
     public function index() {
-        $kendaraan = Kendaraan::all();
+        $kendaraan = Kendaraan::paginate(10);
 
         return view('servisRutin.index', ['data_kendaraan' => $kendaraan]);
     }

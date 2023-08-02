@@ -71,62 +71,64 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
             <hr>
 
-            <table class="table text-center">
-                <thead>
-                    <tr>
-                        <th>Tanggal</th>
-                        <th>Penggantian Oli</th>
-                        <th>Cek Aki</th>
-                        <th>Cek Rem</th>
-                        <th>Cek Kopling</th>
-                        <th>Cek Ban</th>
-                        <th>Cek Lampu</th>
-                        <th>Cek AC</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($data_servis as $servis)
+            <div class="table-responsive">
+                <table class="table text-center">
+                    <thead>
                         <tr>
-                            <td>{{ $servis->tanggal_servis }}</td>
-                            <td>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" {{ $servis->penggantian_oli == 1 ? "checked" : "" }} disabled>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" {{ $servis->cek_aki == 1 ? "checked" : "" }} disabled>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" {{ $servis->cek_rem == 1 ? "checked" : "" }} disabled>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" {{ $servis->cek_kopling == 1 ? "checked" : "" }} disabled>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" {{ $servis->cek_ban == 1 ? "checked" : "" }} disabled>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" {{ $servis->cek_lampu == 1 ? "checked" : ""}} disabled>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" {{ $servis->cek_ac == 1 ? "checked" : "" }} disabled>
-                                </div>
-                            </td>
+                            <th>Tanggal</th>
+                            <th>Penggantian Oli</th>
+                            <th>Cek Aki</th>
+                            <th>Cek Rem</th>
+                            <th>Cek Kopling</th>
+                            <th>Cek Ban</th>
+                            <th>Cek Lampu</th>
+                            <th>Cek AC</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($data_servis as $servis)
+                            <tr>
+                                <td>{{ $servis->tanggal_servis }}</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" {{ $servis->penggantian_oli == 1 ? "checked" : "" }} disabled>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" {{ $servis->cek_aki == 1 ? "checked" : "" }} disabled>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" {{ $servis->cek_rem == 1 ? "checked" : "" }} disabled>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" {{ $servis->cek_kopling == 1 ? "checked" : "" }} disabled>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" {{ $servis->cek_ban == 1 ? "checked" : "" }} disabled>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" {{ $servis->cek_lampu == 1 ? "checked" : ""}} disabled>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" {{ $servis->cek_ac == 1 ? "checked" : "" }} disabled>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
