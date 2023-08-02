@@ -3,6 +3,7 @@
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\MasaAktifDokumenController;
+use App\Http\Controllers\ServisRutinKendaraanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,3 +49,5 @@ Route::get('/masa-aktif-dokumen/{id_kendaraan}', [MasaAktifDokumenController::cl
 Route::post('/masa-aktif-dokumen/{id_kendaraan}', [MasaAktifDokumenController::class, 'store']);
 Route::post('/masa-aktif-dokumen/{id_kendaraan}/{id}', [MasaAktifDokumenController::class, 'update']);
 Route::get('/masa-aktif-dokumen/{id_kendaraan}/{id}/delete', [MasaAktifDokumenController::class, 'del']);
+
+Route::get('/servis-rutin', [ServisRutinKendaraanController::class, 'index']);
