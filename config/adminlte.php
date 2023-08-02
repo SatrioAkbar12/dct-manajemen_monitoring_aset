@@ -320,9 +320,20 @@ return [
         // ],
         // ['header' => 'Master data'],
         [
-            'text' => 'Transaksi Peminjaman',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-list',
+            'text'    => 'Transaksi Peminjaman',
+            'icon'    => 'fas fa-fw fa-list',
+            'submenu' => [
+                [
+                    'text' => 'Peminjaman Aktif',
+                    'url'  => 'peminjaman-aktif',
+                    'icon' => 'fas fa-fw fa-route',
+                ],
+                [
+                    'text' => 'Riwayat Peminjaman',
+                    'url'  => 'riwayat-peminjaman',
+                    'icon' => 'fas fa-fw fa-file-contract',
+                ],
+            ]
         ],
         [
             'text' => 'Servis Rutin',
