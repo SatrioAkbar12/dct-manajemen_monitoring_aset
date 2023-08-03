@@ -28,38 +28,52 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/user', [UserController::class, 'index']);
-Route::post('/user', [UserController::class, 'store']);
-Route::get('/user/{id}/update', [UserController::class, 'show']);
-Route::post('/user/{id}/update', [UserController::class, 'update']);
-Route::get('/user/{id}/delete', [UserController::class, 'del']);
+Route::middleware('auth')->controller(UserController::class)->prefix('user')->name('user.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{id}/update', 'show')->name('show');
+    Route::post('/{id}/update', 'update')->name('update');
+    Route::get('/{id}/delete', 'del')->name('del');
+});
 
-Route::get('/kendaraan', [KendaraanController::class, 'index']);
-Route::post('/kendaraan', [KendaraanController::class, 'store']);
-Route::get('/kendaraan/{id}/update', [KendaraanController::class, 'show']);
-Route::post('/kendaraan/{id}/update', [KendaraanController::class, 'update']);
-Route::get('/kendaraan/{id}/delete', [KendaraanController::class, 'del']);
+Route::middleware('auth')->controller(KendaraanController::class)->prefix('kendaraan')->name('kendaraan.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{id}/update', 'show')->name('show');
+    Route::post('/{id}/update', 'update')->name('update');
+    Route::get('/{id}/delete', 'del')->name('del');
+});
 
-Route::get('/tipe-dokumen', [DokumenController::class, 'index']);
-Route::post('/tipe-dokumen', [DokumenController::class, 'store']);
-Route::get('/tipe-dokumen/{id}/update', [DokumenController::class, 'show']);
-Route::post('/tipe-dokumen/{id}/update', [DokumenController::class, 'update']);
-Route::get('/tipe-dokumen/{id}/delete', [DokumenController::class, 'del']);
+Route::middleware('auth')->controller(DokumenController::class)->prefix('tipe-dokumen')->name('tipeDokumen.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{id}/update', 'show')->name('show');
+    Route::post('/{id}/update', 'update')->name('update');
+    Route::get('/{id}/delete', 'del')->name('del');
+});
 
-Route::get('/masa-aktif-dokumen', [MasaAktifDokumenController::class, 'index']);
-Route::get('/masa-aktif-dokumen/{id_kendaraan}', [MasaAktifDokumenController::class, 'getKendaraan']);
-Route::post('/masa-aktif-dokumen/{id_kendaraan}', [MasaAktifDokumenController::class, 'store']);
-Route::post('/masa-aktif-dokumen/{id_kendaraan}/{id}', [MasaAktifDokumenController::class, 'update']);
-Route::get('/masa-aktif-dokumen/{id_kendaraan}/{id}/delete', [MasaAktifDokumenController::class, 'del']);
+Route::middleware('auth')->controller(MasaAktifDokumenController::class)->prefix('masa-aktif-dokumen')->name('masaAktifDokumen.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::get('/{id_kendaraan}', 'getKendaraan')->name('getKendaraan');
+    Route::post('/{id_kendaraan}', 'store')->name('store');
+    Route::post('/{id_kendaraan}/{id}', 'update')->name('update');
+    Route::get('/{id_kendaraan}/{id}/delete', 'del')->name('del');
+});
 
-Route::get('/servis-rutin', [ServisRutinKendaraanController::class, 'index']);
-Route::get('/servis-rutin/{id_kendaraan}', [ServisRutinKendaraanController::class, 'getKendaraan']);
-Route::post('/servis-rutin/{id_kendaraan}', [ServisRutinKendaraanController::class, 'store']);
+Route::middleware('auth')->controller(ServisRutinKendaraanController::class)->prefix('servis-rutin')->name('servisRutin.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::get('/{id_kendaraan}', 'getKendaraan')->name('getKendaraan');
+    Route::post('/{id_kendaraan}', 'store')->name('store');
+});
 
-Route::get('/peminjaman-aktif', [PeminjamanAktifController::class, 'index']);
-Route::post('/peminjaman-aktif', [PeminjamanAktifController::class, 'store']);
-Route::get('/peminjaman-aktif/{id}', [PeminjamanAktifController::class, 'returning']);
-Route::post('/peminjaman-aktif/{id}', [PeminjamanAktifController::class, 'update']);
+Route::middleware('auth')->controller(PeminjamanAktifController::class)->prefix('peminjaman-aktif')->name('peminjamanAktif.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{id}', 'returning')->name('returning');
+    Route::post('/{id}', 'update')->name('update');
+});
 
-Route::get('/riwayat-peminjaman', [RiwayatPeminjamanController::class, 'index']);
-Route::get('/riwayat-peminjaman/{id}', [RiwayatPeminjamanController::class, 'detail']);
+Route::middleware('auth')->controller(RiwayatPeminjamanController::class)->prefix('riwayat-peminjaman')->name('riwayatPeminjaman.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::get('/{id}', 'detail')->name('detail');
+});
