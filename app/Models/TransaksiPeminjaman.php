@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TransaksiPeminjaman extends Model
@@ -26,5 +27,9 @@ class TransaksiPeminjaman extends Model
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class, 'id_user', 'id');
+    }
+
+    public function kondisiKendaraan(): HasOne {
+        return $this->hasOne(KondisiKendaraanTransaksasiPeminjaman::class, 'id_transaksi', 'id');
     }
 }

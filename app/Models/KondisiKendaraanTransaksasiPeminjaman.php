@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class KondisiKendaraanTransaksasiPeminjaman extends Model
@@ -18,4 +19,8 @@ class KondisiKendaraanTransaksasiPeminjaman extends Model
         'deskripsi',
         'foto'
     ];
+
+    public function transaksiPeminjaman(): BelongsTo {
+        return $this->belongsTo(TransaksiPeminjaman::class, 'id_transaksi', 'id');
+    }
 }
