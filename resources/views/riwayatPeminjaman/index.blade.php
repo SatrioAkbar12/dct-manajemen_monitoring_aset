@@ -28,7 +28,7 @@
                                 <td>{{ $riwayat_peminjaman->kendaraan->nopol . " - " . $riwayat_peminjaman->kendaraan->jenis_kendaraan . " " . $riwayat_peminjaman->kendaraan->merk . " " . $riwayat_peminjaman->kendaraan->warna }}</td>
                                 <td>{{ $riwayat_peminjaman->user->nama }}</td>
                                 <td class="text-center">
-                                    <a href="/riwayat_peminjaman/{{ $riwayat_peminjaman->id }}"><button type="button" class="btn btn-info">Detail</button></a>
+                                    <a href="/riwayat-peminjaman/{{ $riwayat_peminjaman->id }}"><button type="button" class="btn btn-info">Detail</button></a>
                                 </td>
                             </tr>
                         @endforeach
