@@ -27,4 +27,10 @@ class PeminjamanAktifController extends Controller
 
         return redirect('/peminjaman-aktif');
     }
+
+    public function returning($id) {
+        $peminjam_aktif = TransaksiPeminjaman::find($id);
+
+        return view('peminjamanAktif.returning', ['data_peminjaman_aktif' => $peminjam_aktif]);
+    }
 }
