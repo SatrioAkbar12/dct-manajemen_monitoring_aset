@@ -4,6 +4,7 @@ use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\MasaAktifDokumenController;
 use App\Http\Controllers\PeminjamanAktifController;
+use App\Http\Controllers\RiwayatPeminjamanController;
 use App\Http\Controllers\ServisRutinKendaraanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -59,3 +60,5 @@ Route::get('/peminjaman-aktif', [PeminjamanAktifController::class, 'index']);
 Route::post('/peminjaman-aktif', [PeminjamanAktifController::class, 'store']);
 Route::get('/peminjaman-aktif/{id}', [PeminjamanAktifController::class, 'returning']);
 Route::post('/peminjaman-aktif/{id}', [PeminjamanAktifController::class, 'update']);
+
+Route::get('/riwayat-peminjaman', [RiwayatPeminjamanController::class, 'index']);
