@@ -58,3 +58,4 @@ Route::post('/servis-rutin/{id_kendaraan}', [ServisRutinKendaraanController::cla
 Route::get('/peminjaman-aktif', [PeminjamanAktifController::class, 'index']);
 Route::post('/peminjaman-aktif', [PeminjamanAktifController::class, 'store']);
 Route::get('/peminjaman-aktif/{id}', [PeminjamanAktifController::class, 'returning']);
+Route::post('/peminjaman-aktif/{id}', [PeminjamanAktifController::class, 'update']);

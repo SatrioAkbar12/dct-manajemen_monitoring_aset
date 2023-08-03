@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="card">
-        <form action="/peminjaman-aktif/{{ $data_peminjaman_aktif }}" method="POST">
+        <form action="/peminjaman-aktif/{{ $data_peminjaman_aktif->id }}" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="card-body">
                 <div class="form-group">
