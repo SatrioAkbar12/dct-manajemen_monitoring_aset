@@ -12,4 +12,10 @@ class RiwayatPeminjamanController extends Controller
 
         return view('riwayatPeminjaman.index', ['data_riwayat_peminjaman' => $riwayat_peminjaman]);
     }
+
+    public function detail($id) {
+        $riwayat_peminjaman = TransaksiPeminjaman::find($id);
+
+        return view('riwayatPeminjaman.detail', ['data_riwayat_peminjaman' => $riwayat_peminjaman]);
+    }
 }

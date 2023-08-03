@@ -62,3 +62,4 @@ Route::get('/peminjaman-aktif/{id}', [PeminjamanAktifController::class, 'returni
 Route::post('/peminjaman-aktif/{id}', [PeminjamanAktifController::class, 'update']);
 
 Route::get('/riwayat-peminjaman', [RiwayatPeminjamanController::class, 'index']);
+Route::get('/riwayat-peminjaman/{id}', [RiwayatPeminjamanController::class, 'detail']);
