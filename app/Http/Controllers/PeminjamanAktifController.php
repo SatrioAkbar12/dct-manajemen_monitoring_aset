@@ -36,7 +36,7 @@ class PeminjamanAktifController extends Controller
     }
 
     public function update($id, Request $request) {
-        $path = $request->file('foto_kondisi')->storeAs('foto-kondisi', time() . "_" . $request->file('foto_kondisi')->getClientOriginalName());
+        $path = $request->file('foto_kondisi')->storeAs('foto-kondisi', time() . "_" . $request->file('foto_kondisi')->getClientOriginalName(), 'public');
 
         KondisiKendaraanTransaksasiPeminjaman::create([
             'id_transaksi' => $id,
