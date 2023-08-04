@@ -34,7 +34,7 @@
                                 <td>{{ $peminjaman_aktif->user->nama }}</td>
                                 <td>{{ $peminjaman_aktif->target_tanggal_waktu_kembali }}</td>
                                 <td class="text-center">
-                                    <a href="/peminjaman-aktif/{{ $peminjaman_aktif->id }}"><button type="button" class="btn btn-success">Selesaikan</button></a>
+                                    <a href="{{ route('peminjamanAktif.returning', $peminjaman_aktif->id) }}"><button type="button" class="btn btn-success">Selesaikan</button></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -56,7 +56,7 @@
                     <h4 class="modal-title">Tambah peminjaman baru</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="/peminjaman-aktif" method="POST">
+                <form action="{{ route('peminjamanAktif.store') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
