@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <a href="/riwayat-peminjaman"><button type="button" class="btn btn-default">Kembali</button></a>
+            <a href="/riwayat-peminjaman"><button type="button" class="btn btn-secondary">Kembali</button></a>
         </div>
     </div>
 @stop

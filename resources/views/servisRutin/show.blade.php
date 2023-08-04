@@ -61,6 +61,9 @@
                 </div>
             </div>
         </div>
+        <div class="card-footer">
+            <a href="{{ route('servisRutin.index') }}"><button type="button" class="btn btn-secondary">Kembali</button></a>
+        </div>
     </div>
 
     <div class="card">

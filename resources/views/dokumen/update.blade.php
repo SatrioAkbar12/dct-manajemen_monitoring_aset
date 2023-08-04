@@ -19,6 +19,7 @@
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-success">Simpan</button>
+                <a href="{{ route('tipeDokumen.index') }}"><button type="button" class="btn btn-secondary">Kembali</button></a>
             </div>
         </form>
     </div>
