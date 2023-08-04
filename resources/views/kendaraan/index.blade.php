@@ -34,8 +34,8 @@
                                 <td>{{ $d->jenis_kendaraan }}</td>
                                 <td>{{ $d->warna }}</td>
                                 <td class="text-center">
-                                    <a href="/kendaraan/{{ $d->id }}/update"><button type="button" class="btn btn-warning">Update</button></a>
-                                    <a href="/kendaraan/{{ $d->id }}/delete"><button type="button" class="btn btn-danger">Delete</button></a>
+                                    <a href="{{ route('kendaraan.show', $d->id) }}"><button type="button" class="btn btn-warning">Update</button></a>
+                                    <a href="{{ route('kendaraan.del', $d->id) }}"><button type="button" class="btn btn-danger">Delete</button></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -57,7 +57,7 @@
                     <h4 class="modal-title">Tambah data baru</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="/kendaraan" method="POST">
+                <form action="{{ route('kendaraan.store') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">

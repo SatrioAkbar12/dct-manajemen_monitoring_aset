@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="card">
-        <form action="/kendaraan/{{ $data->id }}/update" method="POST">
+        <form action="{{ route('kendaraan.update', $data->id) }}" method="POST">
             {{ csrf_field() }}
             <div class="card-body">
                 <div class="form-group">
@@ -22,9 +22,9 @@
                 <div class="form-group">
                     <label for="jenisKendaraan">Jenis Kendaraan</label>
                     <select class="form-control" name="jenis_kendaraan">
-                        <option selected={{ $data->jenis_kendaraan === 'Motor' ? 1 : 0}}>Motor</option>
-                        <option selected={{ $data->jenis_kendaraan === 'Mobil' ? 1 : 0}}>Mobil</option>
-                        <option selected={{ $data->jenis_kendaraan === 'Van' ? 1 : 0}}>Van</option>
+                        <option {{ $data->jenis_kendaraan == 'Motor' ? "selected" : "" }}>Motor</option>
+                        <option {{ $data->jenis_kendaraan == 'Mobil' ? "selected" : "" }}>Mobil</option>
+                        <option {{ $data->jenis_kendaraan == 'Van' ? "selected" : "" }}>Van</option>
                     </select>
                 </div>
                 <div class="form-group">
