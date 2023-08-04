@@ -31,7 +31,7 @@
                                     <form action="{{ route('tipeDokumen.del', $d->id) }}" method="POST" id="deleteForm">
                                         {{ csrf_field() }}
                                         <a href="{{ route('tipeDokumen.show', $d->id) }}"><button type="button" class="btn btn-warning">Update</button></a>
-                                        <button type="button" class="btn btn-danger" id="btnConfirmation{{ $d->id }}">Delete</button>
+                                        <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -120,36 +120,33 @@
 @stop
 
 @section('js')
-<script>
-    $(document).ready(function() {
-        var length = {{ count($data) }}
-        console.log(length)
+    <script>
+        $(document).ready(function() {
+            @foreach ($data as $d)
+                $('#btnDeleteConfirm{{ $d->id }}').click(function() {
+                    var form = $(this).closest("form")
 
-        @foreach ($data as $d)
-            $('#btnConfirmation{{ $d->id }}').click(function() {
-                var form = $(this).closest("form")
-
-                Swal.fire({
-                    title: 'Apakah anda yakin?',
-                    text: "Anda akan menghapus data",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya',
-                    cancelButtonText: 'Tidak',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        )
-                        form.submit()
-                    }
+                    Swal.fire({
+                        title: 'Apakah anda yakin?',
+                        text: "Anda akan menghapus data",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya',
+                        cancelButtonText: 'Tidak',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                                'Terhapus!',
+                                'Data telah terhapus',
+                                'success'
+                            )
+                            form.submit()
+                        }
+                    })
                 })
-            })
-        @endforeach
-    })
-</script>
+            @endforeach
+        })
+    </script>
 @stop
