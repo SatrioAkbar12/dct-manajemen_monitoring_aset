@@ -327,11 +327,13 @@ return [
                     'text' => 'Peminjaman Aktif',
                     'url'  => 'peminjaman-aktif',
                     'icon' => 'fas fa-fw fa-route',
+                    'active' => ['peminjaman-aktif', 'regex:@^peminjaman-aktif/[0-9]+$@'],
                 ],
                 [
                     'text' => 'Riwayat Peminjaman',
                     'url'  => 'riwayat-peminjaman',
                     'icon' => 'fas fa-fw fa-file-contract',
+                    'active' => ['riwayat-peminjaman', 'regex:@^riwayat-peminjaman/[0-9]+$@']
                 ],
             ]
         ],
@@ -339,11 +341,13 @@ return [
             'text' => 'Servis Rutin',
             'url'  => 'servis-rutin',
             'icon' => 'fas fa-fw fa-wrench',
+            'active' => ['servis-rutin', 'regex:@^servis-rutin/[0-9]+$@']
         ],
         [
             'text' => 'Masa Berlaku Dokumen Kendaraan',
             'url'  => 'masa-aktif-dokumen',
             'icon' => 'fas fa-fw fa-clock',
+            'active' => ['masa-aktif-dokumen', 'regex:@^masa-aktif-dokumen/[0-9]+$@', 'regex:@^masa-aktif-dokumen/[0-9]+/[0-9]+$@'],
         ],
         [
             'text'    => 'Master Data',
@@ -352,17 +356,20 @@ return [
                 [
                     'text' => 'User',
                     'url'  => 'user',
-                    'icon' => 'fas fa-fw fa-user'
+                    'icon' => 'fas fa-fw fa-user',
+                    'active' => ['user', 'regex:@^user/[0-9]+/update$@'],
                 ],
                 [
                     'text' => 'Kendaraan',
                     'url'  => 'kendaraan',
-                    'icon' => 'fas fa-fw fa-car'
+                    'icon' => 'fas fa-fw fa-car',
+                    'active' => ['kendaraan', 'regex:@^kendaraan/[0-9]+/update$@'],
                 ],
                 [
                     'text' => 'Jenis Dokumen Kendaraan',
                     'url'  => 'tipe-dokumen',
-                    'icon' => 'fas fa-fw fa-file'
+                    'icon' => 'fas fa-fw fa-file',
+                    'active' => ['tipe-dokumen', 'regex:@^tipe-dokumen/[0-9]+/update$@'],
                 ],
             ],
         ],
