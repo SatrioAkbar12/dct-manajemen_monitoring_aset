@@ -26,8 +26,8 @@
                 <div class="form-group">
                     <label>Memiliki SIM</label>
                     <select class="form-control" name="memiliki_sim">
-                        <option value="1">Ya</option>
-                        <option value="0">Tidak</option>
+                        <option value="1" {{ $data->memiliki_sim == 1 ? "selected" : "" }}>Ya</option>
+                        <option value="0" {{ $data->memiliki_sim == 0 ? "selected" : "" }}>Tidak</option>
                     </select>
                 </div>
             </div>
