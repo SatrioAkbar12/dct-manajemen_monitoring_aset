@@ -28,12 +28,11 @@
                                 <td>{{ $d->id }}</td>
                                 <td>{{ $d->nama_dokumen }}</td>
                                 <td class="text-center">
-                                    {{-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate">Update</button> --}}
-                                    <a href="{{ route('tipeDokumen.show', $d->id) }}"><button type="button" class="btn btn-warning">Update</button></a>
-                                    {{-- <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">Delete</button> --}}
-                                    <a href="{{ route('tipeDokumen.del', $d->id) }}"><button type="button" class="btn btn-danger">Delete</button></a>
-                                    {{-- <button type="button" class="btn btn-primary dropdown-toggle waves-effect waves-light" data-toggle="modal" data-target="#myModal" data-community="{{ json_encode($d) }}">Edit</button>
-                                    <a href="{{ URL::to('delete', array($d->id)) }}" class="btn btn-danger dropdown-toggle waves-effect waves-light">Delete</a></td> --}}
+                                    <form action="{{ route('tipeDokumen.del', $d->id) }}" method="POST" id="deleteForm">
+                                        {{ csrf_field() }}
+                                        <a href="{{ route('tipeDokumen.show', $d->id) }}"><button type="button" class="btn btn-warning">Update</button></a>
+                                        <button type="button" class="btn btn-danger" id="btnConfirmation{{ $d->id }}">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -72,7 +71,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalUpdate" role="dialog">
+    {{-- <div class="modal fade" id="modalUpdate" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -93,9 +92,9 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    <div class="modal fade" id="modalDelete" role="dialog">
+    {{-- <div class="modal fade" id="modalDelete" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -107,15 +106,50 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-                    {{-- <a href="/tipe-dokumen/{{ $data->id }}/delete/"> --}}
+                    <a href="/tipe-dokumen/{{ $data->id }}/delete/">
                         <button type="button" class="btn btn-primary">Ya</button>
-                    {{-- </a> --}}
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @stop
 
+
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+<script>
+    $(document).ready(function() {
+        var length = {{ count($data) }}
+        console.log(length)
+
+        @foreach ($data as $d)
+            $('#btnConfirmation{{ $d->id }}').click(function() {
+                var form = $(this).closest("form")
+
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: "Anda akan menghapus data",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                        form.submit()
+                    }
+                })
+            })
+        @endforeach
+    })
+</script>
 @stop
