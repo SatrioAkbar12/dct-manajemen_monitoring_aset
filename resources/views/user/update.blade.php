@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="card">
-        <form action="/user/{{ $data->id }}/update" method="POST">
+        <form action="{{ route('user.update', $data->id) }}" method="POST">
             {{ csrf_field() }}
             <div class="card-body">
                 <div class="form-group">

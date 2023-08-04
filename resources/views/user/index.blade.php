@@ -37,8 +37,8 @@
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <a href="/user/{{ $d->id }}/update"><button type="button" class="btn btn-warning">Update</button></a>
-                                    <a href="/user/{{ $d->id }}/delete"><button type="button" class="btn btn-danger">Delete</button></a>
+                                    <a href="{{ route('user.show', $d->id) }}"><button type="button" class="btn btn-warning">Update</button></a>
+                                    <a href="{{ route('user.del', $d->id) }}"><button type="button" class="btn btn-danger">Delete</button></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -60,7 +60,7 @@
                     <h4 class="modal-title">Tambah data baru</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="/user" method="POST">
+                <form action="{{ route('user.store') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
