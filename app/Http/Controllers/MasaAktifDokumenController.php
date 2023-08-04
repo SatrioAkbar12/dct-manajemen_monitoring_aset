@@ -17,10 +17,9 @@ class MasaAktifDokumenController extends Controller
 
     public function getKendaraan($id_kendaraan) {
         $kendaraan = Kendaraan::find($id_kendaraan);
-        $masa_aktif = MasaAktifDokumenKendaraan::where('id_kendaraan', $id_kendaraan)->get();
         $tipe_dokumen = TipeDokumenKendaraan::all();
 
-        return view('masaAktif.show', ['data_kendaraan' => $kendaraan, 'data_masa_aktif' => $masa_aktif, 'data_tipe_dokumen' => $tipe_dokumen]);
+        return view('masaAktif.show', ['data_kendaraan' => $kendaraan, 'data_tipe_dokumen' => $tipe_dokumen]);
     }
 
     public function store($id_kendaraan, Request $request) {
