@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -23,7 +24,7 @@ class UserSeeder extends Seeder
                 'username' => $faker->userName(),
                 'nama' => $faker->name(),
                 'email' => $faker->email(),
-                'password' => $faker->password(),
+                'password' => Hash::make($faker->password()),
                 'memiliki_sim' => $faker->boolean()
             ]);
         }
