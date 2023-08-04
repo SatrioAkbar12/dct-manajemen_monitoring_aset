@@ -39,9 +39,9 @@ Route::middleware('auth')->controller(UserController::class)->prefix('user')->na
 Route::middleware('auth')->controller(KendaraanController::class)->prefix('kendaraan')->name('kendaraan.')->group(function() {
     Route::get('/', 'index')->name('index');
     Route::post('/', 'store')->name('store');
-    Route::get('/{id}/update', 'show')->name('show');
-    Route::post('/{id}/update', 'update')->name('update');
-    Route::get('/{id}/delete', 'del')->name('del');
+    Route::get('/{id}', 'show')->name('show');
+    Route::post('/{id}', 'update')->name('update');
+    Route::post('/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(DokumenController::class)->prefix('tipe-dokumen')->name('tipeDokumen.')->group(function() {
