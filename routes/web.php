@@ -57,7 +57,7 @@ Route::middleware('auth')->controller(MasaAktifDokumenController::class)->prefix
     Route::get('/{id_kendaraan}', 'getKendaraan')->name('getKendaraan');
     Route::post('/{id_kendaraan}', 'store')->name('store');
     Route::post('/{id_kendaraan}/{id}', 'update')->name('update');
-    Route::get('/{id_kendaraan}/{id}/delete', 'del')->name('del');
+    Route::post('/{id_kendaraan}/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(ServisRutinKendaraanController::class)->prefix('servis-rutin')->name('servisRutin.')->group(function() {
