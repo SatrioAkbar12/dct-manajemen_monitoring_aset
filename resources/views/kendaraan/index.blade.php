@@ -73,7 +73,7 @@
                         </div>
                         <div class="form-group">
                             <label>Jenis kendaraan</label>
-                            <select class="form-control" name="jenis_kendaraan">
+                            <select class="form-control" name="jenis_kendaraan" required>
                                 <option value="Motor">Motor</option>
                                 <option value="Mobil">Mobil</option>
                                 <option value="Van">Van</option>

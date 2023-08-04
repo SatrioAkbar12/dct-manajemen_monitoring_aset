@@ -13,15 +13,15 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="nomorPolisi">Nomor Polisi</label>
-                    <input type="text" class="form-control" id="nomorPolisi" name="nopol" value="{{ $data->nopol }}">
+                    <input type="text" class="form-control" id="nomorPolisi" name="nopol" value="{{ $data->nopol }}" required>
                 </div>
                 <div class="form-group">
                     <label for="merk">Merk</label>
-                    <input type="text" class="form-control" id="merk" name="merk" value="{{ $data->merk }}">
+                    <input type="text" class="form-control" id="merk" name="merk" value="{{ $data->merk }}" required>
                 </div>
                 <div class="form-group">
                     <label for="jenisKendaraan">Jenis Kendaraan</label>
-                    <select class="form-control" name="jenis_kendaraan">
+                    <select class="form-control" name="jenis_kendaraan" required>
                         <option {{ $data->jenis_kendaraan == 'Motor' ? "selected" : "" }}>Motor</option>
                         <option {{ $data->jenis_kendaraan == 'Mobil' ? "selected" : "" }}>Mobil</option>
                         <option {{ $data->jenis_kendaraan == 'Van' ? "selected" : "" }}>Van</option>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label for="warna">Warna</label>
-                    <input type="text" class="form-control" id="warna" name="warna" value="{{ $data->warna }}">
+                    <input type="text" class="form-control" id="warna" name="warna" value="{{ $data->warna }}" required>
                 </div>
             </div>
             <div class="card-footer">

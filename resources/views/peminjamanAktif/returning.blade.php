@@ -17,18 +17,18 @@
                 </div>
                 <div class="form-group">
                     <label>Status kondisi kendaraan</label>
-                    <select class="form-control" name="status_kondisi">
+                    <select class="form-control" name="status_kondisi" required>
                         <option value="Aman">Aman</option>
                         <option value="Ada kerusakan">Ada kerusakan</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Deskripsi kondisi kendaraan</label>
-                    <textarea class="form-control" name="deskripsi"></textarea>
+                    <textarea class="form-control" name="deskripsi" required></textarea>
                 </div>
                 <div class="form-group">
                     <label>Foto kondisi kendaraan</label>
-                    <input type="file" class="form-control-file" name="foto_kondisi" accept="image/*">
+                    <input type="file" class="form-control-file" name="foto_kondisi" accept="image/*" required>
                 </div>
             </div>
             <div class="card-footer">

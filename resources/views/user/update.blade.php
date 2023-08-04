@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <label>Memiliki SIM</label>
-                    <select class="form-control" name="memiliki_sim">
+                    <select class="form-control" name="memiliki_sim" required>
                         <option value="1" {{ $data->memiliki_sim == 1 ? "selected" : "" }}>Ya</option>
                         <option value="0" {{ $data->memiliki_sim == 0 ? "selected" : "" }}>Tidak</option>
                     </select>

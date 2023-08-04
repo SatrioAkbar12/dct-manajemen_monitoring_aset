@@ -61,7 +61,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="userPeminjam">Peminjam</label>
-                            <select class="form-control" id="userPeminjam" name="user">
+                            <select class="form-control" id="userPeminjam" name="user" required>
                                 @foreach ($data_user as $user)
                                     <option value="{{ $user->id }}">{{ $user->nama }}</option>
                                 @endforeach
@@ -91,7 +91,7 @@
 
                         <div class="form-group">
                             <label>Kendaraan</label>
-                            <select class="form-control" name="kendaraan">
+                            <select class="form-control" name="kendaraan" required>
                                 @foreach ($data_kendaraan as $kendaraan)
                                     <option value="{{ $kendaraan->id }}">{{ $kendaraan->nopol . " - " . $kendaraan->jenis_kendaraan . " " . $kendaraan->merk . " " . $kendaraan->warna }}</option>
                                 @endforeach
@@ -99,7 +99,7 @@
                         </div>
                         <div class="form-group">
                             <label>Target tanggal waktu kembali</label>
-                            <input type="datetime-local" class="form-control" name="target_tanggal_waktu_kembali">
+                            <input type="datetime-local" class="form-control" name="target_tanggal_waktu_kembali" required>
                         </div>
                     </div>
                     <div class="modal-footer">

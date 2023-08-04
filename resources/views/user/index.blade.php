@@ -84,7 +84,7 @@
                         </div>
                         <div class="form-group">
                             <label>Memiliki SIM</label>
-                            <select class="form-control" name="memiliki_sim">
+                            <select class="form-control" name="memiliki_sim" required>
                                 <option value="1">Ya</option>
                                 <option value="0">Tidak</option>
                             </select>
