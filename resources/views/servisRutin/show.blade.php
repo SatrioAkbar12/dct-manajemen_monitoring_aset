@@ -142,7 +142,7 @@
                     <h4 class="modal-title">Tambah data baru</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="/servis-rutin/{{ $data_kendaraan->id }}" method="POST">
+                <form action="{{ route('servisRutin.store', $data_kendaraan->id) }}" method="POST">
                     {{ csrf_field() }}
                     <div class="card-body">
                         <div class="form-group">
