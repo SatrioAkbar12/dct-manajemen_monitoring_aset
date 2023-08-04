@@ -8,9 +8,8 @@
 
 @section('content')
     <div class="card">
-        <form action="/tipe-dokumen/{{ $data->id }}/update" method="POST">
+        <form action="{{ route('tipeDokumen.update', $d->id) }}" method="POST">
             {{ csrf_field() }}
-            {{-- {{ method_field('PUT') }} --}}
             <div class="card-body">
                 <div class="form-group">
                     <label for="nomorPolisi">Nama</label>

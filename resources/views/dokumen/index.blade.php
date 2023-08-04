@@ -29,9 +29,9 @@
                                 <td>{{ $d->nama_dokumen }}</td>
                                 <td class="text-center">
                                     {{-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate">Update</button> --}}
-                                    <a href="/tipe-dokumen/{{ $d->id }}/update"><button type="button" class="btn btn-warning">Update</button></a>
+                                    <a href="{{ route('tipeDokumen.show', $d->id) }}"><button type="button" class="btn btn-warning">Update</button></a>
                                     {{-- <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">Delete</button> --}}
-                                    <a href="/tipe-dokumen/{{ $d->id }}/delete"><button type="button" class="btn btn-danger">Delete</button></a>
+                                    <a href="{{ route('tipeDokumen.del', $d->id) }}"><button type="button" class="btn btn-danger">Delete</button></a>
                                     {{-- <button type="button" class="btn btn-primary dropdown-toggle waves-effect waves-light" data-toggle="modal" data-target="#myModal" data-community="{{ json_encode($d) }}">Edit</button>
                                     <a href="{{ URL::to('delete', array($d->id)) }}" class="btn btn-danger dropdown-toggle waves-effect waves-light">Delete</a></td> --}}
                                 </td>
@@ -55,7 +55,7 @@
                     <h4 class="modal-title">Tambah data baru</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="/tipe-dokumen" method="POST">
+                <form action="{{ route('tipeDokumen.store') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
