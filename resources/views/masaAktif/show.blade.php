@@ -76,7 +76,7 @@
                                 <td>{{ $dokumen->tanggal_masa_berlaku }}</td>
                                 <td>
                                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $dokumen->id_tipe_dokumen }}">Update</button>
-                                    <a href="/masa-aktif-dokumen/{{ $dokumen->id_kendaraan }}/{{ $dokumen->id }}/delete"><button type="button" class="btn btn-danger">Hapus</button></a>
+                                    <a href="{{ route('masaAktifDokumen.del', ['id_kendaraan' => $dokumen->id_kendaraan, 'id' => $dokumen->id]) }}"><button type="button" class="btn btn-danger">Hapus</button></a>
                                 </td>
                             </tr>
 
@@ -87,7 +87,7 @@
                                             <h4 class="modal-title">Update masa aktif dokumen</h4>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
-                                        <form action="/masa-aktif-dokumen/{{ $dokumen->id_kendaraan }}/{{ $dokumen->id }}" method="POST">
+                                        <form action="{{ route('masaAktifDokumen.update', ['id_kendaraan' => $dokumen->id_kendaraan, 'id' => $dokumen->id]) }}" method="POST">
                                             {{ csrf_field() }}
                                             <div class="modal-body">
                                                 <div class="form-group">
@@ -125,7 +125,7 @@
                     <h4 class="modal-title">Tambah data baru</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="/masa-aktif-dokumen/{{ $data_kendaraan->id }}" method="POST">
+                <form action="{{ route('masaAktifDokumen.store', $data_kendaraan->id) }}" method="POST">
                     {{ csrf_field() }}
                     <div class="card-body">
                         <div class="form-group">

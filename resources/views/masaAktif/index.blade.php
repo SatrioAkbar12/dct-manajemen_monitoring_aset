@@ -28,7 +28,7 @@
                                 <td>{{ $kendaraan->nopol }}</td>
                                 <td>{{ $kendaraan->jenis_kendaraan . " " . $kendaraan->merk . " " . $kendaraan->warna }}</td>
                                 <td class="text-center">
-                                    <a href="/masa-aktif-dokumen/{{ $kendaraan->id }}"><button type="button" class="btn btn-info">Detail</button>
+                                    <a href="{{ route('masaAktifDokumen.getKendaraan', $kendaraan->id) }}"><button type="button" class="btn btn-info">Detail</button>
                                 </td>
                             </tr>
                         @endforeach
