@@ -59,7 +59,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Nama</label>
-                            <input type="text" class="form-control" name="nama" required>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" required>
                             @error('nama')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
