@@ -7,6 +7,7 @@ use App\Http\Controllers\PeminjamanAktifController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RiwayatPeminjamanController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\ServisRutinKendaraanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,11 @@ Route::middleware('auth')->controller(RoleController::class)->prefix('roles')->n
 Route::middleware('auth')->controller(PermissionController::class)->prefix('permission')->name('permission.')->group(function() {
     Route::get('/', 'index')->name('index');
     Route::get('/sync', 'permissionSync')->name('permissionSync');
+});
+
+Route::middleware('auth')->controller(RolePermissionController::class)->prefix('role-permission')->name('rolePermission.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::get('/{id_role}', 'detail')->name('detail');
 });
 
 Route::middleware('auth')->controller(KendaraanController::class)->prefix('kendaraan')->name('kendaraan.')->group(function() {
