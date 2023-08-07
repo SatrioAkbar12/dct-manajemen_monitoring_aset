@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TipeDokumenRequest;
 use Illuminate\Http\Request;
 use App\Models\TipeDokumenKendaraan;
 
@@ -13,7 +14,7 @@ class DokumenController extends Controller
         return view('dokumen.index', ['data' => $data]);
     }
 
-    public function store(Request $request) {
+    public function store(TipeDokumenRequest $request) {
         TipeDokumenKendaraan::create([
             'nama_dokumen' => $request->nama
         ]);
@@ -27,7 +28,7 @@ class DokumenController extends Controller
         return view('dokumen.update', ['data' => $data]);
     }
 
-    public function update($id, Request $request) {
+    public function update($id, TipeDokumenRequest $request) {
         TipeDokumenKendaraan::where('id', $id)->update([
             'nama_dokumen' => $request->nama
         ]);
