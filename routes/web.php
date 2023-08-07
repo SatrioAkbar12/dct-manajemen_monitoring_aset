@@ -5,6 +5,7 @@ use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\MasaAktifDokumenController;
 use App\Http\Controllers\PeminjamanAktifController;
 use App\Http\Controllers\RiwayatPeminjamanController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServisRutinKendaraanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,13 @@ Route::middleware('auth')->controller(UserController::class)->prefix('user')->na
     Route::get('/', 'index')->name('index');
     Route::post('/', 'store')->name('store');
     Route::get('/{id}', 'show')->name('show');
+    Route::post('/{id}', 'update')->name('update');
+    Route::post('/{id}/delete', 'del')->name('del');
+});
+
+Route::middleware('auth')->controller(RoleController::class)->prefix('roles')->name('roles.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
     Route::post('/{id}', 'update')->name('update');
     Route::post('/{id}/delete', 'del')->name('del');
 });
