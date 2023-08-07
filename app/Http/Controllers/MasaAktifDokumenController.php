@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MasaAktifDokumenRequest;
 use App\Models\Kendaraan;
 use App\Models\MasaAktifDokumenKendaraan;
 use App\Models\TipeDokumenKendaraan;
@@ -22,7 +23,7 @@ class MasaAktifDokumenController extends Controller
         return view('masaAktif.show', ['data_kendaraan' => $kendaraan, 'data_tipe_dokumen' => $tipe_dokumen]);
     }
 
-    public function store($id_kendaraan, Request $request) {
+    public function store($id_kendaraan, MasaAktifDokumenRequest $request) {
         MasaAktifDokumenKendaraan::create([
             'id_kendaraan' => $id_kendaraan,
             'id_tipe_dokumen' => $request->tipe_dokumen,
@@ -32,7 +33,7 @@ class MasaAktifDokumenController extends Controller
         return redirect('/masa-aktif-dokumen/' . $id_kendaraan);
     }
 
-    public function update($id_kendaraan, $id, Request $request) {
+    public function update($id_kendaraan, $id, MasaAktifDokumenRequest $request) {
         MasaAktifDokumenKendaraan::where('id', $id)->update([
             'tanggal_masa_berlaku' => $request->masa_aktif
         ]);
