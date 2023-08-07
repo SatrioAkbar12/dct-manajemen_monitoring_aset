@@ -147,7 +147,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>Tanggal servis</label>
-                            <input type="date" class="form-control" name="tanggal_servis" required>
+                            <input type="date" class="form-control @error('tanggal_servis') is-invalid @enderror" name="tanggal_servis" required>
                             @error('tanggal_servis')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
