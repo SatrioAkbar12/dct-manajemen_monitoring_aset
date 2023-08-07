@@ -13,21 +13,21 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="nomorPolisi">Nomor Polisi</label>
-                    <input type="text" class="form-control" id="nomorPolisi" name="nopol" value="{{ $data->nopol }}" required>
+                    <input type="text" class="form-control @error('nopol') is-invalid @enderror" id="nomorPolisi" name="nopol" value="{{ $data->nopol }}" required>
                     @error('nopol')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="merk">Merk</label>
-                    <input type="text" class="form-control" id="merk" name="merk" value="{{ $data->merk }}" required>
+                    <input type="text" class="form-control @error('merk') is-invalid @enderror" id="merk" name="merk" value="{{ $data->merk }}" required>
                     @error('merk')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="jenisKendaraan">Jenis Kendaraan</label>
-                    <select class="form-control" name="jenis_kendaraan" required>
+                    <select class="form-control @error('jenis_kendaraan') is-invalid @enderror" name="jenis_kendaraan" required>
                         <option {{ $data->jenis_kendaraan == 'Motor' ? "selected" : "" }}>Motor</option>
                         <option {{ $data->jenis_kendaraan == 'Mobil' ? "selected" : "" }}>Mobil</option>
                         <option {{ $data->jenis_kendaraan == 'Van' ? "selected" : "" }}>Van</option>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <label for="warna">Warna</label>
-                    <input type="text" class="form-control" id="warna" name="warna" value="{{ $data->warna }}" required>
+                    <input type="text" class="form-control @error('warna') is-invalid @enderror" id="warna" name="warna" value="{{ $data->warna }}" required>
                     @error('warna')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror

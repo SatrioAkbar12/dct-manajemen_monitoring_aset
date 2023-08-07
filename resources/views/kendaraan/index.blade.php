@@ -65,21 +65,21 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Nomor Polisi</label>
-                            <input type="text" class="form-control" name="nopol" required>
+                            <input type="text" class="form-control @error('nopol') is-invalid @enderror" name="nopol" required>
                             @error('nopol')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label>Merk</label>
-                            <input type="text" class="form-control" name="merk" required>
+                            <input type="text" class="form-control @error('merk') is-invalid @enderror" name="merk" required>
                             @error('merk')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label>Jenis kendaraan</label>
-                            <select class="form-control" name="jenis_kendaraan" required>
+                            <select class="form-control" name="jenis_kendaraan @error('jenis_kendaraan') is-invalid @enderror" required>
                                 <option value="Motor">Motor</option>
                                 <option value="Mobil">Mobil</option>
                                 <option value="Van">Van</option>
@@ -90,7 +90,7 @@
                         </div>
                         <div class="form-group">
                             <label>Warna</label>
-                            <input type="text" class="form-control" name="warna" required>
+                            <input type="text" class="form-control @error('warna') is-invalid @enderror" name="warna" required>
                             @error('warna')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
