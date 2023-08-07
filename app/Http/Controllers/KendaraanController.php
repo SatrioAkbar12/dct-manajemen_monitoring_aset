@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\KendaraanRequest;
 use App\Models\Kendaraan;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class KendaraanController extends Controller
         return view('kendaraan.index', ['data' => $data]);
     }
 
-    public function store(Request $request) {
+    public function store(KendaraanRequest $request) {
         Kendaraan::create([
             'nopol' => $request->nopol,
             'merk' => $request->merk,
@@ -31,7 +32,7 @@ class KendaraanController extends Controller
         return view('kendaraan.update', ['data' => $data]);
     }
 
-    public function update($id, Request $request) {
+    public function update($id, KendaraanRequest $request) {
         Kendaraan::where('id', $id)->update([
             'nopol' => $request->nopol,
             'merk' => $request->merk,
