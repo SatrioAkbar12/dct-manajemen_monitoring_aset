@@ -14,6 +14,9 @@
                 <div class="form-group">
                     <label for="nomorPolisi">Nama</label>
                     <input type="text" class="form-control" id="nomorPolisi" name="nama" value="{{ $data->nama_dokumen }}" required>
+                    @error('nama')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="card-footer">

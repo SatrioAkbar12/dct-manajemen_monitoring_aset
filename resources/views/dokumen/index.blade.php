@@ -60,6 +60,9 @@
                         <div class="form-group">
                             <label>Nama</label>
                             <input type="text" class="form-control" name="nama" required>
+                            @error('nama')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
