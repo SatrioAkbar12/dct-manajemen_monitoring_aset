@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PeminjamanAktifRequest;
 use App\Models\Kendaraan;
 use App\Models\KondisiKendaraanTransaksasiPeminjaman;
 use App\Models\TransaksiPeminjaman;
@@ -18,7 +19,7 @@ class PeminjamanAktifController extends Controller
         return view('peminjamanAktif.index', ['data_peminjaman_aktif' => $peminjam_aktif, 'data_user' => $user, 'data_kendaraan' => $kendaraan]);
     }
 
-    public function store(Request $request) {
+    public function store(PeminjamanAktifRequest $request) {
         TransaksiPeminjaman::create([
             'id_user' => $request->user,
             'id_kendaraan' => $request->kendaraan,
@@ -35,7 +36,7 @@ class PeminjamanAktifController extends Controller
         return view('peminjamanAktif.returning', ['data_peminjaman_aktif' => $peminjam_aktif]);
     }
 
-    public function update($id, Request $request) {
+    public function update($id, PeminjamanAktifRequest $request) {
         $path = $request->file('foto_kondisi')->storeAs('foto-kondisi', time() . "_" . $request->file('foto_kondisi')->getClientOriginalName(), 'public');
 
         KondisiKendaraanTransaksasiPeminjaman::create([
