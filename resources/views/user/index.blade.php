@@ -68,35 +68,35 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Nama Lengkap</label>
-                            <input type="text" class="form-control" name="nama" value="{{ old('nama')}}" required>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama')}}" required>
                             @error('nama')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label>Username</label>
-                            <input type="text" class="form-control" name="username" value="{{ old('username')}}" required>
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username')}}" required>
                             @error('username')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="email" value="{{ old('email')}}" required>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email')}}" required>
                             @error('email')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" class="form-control" name="password" required>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
                             @error('password')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label>Memiliki SIM</label>
-                            <select class="form-control" name="memiliki_sim" required>
+                            <select class="form-control @error('memiliki_sim') is-invalid @enderror" name="memiliki_sim" required>
                                 <option value="1">Ya</option>
                                 <option value="0">Tidak</option>
                             </select>
