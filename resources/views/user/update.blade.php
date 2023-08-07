@@ -14,14 +14,23 @@
                 <div class="form-group">
                     <label>Username</label>
                     <input type="text" class="form-control" name="username" value="{{ $data->username }}" required>
+                    @error('username')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>Nama Lengkap</label>
                     <input type="text" class="form-control" name="nama" value="{{ $data->nama }}" required>
+                    @error('nama')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>Email</label>
                     <input type="email" class="form-control" name="email" value="{{ $data->email }}" required>
+                    @error('email')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>Memiliki SIM</label>
@@ -29,6 +38,14 @@
                         <option value="1" {{ $data->memiliki_sim == 1 ? "selected" : "" }}>Ya</option>
                         <option value="0" {{ $data->memiliki_sim == 0 ? "selected" : "" }}>Tidak</option>
                     </select>
+                    @error('memiliki_sim')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    @error('password')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="card-footer">

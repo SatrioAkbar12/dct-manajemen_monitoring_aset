@@ -68,19 +68,31 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Nama Lengkap</label>
-                            <input type="text" class="form-control" name="nama" required>
+                            <input type="text" class="form-control" name="nama" value="{{ old('nama')}}" required>
+                            @error('nama')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Username</label>
-                            <input type="text" class="form-control" name="username" required>
+                            <input type="text" class="form-control" name="username" value="{{ old('username')}}" required>
+                            @error('username')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="email" required>
+                            <input type="email" class="form-control" name="email" value="{{ old('email')}}" required>
+                            @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Password</label>
                             <input type="password" class="form-control" name="password" required>
+                            @error('password')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Memiliki SIM</label>
@@ -88,6 +100,9 @@
                                 <option value="1">Ya</option>
                                 <option value="0">Tidak</option>
                             </select>
+                            @error('memiliki_sim')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
