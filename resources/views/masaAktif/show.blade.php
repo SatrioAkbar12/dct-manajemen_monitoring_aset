@@ -103,7 +103,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Masa aktif hingga</label>
-                                                    <input type="date" class="form-control" name="masa_aktif" value="{{ $dokumen->tanggal_masa_berlaku }}" value="{{ old('masa_aktif') }}" required>
+                                                    <input type="date" class="form-control @error('masa_aktif') is-invalid @enderror" name="masa_aktif" value="{{ $dokumen->tanggal_masa_berlaku }}" value="{{ old('masa_aktif') }}" required>
                                                     @error('masa_aktif')
                                                         <div class="text-danger">{{ $message }}</div>
                                                     @enderror
@@ -140,7 +140,7 @@
                         </div>
                         <div class="form-group">
                             <label>Dokumen</label>
-                            <select class="form-control" name="tipe_dokumen" required>
+                            <select class="form-control @error('tipe_dokumen') is-invalid @enderror" name="tipe_dokumen" required>
                                 @foreach ($data_tipe_dokumen as $dokumen)
                                     <option value="{{ $dokumen->id }}" {{ $dokumen->id == old('tipe_dokumen') ? 'selected' : '' }}>{{ $dokumen->nama_dokumen }}</option>
                                 @endforeach
@@ -151,7 +151,7 @@
                         </div>
                         <div class="form-group">
                             <label>Masa aktif hingga</label>
-                            <input type="date" class="form-control" name="masa_aktif" value="{{ old('masa_aktif') }}" required>
+                            <input type="date" class="form-control @error('masa_aktif') is-invalid @enderror" name="masa_aktif" value="{{ old('masa_aktif') }}" required>
                             @error('masa_aktif')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
