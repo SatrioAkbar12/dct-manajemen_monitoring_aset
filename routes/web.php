@@ -4,6 +4,7 @@ use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\MasaAktifDokumenController;
 use App\Http\Controllers\PeminjamanAktifController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RiwayatPeminjamanController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServisRutinKendaraanController;
@@ -42,6 +43,11 @@ Route::middleware('auth')->controller(RoleController::class)->prefix('roles')->n
     Route::post('/', 'store')->name('store');
     Route::post('/{id}', 'update')->name('update');
     Route::post('/{id}/delete', 'del')->name('del');
+});
+
+Route::middleware('auth')->controller(PermissionController::class)->prefix('permission')->name('permission.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::get('/sync', 'permissionSync')->name('permissionSync');
 });
 
 Route::middleware('auth')->controller(KendaraanController::class)->prefix('kendaraan')->name('kendaraan.')->group(function() {
