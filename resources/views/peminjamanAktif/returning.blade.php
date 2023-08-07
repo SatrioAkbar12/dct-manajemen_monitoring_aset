@@ -21,14 +21,23 @@
                         <option value="Aman">Aman</option>
                         <option value="Ada kerusakan">Ada kerusakan</option>
                     </select>
+                    @error('status_kondisi')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>Deskripsi kondisi kendaraan</label>
                     <textarea class="form-control" name="deskripsi" required></textarea>
+                    @error('deskripsi')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>Foto kondisi kendaraan</label>
                     <input type="file" class="form-control-file" name="foto_kondisi" accept="image/*" required>
+                    @error('foto_kondisi')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="card-footer">

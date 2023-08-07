@@ -66,6 +66,9 @@
                                     <option value="{{ $user->id }}">{{ $user->nama }}</option>
                                 @endforeach
                             </select>
+                            @error('user')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         {{-- <div class="form-group">
@@ -96,10 +99,16 @@
                                     <option value="{{ $kendaraan->id }}">{{ $kendaraan->nopol . " - " . $kendaraan->jenis_kendaraan . " " . $kendaraan->merk . " " . $kendaraan->warna }}</option>
                                 @endforeach
                             </select>
+                            @error('kendaraan')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Target tanggal waktu kembali</label>
                             <input type="datetime-local" class="form-control" name="target_tanggal_waktu_kembali" required>
+                            @error('target_tanggal_waktu_kembali')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
