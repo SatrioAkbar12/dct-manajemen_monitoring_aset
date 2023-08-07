@@ -148,6 +148,9 @@
                         <div class="form-group">
                             <label>Tanggal servis</label>
                             <input type="date" class="form-control" name="tanggal_servis" required>
+                            @error('tanggal_servis')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-check form-check-inline">
                             <input type="checkbox" class="form-check-input" id="penggantianOli" name="penggantian_oli">
