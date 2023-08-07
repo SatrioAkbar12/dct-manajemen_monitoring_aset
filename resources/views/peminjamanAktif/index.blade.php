@@ -61,7 +61,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="userPeminjam">Peminjam</label>
-                            <select class="form-control" id="userPeminjam" name="user" required>
+                            <select class="form-control @error('user') is-invalid @enderror" id="userPeminjam" name="user" required>
                                 @foreach ($data_user as $user)
                                     <option value="{{ $user->id }}">{{ $user->nama }}</option>
                                 @endforeach
@@ -94,7 +94,7 @@
 
                         <div class="form-group">
                             <label>Kendaraan</label>
-                            <select class="form-control" name="kendaraan" required>
+                            <select class="form-control @error('kendaraan') is-invalid @enderror" name="kendaraan" required>
                                 @foreach ($data_kendaraan as $kendaraan)
                                     <option value="{{ $kendaraan->id }}">{{ $kendaraan->nopol . " - " . $kendaraan->jenis_kendaraan . " " . $kendaraan->merk . " " . $kendaraan->warna }}</option>
                                 @endforeach
@@ -105,7 +105,7 @@
                         </div>
                         <div class="form-group">
                             <label>Target tanggal waktu kembali</label>
-                            <input type="datetime-local" class="form-control" name="target_tanggal_waktu_kembali" required>
+                            <input type="datetime-local" class="form-control @error('target_tanggal_waktu_kembali') is-invalid @enderror" name="target_tanggal_waktu_kembali" required>
                             @error('target_tanggal_waktu_kembali')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror

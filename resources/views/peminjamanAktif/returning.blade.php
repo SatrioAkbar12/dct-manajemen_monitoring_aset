@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group">
                     <label>Status kondisi kendaraan</label>
-                    <select class="form-control" name="status_kondisi" required>
+                    <select class="form-control @error('status_kondisi') is-invalid @enderror" name="status_kondisi" required>
                         <option value="Aman">Aman</option>
                         <option value="Ada kerusakan">Ada kerusakan</option>
                     </select>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label>Deskripsi kondisi kendaraan</label>
-                    <textarea class="form-control" name="deskripsi" required></textarea>
+                    <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" required></textarea>
                     @error('deskripsi')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
