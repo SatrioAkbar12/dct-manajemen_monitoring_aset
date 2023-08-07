@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ServisRutinKendaraanRequest;
 use App\Models\Kendaraan;
 use App\Models\ServisRutinKendaraan;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class ServisRutinKendaraanController extends Controller
         return view('servisRutin.show', ['data_kendaraan' => $kendaraan, 'data_servis' => $servis, 'jumlah_servis' => $jumlah_servis]);
     }
 
-    public function store($id_kendaraan, Request $request) {
+    public function store($id_kendaraan, ServisRutinKendaraanRequest $request) {
         ServisRutinKendaraan::create([
             'id_kendaraan' => $id_kendaraan,
             'tanggal_servis' => $request->tanggal_servis,
