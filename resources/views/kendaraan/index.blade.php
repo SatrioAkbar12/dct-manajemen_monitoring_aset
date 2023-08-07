@@ -66,10 +66,16 @@
                         <div class="form-group">
                             <label>Nomor Polisi</label>
                             <input type="text" class="form-control" name="nopol" required>
+                            @error('nopol')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Merk</label>
                             <input type="text" class="form-control" name="merk" required>
+                            @error('merk')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Jenis kendaraan</label>
@@ -78,10 +84,16 @@
                                 <option value="Mobil">Mobil</option>
                                 <option value="Van">Van</option>
                             </select>
+                            @error('jenis_kendaraan')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Warna</label>
                             <input type="text" class="form-control" name="warna" required>
+                            @error('warna')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">

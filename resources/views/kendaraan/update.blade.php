@@ -14,10 +14,16 @@
                 <div class="form-group">
                     <label for="nomorPolisi">Nomor Polisi</label>
                     <input type="text" class="form-control" id="nomorPolisi" name="nopol" value="{{ $data->nopol }}" required>
+                    @error('nopol')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="merk">Merk</label>
                     <input type="text" class="form-control" id="merk" name="merk" value="{{ $data->merk }}" required>
+                    @error('merk')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="jenisKendaraan">Jenis Kendaraan</label>
@@ -26,10 +32,16 @@
                         <option {{ $data->jenis_kendaraan == 'Mobil' ? "selected" : "" }}>Mobil</option>
                         <option {{ $data->jenis_kendaraan == 'Van' ? "selected" : "" }}>Van</option>
                     </select>
+                    @error('jenis_kendaraan')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="warna">Warna</label>
                     <input type="text" class="form-control" id="warna" name="warna" value="{{ $data->warna }}" required>
+                    @error('warna')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="card-footer">
