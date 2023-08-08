@@ -354,12 +354,6 @@ return [
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'User',
-                    'route' => 'user.index',
-                    'icon' => 'fas fa-fw fa-user',
-                    'active' => ['user', 'regex:@^user/[0-9]+/update$@'],
-                ],
-                [
                     'text' => 'Kendaraan',
                     'route' => 'kendaraan.index',
                     'icon' => 'fas fa-fw fa-car',
@@ -373,6 +367,32 @@ return [
                 ],
             ],
         ],
+        [
+            'text' => 'Manajemen Akun',
+            'icon' => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'User',
+                    'route' => 'user.index',
+                    'active' => ['user', 'regex:@^user/[0-9]+/update$@'],
+                ],
+                [
+                    'text' => 'Roles',
+                    'route' => 'roles.index',
+                    'active' => ['roles'],
+                ],
+                [
+                    'text' => 'Permission',
+                    'route' => 'permission.index',
+                    'active' => ['permission']
+                ],
+                [
+                    'text' => 'Role Permission',
+                    'route' => 'rolePermission.index',
+                    'active' => ['role-permisison'],
+                ],
+            ]
+        ]
         // ['header' => 'labels'],
         // [
         //     'text'       => 'important',
