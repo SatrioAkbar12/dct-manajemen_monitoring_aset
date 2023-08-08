@@ -60,14 +60,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data_role->permissions as $permission)
-                            <tr>
-                                <td>{{ $permission->id }}</td>
-                                <td>{{ $permission->name }}</td>
-                                <td class="text-center">
-                                    <a href=""><button type="button" class="btn btn-danger">Hapus</button></a>
-                                </td>
-                            </tr>
+                        @foreach ($data_role->permissions as $list_permissions)
+                                <tr>
+                                    <td>{{ $list_permissions->id }}</td>
+                                    <td>{{ $list_permissions->name }}</td>
+                                    <td class="text-center">
+                                        <form action="{{ route('rolePermission.del', $data_role->id) }}" method="POST">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" value="{{ $list_permissions->name }}">
+                                            <button type="button" class="btn btn-danger">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -82,10 +86,26 @@
                     <h4 class="modal-title">Tambah permission baru</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="" method="POST">
+                <form action="{{ route('rolePermission.store', $data_role->id) }}" method="POST">
                     {{ csrf_field() }}
-                    <div class="modal-content">
-                        {{-- form input --}}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Permission</label>
+                            <select class="form-control @error('permission') is-invalid @enderror" name="permission" required>
+                                @foreach ($data_permission as $permission)
+                                    @if(!($data_role->hasPermissionTo($permission->name)))
+                                        <option value="{{ $permission->name }}">{{ $permission->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @error('permission')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
