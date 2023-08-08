@@ -21,6 +21,7 @@
                             <th>Id</th>
                             <th>Username</th>
                             <th>Nama Lengkap</th>
+                            <th>Role</th>
                             <th>Memiliki SIM</th>
                             <th>Aksi</th>
                         </tr>
@@ -31,6 +32,14 @@
                                 <td>{{ $d->id }}</td>
                                 <td>{{ $d->username }}</td>
                                 <td>{{ $d->nama }}</td>
+                                <td>
+                                    @foreach ($d->getRoleNames() as $role_name)
+                                        @if( !($loop->first) )
+                                            <br>
+                                        @endif
+                                        {{ $role_name }}
+                                    @endforeach
+                                </td>
                                 <td class="text-center">
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" {{ $d->memiliki_sim == 1 ? 'checked' : '' }} disabled>
@@ -39,11 +48,49 @@
                                 <td class="text-center">
                                     <form action="{{ route('user.del', $d->id) }}" method="POST">
                                         {{ csrf_field() }}
-                                        <a href="{{ route('user.show', $d->id) }}"><button type="button" class="btn btn-warning">Update</button></a>
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalUpdateRole{{ $d->id }}">Update role</button>
+                                        <a href="{{ route('user.show', $d->id) }}"><button type="button" class="btn btn-warning">Update data</button></a>
                                         <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
                                     </form>
                                 </td>
                             </tr>
+
+                            <div class="modal fade" id="modalUpdateRole{{ $d->id }}" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Update Role User</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <form action="{{ route('user.updateRole', $d->id) }}" method="POST">
+                                            {{ csrf_field() }}
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label>Nama role</label>
+                                                    <select class="form-control @error('role') is-invalid @enderror" name="role">
+                                                        @foreach ($data_role as $role)
+                                                            <option value="{{ $role->name }}" {{ $d->hasRole( $role->name ) ? "selected" : "" }}>{{ $role->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('role')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                @foreach ($d->getRoleNames() as $role_name)
+                                                    @if ($loop->first)
+                                                        <input type="hidden" name="former_role" value={{ $role_name }}>
+                                                        @break
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
@@ -91,6 +138,17 @@
                             <label>Password</label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
                             @error('password')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select class="form-control @error('role') is-invalid @enderror" name="role" required>
+                                @foreach ($data_role as $role)
+                                    <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('role')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>

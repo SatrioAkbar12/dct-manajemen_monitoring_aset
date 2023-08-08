@@ -36,6 +36,7 @@ Route::middleware('auth')->controller(UserController::class)->prefix('user')->na
     Route::post('/', 'store')->name('store');
     Route::get('/{id}', 'show')->name('show');
     Route::post('/{id}', 'update')->name('update');
+    Route::post('/{id}/role', 'updateRole')->name('updateRole');
     Route::post('/{id}/delete', 'del')->name('del');
 });
 

@@ -25,6 +25,13 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+        if(Route::currentRouteName() == 'user.updateRole') {
+            return [
+                'role' => 'required|string|exists:Spatie\Permission\Models\Role,name',
+                'former_role' => 'required|string|exists:Spatie\Permission\Models\Role,name',
+            ];
+        }
+
         return [
             'nama' => 'required|string',
             'username' => 'required|string',
@@ -32,6 +39,12 @@ class UserRequest extends FormRequest
             'password' => [
                 'required',
                 'string',
+                Rule::excludeIf(Route::currentRouteName() == 'user.update'),
+            ],
+            'role' => [
+                'required',
+                'string',
+                'exists:Spatie\Permission\Models\Role,name',
                 Rule::excludeIf(Route::currentRouteName() == 'user.update'),
             ],
             'memiliki_sim' => 'required|boolean',
