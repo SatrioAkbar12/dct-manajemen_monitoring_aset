@@ -54,6 +54,8 @@ Route::middleware('auth')->controller(PermissionController::class)->prefix('perm
 Route::middleware('auth')->controller(RolePermissionController::class)->prefix('role-permission')->name('rolePermission.')->group(function() {
     Route::get('/', 'index')->name('index');
     Route::get('/{id_role}', 'detail')->name('detail');
+    Route::post('/{id_role}', 'store')->name('store');
+    Route::post('/{id_role}/del', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(KendaraanController::class)->prefix('kendaraan')->name('kendaraan.')->group(function() {
