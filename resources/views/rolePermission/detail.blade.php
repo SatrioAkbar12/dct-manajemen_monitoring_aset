@@ -67,8 +67,8 @@
                                     <td class="text-center">
                                         <form action="{{ route('rolePermission.del', $data_role->id) }}" method="POST">
                                             {{ csrf_field() }}
-                                            <input type="hidden" value="{{ $list_permissions->name }}">
-                                            <button type="button" class="btn btn-danger">Hapus</button>
+                                            <input type="hidden" name="permission" value="{{ $list_permissions->name }}">
+                                            <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $list_permissions->id }}">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -111,4 +111,36 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            @foreach ($data_role->permissions as $d)
+                $('#btnDeleteConfirm{{ $d->id }}').click(function() {
+                    var form = $(this).closest("form")
+
+                    Swal.fire({
+                        title: 'Apakah anda yakin?',
+                        text: "Anda akan menghapus data",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya',
+                        cancelButtonText: 'Tidak',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                                'Terhapus!',
+                                'Data telah terhapus',
+                                'success'
+                            )
+                            form.submit()
+                        }
+                    })
+                })
+            @endforeach
+        })
+    </script>
 @stop
