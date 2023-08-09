@@ -53,10 +53,10 @@ Route::middleware('auth')->controller(PermissionController::class)->prefix('perm
 });
 
 Route::middleware('auth')->controller(RolePermissionController::class)->prefix('role-permission')->name('rolePermission.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::get('/{id_role}', 'detail')->name('detail');
-    Route::post('/{id_role}', 'store')->name('store');
-    Route::post('/{id_role}/del', 'del')->name('del');
+    Route::middleware('permission:rolePermission.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:rolePermission.detail')->get('/{id_role}', 'detail')->name('detail');
+    Route::middleware('permission:rolePermission.store')->post('/{id_role}', 'store')->name('store');
+    Route::middleware('permission:rolePermission.del')->post('/{id_role}/del', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(KendaraanController::class)->prefix('kendaraan')->name('kendaraan.')->group(function() {

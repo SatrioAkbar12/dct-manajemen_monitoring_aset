@@ -26,7 +26,9 @@
                                 <td>{{ $role->id }}</td>
                                 <td>{{ $role->name }}</td>
                                 <td>
-                                    <a href="{{ route('rolePermission.detail', $role->id) }}"><button type="button" class="btn btn-info">Detail</button>
+                                    @can('rolePermission.detail')
+                                        <a href="{{ route('rolePermission.detail', $role->id) }}"><button type="button" class="btn btn-info">Detail</button>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

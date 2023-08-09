@@ -47,12 +47,14 @@
             <h5 class="card-title">List Permission</h5>
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah permission</button>
-            <hr>
+            {{-- @can('rolePermission.store') --}}
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah permission</button>
+                <hr>
+            {{-- @endcan --}}
 
             <div class="table-responsive">
                 <table class="table">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>Id</th>
                             <th>Permission</th>
@@ -62,14 +64,16 @@
                     <tbody>
                         @foreach ($data_role->permissions as $list_permissions)
                                 <tr>
-                                    <td>{{ $list_permissions->id }}</td>
+                                    <td class="text-center">{{ $list_permissions->id }}</td>
                                     <td>{{ $list_permissions->name }}</td>
                                     <td class="text-center">
-                                        <form action="{{ route('rolePermission.del', $data_role->id) }}" method="POST">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="permission" value="{{ $list_permissions->name }}">
-                                            <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $list_permissions->id }}">Hapus</button>
-                                        </form>
+                                        @can('rolePermission.del')
+                                            <form action="{{ route('rolePermission.del', $data_role->id) }}" method="POST">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="permission" value="{{ $list_permissions->name }}">
+                                                <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $list_permissions->id }}">Hapus</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                         @endforeach
