@@ -25,7 +25,7 @@
                         @foreach ($data_riwayat_peminjaman as $riwayat_peminjaman)
                             <tr>
                                 <td>{{ $riwayat_peminjaman->created_at }}</td>
-                                <td>{{ $riwayat_peminjaman->kendaraan->nopol . " - " . $riwayat_peminjaman->kendaraan->jenis_kendaraan . " " . $riwayat_peminjaman->kendaraan->merk . " " . $riwayat_peminjaman->kendaraan->warna }}</td>
+                                <td>{{ $riwayat_peminjaman->kendaraan->nopol . " - " . $riwayat_peminjaman->kendaraan->jenisKendaraan->nama . " " . $riwayat_peminjaman->kendaraan->merk . " " . $riwayat_peminjaman->kendaraan->warna }}</td>
                                 <td>{{ $riwayat_peminjaman->user->nama }}</td>
                                 <td class="text-center">
                                     @can('riwayatPeminjaman.detail')
