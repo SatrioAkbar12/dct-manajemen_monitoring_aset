@@ -27,9 +27,9 @@ class MasaAktifDokumenRequest extends FormRequest
     {
         return [
             'tipe_dokumen' => [
+                Rule::excludeIf(Route::currentRouteName() == 'masaAktifDokumen.update'),
                 'required',
                 'exists:App\Models\TipeDokumenKendaraan,id',
-                Rule::excludeIf(Route::currentRouteName() == 'masaAktifDokumen.update'),
             ],
             'masa_aktif' => 'required|date',
         ];

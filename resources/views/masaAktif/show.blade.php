@@ -95,11 +95,11 @@
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label>Kendaraan</label>
-                                                    <input type="text" class="form-control" value="{{ $dokumen->kendaraan->nopol . " - " . $dokumen->kendaraan->jenis_kendaraan . " " . $dokumen->kendaraan->merk . " " . $dokumen->kendaraan->warna }}" disabled>
+                                                    <input type="text" class="form-control" value="{{ $dokumen->kendaraan->nopol . " - " . $dokumen->kendaraan->jenis_kendaraan . " " . $dokumen->kendaraan->merk . " " . $dokumen->kendaraan->warna }}" readonly>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Dokumen</label>
-                                                    <input type="text" class="form-control" value="{{ $dokumen->tipeDokumen->nama_dokumen }}" disabled>
+                                                    <input type="text" class="form-control" name="tipe_dokumen" value="{{ $dokumen->tipeDokumen->nama_dokumen }}" readonly>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Masa aktif hingga</label>
