@@ -32,19 +32,19 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->controller(UserController::class)->prefix('user')->name('user.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::post('/', 'store')->name('store');
-    Route::get('/{id}', 'show')->name('show');
-    Route::post('/{id}', 'update')->name('update');
-    Route::post('/{id}/role', 'updateRole')->name('updateRole');
-    Route::post('/{id}/delete', 'del')->name('del');
+    Route::middleware('permission:user.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:user.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:user.update')->get('/{id}', 'show')->name('show');
+    Route::middleware('permission:user.update')->post('/{id}', 'update')->name('update');
+    Route::middleware('permission:user.updateRole')->post('/{id}/role', 'updateRole')->name('updateRole');
+    Route::middleware('permission:user.del')->post('/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(RoleController::class)->prefix('roles')->name('roles.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::post('/', 'store')->name('store');
-    Route::post('/{id}', 'update')->name('update');
-    Route::post('/{id}/delete', 'del')->name('del');
+    Route::middleware('permission:user.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:user.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:user.update')->post('/{id}', 'update')->name('update');
+    Route::middleware('permission:user.del')->post('/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(PermissionController::class)->prefix('permission')->name('permission.')->group(function() {
