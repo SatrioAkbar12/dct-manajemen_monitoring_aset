@@ -84,9 +84,9 @@ Route::middleware('auth')->controller(MasaAktifDokumenController::class)->prefix
 });
 
 Route::middleware('auth')->controller(ServisRutinKendaraanController::class)->prefix('servis-rutin')->name('servisRutin.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::get('/{id_kendaraan}', 'getKendaraan')->name('getKendaraan');
-    Route::post('/{id_kendaraan}', 'store')->name('store');
+    Route::middleware('permission:servisRutin.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:servisRutin.getKendaraan')->get('/{id_kendaraan}', 'getKendaraan')->name('getKendaraan');
+    Route::middleware('permission:servisRutin.store')->post('/{id_kendaraan}', 'store')->name('store');
 });
 
 Route::middleware('auth')->controller(PeminjamanAktifController::class)->prefix('peminjaman-aktif')->name('peminjamanAktif.')->group(function() {

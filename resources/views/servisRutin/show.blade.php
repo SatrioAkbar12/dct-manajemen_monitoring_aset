@@ -71,8 +71,10 @@
             <h5 class="card-title">List Servis Rutin Kendaraan</h5>
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
-            <hr>
+            @can('servisRutin.store')
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
+                <hr>
+            @endcan
 
             <div class="table-responsive">
                 <table class="table text-center">
@@ -135,58 +137,60 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalCreate" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Tambah data baru</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    @can('servisRutin.store')
+        <div class="modal fade" id="modalCreate" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tambah data baru</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <form action="{{ route('servisRutin.store', $data_kendaraan->id) }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Tanggal servis</label>
+                                <input type="date" class="form-control @error('tanggal_servis') is-invalid @enderror" name="tanggal_servis" required>
+                                @error('tanggal_servis')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="penggantianOli" name="penggantian_oli">
+                                <label class="form-check-label" for="penggantianOli">Penggantian oli</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="cekAki" name="cek_aki">
+                                <label class="form-check-label" for="cekAki">Cek aki</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="cekRem" name="cek_rem">
+                                <label class="form-check-label" for="cekRem">Cek rem</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="cekKopling" name="cek_kopling">
+                                <label class="form-check-label" for="cekKopling">Cek kopling</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="cekBan" name="cek_ban">
+                                <label class="form-check-label" for="cekBan">Cek ban</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="cekLampu" name="cek_lampu">
+                                <label class="form-check-label" for="cekLampu">Cek lampu</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="cekAc" name="cek_ac">
+                                <label class="form-check-label" for="cekAc">Cek AC</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
                 </div>
-                <form action="{{ route('servisRutin.store', $data_kendaraan->id) }}" method="POST">
-                    {{ csrf_field() }}
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label>Tanggal servis</label>
-                            <input type="date" class="form-control @error('tanggal_servis') is-invalid @enderror" name="tanggal_servis" required>
-                            @error('tanggal_servis')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input" id="penggantianOli" name="penggantian_oli">
-                            <label class="form-check-label" for="penggantianOli">Penggantian oli</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input" id="cekAki" name="cek_aki">
-                            <label class="form-check-label" for="cekAki">Cek aki</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input" id="cekRem" name="cek_rem">
-                            <label class="form-check-label" for="cekRem">Cek rem</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input" id="cekKopling" name="cek_kopling">
-                            <label class="form-check-label" for="cekKopling">Cek kopling</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input" id="cekBan" name="cek_ban">
-                            <label class="form-check-label" for="cekBan">Cek ban</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input" id="cekLampu" name="cek_lampu">
-                            <label class="form-check-label" for="cekLampu">Cek lampu</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input" id="cekAc" name="cek_ac">
-                            <label class="form-check-label" for="cekAc">Cek AC</label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+    @endcan
 @stop
