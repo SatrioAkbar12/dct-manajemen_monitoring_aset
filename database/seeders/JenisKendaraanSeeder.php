@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\JenisKendaraan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 
-class RoleSeeder extends Seeder
+class JenisKendaraanSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'user']);
+        JenisKendaraan::create(['nama' => 'Mobil']);
+        JenisKendaraan::create(['nama' => 'Motor']);
     }
 }

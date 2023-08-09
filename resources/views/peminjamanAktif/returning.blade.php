@@ -13,7 +13,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>Kendaraan</label>
-                    <input type="text" class="form-control-plaintext" value="{{ $data_peminjaman_aktif->kendaraan->nopol . " - " . $data_peminjaman_aktif->kendaraan->jenis_kendaraan . " " . $data_peminjaman_aktif->kendaraan->merk . " " . $data_peminjaman_aktif->kendaraan->warna }}" disabled>
+                    <input type="text" class="form-control-plaintext" value="{{ $data_peminjaman_aktif->kendaraan->nopol . " - " . $data_peminjaman_aktif->kendaraan->jenisKendaraan->nama . " " . $data_peminjaman_aktif->kendaraan->merk . " " . $data_peminjaman_aktif->kendaraan->warna }}" disabled>
                 </div>
                 <div class="form-group">
                     <label>Status kondisi kendaraan</label>

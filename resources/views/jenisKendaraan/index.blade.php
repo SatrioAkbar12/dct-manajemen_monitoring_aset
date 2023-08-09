@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Master Data Kendaraan')
+@section('title', 'Master Data Jenis Kendaraan')
 
 @section('content_header')
-    <h1>Master Data Kendaraan</h1>
+    <h1>Master Data Jenis Kendaraan</h1>
 @stop
 
 @section('content')
-    <p>Semua data mengenai aset kendaraan yang dimiliki</p>
+    <p>Semua data tentang jenis kendaraan yang ada</p>
 
     <div class="card">
         <div class="card-body">
-            @can('kendaraan.index')
+            @can('jenisKendaraan.store')
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
                 <hr>
             @endcan
@@ -21,10 +21,7 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nomor Polisi</th>
-                            <th>Merk</th>
                             <th>Jenis Kendaraan</th>
-                            <th>Warna</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -32,24 +29,50 @@
                         @foreach ($data as $d)
                             <tr>
                                 <td>{{ $d->id }}</td>
-                                <td>{{ $d->nopol}}</td>
-                                <td>{{ $d->merk }}</td>
-                                <td>{{ $d->jenisKendaraan->nama }}</td>
-                                <td>{{ $d->warna }}</td>
+                                <td>{{ $d->nama }}</td>
                                 <td class="text-center">
-                                    @can('kendaraan.del')
-                                        <form action="{{ route('kendaraan.del', $d->id) }}" method="POST">
+                                    @can('jenisKendaraan.del')
+                                        <form action="{{ route('jenisKendaraan.del', $d->id) }}" method="POST">
                                             {{ csrf_field() }}
                                     @endcan
-                                    @can('kendaraan.update')
-                                            <a href="{{ route('kendaraan.show', $d->id) }}"><button type="button" class="btn btn-warning">Update</button></a>
+                                    @can('jenisKendaraan.update')
+                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $d->id }}">Update</button>
                                     @endcan
-                                    @can('kendaraan.del')
+                                    @can('jenisKendaraan.del')
                                             <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
                                         </form>
                                     @endcan
                                 </td>
                             </tr>
+
+                            @can('jenisKendaraan.update')
+                                <div class="modal fade" id="modalUpdate{{ $d->id }}" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Update data</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <form action="{{ route('jenisKendaraan.update', $d->id) }}" method="POST">
+                                                {{ csrf_field() }}
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Jenis kendaraan</label>
+                                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ $d->nama }}" required>
+                                                        @error('nama')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endcan
                         @endforeach
                     </tbody>
                 </table>
@@ -62,7 +85,7 @@
         </div>
     </div>
 
-    @can('kendaraan.store')
+    @can('jenisKendaraan.store')
         <div class="modal fade" id="modalCreate" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -70,38 +93,13 @@
                         <h4 class="modal-title">Tambah data baru</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <form action="{{ route('kendaraan.store') }}" method="POST">
+                    <form action="{{ route('jenisKendaraan.store') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
-                                <label>Nomor Polisi</label>
-                                <input type="text" class="form-control @error('nopol') is-invalid @enderror" name="nopol" required>
-                                @error('nopol')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Merk</label>
-                                <input type="text" class="form-control @error('merk') is-invalid @enderror" name="merk" required>
-                                @error('merk')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Jenis kendaraan</label>
-                                <select class="form-control @error('jenis_kendaraan') is-invalid @enderror" name="jenis_kendaraan" required>
-                                    @foreach ($data_jenis_kendaraan as $jenis_kendaraan)
-                                        <option value="{{ $jenis_kendaraan->id }}">{{ $jenis_kendaraan->nama }}</option>
-                                    @endforeach
-                                </select>
-                                @error('jenis_kendaraan')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Warna</label>
-                                <input type="text" class="form-control @error('warna') is-invalid @enderror" name="warna" required>
-                                @error('warna')
+                                <label>Jenis Kendaraan</label>
+                                <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" required>
+                                @error('nama')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -115,9 +113,6 @@
             </div>
         </div>
     @endcan
-@stop
-
-@section('css')
 @stop
 
 @section('js')

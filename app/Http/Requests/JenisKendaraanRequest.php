@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class KendaraanRequest extends FormRequest
+class JenisKendaraanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,7 @@ class KendaraanRequest extends FormRequest
     public function rules()
     {
         return [
-            'nopol' => 'required|string',
-            'merk' => 'required|string',
-            'warna' => 'required|string',
-            'jenis_kendaraan' => 'required|integer|exists:\App\Models\JenisKendaraan,id'
+            'nama' => 'required|string',
         ];
     }
 }

@@ -30,7 +30,7 @@
                     <p>Kendaraan</p>
                 </div>
                 <div class="col-8 col-md-10">
-                    <p>: {{ $data_riwayat_peminjaman->kendaraan->nopol . " - " . $data_riwayat_peminjaman->kendaraan->jenis_kendaraan . " " . $data_riwayat_peminjaman->kendaraan->merk . " " . $data_riwayat_peminjaman->kendaraan->warna }}
+                    <p>: {{ $data_riwayat_peminjaman->kendaraan->nopol . " - " . $data_riwayat_peminjaman->kendaraan->jenisKendaraan->nama . " " . $data_riwayat_peminjaman->kendaraan->merk . " " . $data_riwayat_peminjaman->kendaraan->warna }}
                 </div>
             </div>
             <div class="row">

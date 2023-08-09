@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -17,6 +18,16 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $role = Role::where('name', 'admin')->first();
+        $user = User::create([
+            'nama' => 'Admin',
+            'username' => 'admin',
+            'email' => 'admin@mail.com',
+            'password' => Hash::make('admin123'),
+            'memiliki_sim' => 1
+        ]);
+        $user->assignRole($role->name);
+
         $faker = Faker::create();;
 
         for($i = 0; $i < 10; $i++) {

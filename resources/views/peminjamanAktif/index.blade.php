@@ -33,7 +33,7 @@
                         @foreach ($data_peminjaman_aktif as $peminjaman_aktif)
                             <tr>
                                 <td>{{ $peminjaman_aktif->created_at }}</td>
-                                <td>{{ $peminjaman_aktif->kendaraan->nopol . " - " . $peminjaman_aktif->kendaraan->jenis_kendaraan . " " . $peminjaman_aktif->kendaraan->merk . " " . $peminjaman_aktif->kendaraan->warna }}</td>
+                                <td>{{ $peminjaman_aktif->kendaraan->nopol . " - " . $peminjaman_aktif->kendaraan->jenisKendaraan->nama . " " . $peminjaman_aktif->kendaraan->merk . " " . $peminjaman_aktif->kendaraan->warna }}</td>
                                 <td>{{ $peminjaman_aktif->user->nama }}</td>
                                 <td>{{ $peminjaman_aktif->target_tanggal_waktu_kembali }}</td>
                                 <td class="text-center">
@@ -102,7 +102,7 @@
                                 <label>Kendaraan</label>
                                 <select class="form-control @error('kendaraan') is-invalid @enderror" name="kendaraan" required>
                                     @foreach ($data_kendaraan as $kendaraan)
-                                        <option value="{{ $kendaraan->id }}">{{ $kendaraan->nopol . " - " . $kendaraan->jenis_kendaraan . " " . $kendaraan->merk . " " . $kendaraan->warna }}</option>
+                                        <option value="{{ $kendaraan->id }}">{{ $kendaraan->nopol . " - " . $kendaraan->jenisKendaraan->nama . " " . $kendaraan->merk . " " . $kendaraan->warna }}</option>
                                     @endforeach
                                 </select>
                                 @error('kendaraan')
