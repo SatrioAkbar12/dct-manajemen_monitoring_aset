@@ -28,9 +28,9 @@
                 <div class="form-group">
                     <label for="jenisKendaraan">Jenis Kendaraan</label>
                     <select class="form-control @error('jenis_kendaraan') is-invalid @enderror" name="jenis_kendaraan" required>
-                        <option {{ $data->jenis_kendaraan == 'Motor' ? "selected" : "" }}>Motor</option>
-                        <option {{ $data->jenis_kendaraan == 'Mobil' ? "selected" : "" }}>Mobil</option>
-                        <option {{ $data->jenis_kendaraan == 'Van' ? "selected" : "" }}>Van</option>
+                        @foreach ($data_jenis_kendaraan as $jenis_kendaraan)
+                            <option value="{{ $jenis_kendaraan->id }}" {{ $data->id_jenis_kendaraan == $jenis_kendaraan->id ? 'selected' : '' }}>{{ $jenis_kendaraan->nama }}</option>
+                        @endforeach
                     </select>
                     @error('jenis_kendaraan')
                         <div class="text-danger">{{ $message }}</div>
@@ -53,5 +53,4 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop

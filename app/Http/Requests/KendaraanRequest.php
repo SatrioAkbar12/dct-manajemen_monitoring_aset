@@ -27,7 +27,7 @@ class KendaraanRequest extends FormRequest
             'nopol' => 'required|string',
             'merk' => 'required|string',
             'warna' => 'required|string',
-            'jenis_kendaraan' => 'required|in:Motor,Mobil,Van'
+            'jenis_kendaraan' => 'required|integer|exists:\App\Models\JenisKendaraan,id'
         ];
     }
 }

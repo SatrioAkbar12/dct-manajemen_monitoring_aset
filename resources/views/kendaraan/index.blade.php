@@ -34,7 +34,7 @@
                                 <td>{{ $d->id }}</td>
                                 <td>{{ $d->nopol}}</td>
                                 <td>{{ $d->merk }}</td>
-                                <td>{{ $d->jenis_kendaraan }}</td>
+                                <td>{{ $d->jenisKendaraan->nama }}</td>
                                 <td>{{ $d->warna }}</td>
                                 <td class="text-center">
                                     @can('kendaraan.del')
@@ -89,10 +89,10 @@
                             </div>
                             <div class="form-group">
                                 <label>Jenis kendaraan</label>
-                                <select class="form-control" name="jenis_kendaraan @error('jenis_kendaraan') is-invalid @enderror" required>
-                                    <option value="Motor">Motor</option>
-                                    <option value="Mobil">Mobil</option>
-                                    <option value="Van">Van</option>
+                                <select class="form-control @error('jenis_kendaraan') is-invalid @enderror" name="jenis_kendaraan" required>
+                                    @foreach ($data_jenis_kendaraan as $jenis_kendaraan)
+                                        <option value="{{ $jenis_kendaraan->id }}">{{ $jenis_kendaraan->nama }}</option>
+                                    @endforeach
                                 </select>
                                 @error('jenis_kendaraan')
                                     <div class="text-danger">{{ $message }}</div>
