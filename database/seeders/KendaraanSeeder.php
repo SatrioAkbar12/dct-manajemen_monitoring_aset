@@ -25,7 +25,8 @@ class KendaraanSeeder extends Seeder
                 'nopol' => strtoupper($faker->bothify('? #### ???')),
                 'merk' => $faker->word(),
                 'id_jenis_kendaraan' => rand(1, $jumlah_jenis_kendaraan),
-                'warna' => $faker->colorName()
+                'warna' => $faker->colorName(),
+                'tipe' => $faker->word(),
             ]);
         }
     }
