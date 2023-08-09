@@ -76,11 +76,11 @@ Route::middleware('auth')->controller(DokumenController::class)->prefix('tipe-do
 });
 
 Route::middleware('auth')->controller(MasaAktifDokumenController::class)->prefix('masa-aktif-dokumen')->name('masaAktifDokumen.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::get('/{id_kendaraan}', 'getKendaraan')->name('getKendaraan');
-    Route::post('/{id_kendaraan}', 'store')->name('store');
-    Route::post('/{id_kendaraan}/{id}', 'update')->name('update');
-    Route::post('/{id_kendaraan}/{id}/delete', 'del')->name('del');
+    Route::middleware('permission:masaAktifDokumen.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:masaAktifDokumen.getKendaraan')->get('/{id_kendaraan}', 'getKendaraan')->name('getKendaraan');
+    Route::middleware('permission:masaAktifDokumen.store')->post('/{id_kendaraan}', 'store')->name('store');
+    Route::middleware('permission:masaAktifDokumen.update')->post('/{id_kendaraan}/{id}', 'update')->name('update');
+    Route::middleware('permission:masaAktifDokumen.del')->post('/{id_kendaraan}/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(ServisRutinKendaraanController::class)->prefix('servis-rutin')->name('servisRutin.')->group(function() {

@@ -42,7 +42,9 @@
                                     </ul>
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('masaAktifDokumen.getKendaraan', $kendaraan->id) }}"><button type="button" class="btn btn-info">Detail</button>
+                                    @can('masaAktifDokumen.getKendaraan')
+                                        <a href="{{ route('masaAktifDokumen.getKendaraan', $kendaraan->id) }}"><button type="button" class="btn btn-info">Detail</button>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -56,8 +58,4 @@
             </div>
         </div>
     </div>
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop

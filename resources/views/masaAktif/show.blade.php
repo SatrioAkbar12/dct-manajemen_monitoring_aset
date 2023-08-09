@@ -55,8 +55,10 @@
             <h5 class="card-title">Dokumen kendaraan</h5>
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah baru</button>
-            <hr>
+            @can('masaAktifDokumen.store')
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah baru</button>
+                <hr>
+            @endcan
 
             <div class="table-responsive">
                 <table class="table">
@@ -75,48 +77,56 @@
                                 <td>{{ $dokumen->tipeDokumen->nama_dokumen }}</td>
                                 <td>{{ $dokumen->tanggal_masa_berlaku }}</td>
                                 <td>
-                                    <form action="{{ route('masaAktifDokumen.del', ['id_kendaraan' => $dokumen->id_kendaraan, 'id' => $dokumen->id]) }}" method="POST">
-                                        {{ csrf_field() }}
+                                    @can('masaAktifDokumen.del')
+                                        <form action="{{ route('masaAktifDokumen.del', ['id_kendaraan' => $dokumen->id_kendaraan, 'id' => $dokumen->id]) }}" method="POST">
+                                            {{ csrf_field() }}
+                                    @endcan
+                                    @can('masaAktifDokumen.update')
                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $dokumen->id_tipe_dokumen }}">Update</button>
+                                    @endcan
+                                    @can('masaAktifDokumen.del')
                                         <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $dokumen->id }}">Hapus</button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
 
-                            <div class="modal fade" id="modalUpdate{{ $dokumen->id_tipe_dokumen }}" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Update masa aktif dokumen</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            @can('masaAktifDokumen.update')
+                                <div class="modal fade" id="modalUpdate{{ $dokumen->id_tipe_dokumen }}" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Update masa aktif dokumen</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <form action="{{ route('masaAktifDokumen.update', ['id_kendaraan' => $dokumen->id_kendaraan, 'id' => $dokumen->id]) }}" method="POST">
+                                                {{ csrf_field() }}
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Kendaraan</label>
+                                                        <input type="text" class="form-control" value="{{ $dokumen->kendaraan->nopol . " - " . $dokumen->kendaraan->jenis_kendaraan . " " . $dokumen->kendaraan->merk . " " . $dokumen->kendaraan->warna }}" readonly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Dokumen</label>
+                                                        <input type="text" class="form-control" name="tipe_dokumen" value="{{ $dokumen->tipeDokumen->nama_dokumen }}" readonly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Masa aktif hingga</label>
+                                                        <input type="date" class="form-control @error('masa_aktif') is-invalid @enderror" name="masa_aktif" value="{{ $dokumen->tanggal_masa_berlaku }}" value="{{ old('masa_aktif') }}" required>
+                                                        @error('masa_aktif')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-defaul" data-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                </div>
+                                            </form>
                                         </div>
-                                        <form action="{{ route('masaAktifDokumen.update', ['id_kendaraan' => $dokumen->id_kendaraan, 'id' => $dokumen->id]) }}" method="POST">
-                                            {{ csrf_field() }}
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label>Kendaraan</label>
-                                                    <input type="text" class="form-control" value="{{ $dokumen->kendaraan->nopol . " - " . $dokumen->kendaraan->jenis_kendaraan . " " . $dokumen->kendaraan->merk . " " . $dokumen->kendaraan->warna }}" readonly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Dokumen</label>
-                                                    <input type="text" class="form-control" name="tipe_dokumen" value="{{ $dokumen->tipeDokumen->nama_dokumen }}" readonly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Masa aktif hingga</label>
-                                                    <input type="date" class="form-control @error('masa_aktif') is-invalid @enderror" name="masa_aktif" value="{{ $dokumen->tanggal_masa_berlaku }}" value="{{ old('masa_aktif') }}" required>
-                                                    @error('masa_aktif')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-defaul" data-dismiss="modal">Batal</button>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </div>
-                                        </form>
                                     </div>
                                 </div>
-                            </div>
+                            @endcan
                         @endforeach
                     </tbody>
                 </table>
@@ -124,47 +134,49 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalCreate" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Tambah data baru</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    @can('masaAktifDokumen.store')
+        <div class="modal fade" id="modalCreate" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tambah data baru</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <form action="{{ route('masaAktifDokumen.store', $data_kendaraan->id) }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Kendaraan</label>
+                                <input type="text" class="form-control" value="{{ $data_kendaraan->nopol . " - " . $data_kendaraan->jenis_kendaraan . " " . $data_kendaraan->merk . " " . $data_kendaraan->warna }}" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label>Dokumen</label>
+                                <select class="form-control @error('tipe_dokumen') is-invalid @enderror" name="tipe_dokumen" required>
+                                    @foreach ($data_tipe_dokumen as $dokumen)
+                                        <option value="{{ $dokumen->id }}" {{ $dokumen->id == old('tipe_dokumen') ? 'selected' : '' }}>{{ $dokumen->nama_dokumen }}</option>
+                                    @endforeach
+                                </select>
+                                @error('tipe_dokumen')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Masa aktif hingga</label>
+                                <input type="date" class="form-control @error('masa_aktif') is-invalid @enderror" name="masa_aktif" value="{{ old('masa_aktif') }}" required>
+                                @error('masa_aktif')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
                 </div>
-                <form action="{{ route('masaAktifDokumen.store', $data_kendaraan->id) }}" method="POST">
-                    {{ csrf_field() }}
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label>Kendaraan</label>
-                            <input type="text" class="form-control" value="{{ $data_kendaraan->nopol . " - " . $data_kendaraan->jenis_kendaraan . " " . $data_kendaraan->merk . " " . $data_kendaraan->warna }}" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label>Dokumen</label>
-                            <select class="form-control @error('tipe_dokumen') is-invalid @enderror" name="tipe_dokumen" required>
-                                @foreach ($data_tipe_dokumen as $dokumen)
-                                    <option value="{{ $dokumen->id }}" {{ $dokumen->id == old('tipe_dokumen') ? 'selected' : '' }}>{{ $dokumen->nama_dokumen }}</option>
-                                @endforeach
-                            </select>
-                            @error('tipe_dokumen')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Masa aktif hingga</label>
-                            <input type="date" class="form-control @error('masa_aktif') is-invalid @enderror" name="masa_aktif" value="{{ old('masa_aktif') }}" required>
-                            @error('masa_aktif')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+    @endcan
 @stop
 
 @section('css')
