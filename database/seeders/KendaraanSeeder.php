@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\JenisKendaraan;
 use App\Models\Kendaraan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,14 +17,14 @@ class KendaraanSeeder extends Seeder
      */
     public function run()
     {
-        $jenis_kendaraan = ['Motor', 'Mobil'];
+        $jumlah_jenis_kendaraan = JenisKendaraan::count();
         $faker = Faker::create();
 
         for($i = 0; $i < 20; $i++) {
             Kendaraan::create([
                 'nopol' => strtoupper($faker->bothify('? #### ???')),
                 'merk' => $faker->word(),
-                'jenis_kendaraan' => $jenis_kendaraan[array_rand($jenis_kendaraan)],
+                'id_jenis_kendaraan' => rand(1, $jumlah_jenis_kendaraan),
                 'warna' => $faker->colorName()
             ]);
         }
