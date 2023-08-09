@@ -90,10 +90,10 @@ Route::middleware('auth')->controller(ServisRutinKendaraanController::class)->pr
 });
 
 Route::middleware('auth')->controller(PeminjamanAktifController::class)->prefix('peminjaman-aktif')->name('peminjamanAktif.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::post('/', 'store')->name('store');
-    Route::get('/{id}', 'returning')->name('returning');
-    Route::post('/{id}', 'update')->name('update');
+    Route::middleware('permission:peminjamanAktif.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:peminjamanAktif.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:peminjamanAktif.returning')->get('/{id}', 'returning')->name('returning');
+    Route::middleware('permission:peminjamanAktif.update')->post('/{id}', 'update')->name('update');
 });
 
 Route::middleware('auth')->controller(RiwayatPeminjamanController::class)->prefix('riwayat-peminjaman')->name('riwayatPeminjaman.')->group(function() {

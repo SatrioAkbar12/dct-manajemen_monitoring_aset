@@ -41,7 +41,9 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-success">Simpan</button>
+                @can('peminjamanAktif.update')
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                @endcan
                 <a href="{{ route('peminjamanAktif.index') }}"><button type="button" class="btn btn-secondary">Kembali</button></a>
             </div>
         </form>

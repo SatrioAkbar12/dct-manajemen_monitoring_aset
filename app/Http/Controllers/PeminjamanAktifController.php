@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class PeminjamanAktifController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:peminjamanAktif.index|peminjamanAktif.store|peminjamanAktif.returning|peminjamanAktif.update');
+    }
+
     public function index() {
         $peminjam_aktif = TransaksiPeminjaman::where('aktif', 1)->paginate(10);
         $user = User::all();

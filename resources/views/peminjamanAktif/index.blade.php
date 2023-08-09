@@ -13,8 +13,11 @@
 
     <div class="card">
         <div class="card-body">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah peminjaman</button>
-            <hr>
+            @can('peminjamanAktif.store')
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah peminjaman</button>
+                <hr>
+            @endcan
+
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="text-center">
@@ -34,7 +37,9 @@
                                 <td>{{ $peminjaman_aktif->user->nama }}</td>
                                 <td>{{ $peminjaman_aktif->target_tanggal_waktu_kembali }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('peminjamanAktif.returning', $peminjaman_aktif->id) }}"><button type="button" class="btn btn-success">Selesaikan</button></a>
+                                    @can('peminjamanAktif.returning')
+                                        <a href="{{ route('peminjamanAktif.returning', $peminjaman_aktif->id) }}"><button type="button" class="btn btn-success">Selesaikan</button></a>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -49,80 +54,81 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalCreate" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Tambah peminjaman baru</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    @can('peminjamanAktif.store')
+        <div class="modal fade" id="modalCreate" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tambah peminjaman baru</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <form action="{{ route('peminjamanAktif.store') }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="userPeminjam">Peminjam</label>
+                                <select class="form-control @error('user') is-invalid @enderror" id="userPeminjam" name="user" required>
+                                    @foreach ($data_user as $user)
+                                        <option value="{{ $user->id }}">{{ $user->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('user')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            {{-- <div class="form-group">
+                                <label for="userPeminjam">Peminjam</label>
+                                <select class="form-control select2multiple" id="userPeminjam" name="user" multiple="multiple">
+                                    @foreach ($data_user as $user)
+                                        <option value="{{ $user->id }}">{{ $user->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <x-adminlte-select label="Test select" name="selBasic">
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                            </x-adminlte-select>
+
+                            <x-adminlte-select2 label="Test select2" name="sel2Basic">
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                            </x-adminlte-select2> --}}
+
+                            <div class="form-group">
+                                <label>Kendaraan</label>
+                                <select class="form-control @error('kendaraan') is-invalid @enderror" name="kendaraan" required>
+                                    @foreach ($data_kendaraan as $kendaraan)
+                                        <option value="{{ $kendaraan->id }}">{{ $kendaraan->nopol . " - " . $kendaraan->jenis_kendaraan . " " . $kendaraan->merk . " " . $kendaraan->warna }}</option>
+                                    @endforeach
+                                </select>
+                                @error('kendaraan')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Target tanggal waktu kembali</label>
+                                <input type="datetime-local" class="form-control @error('target_tanggal_waktu_kembali') is-invalid @enderror" name="target_tanggal_waktu_kembali" required>
+                                @error('target_tanggal_waktu_kembali')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
                 </div>
-                <form action="{{ route('peminjamanAktif.store') }}" method="POST">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="userPeminjam">Peminjam</label>
-                            <select class="form-control @error('user') is-invalid @enderror" id="userPeminjam" name="user" required>
-                                @foreach ($data_user as $user)
-                                    <option value="{{ $user->id }}">{{ $user->nama }}</option>
-                                @endforeach
-                            </select>
-                            @error('user')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        {{-- <div class="form-group">
-                            <label for="userPeminjam">Peminjam</label>
-                            <select class="form-control select2multiple" id="userPeminjam" name="user" multiple="multiple">
-                                @foreach ($data_user as $user)
-                                    <option value="{{ $user->id }}">{{ $user->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <x-adminlte-select label="Test select" name="selBasic">
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                        </x-adminlte-select>
-
-                        <x-adminlte-select2 label="Test select2" name="sel2Basic">
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                        </x-adminlte-select2> --}}
-
-                        <div class="form-group">
-                            <label>Kendaraan</label>
-                            <select class="form-control @error('kendaraan') is-invalid @enderror" name="kendaraan" required>
-                                @foreach ($data_kendaraan as $kendaraan)
-                                    <option value="{{ $kendaraan->id }}">{{ $kendaraan->nopol . " - " . $kendaraan->jenis_kendaraan . " " . $kendaraan->merk . " " . $kendaraan->warna }}</option>
-                                @endforeach
-                            </select>
-                            @error('kendaraan')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Target tanggal waktu kembali</label>
-                            <input type="datetime-local" class="form-control @error('target_tanggal_waktu_kembali') is-invalid @enderror" name="target_tanggal_waktu_kembali" required>
-                            @error('target_tanggal_waktu_kembali')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+    @endcan
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
     {{-- <style>
         .select2-container{
             width: 1120.74px;
