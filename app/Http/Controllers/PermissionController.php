@@ -10,8 +10,9 @@ class PermissionController extends Controller
 {
     public function index() {
         $data = Permission::paginate(20);
+        $jumlah_permission = Permission::count();
 
-        return view('permission.index', ['data' => $data]);
+        return view('permission.index', ['data' => $data, 'jumlah_permission' => $jumlah_permission]);
     }
 
     public function permissionSync() {
