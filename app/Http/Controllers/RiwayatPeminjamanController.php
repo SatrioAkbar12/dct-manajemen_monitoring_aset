@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class RiwayatPeminjamanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:riwayatPeminjaman.index|riwayatPeminjaman.detail');
+    }
+
     public function index() {
         $riwayat_peminjaman = TransaksiPeminjaman::where('aktif', 0)->paginate(10);
 

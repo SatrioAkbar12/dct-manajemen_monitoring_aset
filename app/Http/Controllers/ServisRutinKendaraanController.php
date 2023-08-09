@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ServisRutinKendaraanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:servisRutin.index|servisRutin.getKendaraan|servisRutin.store');
+    }
+
     public function index() {
         $kendaraan = Kendaraan::paginate(10);
 

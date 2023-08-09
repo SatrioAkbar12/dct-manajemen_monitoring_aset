@@ -28,7 +28,9 @@
                                 <td>{{ $riwayat_peminjaman->kendaraan->nopol . " - " . $riwayat_peminjaman->kendaraan->jenis_kendaraan . " " . $riwayat_peminjaman->kendaraan->merk . " " . $riwayat_peminjaman->kendaraan->warna }}</td>
                                 <td>{{ $riwayat_peminjaman->user->nama }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('riwayatPeminjaman.detail', $riwayat_peminjaman->id) }}"><button type="button" class="btn btn-info">Detail</button></a>
+                                    @can('riwayatPeminjaman.detail')
+                                        <a href="{{ route('riwayatPeminjaman.detail', $riwayat_peminjaman->id) }}"><button type="button" class="btn btn-info">Detail</button></a>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

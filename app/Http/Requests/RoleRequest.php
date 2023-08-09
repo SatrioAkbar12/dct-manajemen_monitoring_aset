@@ -3,10 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Validation\Rule;
 
-class MasaAktifDokumenRequest extends FormRequest
+class RoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +24,7 @@ class MasaAktifDokumenRequest extends FormRequest
     public function rules()
     {
         return [
-            'tipe_dokumen' => [
-                Rule::excludeIf(Route::currentRouteName() == 'masaAktifDokumen.update'),
-                'required',
-                'exists:App\Models\TipeDokumenKendaraan,id',
-            ],
-            'masa_aktif' => 'required|date',
+            'nama' => 'required|string',
         ];
     }
 }

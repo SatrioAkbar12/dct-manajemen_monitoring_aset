@@ -18,6 +18,7 @@
                             <th>Id</th>
                             <th>Nomor Polisi</th>
                             <th>Kendaraan</th>
+                            <th>Deskripsi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -27,8 +28,23 @@
                                 <td>{{ $kendaraan->id }}</td>
                                 <td>{{ $kendaraan->nopol }}</td>
                                 <td>{{ $kendaraan->jenis_kendaraan . " " . $kendaraan->merk . " " . $kendaraan->warna }}</td>
+                                <td class="text-danger">
+                                    <ul>
+                                        @if($kendaraan->masaAktifDokumen->count() == 0)
+                                            Kendaraan perlu dilengkapi data dokumen kendaraan
+                                        @endif
+
+                                        @foreach ($kendaraan->masaAktifDokumen as $dokumen)
+                                            @if(\Carbon\Carbon::createFromFormat('Y-m-d', $dokumen->tanggal_masa_berlaku)->diffInDays(\Carbon\Carbon::now('Asia/Jakarta'), false) >= -7)
+                                                <li>{{ $dokumen->tipeDokumen->nama_dokumen }} perlu diperpanjang sebelum tanggal {{ $dokumen->tanggal_masa_berlaku }}</li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                </td>
                                 <td class="text-center">
-                                    <a href="{{ route('masaAktifDokumen.getKendaraan', $kendaraan->id) }}"><button type="button" class="btn btn-info">Detail</button>
+                                    @can('masaAktifDokumen.getKendaraan')
+                                        <a href="{{ route('masaAktifDokumen.getKendaraan', $kendaraan->id) }}"><button type="button" class="btn btn-info">Detail</button>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -42,8 +58,4 @@
             </div>
         </div>
     </div>
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop

@@ -8,6 +8,11 @@ use App\Models\TipeDokumenKendaraan;
 
 class DokumenController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:tipeDokumen.index|tipeDokumen.store|tipeDokumen.show|tipeDokumen.update|tipeDokumen.del');
+    }
+
     public function index() {
         $data = TipeDokumenKendaraan::paginate(10);
 

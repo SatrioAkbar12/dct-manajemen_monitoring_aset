@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class MasaAktifDokumenController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:masaAktifDokumen.index|masaAktifDokumen.getKendaraan|masaAktifDokumen.store|masaAktifDokumen.update|masaAktifDokumen.del');
+    }
+
     public function index() {
         $kendaraan = Kendaraan::paginate(10);
 
