@@ -47,57 +47,61 @@
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <form action="{{ route('user.del', $d->id) }}" method="POST">
-                                        {{ csrf_field() }}
-                                        @can('user.updateRole')
+                                    @can('user.del')
+                                        <form action="{{ route('user.del', $d->id) }}" method="POST">
+                                            {{ csrf_field() }}
+                                    @endcan
+                                    @can('user.updateRole')
                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalUpdateRole{{ $d->id }}">Update role</button>
-                                        @endcan
-                                        @can('user.show')
+                                    @endcan
+                                    @can('user.update')
                                             <a href="{{ route('user.show', $d->id) }}"><button type="button" class="btn btn-warning">Update data</button></a>
-                                        @endcan
-                                        @can('user.del')
+                                    @endcan
+                                    @can('user.del')
                                             <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
-                                        @endcan
-                                    </form>
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
 
-                            <div class="modal fade" id="modalUpdateRole{{ $d->id }}" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Update Role User</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <form action="{{ route('user.updateRole', $d->id) }}" method="POST">
-                                            {{ csrf_field() }}
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label>Nama role</label>
-                                                    <select class="form-control @error('role') is-invalid @enderror" name="role">
-                                                        @foreach ($data_role as $role)
-                                                            <option value="{{ $role->name }}" {{ $d->hasRole( $role->name ) ? "selected" : "" }}>{{ $role->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('role')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
+                            @can('user.updateRole')
+                                <div class="modal fade" id="modalUpdateRole{{ $d->id }}" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Update Role User</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <form action="{{ route('user.updateRole', $d->id) }}" method="POST">
+                                                {{ csrf_field() }}
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Nama role</label>
+                                                        <select class="form-control @error('role') is-invalid @enderror" name="role">
+                                                            @foreach ($data_role as $role)
+                                                                <option value="{{ $role->name }}" {{ $d->hasRole( $role->name ) ? "selected" : "" }}>{{ $role->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('role')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    @foreach ($d->getRoleNames() as $role_name)
+                                                        @if ($loop->first)
+                                                            <input type="hidden" name="former_role" value={{ $role_name }}>
+                                                            @break
+                                                        @endif
+                                                    @endforeach
                                                 </div>
-                                                @foreach ($d->getRoleNames() as $role_name)
-                                                    @if ($loop->first)
-                                                        <input type="hidden" name="former_role" value={{ $role_name }}>
-                                                        @break
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </div>
-                                        </form>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endcan
                         @endforeach
                     </tbody>
                 </table>
@@ -110,74 +114,76 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalCreate" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Tambah data baru</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    @can('user.store')
+        <div class="modal fade" id="modalCreate" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tambah data baru</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <form action="{{ route('user.store') }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Nama Lengkap</label>
+                                <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama')}}" required>
+                                @error('nama')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username')}}" required>
+                                @error('username')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email')}}" required>
+                                @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
+                                @error('password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Role</label>
+                                <select class="form-control @error('role') is-invalid @enderror" name="role" required>
+                                    @foreach ($data_role as $role)
+                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('role')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Memiliki SIM</label>
+                                <select class="form-control @error('memiliki_sim') is-invalid @enderror" name="memiliki_sim" required>
+                                    <option value="1">Ya</option>
+                                    <option value="0">Tidak</option>
+                                </select>
+                                @error('memiliki_sim')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
                 </div>
-                <form action="{{ route('user.store') }}" method="POST">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Nama Lengkap</label>
-                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama')}}" required>
-                            @error('nama')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Username</label>
-                            <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username')}}" required>
-                            @error('username')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email')}}" required>
-                            @error('email')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
-                            @error('password')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Role</label>
-                            <select class="form-control @error('role') is-invalid @enderror" name="role" required>
-                                @foreach ($data_role as $role)
-                                    <option value="{{ $role->name }}">{{ $role->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('role')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Memiliki SIM</label>
-                            <select class="form-control @error('memiliki_sim') is-invalid @enderror" name="memiliki_sim" required>
-                                <option value="1">Ya</option>
-                                <option value="0">Tidak</option>
-                            </select>
-                            @error('memiliki_sim')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+    @endcan
 @stop
 
 @section('css')
