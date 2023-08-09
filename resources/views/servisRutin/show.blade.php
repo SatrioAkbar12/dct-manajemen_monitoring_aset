@@ -33,7 +33,7 @@
                     <p>Jenis kendaraan</p>
                 </div>
                 <div class="col-8 col-md-10">
-                    <p>: {{ $data_kendaraan->jenis_kendaraan }}</p>
+                    <p>: {{ $data_kendaraan->jenisKendaraan->nama }}</p>
                 </div>
             </div>
             <div class="row">
