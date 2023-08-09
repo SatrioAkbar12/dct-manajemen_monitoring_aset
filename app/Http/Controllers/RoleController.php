@@ -8,6 +8,11 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:roles.index|roles.store|roles.update|roles.del');
+    }
+
     public function index() {
         $data = Role::paginate(10);
 
