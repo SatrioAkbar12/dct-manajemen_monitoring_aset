@@ -48,8 +48,8 @@ Route::middleware('auth')->controller(RoleController::class)->prefix('roles')->n
 });
 
 Route::middleware('auth')->controller(PermissionController::class)->prefix('permission')->name('permission.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::get('/sync', 'permissionSync')->name('permissionSync');
+    Route::middleware('permission:permission.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:permission.permissionSync')->get('/sync', 'permissionSync')->name('permissionSync');
 });
 
 Route::middleware('auth')->controller(RolePermissionController::class)->prefix('role-permission')->name('rolePermission.')->group(function() {

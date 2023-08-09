@@ -8,6 +8,11 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:permission.index|permission.permissionSync');
+    }
+
     public function index() {
         $data = Permission::paginate(20);
         $jumlah_permission = Permission::count();

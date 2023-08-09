@@ -12,8 +12,10 @@
     <div class="card">
         <div class="card-body">
             <p>Jumlah permission saat ini : {{ $jumlah_permission }}</p>
-            <a href="{{ route('permission.permissionSync') }}"><button type="button" class="btn btn-primary">Sinkronisasi permission</button></a>
-            <hr>
+            @can('permission.permissionSync')
+                <a href="{{ route('permission.permissionSync') }}"><button type="button" class="btn btn-primary">Sinkronisasi permission</button></a>
+                <hr>
+            @endcan
 
             <div class="table-responsive">
                 <table class="table table-bordered">
