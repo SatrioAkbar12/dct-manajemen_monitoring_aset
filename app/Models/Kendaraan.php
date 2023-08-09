@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -15,10 +16,14 @@ class Kendaraan extends Model
 
     protected $fillable = [
         'nopol',
-        'jenis_kendaraan',
         'merk',
         'warna',
+        'id_jenis_kendaraan',
     ];
+
+    public function jenisKendaraan(): BelongsTo {
+        return $this->belongsTo(JenisKendaraan::class, 'id_jenis_kendaraan', 'id');
+    }
 
     public function masaAktifDokumen(): HasMany {
         return $this->hasMany(MasaAktifDokumenKendaraan::class, 'id_kendaraan', 'id');
