@@ -11,8 +11,11 @@
 
     <div class="card">
         <div class="card-body">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
-            <hr>
+            @can('kendaraan.index')
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
+                <hr>
+            @endcan
+
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -34,11 +37,17 @@
                                 <td>{{ $d->jenis_kendaraan }}</td>
                                 <td>{{ $d->warna }}</td>
                                 <td class="text-center">
-                                    <form action="{{ route('kendaraan.del', $d->id) }}" method="POST">
-                                        {{ csrf_field() }}
-                                        <a href="{{ route('kendaraan.show', $d->id) }}"><button type="button" class="btn btn-warning">Update</button></a>
-                                        <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
-                                    </form>
+                                    @can('kendaraan.del')
+                                        <form action="{{ route('kendaraan.del', $d->id) }}" method="POST">
+                                            {{ csrf_field() }}
+                                    @endcan
+                                    @can('kendaraan.update')
+                                            <a href="{{ route('kendaraan.show', $d->id) }}"><button type="button" class="btn btn-warning">Update</button></a>
+                                    @endcan
+                                    @can('kendaraan.del')
+                                            <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -53,57 +62,59 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalCreate" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Tambah data baru</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    @can('kendaraan.store')
+        <div class="modal fade" id="modalCreate" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tambah data baru</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <form action="{{ route('kendaraan.store') }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Nomor Polisi</label>
+                                <input type="text" class="form-control @error('nopol') is-invalid @enderror" name="nopol" required>
+                                @error('nopol')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Merk</label>
+                                <input type="text" class="form-control @error('merk') is-invalid @enderror" name="merk" required>
+                                @error('merk')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Jenis kendaraan</label>
+                                <select class="form-control" name="jenis_kendaraan @error('jenis_kendaraan') is-invalid @enderror" required>
+                                    <option value="Motor">Motor</option>
+                                    <option value="Mobil">Mobil</option>
+                                    <option value="Van">Van</option>
+                                </select>
+                                @error('jenis_kendaraan')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Warna</label>
+                                <input type="text" class="form-control @error('warna') is-invalid @enderror" name="warna" required>
+                                @error('warna')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
                 </div>
-                <form action="{{ route('kendaraan.store') }}" method="POST">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Nomor Polisi</label>
-                            <input type="text" class="form-control @error('nopol') is-invalid @enderror" name="nopol" required>
-                            @error('nopol')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Merk</label>
-                            <input type="text" class="form-control @error('merk') is-invalid @enderror" name="merk" required>
-                            @error('merk')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Jenis kendaraan</label>
-                            <select class="form-control" name="jenis_kendaraan @error('jenis_kendaraan') is-invalid @enderror" required>
-                                <option value="Motor">Motor</option>
-                                <option value="Mobil">Mobil</option>
-                                <option value="Van">Van</option>
-                            </select>
-                            @error('jenis_kendaraan')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Warna</label>
-                            <input type="text" class="form-control @error('warna') is-invalid @enderror" name="warna" required>
-                            @error('warna')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+    @endcan
 @stop
 
 @section('css')

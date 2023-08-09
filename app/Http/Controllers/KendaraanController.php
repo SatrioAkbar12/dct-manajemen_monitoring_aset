@@ -8,8 +8,12 @@ use Illuminate\Http\Request;
 
 class KendaraanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:kendaraan.index|kendaraan.store|kendaraan.show|kendaraan.update|kendaraan.del');
+    }
+
     public function index() {
-        // $data = Kendaraan::all();
         $data = Kendaraan::paginate(10);
 
         return view('kendaraan.index', ['data' => $data]);
