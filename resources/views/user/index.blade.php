@@ -11,9 +11,10 @@
 
     <div class="card">
         <div class="card-body">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
-            <hr>
-
+            @can('user.store')
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
+                <hr>
+            @endcan
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -48,9 +49,15 @@
                                 <td class="text-center">
                                     <form action="{{ route('user.del', $d->id) }}" method="POST">
                                         {{ csrf_field() }}
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalUpdateRole{{ $d->id }}">Update role</button>
-                                        <a href="{{ route('user.show', $d->id) }}"><button type="button" class="btn btn-warning">Update data</button></a>
-                                        <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
+                                        @can('user.updateRole')
+                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalUpdateRole{{ $d->id }}">Update role</button>
+                                        @endcan
+                                        @can('user.show')
+                                            <a href="{{ route('user.show', $d->id) }}"><button type="button" class="btn btn-warning">Update data</button></a>
+                                        @endcan
+                                        @can('user.del')
+                                            <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
+                                        @endcan
                                     </form>
                                 </td>
                             </tr>

@@ -10,6 +10,11 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:user.index|user.store|user.show|user.update|user.updateRole|user.del');
+    }
+
     public function index() {
         $data = User::paginate(10);
         $data_role = Role::all();
@@ -52,7 +57,9 @@ class UserController extends Controller
         // return $request->former_role . " " . $request->role;
 
         $user = User::find($id);
-        $user->removeRole($request->former_role);
+        if($request->former_role != null) {
+            $user->removeRole($request->former_role);
+        }
         $user->assignRole($request->role);
 
         return redirect(route('user.index'));
