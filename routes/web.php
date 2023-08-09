@@ -97,6 +97,6 @@ Route::middleware('auth')->controller(PeminjamanAktifController::class)->prefix(
 });
 
 Route::middleware('auth')->controller(RiwayatPeminjamanController::class)->prefix('riwayat-peminjaman')->name('riwayatPeminjaman.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::get('/{id}', 'detail')->name('detail');
+    Route::middleware('permission:riwayatPeminjaman.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:riwayatPeminjaman.detail')->get('/{id}', 'detail')->name('detail');
 });
