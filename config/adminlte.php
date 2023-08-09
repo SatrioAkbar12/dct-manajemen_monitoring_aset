@@ -354,6 +354,12 @@ return [
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
+                    'text' => 'Jenis Kendaraan',
+                    'route' => 'jenisKendaraan.index',
+                    'icon' => 'fas fa-fw fa-paper-plane',
+                    'active' => ['kendaraan'],
+                ],
+                [
                     'text' => 'Kendaraan',
                     'route' => 'kendaraan.index',
                     'icon' => 'fas fa-fw fa-car',
