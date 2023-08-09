@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DokumenController;
+use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\MasaAktifDokumenController;
 use App\Http\Controllers\PeminjamanAktifController;
@@ -57,6 +58,13 @@ Route::middleware('auth')->controller(RolePermissionController::class)->prefix('
     Route::middleware('permission:rolePermission.detail')->get('/{id_role}', 'detail')->name('detail');
     Route::middleware('permission:rolePermission.store')->post('/{id_role}', 'store')->name('store');
     Route::middleware('permission:rolePermission.del')->post('/{id_role}/del', 'del')->name('del');
+});
+
+Route::middleware('auth')->controller(JenisKendaraanController::class)->prefix('jenis-kendaraan')->name('jenisKendaraan.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
+    Route::post('/{id}', 'update')->name('update');
+    Route::post('/{id}/del', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(KendaraanController::class)->prefix('kendaraan')->name('kendaraan.')->group(function() {
