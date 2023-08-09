@@ -68,11 +68,11 @@ Route::middleware('auth')->controller(KendaraanController::class)->prefix('kenda
 });
 
 Route::middleware('auth')->controller(DokumenController::class)->prefix('tipe-dokumen')->name('tipeDokumen.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::post('/', 'store')->name('store');
-    Route::get('/{id}', 'show')->name('show');
-    Route::post('/{id}', 'update')->name('update');
-    Route::post('/{id}/delete', 'del')->name('del');
+    Route::middleware('permission:tipeDokumen.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:tipeDokumen.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:tipeDokumen.show')->get('/{id}', 'show')->name('show');
+    Route::middleware('permission:tipeDokumen.update')->post('/{id}', 'update')->name('update');
+    Route::middleware('permission:tipeDokumen.del')->post('/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(MasaAktifDokumenController::class)->prefix('masa-aktif-dokumen')->name('masaAktifDokumen.')->group(function() {
