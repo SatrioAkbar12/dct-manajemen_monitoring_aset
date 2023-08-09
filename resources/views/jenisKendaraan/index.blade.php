@@ -11,8 +11,10 @@
 
     <div class="card">
         <div class="card-body">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
-            <hr>
+            @can('jenisKendaraan.store')
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
+                <hr>
+            @endcan
 
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -29,40 +31,48 @@
                                 <td>{{ $d->id }}</td>
                                 <td>{{ $d->nama }}</td>
                                 <td class="text-center">
-                                    <form action="{{ route('jenisKendaraan.del', $d->id) }}" method="POST">
-                                        {{ csrf_field() }}
-                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $d->id }}">Update</button>
-                                        <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
-                                    </form>
+                                    @can('jenisKendaraan.del')
+                                        <form action="{{ route('jenisKendaraan.del', $d->id) }}" method="POST">
+                                            {{ csrf_field() }}
+                                    @endcan
+                                    @can('jenisKendaraan.update')
+                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $d->id }}">Update</button>
+                                    @endcan
+                                    @can('jenisKendaraan.del')
+                                            <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
 
-                            <div class="modal fade" id="modalUpdate{{ $d->id }}" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Update data</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <form action="{{ route('jenisKendaraan.update', $d->id) }}" method="POST">
-                                            {{ csrf_field() }}
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label>Jenis kendaraan</label>
-                                                    <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ $d->nama }}" required>
-                                                    @error('nama')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
+                            @can('jenisKendaraan.update')
+                                <div class="modal fade" id="modalUpdate{{ $d->id }}" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Update data</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <form action="{{ route('jenisKendaraan.update', $d->id) }}" method="POST">
+                                                {{ csrf_field() }}
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Jenis kendaraan</label>
+                                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ $d->nama }}" required>
+                                                        @error('nama')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </div>
-                                        </form>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endcan
                         @endforeach
                     </tbody>
                 </table>
@@ -75,32 +85,34 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalCreate" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Tambah data baru</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <form action="{{ route('jenisKendaraan.store') }}" method="POST">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Jenis Kendaraan</label>
-                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" required>
-                            @error('nama')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
+    @can('jenisKendaraan.store')
+        <div class="modal fade" id="modalCreate" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tambah data baru</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <form action="{{ route('jenisKendaraan.store') }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Jenis Kendaraan</label>
+                                <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" required>
+                                @error('nama')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    @endcan
 @stop
 
 @section('js')

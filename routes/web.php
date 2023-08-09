@@ -61,10 +61,10 @@ Route::middleware('auth')->controller(RolePermissionController::class)->prefix('
 });
 
 Route::middleware('auth')->controller(JenisKendaraanController::class)->prefix('jenis-kendaraan')->name('jenisKendaraan.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::post('/', 'store')->name('store');
-    Route::post('/{id}', 'update')->name('update');
-    Route::post('/{id}/del', 'del')->name('del');
+    Route::middleware('permission:jenisKendaraan.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:jenisKendaraan.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:jenisKendaraan.update')->post('/{id}', 'update')->name('update');
+    Route::middleware('permission:jenisKendaraan.del')->post('/{id}/del', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(KendaraanController::class)->prefix('kendaraan')->name('kendaraan.')->group(function() {

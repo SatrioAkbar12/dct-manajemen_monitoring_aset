@@ -10,7 +10,7 @@ class JenisKendaraanController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('permission::jenisKendaraan.index|jenisKendaraan.store|jenisKendaraan.update|jenisKendaraan.delete');
+        $this->middleware('permission:jenisKendaraan.index|jenisKendaraan.store|jenisKendaraan.update|jenisKendaraan.delete');
     }
 
     public function index() {
