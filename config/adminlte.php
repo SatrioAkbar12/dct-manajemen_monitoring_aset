@@ -357,19 +357,19 @@ return [
                     'text' => 'Jenis Kendaraan',
                     'route' => 'jenisKendaraan.index',
                     'icon' => 'fas fa-fw fa-paper-plane',
-                    'active' => ['kendaraan'],
+                    'active' => ['jenis-kendaraan'],
                 ],
                 [
                     'text' => 'Kendaraan',
                     'route' => 'kendaraan.index',
                     'icon' => 'fas fa-fw fa-car',
-                    'active' => ['kendaraan', 'regex:@^kendaraan/[0-9]+/update$@'],
+                    'active' => ['kendaraan', 'regex:@^kendaraan/[0-9]+$@'],
                 ],
                 [
                     'text' => 'Jenis Dokumen Kendaraan',
                     'route' => 'tipeDokumen.index',
                     'icon' => 'fas fa-fw fa-file',
-                    'active' => ['tipe-dokumen', 'regex:@^tipe-dokumen/[0-9]+/update$@'],
+                    'active' => ['tipe-dokumen', 'regex:@^tipe-dokumen/[0-9]+$@'],
                 ],
             ],
         ],
@@ -380,7 +380,7 @@ return [
                 [
                     'text' => 'User',
                     'route' => 'user.index',
-                    'active' => ['user', 'regex:@^user/[0-9]+/update$@'],
+                    'active' => ['user', 'regex:@^user/[0-9]+$@'],
                 ],
                 [
                     'text' => 'Roles',
