@@ -22,6 +22,7 @@ class KondisiKendaraanTransaksasiPeminjaman extends Model
         'foto_kanan',
         'foto_kiri',
         'km_terakhir',
+        'jumlah_km',
     ];
 
     public function transaksiPeminjaman(): BelongsTo {
