@@ -22,7 +22,7 @@
                 <table class="table table-bordered">
                     <thead class="text-center">
                         <tr>
-                            <th>Tanggal Pinjam</th>
+                            <th>Tanggal Waktu Pinjam</th>
                             <th>Kendaraan</th>
                             <th>Peminjam</th>
                             <th>Target Tanggal Waktu Kembali</th>
@@ -32,7 +32,7 @@
                     <tbody>
                         @foreach ($data_peminjaman_aktif as $peminjaman_aktif)
                             <tr>
-                                <td>{{ $peminjaman_aktif->tanggal_pinjam }}</td>
+                                <td>{{ $peminjaman_aktif->tanggal_waktu_pinjam }}</td>
                                 <td>{{ $peminjaman_aktif->kendaraan->nopol . " - " . $peminjaman_aktif->kendaraan->jenisKendaraan->nama . " " . $peminjaman_aktif->kendaraan->merk . " " . $peminjaman_aktif->kendaraan->tipe . " " . $peminjaman_aktif->kendaraan->warna }}</td>
                                 <td>{{ $peminjaman_aktif->user->nama }}</td>
                                 <td>{{ $peminjaman_aktif->target_tanggal_waktu_kembali }}</td>
@@ -110,9 +110,9 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Tanggal pinjam</label>
-                                <input type="datetime-local" class="form-control @error('tanggal_pinjam') is-invalid @enderror" name="tanggal_pinjam" required>
-                                @error('tanggal_pinjam')
+                                <label>Tanggal waktu pinjam</label>
+                                <input type="datetime-local" class="form-control @error('tanggal_waktu_pinjam') is-invalid @enderror" name="tanggal_waktu_pinjam" required>
+                                @error('tanggal_waktu_pinjam')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

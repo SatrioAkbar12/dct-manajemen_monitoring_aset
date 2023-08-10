@@ -15,6 +15,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th>Tanggal Waktu Pinjam</th>
                             <th>Tanggal Waktu Kembali</th>
                             <th>Kendaraan</th>
                             <th>Peminjam</th>
@@ -24,7 +25,8 @@
                     <tbody>
                         @foreach ($data_riwayat_peminjaman as $riwayat_peminjaman)
                             <tr>
-                                <td>{{ $riwayat_peminjaman->created_at }}</td>
+                                <td>{{ $riwayat_peminjaman->tanggal_waktu_pinjam }}</td>
+                                <td>{{ $riwayat_peminjaman->updated_at }}</td>
                                 <td>{{ $riwayat_peminjaman->kendaraan->nopol . " - " . $riwayat_peminjaman->kendaraan->jenisKendaraan->nama . " " . $riwayat_peminjaman->kendaraan->merk . " " . $riwayat_peminjaman->kendaraan->tipe . " " . $riwayat_peminjaman->kendaraan->warna }}</td>
                                 <td>{{ $riwayat_peminjaman->user->nama }}</td>
                                 <td class="text-center">

@@ -27,7 +27,7 @@ class PeminjamanAktifController extends Controller
 
     public function store(PeminjamanAktifRequest $request) {
         $peminjaman_aktif = TransaksiPeminjaman::where('id_kendaraan', $request->kendaraan)->where('aktif', 1)->where(function($query) use ($request) {
-            $query->where('tanggal_pinjam', '<=', $request->tanggal_pinjam)->where('target_tanggal_waktu_kembali', '>=', $request->tanggal_pinjam);
+            $query->where('tanggal_waktu_pinjam', '<=', $request->tanggal_waktu_pinjam)->where('target_tanggal_waktu_kembali', '>=', $request->tanggal_waktu_pinjam);
         })->first();
 
         if($peminjaman_aktif != null) {
@@ -41,7 +41,7 @@ class PeminjamanAktifController extends Controller
             'id_kendaraan' => $request->kendaraan,
             'target_tanggal_waktu_kembali' => $request->target_tanggal_waktu_kembali,
             'aktif' => 1,
-            'tanggal_pinjam' => $request->tanggal_pinjam,
+            'tanggal_waktu_pinjam' => $request->tanggal_waktu_pinjam,
         ]);
 
         return redirect(route('peminjamanAktif.index'));
