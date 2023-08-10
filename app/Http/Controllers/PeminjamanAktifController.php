@@ -42,17 +42,32 @@ class PeminjamanAktifController extends Controller
     }
 
     public function update($id, PeminjamanAktifRequest $request) {
-        $path = $request->file('foto_kondisi')->storeAs('foto-kondisi', time() . "_" . $request->file('foto_kondisi')->getClientOriginalName(), 'public');
+        $path_depan = $request->file('foto_depan')->storeAs('foto-kondisi', time() . "_foto-depan." . $request->file('foto_depan')->getClientOriginalExtension(), 'public');
+        $path_belakang = $request->file('foto_belakang')->storeAs('foto-kondisi', time() . "_foto-belakang." . $request->file('foto_belakang')->getClientOriginalExtension(), 'public');
+        $path_kanan = $request->file('foto_kanan')->storeAs('foto-kondisi', time() . "_foto_kanan" . $request->file('foto_kanan')->getClientOriginalExtension(), 'public');
+        $path_kiri = $request->file('foto_kiri')->storeAs('foto-kondisi', time() . "_foto_kiri" . $request->file('foto_kiri')->getClientOriginalExtension(), 'public');
+
+        $transaksi = TransaksiPeminjaman::find($id);
+        $kendaraan = Kendaraan::find($transaksi->id_kendaraan);
 
         KondisiKendaraanTransaksasiPeminjaman::create([
             'id_transaksi' => $id,
             'status_kondisi' => $request->status_kondisi,
             'deskripsi' => $request->deskripsi,
-            'foto' => $path
+            'km_terakhir' => $request->km_terakhir,
+            'jumlah_km' => $request->km_terakhir - $kendaraan->km_saat_ini,
+            'foto_depan' => $path_depan,
+            'foto_belakang' => $path_belakang,
+            'foto_kanan' => $path_kanan,
+            'foto_kiri' => $path_kiri,
         ]);
 
-        TransaksiPeminjaman::where('id', $id)->update([
+        $transaksi->update([
             'aktif' => 0
+        ]);
+
+        $kendaraan->update([
+            'km_saat_ini' => $request->km_terakhir,
         ]);
 
         return redirect(route('peminjamanAktif.index'));

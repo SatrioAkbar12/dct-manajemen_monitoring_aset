@@ -35,7 +35,11 @@ class PeminjamanAktifRequest extends FormRequest
             return [
                 'status_kondisi' => 'required|in:Aman,Ada kerusakan',
                 'deskripsi' => 'required|string',
-                'foto_kondisi' => 'required|image',
+                'km_terakhir' => 'required|integer',
+                'foto_depan' => 'required|image',
+                'foto_belakang' => 'required|image',
+                'foto_kanan' => 'required|image',
+                'foto_kiri' => 'required|image',
             ];
         }
     }
