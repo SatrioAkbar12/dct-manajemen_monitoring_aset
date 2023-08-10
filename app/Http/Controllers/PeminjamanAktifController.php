@@ -32,7 +32,7 @@ class PeminjamanAktifController extends Controller
             'aktif' => 1,
         ]);
 
-        return redirect('/peminjaman-aktif');
+        return redirect(route('peminjamanAktif.index'));
     }
 
     public function returning($id) {
@@ -55,6 +55,6 @@ class PeminjamanAktifController extends Controller
             'aktif' => 0
         ]);
 
-        return redirect('/peminjaman-aktif');
+        return redirect(route('peminjamanAktif.index'));
     }
 }
