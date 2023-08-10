@@ -14,7 +14,7 @@
                     <p>Tanggal waktu peminjaman</p>
                 </div>
                 <div class="col-8 col-md-10">
-                    <p>: {{ $data_riwayat_peminjaman->created_at }}</p>
+                    <p>: {{ $data_riwayat_peminjaman->tanggal_waktu_pinjam }}</p>
                 </div>
             </div>
             <div class="row">
@@ -22,7 +22,7 @@
                     <p>Tanggal waktu kembali</p>
                 </div>
                 <div class="col-8 col-md-10">
-                    <p>: {{ $data_riwayat_peminjaman->updated_at }}</p>
+                    <p>: {{ $data_riwayat_peminjaman->tanggal_waktu_kembali }}</p>
                 </div>
             </div>
             <div class="row">
@@ -67,7 +67,22 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto) }}">
+                    <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_depan) }}">
+                    <p class="text-center">Foto Depan</p>
+                </div>
+                <div class="col-md-6">
+                    <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_belakang) }}">
+                    <p class="text-center">Foto Belakang</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_kanan) }}">
+                    <p class="text-center">Foto Kanan</p>
+                </div>
+                <div class="col-md-6">
+                    <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_kiri) }}">
+                    <p class="text-center">Foto Kiri</p>
                 </div>
             </div>
         </div>
