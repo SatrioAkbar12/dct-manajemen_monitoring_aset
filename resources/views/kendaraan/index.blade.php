@@ -18,12 +18,12 @@
 
             <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
-                            <th>Id</th>
                             <th>Nomor Polisi</th>
-                            <th>Merk</th>
                             <th>Jenis Kendaraan</th>
+                            <th>Merk</th>
+                            <th>Tipe</th>
                             <th>Warna</th>
                             <th>Aksi</th>
                         </tr>
@@ -31,10 +31,10 @@
                     <tbody>
                         @foreach ($data as $d)
                             <tr>
-                                <td>{{ $d->id }}</td>
                                 <td>{{ $d->nopol}}</td>
-                                <td>{{ $d->merk }}</td>
                                 <td>{{ $d->jenisKendaraan->nama }}</td>
+                                <td>{{ $d->merk }}</td>
+                                <td>{{ $d->tipe }}</td>
                                 <td>{{ $d->warna }}</td>
                                 <td class="text-center">
                                     @can('kendaraan.del')
@@ -81,13 +81,6 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Merk</label>
-                                <input type="text" class="form-control @error('merk') is-invalid @enderror" name="merk" required>
-                                @error('merk')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
                                 <label>Jenis kendaraan</label>
                                 <select class="form-control @error('jenis_kendaraan') is-invalid @enderror" name="jenis_kendaraan" required>
                                     @foreach ($data_jenis_kendaraan as $jenis_kendaraan)
@@ -95,6 +88,20 @@
                                     @endforeach
                                 </select>
                                 @error('jenis_kendaraan')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Merk</label>
+                                <input type="text" class="form-control @error('merk') is-invalid @enderror" name="merk" required>
+                                @error('merk')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Tipe</label>
+                                <input type="text" class="form-control @error('tipe') is-invalid @enderror" name="tipe" required>
+                                @error('tipe')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

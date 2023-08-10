@@ -19,13 +19,6 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="merk">Merk</label>
-                    <input type="text" class="form-control @error('merk') is-invalid @enderror" id="merk" name="merk" value="{{ $data->merk }}" required>
-                    @error('merk')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
                     <label for="jenisKendaraan">Jenis Kendaraan</label>
                     <select class="form-control @error('jenis_kendaraan') is-invalid @enderror" name="jenis_kendaraan" required>
                         @foreach ($data_jenis_kendaraan as $jenis_kendaraan)
@@ -33,6 +26,20 @@
                         @endforeach
                     </select>
                     @error('jenis_kendaraan')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="merk">Merk</label>
+                    <input type="text" class="form-control @error('merk') is-invalid @enderror" id="merk" name="merk" value="{{ $data->merk }}" required>
+                    @error('merk')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="tipe">Tipe</label>
+                    <input type="text" class="form-control @error('tipe') is-invalid @enderror" id="tipe" name="tipe" value="{{ $data->tipe }}" required>
+                    @error('tipe')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>

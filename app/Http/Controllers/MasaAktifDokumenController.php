@@ -35,7 +35,7 @@ class MasaAktifDokumenController extends Controller
             'tanggal_masa_berlaku' => $request->masa_aktif
         ]);
 
-        return redirect('/masa-aktif-dokumen/' . $id_kendaraan);
+        return redirect(route('masaAktifDokumen.getKendaraan', $id_kendaraan));
     }
 
     public function update($id_kendaraan, $id, MasaAktifDokumenRequest $request) {
@@ -43,12 +43,12 @@ class MasaAktifDokumenController extends Controller
             'tanggal_masa_berlaku' => $request->masa_aktif
         ]);
 
-        return redirect('/masa-aktif-dokumen/' . $id_kendaraan);
+        return redirect(route('masaAktifDokumen.getKendaraan', $id_kendaraan));
     }
 
     public function del($id_kendaraan, $id) {
         MasaAktifDokumenKendaraan::where('id', $id)->delete();
 
-        return redirect('/masa-aktif-dokumen/' . $id_kendaraan);
+        return redirect(route('masaAktifDokumen.getKendaraan', $id_kendaraan));
     }
 }

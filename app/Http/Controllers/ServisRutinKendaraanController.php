@@ -41,6 +41,6 @@ class ServisRutinKendaraanController extends Controller
             'cek_ac' => $request->cek_ac == 'on' ? 1 : 0
         ]);
 
-        return redirect('/servis-rutin/' . $id_kendaraan);
+        return redirect(route('servisRutin.getKendaraan', $id_kendaraan));
     }
 }

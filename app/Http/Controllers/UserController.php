@@ -33,7 +33,7 @@ class UserController extends Controller
 
         $user->assignRole($request->role);
 
-        return redirect('/user');
+        return redirect(route('user.index'));
     }
 
     public function show($id) {
@@ -50,12 +50,10 @@ class UserController extends Controller
             'memiliki_sim' => $request->memiliki_sim
         ]);
 
-        return redirect('/user');
+        return redirect(route('user.index'));
     }
 
     public function updateRole($id, UserRequest $request) {
-        // return $request->former_role . " " . $request->role;
-
         $user = User::find($id);
         if($request->former_role != null) {
             $user->removeRole($request->former_role);
@@ -68,6 +66,6 @@ class UserController extends Controller
     public function del($id) {
         User::where('id', $id)->delete();
 
-        return redirect('/user');
+        return redirect(route('user.index'));
     }
 }

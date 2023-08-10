@@ -15,7 +15,7 @@ class KendaraanController extends Controller
     }
 
     public function index() {
-        $data = Kendaraan::paginate(10);
+        $data = Kendaraan::orderBy('updated_at', 'desc')->paginate(10);
         $data_jenis_kendaraan = JenisKendaraan::all();
 
         return view('kendaraan.index', ['data' => $data, 'data_jenis_kendaraan' => $data_jenis_kendaraan]);
@@ -26,10 +26,11 @@ class KendaraanController extends Controller
             'nopol' => $request->nopol,
             'merk' => $request->merk,
             'id_jenis_kendaraan' => $request->jenis_kendaraan,
-            'warna' => $request->warna
+            'warna' => $request->warna,
+            'tipe' => $request->tipe,
         ]);
 
-        return redirect('/kendaraan');
+        return redirect(route('kendaraan.index'));
     }
 
     public function show($id) {
@@ -44,15 +45,16 @@ class KendaraanController extends Controller
             'nopol' => $request->nopol,
             'merk' => $request->merk,
             'id_jenis_kendaraan' => $request->jenis_kendaraan,
-            'warna' => $request->warna
+            'warna' => $request->warna,
+            'tipe' => $request->tipe,
         ]);
 
-        return redirect('/kendaraan');
+        return redirect(route('kendaraan.index'));
     }
 
     public function del($id) {
         Kendaraan::where('id', $id)->delete();
 
-        return redirect('/kendaraan');
+        return redirect(route('kendaraan.index'));
     }
 }

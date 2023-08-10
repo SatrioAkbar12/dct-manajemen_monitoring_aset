@@ -27,7 +27,7 @@
                             <tr>
                                 <td>{{ $kendaraan->id }}</td>
                                 <td>{{ $kendaraan->nopol }}</td>
-                                <td>{{ $kendaraan->jenisKendaraan->nama . " " . $kendaraan->merk . " " . $kendaraan->warna }}</td>
+                                <td>{{ $kendaraan->jenisKendaraan->nama . " " . $kendaraan->merk . " " . $kendaraan->tipe . " " . $kendaraan->warna }}</td>
                                 <td class="text-danger">
                                     <ul>
                                         @if($kendaraan->masaAktifDokumen->count() == 0)
