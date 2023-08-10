@@ -28,7 +28,8 @@ class PeminjamanAktifRequest extends FormRequest
             return [
                 'user' => 'required|exists:App\Models\User,id',
                 'kendaraan' => 'required|exists:App\Models\Kendaraan,id',
-                'target_tanggal_waktu_kembali' => 'required|date'
+                'target_tanggal_waktu_kembali' => 'required|date',
+                'tanggal_pinjam' => 'required|date',
             ];
         }
         elseif(Route::currentRouteName() == 'peminjamanAktif.update') {
