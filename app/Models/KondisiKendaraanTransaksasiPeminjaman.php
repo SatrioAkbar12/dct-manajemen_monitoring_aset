@@ -17,7 +17,8 @@ class KondisiKendaraanTransaksasiPeminjaman extends Model
         'id_transaksi',
         'status_kondisi',
         'deskripsi',
-        'foto'
+        'foto',
+        'km_terakhir',
     ];
 
     public function transaksiPeminjaman(): BelongsTo {
