@@ -50,6 +50,13 @@
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label for="km_saat_ini">KM saat ini</label>
+                    <input type="number" class="form-control @error('km_saat_ini') is-invalid @enderror" id="km_saat_ini" name="km_saat_ini" value="{{ $data->km_saat_ini }}" required>
+                    @error('km_saat_ini')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-success">Simpan</button>

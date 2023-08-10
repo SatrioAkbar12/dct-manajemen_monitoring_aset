@@ -29,6 +29,7 @@ class KendaraanRequest extends FormRequest
             'warna' => 'required|string',
             'jenis_kendaraan' => 'required|integer|exists:\App\Models\JenisKendaraan,id',
             'tipe' => 'required|string',
+            'km_saat_ini' => 'required|integer',
         ];
     }
 }

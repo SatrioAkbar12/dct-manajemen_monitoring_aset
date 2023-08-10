@@ -33,9 +33,38 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Foto kondisi kendaraan</label>
-                    <input type="file" class="form-control-file" name="foto_kondisi" accept="image/*" required>
-                    @error('foto_kondisi')
+                    <label>KM terakhir kendaraan</label>
+                    <input type="number" class="form-control @error('km_terakhir') is-invalid @enderror" name="km_terakhir" required>
+                    *KM peminjaman terakhir : {{ $data_peminjaman_aktif->kendaraan->km_saat_ini }}
+                    @error('km_terakhir')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label>Foto depan kendaraan</label>
+                    <input type="file" class="form-control-file" name="foto_depan" accept="image/*" required>
+                    @error('foto_depan')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label>Foto belakang kendaraan</label>
+                    <input type="file" class="form-control-file" name="foto_belakang" accept="image/*" required>
+                    @error('foto_belakang')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label>Foto kanan kendaraan</label>
+                    <input type="file" class="form-control-file" name="foto_kanan" accept="image/*" required>
+                    @error('foto_kanan')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label>Foto kiri kendaraan</label>
+                    <input type="file" class="form-control-file" name="foto_kiri" accept="image/*" required>
+                    @error('foto_kiri')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>

@@ -28,14 +28,19 @@ class PeminjamanAktifRequest extends FormRequest
             return [
                 'user' => 'required|exists:App\Models\User,id',
                 'kendaraan' => 'required|exists:App\Models\Kendaraan,id',
-                'target_tanggal_waktu_kembali' => 'required|date'
+                'target_tanggal_waktu_kembali' => 'required|date',
+                'tanggal_waktu_pinjam' => 'required|date',
             ];
         }
         elseif(Route::currentRouteName() == 'peminjamanAktif.update') {
             return [
                 'status_kondisi' => 'required|in:Aman,Ada kerusakan',
                 'deskripsi' => 'required|string',
-                'foto_kondisi' => 'required|image',
+                'km_terakhir' => 'required|integer',
+                'foto_depan' => 'required|image',
+                'foto_belakang' => 'required|image',
+                'foto_kanan' => 'required|image',
+                'foto_kiri' => 'required|image',
             ];
         }
     }

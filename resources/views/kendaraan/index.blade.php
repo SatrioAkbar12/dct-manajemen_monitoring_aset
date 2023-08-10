@@ -25,6 +25,7 @@
                             <th>Merk</th>
                             <th>Tipe</th>
                             <th>Warna</th>
+                            <th>KM saat ini</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -36,6 +37,7 @@
                                 <td>{{ $d->merk }}</td>
                                 <td>{{ $d->tipe }}</td>
                                 <td>{{ $d->warna }}</td>
+                                <td>{{ $d->km_saat_ini }}</td>
                                 <td class="text-center">
                                     @can('kendaraan.del')
                                         <form action="{{ route('kendaraan.del', $d->id) }}" method="POST">
@@ -109,6 +111,13 @@
                                 <label>Warna</label>
                                 <input type="text" class="form-control @error('warna') is-invalid @enderror" name="warna" required>
                                 @error('warna')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>KM saat ini</label>
+                                <input type="number" class="form-control @error('km_saat_ini') is-invalid @enderror" name="km_saat_ini" required>
+                                @error('km_saat_ini')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
