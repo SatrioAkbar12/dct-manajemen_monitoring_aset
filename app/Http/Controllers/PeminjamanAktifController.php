@@ -7,6 +7,7 @@ use App\Models\Kendaraan;
 use App\Models\KondisiKendaraanTransaksasiPeminjaman;
 use App\Models\TransaksiPeminjaman;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -75,7 +76,8 @@ class PeminjamanAktifController extends Controller
         ]);
 
         $transaksi->update([
-            'aktif' => 0
+            'aktif' => 0,
+            'tanggal_waktu_kembali' => Carbon::now('Asia/Jakarta'),
         ]);
 
         $kendaraan->update([
