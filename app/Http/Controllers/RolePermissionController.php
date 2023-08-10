@@ -11,7 +11,7 @@ class RolePermissionController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('permission:rolePermission.index|rolePermission.detail|rolePermission.store|rolePermission.del');
+        $this->middleware('permission:rolePermission.index|rolePermission.detail|rolePermission.store|rolePermission.del');
     }
 
     public function index() {
