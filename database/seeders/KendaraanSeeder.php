@@ -27,6 +27,7 @@ class KendaraanSeeder extends Seeder
                 'id_jenis_kendaraan' => rand(1, $jumlah_jenis_kendaraan),
                 'warna' => $faker->colorName(),
                 'tipe' => $faker->word(),
+                'km_saat_ini' => $faker->randomNumber(6, false),
             ]);
         }
     }

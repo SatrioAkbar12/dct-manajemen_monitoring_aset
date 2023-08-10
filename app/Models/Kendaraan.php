@@ -20,6 +20,7 @@ class Kendaraan extends Model
         'warna',
         'id_jenis_kendaraan',
         'tipe',
+        'km_saat_ini',
     ];
 
     public function jenisKendaraan(): BelongsTo {
