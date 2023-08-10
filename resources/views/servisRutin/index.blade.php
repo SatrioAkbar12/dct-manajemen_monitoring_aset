@@ -26,7 +26,7 @@
                             <tr>
                                 <td>{{ $kendaraan->id }}</td>
                                 <td>{{ $kendaraan->nopol }}</td>
-                                <td>{{ $kendaraan->jenisKendaraan->nama . " " . $kendaraan->merk . " " . $kendaraan->warna }}</td>
+                                <td>{{ $kendaraan->jenisKendaraan->nama . " " . $kendaraan->merk . " " . $kendaraan->tipe . " " . $kendaraan->warna }}</td>
                                 <td class="text-center">
                                     @can('servisRutin.getKendaraan')
                                         <a href="{{ route('servisRutin.getKendaraan', $kendaraan->id) }}"><button type="button" class="btn btn-info">Detail</button>
@@ -47,5 +47,4 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
