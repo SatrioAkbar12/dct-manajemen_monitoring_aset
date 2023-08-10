@@ -30,6 +30,14 @@
             </div>
             <div class="row">
                 <div class="col-4 col-md-2">
+                    <p>Tipe</p>
+                </div>
+                <div class="col-8 col-md-10">
+                    <p>: {{ $data_kendaraan->tipe }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-md-2">
                     <p>Jenis kendaraan</p>
                 </div>
                 <div class="col-8 col-md-10">
