@@ -28,6 +28,7 @@ class KendaraanController extends Controller
             'id_jenis_kendaraan' => $request->jenis_kendaraan,
             'warna' => $request->warna,
             'tipe' => $request->tipe,
+            'km_saat_ini' => $request->km_saat_ini,
         ]);
 
         return redirect(route('kendaraan.index'));
@@ -47,6 +48,7 @@ class KendaraanController extends Controller
             'id_jenis_kendaraan' => $request->jenis_kendaraan,
             'warna' => $request->warna,
             'tipe' => $request->tipe,
+            'km_saat_ini' => $request->km_saat_ini,
         ]);
 
         return redirect(route('kendaraan.index'));
