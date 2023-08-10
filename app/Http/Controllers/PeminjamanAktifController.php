@@ -8,6 +8,7 @@ use App\Models\KondisiKendaraanTransaksasiPeminjaman;
 use App\Models\TransaksiPeminjaman;
 use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PeminjamanAktifController extends Controller
 {
@@ -17,17 +18,23 @@ class PeminjamanAktifController extends Controller
     }
 
     public function index() {
-        $peminjam_aktif = TransaksiPeminjaman::where('aktif', 1)->paginate(10);
+        $peminjaman_aktif = TransaksiPeminjaman::where('aktif', 1)->paginate(10);
         $user = User::all();
         $kendaraan = Kendaraan::all();
 
-        return view('peminjamanAktif.index', ['data_peminjaman_aktif' => $peminjam_aktif, 'data_user' => $user, 'data_kendaraan' => $kendaraan]);
+        return view('peminjamanAktif.index', ['data_peminjaman_aktif' => $peminjaman_aktif, 'data_user' => $user, 'data_kendaraan' => $kendaraan]);
     }
 
     public function store(PeminjamanAktifRequest $request) {
-        // $peminjaman_aktif = TransaksiPeminjaman::where('id_kendaraan', $request->kendaraan)->where(function($query) use ($request) {
-        //     $query->where('tanggal_pinjam', '<=', $request->tanggal_pinjam)->where('target_tanggal_waktu_kembali', '>=', $request->tanggal_pinjam);
-        // })->first();
+        $peminjaman_aktif = TransaksiPeminjaman::where('id_kendaraan', $request->kendaraan)->where('aktif', 1)->where(function($query) use ($request) {
+            $query->where('tanggal_pinjam', '<=', $request->tanggal_pinjam)->where('target_tanggal_waktu_kembali', '>=', $request->tanggal_pinjam);
+        })->first();
+
+        if($peminjaman_aktif != null) {
+            Alert::error('Gagal menyimpan!', 'Kendaraan ' . $peminjaman_aktif->kendaraan->nopol . " - " . $peminjaman_aktif->kendaraan->jenisKendaraan->nama . " " . $peminjaman_aktif->kendaraan->merk . " " . $peminjaman_aktif->kendaraan->tipe . " " . $peminjaman_aktif->kendaraan->warna . " sedang digunakan!");
+
+            return redirect()->back();
+        }
 
         TransaksiPeminjaman::create([
             'id_user' => $request->user,
@@ -41,9 +48,9 @@ class PeminjamanAktifController extends Controller
     }
 
     public function returning($id) {
-        $peminjam_aktif = TransaksiPeminjaman::find($id);
+        $peminjaman_aktif = TransaksiPeminjaman::find($id);
 
-        return view('peminjamanAktif.returning', ['data_peminjaman_aktif' => $peminjam_aktif]);
+        return view('peminjamanAktif.returning', ['data_peminjaman_aktif' => $peminjaman_aktif]);
     }
 
     public function update($id, PeminjamanAktifRequest $request) {
