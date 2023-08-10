@@ -35,6 +35,7 @@
                 <div class="form-group">
                     <label>KM terakhir kendaraan</label>
                     <input type="number" class="form-control @error('km_terakhir') is-invalid @enderror" name="km_terakhir" required>
+                    *KM peminjaman terakhir : {{ $data_peminjaman_aktif->kendaraan->km_saat_ini }}
                     @error('km_terakhir')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
