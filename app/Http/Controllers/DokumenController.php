@@ -24,7 +24,7 @@ class DokumenController extends Controller
             'nama_dokumen' => $request->nama
         ]);
 
-        return redirect('/tipe-dokumen');
+        return redirect(route('tipeDokumen.index'));
     }
 
     public function show($id) {
@@ -38,12 +38,12 @@ class DokumenController extends Controller
             'nama_dokumen' => $request->nama
         ]);
 
-        return redirect('/tipe-dokumen');
+        return redirect(route('tipeDokumen.index'));
     }
 
     public function del($id) {
         TipeDokumenKendaraan::where('id', $id)->delete();
 
-        return redirect('/tipe-dokumen');
+        return redirect(route('tipeDokumen.index'));
     }
 }
