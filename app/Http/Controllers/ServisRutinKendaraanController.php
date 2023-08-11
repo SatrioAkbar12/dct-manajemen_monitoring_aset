@@ -17,10 +17,6 @@ class ServisRutinKendaraanController extends Controller
     }
 
     public function index() {
-        // $faker = Faker::create();
-        // $carbon = Carbon::instance($faker->dateTimeThisYear());
-        // return $carbon->toDateString();
-
         $kendaraan = Kendaraan::paginate(10);
 
         return view('servisRutin.index', ['data_kendaraan' => $kendaraan]);
@@ -35,6 +31,10 @@ class ServisRutinKendaraanController extends Controller
     }
 
     public function store($id_kendaraan, ServisRutinKendaraanRequest $request) {
+        $kendaraan = Kendaraan::find($id_kendaraan);
+        $km_target = (floor($kendaraan->km_saat_ini / 10000) + 1) * 10000;
+        $tanggal_target = Carbon::parse($request->tanggal_servis, 'Asia/Jakarta')->addMonths(6);
+
         ServisRutinKendaraan::create([
             'id_kendaraan' => $id_kendaraan,
             'tanggal_servis' => $request->tanggal_servis,
@@ -44,7 +44,9 @@ class ServisRutinKendaraanController extends Controller
             'cek_kopling' => $request->cek_kopling == 'on' ? 1 : 0,
             'cek_ban' => $request->cek_ban == 'on' ? 1 : 0,
             'cek_lampu' => $request->cek_lampu == 'on' ? 1 : 0,
-            'cek_ac' => $request->cek_ac == 'on' ? 1 : 0
+            'cek_ac' => $request->cek_ac == 'on' ? 1 : 0,
+            'km_target' => $km_target,
+            'tanggal_target' => $tanggal_target,
         ]);
 
         return redirect(route('servisRutin.getKendaraan', $id_kendaraan));
