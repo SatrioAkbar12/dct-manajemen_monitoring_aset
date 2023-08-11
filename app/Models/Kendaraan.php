@@ -21,6 +21,7 @@ class Kendaraan extends Model
         'id_jenis_kendaraan',
         'tipe',
         'km_saat_ini',
+        'tanggal_perbarui_dokumen',
     ];
 
     public function jenisKendaraan(): BelongsTo {
