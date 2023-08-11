@@ -16,7 +16,7 @@ class MasaAktifDokumenController extends Controller
     }
 
     public function index() {
-        $kendaraan = Kendaraan::paginate(10);
+        $kendaraan = Kendaraan::orderByRaw('-tanggal_perbarui_dokumen DESC')->paginate(10);
 
         return view('masaAktif.index', ['data_kendaraan' => $kendaraan]);
     }
@@ -41,6 +41,10 @@ class MasaAktifDokumenController extends Controller
     public function update($id_kendaraan, $id, MasaAktifDokumenRequest $request) {
         MasaAktifDokumenKendaraan::where('id', $id)->update([
             'tanggal_masa_berlaku' => $request->masa_aktif
+        ]);
+
+        Kendaraan::where('id', $id_kendaraan)->update([
+            'tanggal_perbarui_dokumen' => null,
         ]);
 
         return redirect(route('masaAktifDokumen.getKendaraan', $id_kendaraan));
