@@ -30,8 +30,8 @@ class ServisRutinKendaraanController extends Controller
     }
 
     public function store($id_kendaraan, ServisRutinKendaraanRequest $request) {
-        $kendaraan = Kendaraan::find($id_kendaraan);
-        $km_target = (floor($kendaraan->km_saat_ini / 10000) + 1) * 10000;
+        $km_target = ServisRutinKendaraan::where('id_kendaraan', $id_kendaraan)->orderBy('km_target', 'desc')->first('km_target')->km_target + 10000;
+
         $tanggal_target = Carbon::parse($request->tanggal_servis, 'Asia/Jakarta')->addMonths(6);
 
         ServisRutinKendaraan::create([

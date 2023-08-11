@@ -97,6 +97,8 @@
                             <th>Cek Lampu</th>
                             <th>Cek AC</th> --}}
                             <th>Deskripsi</th>
+                            <th>KM Target Servis Selanjutnya</th>
+                            <th>Tanggal Target Servis Selanjutnya</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -138,7 +140,9 @@
                                         <input type="checkbox" class="form-check-input" {{ $servis->cek_ac == 1 ? "checked" : "" }} disabled>
                                     </div>
                                 </td> --}}
-                                <td>{{ $servis->detail_servis }}
+                                <td>{{ $servis->detail_servis }}</td>
+                                <td>{{ $servis->km_target }}</td>
+                                <td>{{ $servis->tanggal_target }}</td>
                             </tr>
                         @endforeach
                     </tbody>
