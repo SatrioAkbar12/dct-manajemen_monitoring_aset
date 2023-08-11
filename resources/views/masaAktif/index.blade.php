@@ -13,7 +13,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>Id</th>
                             <th>Nomor Polisi</th>
@@ -28,14 +28,13 @@
                                 <td>{{ $kendaraan->id }}</td>
                                 <td>{{ $kendaraan->nopol }}</td>
                                 <td>{{ $kendaraan->jenisKendaraan->nama . " " . $kendaraan->merk . " " . $kendaraan->tipe . " " . $kendaraan->warna }}</td>
-                                <td class="text-danger">
-                                    <ul>
-                                        @if($kendaraan->masaAktifDokumen->count() == 0)
-                                            Kendaraan perlu dilengkapi data dokumen kendaraan
-                                        @endif
-
+                                <td>
+                                    @if($kendaraan->masaAktifDokumen->count() == 0)
+                                        <div class="text-center">Kendaraan perlu dilengkapi data dokumen kendaraan</div>
+                                    @endif
+                                    <ul class="text-danger">
                                         @foreach ($kendaraan->masaAktifDokumen as $dokumen)
-                                            @if(\Carbon\Carbon::createFromFormat('Y-m-d', $dokumen->tanggal_masa_berlaku)->diffInDays(\Carbon\Carbon::now('Asia/Jakarta'), false) >= -7)
+                                            @if(\Carbon\Carbon::createFromFormat('Y-m-d', $dokumen->tanggal_masa_berlaku, 'Asia/Jakarta')->diffInDays(\Carbon\Carbon::now('Asia/Jakarta'), false) >= -7)
                                                 <li>{{ $dokumen->tipeDokumen->nama_dokumen }} perlu diperpanjang sebelum tanggal {{ $dokumen->tanggal_masa_berlaku }}</li>
                                             @endif
                                         @endforeach
