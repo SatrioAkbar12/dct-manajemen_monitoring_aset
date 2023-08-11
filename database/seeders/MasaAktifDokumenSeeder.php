@@ -23,7 +23,7 @@ class MasaAktifDokumenSeeder extends Seeder
                 MasaAktifDokumenKendaraan::create([
                     'id_kendaraan' => $kendaraan,
                     'id_tipe_dokumen' => $dokumen,
-                    'tanggal_masa_berlaku' => $faker->date
+                    'tanggal_masa_berlaku' => $faker->dateTimeThisYear('+6 months', 'Asia/Jakarta')
                 ]);
             }
         }
