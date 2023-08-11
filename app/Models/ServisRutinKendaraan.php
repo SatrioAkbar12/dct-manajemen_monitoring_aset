@@ -15,14 +15,17 @@ class ServisRutinKendaraan extends Model
 
     protected $fillable = [
         'id_kendaraan',
-        'penggantian_oli',
-        'cek_aki',
-        'cek_rem',
-        'cek_kopling',
-        'cek_ban',
-        'cek_lampu',
-        'cek_ac',
-        'tanggal_servis'
+        // 'penggantian_oli',
+        // 'cek_aki',
+        // 'cek_rem',
+        // 'cek_kopling',
+        // 'cek_ban',
+        // 'cek_lampu',
+        // 'cek_ac',
+        'tanggal_servis',
+        'km_target',
+        'tanggal_target',
+        'detail_servis',
     ];
 
     public function kendaraan(): BelongsTo {

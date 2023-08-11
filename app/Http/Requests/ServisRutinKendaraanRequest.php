@@ -25,6 +25,7 @@ class ServisRutinKendaraanRequest extends FormRequest
     {
         return [
             'tanggal_servis' => 'required|date',
+            'detail_servis' => 'required',
         ];
     }
 }

@@ -32,7 +32,7 @@ class Kendaraan extends Model
     }
 
     public function servisRutin(): HasMany {
-        return $this->hasMany(ServisRutinKendaraan::class, 'id_kendaraan', 'id');
+        return $this->hasMany(ServisRutinKendaraan::class, 'id_kendaraan', 'id')->orderBy('tanggal_servis', 'desc');
     }
 
     public function transaksiPeminjaman(): HasMany {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ServisRutinKendaraanRequest;
 use App\Models\Kendaraan;
 use App\Models\ServisRutinKendaraan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ServisRutinKendaraanController extends Controller
@@ -29,16 +30,23 @@ class ServisRutinKendaraanController extends Controller
     }
 
     public function store($id_kendaraan, ServisRutinKendaraanRequest $request) {
+        $km_target = ServisRutinKendaraan::where('id_kendaraan', $id_kendaraan)->orderBy('km_target', 'desc')->first('km_target')->km_target + 10000;
+
+        $tanggal_target = Carbon::parse($request->tanggal_servis, 'Asia/Jakarta')->addMonths(6);
+
         ServisRutinKendaraan::create([
             'id_kendaraan' => $id_kendaraan,
             'tanggal_servis' => $request->tanggal_servis,
-            'penggantian_oli' => $request->penggantian_oli == 'on' ? 1 : 0,
-            'cek_aki' => $request->cek_aki == 'on' ? 1 : 0,
-            'cek_rem' => $request->cek_rem == 'on' ? 1 : 0,
-            'cek_kopling' => $request->cek_kopling == 'on' ? 1 : 0,
-            'cek_ban' => $request->cek_ban == 'on' ? 1 : 0,
-            'cek_lampu' => $request->cek_lampu == 'on' ? 1 : 0,
-            'cek_ac' => $request->cek_ac == 'on' ? 1 : 0
+            // 'penggantian_oli' => $request->penggantian_oli == 'on' ? 1 : 0,
+            // 'cek_aki' => $request->cek_aki == 'on' ? 1 : 0,
+            // 'cek_rem' => $request->cek_rem == 'on' ? 1 : 0,
+            // 'cek_kopling' => $request->cek_kopling == 'on' ? 1 : 0,
+            // 'cek_ban' => $request->cek_ban == 'on' ? 1 : 0,
+            // 'cek_lampu' => $request->cek_lampu == 'on' ? 1 : 0,
+            // 'cek_ac' => $request->cek_ac == 'on' ? 1 : 0,
+            'km_target' => $km_target,
+            'tanggal_target' => $tanggal_target,
+            'detail_servis' => $request->detail_servis,
         ]);
 
         return redirect(route('servisRutin.getKendaraan', $id_kendaraan));
