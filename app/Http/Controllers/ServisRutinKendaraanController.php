@@ -7,7 +7,6 @@ use App\Models\Kendaraan;
 use App\Models\ServisRutinKendaraan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Faker\Factory as Faker;
 
 class ServisRutinKendaraanController extends Controller
 {
@@ -38,15 +37,16 @@ class ServisRutinKendaraanController extends Controller
         ServisRutinKendaraan::create([
             'id_kendaraan' => $id_kendaraan,
             'tanggal_servis' => $request->tanggal_servis,
-            'penggantian_oli' => $request->penggantian_oli == 'on' ? 1 : 0,
-            'cek_aki' => $request->cek_aki == 'on' ? 1 : 0,
-            'cek_rem' => $request->cek_rem == 'on' ? 1 : 0,
-            'cek_kopling' => $request->cek_kopling == 'on' ? 1 : 0,
-            'cek_ban' => $request->cek_ban == 'on' ? 1 : 0,
-            'cek_lampu' => $request->cek_lampu == 'on' ? 1 : 0,
-            'cek_ac' => $request->cek_ac == 'on' ? 1 : 0,
+            // 'penggantian_oli' => $request->penggantian_oli == 'on' ? 1 : 0,
+            // 'cek_aki' => $request->cek_aki == 'on' ? 1 : 0,
+            // 'cek_rem' => $request->cek_rem == 'on' ? 1 : 0,
+            // 'cek_kopling' => $request->cek_kopling == 'on' ? 1 : 0,
+            // 'cek_ban' => $request->cek_ban == 'on' ? 1 : 0,
+            // 'cek_lampu' => $request->cek_lampu == 'on' ? 1 : 0,
+            // 'cek_ac' => $request->cek_ac == 'on' ? 1 : 0,
             'km_target' => $km_target,
             'tanggal_target' => $tanggal_target,
+            'detail_servis' => $request->detail_servis,
         ]);
 
         return redirect(route('servisRutin.getKendaraan', $id_kendaraan));

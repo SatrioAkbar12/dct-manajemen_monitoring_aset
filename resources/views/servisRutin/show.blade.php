@@ -89,20 +89,21 @@
                     <thead>
                         <tr>
                             <th>Tanggal</th>
-                            <th>Penggantian Oli</th>
+                            {{-- <th>Penggantian Oli</th>
                             <th>Cek Aki</th>
                             <th>Cek Rem</th>
                             <th>Cek Kopling</th>
                             <th>Cek Ban</th>
                             <th>Cek Lampu</th>
-                            <th>Cek AC</th>
+                            <th>Cek AC</th> --}}
+                            <th>Deskripsi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data_servis as $servis)
                             <tr>
                                 <td>{{ $servis->tanggal_servis }}</td>
-                                <td>
+                                {{-- <td>
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" {{ $servis->penggantian_oli == 1 ? "checked" : "" }} disabled>
                                     </div>
@@ -136,7 +137,8 @@
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" {{ $servis->cek_ac == 1 ? "checked" : "" }} disabled>
                                     </div>
-                                </td>
+                                </td> --}}
+                                <td>{{ $servis->detail_servis }}
                             </tr>
                         @endforeach
                     </tbody>
@@ -163,7 +165,7 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-check form-check-inline">
+                            {{-- <div class="form-check form-check-inline">
                                 <input type="checkbox" class="form-check-input" id="penggantianOli" name="penggantian_oli">
                                 <label class="form-check-label" for="penggantianOli">Penggantian oli</label>
                             </div>
@@ -190,6 +192,10 @@
                             <div class="form-check form-check-inline">
                                 <input type="checkbox" class="form-check-input" id="cekAc" name="cek_ac">
                                 <label class="form-check-label" for="cekAc">Cek AC</label>
+                            </div> --}}
+                            <div class="from-group">
+                                <label>Detail servis</label>
+                                <textarea class="form-control @error('detail_servis') is-invalid @enderror" name="detail_servis" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
