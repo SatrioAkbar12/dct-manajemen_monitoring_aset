@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\KendaraanRequest;
 use App\Models\JenisKendaraan;
 use App\Models\Kendaraan;
+use App\Models\ServisRutinKendaraan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class KendaraanController extends Controller
@@ -22,13 +24,21 @@ class KendaraanController extends Controller
     }
 
     public function store(KendaraanRequest $request) {
-        Kendaraan::create([
+        $kendaraan = Kendaraan::create([
             'nopol' => $request->nopol,
             'merk' => $request->merk,
             'id_jenis_kendaraan' => $request->jenis_kendaraan,
             'warna' => $request->warna,
             'tipe' => $request->tipe,
             'km_saat_ini' => $request->km_saat_ini,
+        ]);
+
+        ServisRutinKendaraan::create([
+            'id_kendaraan' => $kendaraan->id,
+            'tanggal_servis' => $request->tanggal_servis_terakhir,
+            'km_target' => $request->km_target_servis,
+            'tanggal_target' => Carbon::parse($request->tanggal_servis_terakhir, 'Asia/Jakarta')->addMonths(6),
+            'detail_servis' => 'Awal input servis rutin kendaraan',
         ]);
 
         return redirect(route('kendaraan.index'));

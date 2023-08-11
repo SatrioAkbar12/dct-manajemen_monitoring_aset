@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
 
 class KendaraanRequest extends FormRequest
 {
@@ -30,6 +32,16 @@ class KendaraanRequest extends FormRequest
             'jenis_kendaraan' => 'required|integer|exists:\App\Models\JenisKendaraan,id',
             'tipe' => 'required|string',
             'km_saat_ini' => 'required|integer',
+            'tanggal_servis_terakhir' => [
+                Rule::excludeIf(Route::currentRouteName() == 'kendaraan.update'),
+                'required',
+                'date',
+            ],
+            'km_target_servis' => [
+                Rule::excludeIf(Route::currentRouteName() == 'kendaraan.update'),
+                'required',
+                'integer',
+            ],
         ];
     }
 }

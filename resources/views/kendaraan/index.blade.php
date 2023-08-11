@@ -121,6 +121,21 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <p>Servis Rutin Kendaraan</p>
+                            <div class="form-group">
+                                <label>Tanggal servis rutin terakhir</label>
+                                <input type="date" class="form-control @error('tanggal_servis_terakhir') is-invalid @enderror" name="tanggal_servis_terakhir" required>
+                                @error('tanggal_servis_terakhir')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>KM target servis</label>
+                                <input type="number" class="form-control @error('km_target_servis') is-invalid @enderror" name="km_target_servis" required>
+                                @error('km_target_servis')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
