@@ -28,15 +28,16 @@ class ServisRutinSeeder extends Seeder
             ServisRutinKendaraan::create([
                 'id_kendaraan' => $kendaraan->id,
                 'tanggal_servis' => $tanggal_servis,
-                'penggantian_oli' => $faker->boolean(),
-                'cek_aki' => $faker->boolean(),
-                'cek_rem' => $faker->boolean(),
-                'cek_kopling' => $faker->boolean(),
-                'cek_ban' => $faker->boolean(),
-                'cek_lampu' => $faker->boolean(),
-                'cek_ac' => $faker->boolean(),
+                // 'penggantian_oli' => $faker->boolean(),
+                // 'cek_aki' => $faker->boolean(),
+                // 'cek_rem' => $faker->boolean(),
+                // 'cek_kopling' => $faker->boolean(),
+                // 'cek_ban' => $faker->boolean(),
+                // 'cek_lampu' => $faker->boolean(),
+                // 'cek_ac' => $faker->boolean(),
                 'km_target' => (floor($kendaraan->km_saat_ini/10000)+1)*10000,
                 'tanggal_target' => $tanggal_target,
+                'detail_servis' => $faker->text,
             ]);
         }
     }
