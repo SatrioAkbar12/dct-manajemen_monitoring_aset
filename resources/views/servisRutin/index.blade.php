@@ -13,11 +13,12 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>Id</th>
                             <th>Nomor Polisi</th>
                             <th>Kendaraan</th>
+                            <th>Deskripsi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -27,6 +28,19 @@
                                 <td>{{ $kendaraan->id }}</td>
                                 <td>{{ $kendaraan->nopol }}</td>
                                 <td>{{ $kendaraan->jenisKendaraan->nama . " " . $kendaraan->merk . " " . $kendaraan->tipe . " " . $kendaraan->warna }}</td>
+                                <td class="text-center">
+                                    @foreach ($kendaraan->servisRutin as $servis_rutin)
+                                        @if($loop->first)
+                                            @if ( ($kendaraan->km_saat_ini >= $servis_rutin->km_target) || (\Carbon\Carbon::now()->greaterThan(\Carbon\Carbon::createFromFormat('Y-m-d', $servis_rutin->tanggal_target, 'Asia/Jakarta'))) )
+                                                <div class="text-danger">Kendaraan perlu dilakukan servis rutin</div>
+                                            @else
+                                                &minus;
+                                            @endif
+                                            @break
+                                        @endif
+
+                                    @endforeach
+                                </td>
                                 <td class="text-center">
                                     @can('servisRutin.getKendaraan')
                                         <a href="{{ route('servisRutin.getKendaraan', $kendaraan->id) }}"><button type="button" class="btn btn-info">Detail</button>

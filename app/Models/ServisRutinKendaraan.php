@@ -22,7 +22,9 @@ class ServisRutinKendaraan extends Model
         'cek_ban',
         'cek_lampu',
         'cek_ac',
-        'tanggal_servis'
+        'tanggal_servis',
+        'km_target',
+        'tanggal_target',
     ];
 
     public function kendaraan(): BelongsTo {
