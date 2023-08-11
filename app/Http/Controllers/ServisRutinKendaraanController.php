@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ServisRutinKendaraanRequest;
 use App\Models\Kendaraan;
 use App\Models\ServisRutinKendaraan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Faker\Factory as Faker;
 
 class ServisRutinKendaraanController extends Controller
 {
@@ -15,6 +17,10 @@ class ServisRutinKendaraanController extends Controller
     }
 
     public function index() {
+        // $faker = Faker::create();
+        // $carbon = Carbon::instance($faker->dateTimeThisYear());
+        // return $carbon->toDateString();
+
         $kendaraan = Kendaraan::paginate(10);
 
         return view('servisRutin.index', ['data_kendaraan' => $kendaraan]);
