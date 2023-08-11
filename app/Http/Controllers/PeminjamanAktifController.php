@@ -29,9 +29,16 @@ class PeminjamanAktifController extends Controller
     public function store(PeminjamanAktifRequest $request) {
         $peminjaman_aktif = TransaksiPeminjaman::where('id_kendaraan', $request->kendaraan)->where(function($query) use ($request) {
             $query->where('aktif', 1)->Where(function($query) use ($request) {
-                $query->where('tanggal_waktu_pinjam', '<=', $request->tanggal_waktu_pinjam)->where('target_tanggal_waktu_kembali', '>=', $request->tanggal_waktu_pinjam);
+                $query->where('tanggal_waktu_pinjam', '<=', $request->tanggal_waktu_pinjam)->Where('target_tanggal_waktu_kembali', '>=', $request->tanggal_waktu_pinjam);
             });
         })->first();
+        // $peminjaman_aktif = TransaksiPeminjaman::where('id_kendaraan', $request->kendaraan)->where('aktif', 1)
+        //     ->where(function($query) use ($request) {
+        //         $query->where('tanggal_waktu_pinjam', '<=', $request->tanggal_waktu_pinjam)->where('target_tanggal_waktu_kembali', '>=', $request->target_tanggal_waktu_kembali);
+        //     })
+        //     ->first();
+
+        // return $peminjaman_aktif;
 
         if($peminjaman_aktif != null) {
             Alert::error('Gagal menyimpan!', 'Kendaraan ' . $peminjaman_aktif->kendaraan->nopol . " - " . $peminjaman_aktif->kendaraan->jenisKendaraan->nama . " " . $peminjaman_aktif->kendaraan->merk . " " . $peminjaman_aktif->kendaraan->tipe . " " . $peminjaman_aktif->kendaraan->warna . " sedang digunakan!");
