@@ -41,6 +41,7 @@ class KendaraanSeeder extends Seeder
 
             $aset = Aset::create([
                 'kode_aset' => $kode_aset,
+                'tipe_aset' => 'kendaraan',
             ]);
 
             Kendaraan::create([
