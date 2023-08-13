@@ -354,6 +354,11 @@ return [
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
+                    'text' => 'Aset',
+                    'route' => 'aset.index',
+                    'active' => ['aset', 'regex:@^aset/[0-9]+$@'],
+                ],
+                [
                     'text' => 'Jenis Kendaraan',
                     'route' => 'jenisKendaraan.index',
                     'icon' => 'fas fa-fw fa-paper-plane',
