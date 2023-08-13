@@ -28,7 +28,9 @@
                                 <td>{{ $aset->kode_aset }}</td>
                                 <td>{{ ucfirst($aset->tipe_aset) }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('aset.detail', $aset->id) }}"><button type="button" class="btn btn-info">Detail</button></a>
+                                    @can('aset.detail')
+                                        <a href="{{ route('aset.detail', $aset->id) }}"><button type="button" class="btn btn-info">Detail</button></a>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
