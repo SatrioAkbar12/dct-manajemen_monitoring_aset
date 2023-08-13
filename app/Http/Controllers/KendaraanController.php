@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\KendaraanRequest;
+use App\Models\Aset;
 use App\Models\JenisKendaraan;
 use App\Models\Kendaraan;
 use App\Models\ServisRutinKendaraan;
@@ -24,6 +25,30 @@ class KendaraanController extends Controller
     }
 
     public function store(KendaraanRequest $request) {
+        $prefix_jenis_kendaraan = $request->jenis_kendaraan;
+        if(intval($prefix_jenis_kendaraan) < 10) {
+            $prefix_jenis_kendaraan = '0' . $prefix_jenis_kendaraan;
+        }
+        $kode_aset = 'TRAN' . $prefix_jenis_kendaraan;
+
+        $aset = Aset::where('kode_aset', 'like',  $kode_aset . '%')->orderBy('id', 'desc')->first();
+        $id = 1;
+        if($aset != null) {
+            $id = intval(substr($aset->kode_aset, -3)) + 1;
+        }
+
+        if($id < 10) {
+            $kode_aset = $kode_aset . "00" . $id;
+        }
+        else {
+            $kode_aset = $kode_aset . "0" . $id;
+        }
+
+        $aset = Aset::create([
+            'kode_aset' => $kode_aset,
+            'tipe_aset' => 'kendaraan',
+        ]);
+
         $kendaraan = Kendaraan::create([
             'nopol' => $request->nopol,
             'merk' => $request->merk,
@@ -31,6 +56,7 @@ class KendaraanController extends Controller
             'warna' => $request->warna,
             'tipe' => $request->tipe,
             'km_saat_ini' => $request->km_saat_ini,
+            'id_aset' => $aset->id,
         ]);
 
         ServisRutinKendaraan::create([

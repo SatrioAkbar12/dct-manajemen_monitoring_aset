@@ -20,6 +20,7 @@
                 <table class="table table-bordered">
                     <thead class="text-center">
                         <tr>
+                            <th>Kode Aset</th>
                             <th>Nomor Polisi</th>
                             <th>Jenis Kendaraan</th>
                             <th>Merk</th>
@@ -32,6 +33,7 @@
                     <tbody>
                         @foreach ($data as $d)
                             <tr>
+                                <td>{{ $d->aset->kode_aset }}</td>
                                 <td>{{ $d->nopol}}</td>
                                 <td>{{ $d->jenisKendaraan->nama }}</td>
                                 <td>{{ $d->merk }}</td>
@@ -75,6 +77,9 @@
                     <form action="{{ route('kendaraan.store') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="modal-body">
+                            <div class="form-group">
+                                <h5 class="lead">Data Kendaraan</h5>
+                            </div>
                             <div class="form-group">
                                 <label>Nomor Polisi</label>
                                 <input type="text" class="form-control @error('nopol') is-invalid @enderror" name="nopol" required>
@@ -121,7 +126,9 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <p>Servis Rutin Kendaraan</p>
+                            <div class="form-group">
+                                <h5 class="lead">Servis Rutin Kendaraan</h5>
+                            </div>
                             <div class="form-group">
                                 <label>Tanggal servis rutin terakhir</label>
                                 <input type="date" class="form-control @error('tanggal_servis_terakhir') is-invalid @enderror" name="tanggal_servis_terakhir" required>

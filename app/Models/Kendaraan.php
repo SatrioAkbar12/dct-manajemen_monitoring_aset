@@ -22,10 +22,15 @@ class Kendaraan extends Model
         'tipe',
         'km_saat_ini',
         'tanggal_perbarui_dokumen',
+        'id_aset',
     ];
 
     public function jenisKendaraan(): BelongsTo {
         return $this->belongsTo(JenisKendaraan::class, 'id_jenis_kendaraan', 'id');
+    }
+
+    public function aset(): BelongsTo {
+        return $this->belongsTo(Aset::class, 'id_aset', 'id');
     }
 
     public function masaAktifDokumen(): HasMany {
