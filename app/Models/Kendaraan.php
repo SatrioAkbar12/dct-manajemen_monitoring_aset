@@ -29,6 +29,10 @@ class Kendaraan extends Model
         return $this->belongsTo(JenisKendaraan::class, 'id_jenis_kendaraan', 'id');
     }
 
+    public function aset(): BelongsTo {
+        return $this->belongsTo(Aset::class, 'id_aset', 'id');
+    }
+
     public function masaAktifDokumen(): HasMany {
         return $this->hasMany(MasaAktifDokumenKendaraan::class, 'id_kendaraan', 'id');
     }
