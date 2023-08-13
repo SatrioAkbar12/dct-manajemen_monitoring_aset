@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Aset;
 use App\Models\JenisKendaraan;
 use App\Models\Kendaraan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -21,6 +22,27 @@ class KendaraanSeeder extends Seeder
         $faker = Faker::create();
 
         for($i = 0; $i < 20; $i++) {
+            $prefix_jenis_kendaraan = "0" . rand(1, $jumlah_jenis_kendaraan);
+            $kode_aset = 'TRAN' . $prefix_jenis_kendaraan;
+
+            $aset = Aset::where('kode_aset', 'like', $kode_aset.'%')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->first();
+            $id = 1;
+
+            if($aset != null) {
+                $id = intval(substr($aset->kode_aset, -3)) + 1;
+            }
+
+            if($id < 10) {
+                $kode_aset = $kode_aset . '00' . $id;
+            }
+            else {
+                $kode_aset = $kode_aset . '0' . $id;
+            }
+
+            $aset = Aset::create([
+                'kode_aset' => $kode_aset,
+            ]);
+
             Kendaraan::create([
                 'nopol' => strtoupper($faker->bothify('? #### ???')),
                 'merk' => $faker->word(),
@@ -28,6 +50,7 @@ class KendaraanSeeder extends Seeder
                 'warna' => $faker->colorName(),
                 'tipe' => $faker->word(),
                 'km_saat_ini' => $faker->randomNumber(6, false),
+                'id_aset' => $aset->id,
             ]);
         }
     }
