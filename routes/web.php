@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AsetController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KendaraanController;
@@ -107,4 +108,9 @@ Route::middleware('auth')->controller(PeminjamanAktifController::class)->prefix(
 Route::middleware('auth')->controller(RiwayatPeminjamanController::class)->prefix('riwayat-peminjaman')->name('riwayatPeminjaman.')->group(function() {
     Route::middleware('permission:riwayatPeminjaman.index')->get('/', 'index')->name('index');
     Route::middleware('permission:riwayatPeminjaman.detail')->get('/{id}', 'detail')->name('detail');
+});
+
+Route::middleware('auth')->controller(AsetController::class)->prefix('aset')->name('aset.')->group(function() {
+    Route::middleware('permission:aset.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:aset.detail')->get('/{id}', 'detail')->name('detail');
 });
