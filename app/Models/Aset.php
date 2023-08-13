@@ -15,6 +15,7 @@ class Aset extends Model
 
     protected $fillable = [
         'kode_aset',
+        'tipe_aset',
     ];
 
     public function kendaraan(): HasOne {
