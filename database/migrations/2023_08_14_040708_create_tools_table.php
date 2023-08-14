@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('status_saat_ini')->nullable();
             $table->unsignedBigInteger('id_tools_group');
             $table->unsignedBigInteger('id_gudang')->nullable();
+            $table->softDeletes();
         });
     }
 
