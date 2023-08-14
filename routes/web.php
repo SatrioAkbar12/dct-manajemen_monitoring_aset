@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AsetController;
 use App\Http\Controllers\DokumenController;
+use App\Http\Controllers\GudangController;
 use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\MasaAktifDokumenController;
@@ -113,4 +114,11 @@ Route::middleware('auth')->controller(RiwayatPeminjamanController::class)->prefi
 Route::middleware('auth')->controller(AsetController::class)->prefix('aset')->name('aset.')->group(function() {
     Route::middleware('permission:aset.index')->get('/', 'index')->name('index');
     Route::middleware('permission:aset.detail')->get('/{id}', 'detail')->name('detail');
+});
+
+Route::middleware('auth')->controller(GudangController::class)->prefix('gudang')->name('gudang.')->group(function() {
+    Route::middleware('permission:gudang.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:gudang.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:gudang.update')->post('/{id}', 'update')->name('update');
+    Route::middleware('permission:gudang.del')->get('/{id}/delete', 'del')->name('del');
 });
