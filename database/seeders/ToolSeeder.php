@@ -50,7 +50,7 @@ class ToolSeeder extends Seeder
                 'id_aset' => $aset->id,
                 'nama' => $faker->sentence(3),
                 'merk' => ucfirst($faker->word()),
-                'model' => ucwords($faker->bothify('???-####')),
+                'model' => strtoupper($faker->bothify('???-####')),
                 'deskripsi' => $faker->text(),
                 'status_saat_ini' => 'Digudang',
                 'id_gudang' => rand(1, $jumlah_gudang),
