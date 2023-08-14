@@ -386,6 +386,11 @@ return [
                     'route' => 'toolsGroup.index',
                     'active' => ['tools-group'],
                 ],
+                [
+                    'text' => 'Tools',
+                    'route' => 'tools.index',
+                    'active' => ['tools', 'regex:@^tools/[0-9]+$@', 'regex:@^tools/[0-9]+/edit$@'],
+                ]
             ],
         ],
         [

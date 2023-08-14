@@ -12,6 +12,7 @@ use App\Http\Controllers\RiwayatPeminjamanController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\ServisRutinKendaraanController;
+use App\Http\Controllers\ToolController;
 use App\Http\Controllers\ToolsGroupController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -129,4 +130,13 @@ Route::middleware('auth')->controller(ToolsGroupController::class)->prefix('tool
     Route::post('/', 'store')->name('store');
     Route::post('/{id}', 'update')->name('update');
     Route::delete('/{id}/delete', 'del')->name('del');
+});
+
+Route::middleware('auth')->controller(ToolController::class)->prefix('tools')->name('tools.')->group(function() {
+    Route::middleware('permission:tools.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:tools.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:tools.detail')->get('/{id}', 'detail')->name('detail');
+    Route::middleware('permission:tools.edit')->get('/{id}/edit', 'edit')->name('edit');
+    Route::middleware('permission:tools.update')->post('/{id}/update', 'update')->name('update');
+    Route::middleware('permission:tools.del')->delete('/{id}/delete', 'del')->name('del');
 });
