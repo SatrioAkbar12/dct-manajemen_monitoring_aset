@@ -31,4 +31,8 @@ class Tool extends Model
     public function gudang(): BelongsTo {
         return $this->belongsTo(Gudang::class, 'id_gudang', 'id');
     }
+
+    public function toolsGroup(): BelongsTo {
+        return $this->belongsTo(ToolsGroup::class, 'id_tools_group', 'id');
+    }
 }
