@@ -376,6 +376,16 @@ return [
                     'icon' => 'fas fa-fw fa-file',
                     'active' => ['tipe-dokumen', 'regex:@^tipe-dokumen/[0-9]+$@'],
                 ],
+                [
+                    'text' => 'Gudang',
+                    'route' => 'gudang.index',
+                    'active' => ['gudang'],
+                ],
+                [
+                    'text' => 'Tools Group',
+                    'route' => 'toolsGroup.index',
+                    'active' => ['tools-group'],
+                ],
             ],
         ],
         [

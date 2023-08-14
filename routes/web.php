@@ -12,6 +12,7 @@ use App\Http\Controllers\RiwayatPeminjamanController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\ServisRutinKendaraanController;
+use App\Http\Controllers\ToolsGroupController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -121,4 +122,11 @@ Route::middleware('auth')->controller(GudangController::class)->prefix('gudang')
     Route::middleware('permission:gudang.store')->post('/', 'store')->name('store');
     Route::middleware('permission:gudang.update')->post('/{id}', 'update')->name('update');
     Route::middleware('permission:gudang.del')->delete('/{id}/delete', 'del')->name('del');
+});
+
+Route::middleware('auth')->controller(ToolsGroupController::class)->prefix('tools-group')->name('toolsGroup.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
+    Route::post('/{id}', 'update')->name('update');
+    Route::delete('/{id}/delete', 'del')->name('del');
 });
