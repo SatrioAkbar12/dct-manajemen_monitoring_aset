@@ -53,7 +53,7 @@
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label>Nama gudang</label>
-                                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ $gudang->nama }}">
+                                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ $gudang->nama }}" required>
                                                         @error('nama')
                                                             <div class="text-danger">{{ $message }}</div>
                                                         @enderror
@@ -91,7 +91,7 @@
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label>Nama gudang</label>
-                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value={{ old('nama') }}>
+                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value={{ old('nama') }} required>
                                         @error('nama')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
