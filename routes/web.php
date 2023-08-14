@@ -120,5 +120,5 @@ Route::middleware('auth')->controller(GudangController::class)->prefix('gudang')
     Route::middleware('permission:gudang.index')->get('/', 'index')->name('index');
     Route::middleware('permission:gudang.store')->post('/', 'store')->name('store');
     Route::middleware('permission:gudang.update')->post('/{id}', 'update')->name('update');
-    Route::middleware('permission:gudang.del')->get('/{id}/delete', 'del')->name('del');
+    Route::middleware('permission:gudang.del')->delete('/{id}/delete', 'del')->name('del');
 });
