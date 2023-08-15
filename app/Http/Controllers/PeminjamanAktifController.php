@@ -9,6 +9,7 @@ use App\Models\TransaksiPeminjaman;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PeminjamanAktifController extends Controller
@@ -19,9 +20,16 @@ class PeminjamanAktifController extends Controller
     }
 
     public function index() {
-        $peminjaman_aktif = TransaksiPeminjaman::where('aktif', 1)->paginate(10);
+        $peminjaman_aktif = TransaksiPeminjaman::where('aktif', 1);
         $user = User::all();
         $kendaraan = Kendaraan::all();
+        $auth_user = Auth::user();
+
+        if( !($auth_user->hasRole('admin')) ) {
+            $peminjaman_aktif = $peminjaman_aktif->where('id_user', $auth_user->id);
+        }
+
+        $peminjaman_aktif = $peminjaman_aktif->paginate(10);
 
         return view('peminjamanAktif.index', ['data_peminjaman_aktif' => $peminjaman_aktif, 'data_user' => $user, 'data_kendaraan' => $kendaraan]);
     }
@@ -32,16 +40,9 @@ class PeminjamanAktifController extends Controller
                 $query->where('tanggal_waktu_pinjam', '<=', $request->tanggal_waktu_pinjam)->Where('target_tanggal_waktu_kembali', '>=', $request->tanggal_waktu_pinjam);
             });
         })->first();
-        // $peminjaman_aktif = TransaksiPeminjaman::where('id_kendaraan', $request->kendaraan)->where('aktif', 1)
-        //     ->where(function($query) use ($request) {
-        //         $query->where('tanggal_waktu_pinjam', '<=', $request->tanggal_waktu_pinjam)->where('target_tanggal_waktu_kembali', '>=', $request->target_tanggal_waktu_kembali);
-        //     })
-        //     ->first();
-
-        // return $peminjaman_aktif;
 
         if($peminjaman_aktif != null) {
-            Alert::error('Gagal menyimpan!', 'Kendaraan ' . $peminjaman_aktif->kendaraan->nopol . " - " . $peminjaman_aktif->kendaraan->jenisKendaraan->nama . " " . $peminjaman_aktif->kendaraan->merk . " " . $peminjaman_aktif->kendaraan->tipe . " " . $peminjaman_aktif->kendaraan->warna . " sedang digunakan!");
+            Alert::error('Gagal menyimpan!', 'Kendaraan ' . $peminjaman_aktif->kendaraan->aset->kode_aset . " - ". $peminjaman_aktif->kendaraan->nopol . " - " . $peminjaman_aktif->kendaraan->jenisKendaraan->nama . " " . $peminjaman_aktif->kendaraan->merk . " " . $peminjaman_aktif->kendaraan->tipe . " " . $peminjaman_aktif->kendaraan->warna . " sedang digunakan!");
 
             return redirect()->back();
         }
