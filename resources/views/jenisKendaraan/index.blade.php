@@ -18,7 +18,7 @@
 
             <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>Id</th>
                             <th>Jenis Kendaraan</th>
@@ -31,16 +31,11 @@
                                 <td>{{ $d->id }}</td>
                                 <td>{{ $d->nama }}</td>
                                 <td class="text-center">
-                                    @can('jenisKendaraan.del')
-                                        <form action="{{ route('jenisKendaraan.del', $d->id) }}" method="POST">
-                                            {{ csrf_field() }}
-                                    @endcan
                                     @can('jenisKendaraan.update')
-                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $d->id }}">Update</button>
+                                        <button type="button" class="mx-2 my-1 btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $d->id }}">Update</button>
                                     @endcan
                                     @can('jenisKendaraan.del')
-                                            <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
-                                        </form>
+                                        <a href="{{ route('jenisKendaraan.del', $d->id) }}" class="mx-2 my-1 btn btn-danger" data-confirm-delete="true">Delete</button>
                                     @endcan
                                 </td>
                             </tr>
@@ -113,36 +108,4 @@
             </div>
         </div>
     @endcan
-@stop
-
-@section('js')
-    <script>
-        $(document).ready(function() {
-            @foreach ($data as $d)
-                $('#btnDeleteConfirm{{ $d->id }}').click(function() {
-                    var form = $(this).closest("form")
-
-                    Swal.fire({
-                        title: 'Apakah anda yakin?',
-                        text: "Anda akan menghapus data",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Ya',
-                        cancelButtonText: 'Tidak',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire(
-                                'Terhapus!',
-                                'Data telah terhapus',
-                                'success'
-                            )
-                            form.submit()
-                        }
-                    })
-                })
-            @endforeach
-        })
-    </script>
 @stop
