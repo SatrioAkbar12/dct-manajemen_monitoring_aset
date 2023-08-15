@@ -69,7 +69,7 @@ Route::middleware('auth')->controller(JenisKendaraanController::class)->prefix('
     Route::middleware('permission:jenisKendaraan.index')->get('/', 'index')->name('index');
     Route::middleware('permission:jenisKendaraan.store')->post('/', 'store')->name('store');
     Route::middleware('permission:jenisKendaraan.update')->post('/{id}', 'update')->name('update');
-    Route::middleware('permission:jenisKendaraan.del')->post('/{id}/del', 'del')->name('del');
+    Route::middleware('permission:jenisKendaraan.del')->delete('/{id}/del', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(KendaraanController::class)->prefix('kendaraan')->name('kendaraan.')->group(function() {
