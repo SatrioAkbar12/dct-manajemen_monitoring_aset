@@ -13,7 +13,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>Kendaraan</label>
-                    <input type="text" class="form-control-plaintext" value="{{ $data_peminjaman_aktif->kendaraan->nopol . " - " . $data_peminjaman_aktif->kendaraan->jenisKendaraan->nama . " " . $data_peminjaman_aktif->kendaraan->merk . " " . $data_peminjaman_aktif->kendaraan->tipe . " " . $data_peminjaman_aktif->kendaraan->warna }}" disabled>
+                    <input type="text" class="form-control-plaintext" value="{{ $data_peminjaman_aktif->kendaraan->aset->kode_aset . " - " . $data_peminjaman_aktif->kendaraan->nopol . " - " . $data_peminjaman_aktif->kendaraan->jenisKendaraan->nama . " " . $data_peminjaman_aktif->kendaraan->merk . " " . $data_peminjaman_aktif->kendaraan->tipe . " " . $data_peminjaman_aktif->kendaraan->warna }}" disabled>
                 </div>
                 <div class="form-group">
                     <label>Status kondisi kendaraan</label>
@@ -34,6 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label>KM terakhir kendaraan</label>
+                    <input type="hidden" name="km_sebelumnya" value="{{ $data_peminjaman_aktif->kendaraan->km_saat_ini }}">
                     <input type="number" class="form-control @error('km_terakhir') is-invalid @enderror" name="km_terakhir" required>
                     *KM peminjaman terakhir : {{ $data_peminjaman_aktif->kendaraan->km_saat_ini }}
                     @error('km_terakhir')
