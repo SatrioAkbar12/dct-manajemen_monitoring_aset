@@ -15,7 +15,7 @@ class RoleController extends Controller
     }
 
     public function index() {
-        $data = Role::paginate(10);
+        $data = Role::orderBy('updated_at', 'desc')->paginate(10);
 
         $title = 'Hapus data';
         $text = 'Apakah anda yakin menghapus data ini?';
