@@ -27,6 +27,14 @@
             </div>
             <div class="row">
                 <div class="col-4 col-md-2">
+                    <p>Kode aset</p>
+                </div>
+                <div class="col-8 col-md-10">
+                    <p>: {{ $data_riwayat_peminjaman->kendaraan->aset->kode_aset }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-md-2">
                     <p>Kendaraan</p>
                 </div>
                 <div class="col-8 col-md-10">
@@ -87,7 +95,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <a href="{{ route('riwayatPeminjaman.index') }}"><button type="button" class="btn btn-secondary">Kembali</button></a>
+            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-secondary">Kembali</button></a>
         </div>
     </div>
 @stop
