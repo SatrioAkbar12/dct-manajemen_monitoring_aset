@@ -7,6 +7,7 @@ use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\MasaAktifDokumenController;
 use App\Http\Controllers\PeminjamanAktifController;
+use App\Http\Controllers\PeminjamanAktifToolController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RiwayatPeminjamanController;
 use App\Http\Controllers\RoleController;
@@ -139,4 +140,11 @@ Route::middleware('auth')->controller(ToolController::class)->prefix('tools')->n
     Route::middleware('permission:tools.edit')->get('/{id}/edit', 'edit')->name('edit');
     Route::middleware('permission:tools.update')->post('/{id}/update', 'update')->name('update');
     Route::middleware('permission:tools.del')->delete('/{id}/delete', 'del')->name('del');
+});
+
+Route::middleware('auth')->controller(PeminjamanAktifToolController::class)->prefix('peminjaman-aktif-tools')->name('peminjamanAktifTools.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{id}', 'returning')->name('returning');
+    Route::post('/{id}', 'update')->name('update');
 });

@@ -1,14 +1,15 @@
 .select2-container {
   box-sizing: border-box;
-  display: inline-block;
+  /* display: inline-block; */
+  display: block;
   margin: 0;
   position: relative;
-  vertical-align: middle; }
+  /* vertical-align: middle;*/ }
   .select2-container .select2-selection--single {
     box-sizing: border-box;
     cursor: pointer;
     display: block;
-    height: 28px;
+    height: calc(2.25rem + 2px);
     user-select: none;
     -webkit-user-select: none; }
     .select2-container .select2-selection--single .select2-selection__rendered {
@@ -187,6 +188,7 @@
     padding: 0 5px;
     width: 100%; }
     .select2-container--default .select2-selection--multiple .select2-selection__rendered li {
+        color: #444;
       list-style: none; }
   .select2-container--default .select2-selection--multiple .select2-selection__clear {
     cursor: pointer;

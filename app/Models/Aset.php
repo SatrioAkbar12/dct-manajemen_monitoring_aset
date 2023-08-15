@@ -21,4 +21,8 @@ class Aset extends Model
     public function kendaraan(): HasOne {
         return $this->hasOne(Kendaraan::class, 'id_aset', 'id');
     }
+
+    public function tool(): HasOne {
+        return $this->hasOne(Tool::class, 'id_aset', 'id');
+    }
 }
