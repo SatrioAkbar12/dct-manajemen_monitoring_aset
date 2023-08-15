@@ -50,7 +50,7 @@ Route::middleware('auth')->controller(RoleController::class)->prefix('roles')->n
     Route::middleware('permission:user.index')->get('/', 'index')->name('index');
     Route::middleware('permission:user.store')->post('/', 'store')->name('store');
     Route::middleware('permission:user.update')->post('/{id}', 'update')->name('update');
-    Route::middleware('permission:user.del')->post('/{id}/delete', 'del')->name('del');
+    Route::middleware('permission:user.del')->delete('/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(PermissionController::class)->prefix('permission')->name('permission.')->group(function() {
