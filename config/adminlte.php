@@ -322,18 +322,24 @@ return [
         [
             'text'    => 'Transaksi Peminjaman',
             'icon'    => 'fas fa-fw fa-list',
+            'can'     => [
+                'peminjamanAktif.index', 'peminjamanAktif.store', 'peminjamanAktif.returning', 'peminjamanAktif.update',
+                'riwayatPeminjaman.index', 'riwayatPeminjaman.detail'
+            ],
             'submenu' => [
                 [
                     'text' => 'Peminjaman Aktif',
                     'route' => 'peminjamanAktif.index',
                     'icon' => 'fas fa-fw fa-route',
                     'active' => ['peminjaman-aktif', 'regex:@^peminjaman-aktif/[0-9]+$@'],
+                    'can' => ['peminjamanAktif.index', 'peminjamanAktif.store', 'peminjamanAktif.returning', 'peminjamanAktif.update'],
                 ],
                 [
                     'text' => 'Riwayat Peminjaman',
                     'route' => 'riwayatPeminjaman.index',
                     'icon' => 'fas fa-fw fa-file-contract',
-                    'active' => ['riwayat-peminjaman', 'regex:@^riwayat-peminjaman/[0-9]+$@']
+                    'active' => ['riwayat-peminjaman', 'regex:@^riwayat-peminjaman/[0-9]+$@'],
+                    'can' => ['riwayatPeminjaman.index', 'riwayatPeminjaman.detail'],
                 ],
             ]
         ],
@@ -341,81 +347,109 @@ return [
             'text' => 'Servis Rutin',
             'route' => 'servisRutin.index',
             'icon' => 'fas fa-fw fa-wrench',
-            'active' => ['servis-rutin', 'regex:@^servis-rutin/[0-9]+$@']
+            'active' => ['servis-rutin', 'regex:@^servis-rutin/[0-9]+$@'],
+            'can' => ['servisRutin.index', 'servisRutin.getKendaraan', 'servisRutin.store'],
         ],
         [
             'text' => 'Masa Berlaku Dokumen Kendaraan',
             'route' => 'masaAktifDokumen.index',
             'icon' => 'fas fa-fw fa-clock',
             'active' => ['masa-aktif-dokumen', 'regex:@^masa-aktif-dokumen/[0-9]+$@', 'regex:@^masa-aktif-dokumen/[0-9]+/[0-9]+$@'],
+            'can' => ['masaAktifDokumen.index', 'masaAktifDokumen.getKendaraan', 'masaAktifDokumen.store', 'masaAktifDokumen.update', 'masaAktifDokumen.update', 'masaAktifDokumen.del'],
         ],
         [
             'text'    => 'Master Data',
             'icon'    => 'fas fa-fw fa-share',
+            'can'     => [
+                'aset.index', 'aset.detail',
+                'jenisKendaraan.index', 'jenisKendaraan.store', 'jenisKendaraan.update', 'jenisKendaraan.del',
+                'kendaraan.index', 'kendaraan.store', 'kendaraan.show', 'kendaraan.update', 'kendaraan.del',
+                'tipeDokumen.index', 'tipeDokumen.store', 'tipeDokumen.show', 'tipeDokumen.update', 'tipeDokumen.del',
+                'gudang.index', 'gudang.store', 'gudang.update', 'gudang.del',
+                'toolsGroup.index', 'toolsGroup.store', 'toolsGroup.update', 'toolsGroup.del',
+                'tools.index', 'tools.store', 'tools.detail', 'tools.edit', 'tools.update', 'tools.del',
+            ],
             'submenu' => [
                 [
                     'text' => 'Aset',
                     'route' => 'aset.index',
                     'active' => ['aset', 'regex:@^aset/[0-9]+$@'],
+                    'can' => ['aset.index', 'aset.detail'],
                 ],
                 [
                     'text' => 'Jenis Kendaraan',
                     'route' => 'jenisKendaraan.index',
                     'icon' => 'fas fa-fw fa-paper-plane',
                     'active' => ['jenis-kendaraan'],
+                    'can' => ['jenisKendaraan.index', 'jenisKendaraan.store', 'jenisKendaraan.update', 'jenisKendaraan.del'],
                 ],
                 [
                     'text' => 'Kendaraan',
                     'route' => 'kendaraan.index',
                     'icon' => 'fas fa-fw fa-car',
                     'active' => ['kendaraan', 'regex:@^kendaraan/[0-9]+$@'],
+                    'can' => ['kendaraan.index', 'kendaraan.store', 'kendaraan.show', 'kendaraan.update', 'kendaraan.del'],
                 ],
                 [
                     'text' => 'Jenis Dokumen Kendaraan',
                     'route' => 'tipeDokumen.index',
                     'icon' => 'fas fa-fw fa-file',
                     'active' => ['tipe-dokumen', 'regex:@^tipe-dokumen/[0-9]+$@'],
+                    'can' => ['tipeDokumen.index', 'tipeDokumen.store', 'tipeDokumen.show', 'tipeDokumen.update', 'tipeDokumen.del'],
                 ],
                 [
                     'text' => 'Gudang',
                     'route' => 'gudang.index',
                     'active' => ['gudang'],
+                    'can' => ['gudang.index', 'gudang.store', 'gudang.update', 'gudang.del'],
                 ],
                 [
                     'text' => 'Tools Group',
                     'route' => 'toolsGroup.index',
                     'active' => ['tools-group'],
+                    'can' => ['toolsGroup.index', 'toolsGroup.store', 'toolsGroup.update', 'toolsGroup.del'],
                 ],
                 [
                     'text' => 'Tools',
                     'route' => 'tools.index',
                     'active' => ['tools', 'regex:@^tools/[0-9]+$@', 'regex:@^tools/[0-9]+/edit$@'],
-                ]
+                    'can' => ['tools.index', 'tools.store', 'tools.detail', 'tools.edit', 'tools.update', 'tools.del'],
+                ],
             ],
         ],
         [
             'text' => 'Manajemen Akun',
             'icon' => 'fas fa-fw fa-user',
+            'can' => [
+                'user.index', 'user.store', 'user.update', 'user.show', 'user.updateRole', 'user.del',
+                'roles.index', 'roles.store', 'roles.update', 'roles.del',
+                'permission.index.', 'permission.permissionSync',
+                'rolePermission.index', 'rolePermission.detail', 'rolePermission.store', 'rolePermission.del',
+            ],
             'submenu' => [
                 [
                     'text' => 'User',
                     'route' => 'user.index',
                     'active' => ['user', 'regex:@^user/[0-9]+$@'],
+                    'can' => ['user.index', 'user.store', 'user.update', 'user.show', 'user.updateRole', 'user.del'],
                 ],
                 [
                     'text' => 'Roles',
                     'route' => 'roles.index',
                     'active' => ['roles'],
+                    'can' => ['roles.index', 'roles.store', 'roles.update', 'roles.del'],
                 ],
                 [
                     'text' => 'Permission',
                     'route' => 'permission.index',
-                    'active' => ['permission']
+                    'active' => ['permission'],
+                    'can' => ['permission.index.', 'permission.permissionSync'],
                 ],
                 [
                     'text' => 'Role Permission',
                     'route' => 'rolePermission.index',
                     'active' => ['role-permisison'],
+                    'can' => ['rolePermission.index', 'rolePermission.detail', 'rolePermission.store', 'rolePermission.del'],
                 ],
             ]
         ]

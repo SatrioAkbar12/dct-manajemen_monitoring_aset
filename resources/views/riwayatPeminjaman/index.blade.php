@@ -28,7 +28,7 @@
                             <tr>
                                 <td>{{ $riwayat_peminjaman->tanggal_waktu_pinjam }}</td>
                                 <td>{{ $riwayat_peminjaman->tanggal_waktu_kembali }}</td>
-                                <td>{{ $riwayat_peminjaman->kendaraan->nopol . " - " . $riwayat_peminjaman->kendaraan->jenisKendaraan->nama . " " . $riwayat_peminjaman->kendaraan->merk . " " . $riwayat_peminjaman->kendaraan->tipe . " " . $riwayat_peminjaman->kendaraan->warna }}</td>
+                                <td>{{ $riwayat_peminjaman->kendaraan->aset->kode_aset . " - " . $riwayat_peminjaman->kendaraan->nopol . " - " . $riwayat_peminjaman->kendaraan->jenisKendaraan->nama . " " . $riwayat_peminjaman->kendaraan->merk . " " . $riwayat_peminjaman->kendaraan->tipe . " " . $riwayat_peminjaman->kendaraan->warna }}</td>
                                 <td>{{ $riwayat_peminjaman->user->nama }}</td>
                                 <td>{{ $riwayat_peminjaman->kondisiKendaraan->jumlah_km }} KM</td>
                                 <td class="text-center">

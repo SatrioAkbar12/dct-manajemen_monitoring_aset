@@ -80,43 +80,25 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="userPeminjam">Peminjam</label>
-                                <select class="form-control @error('user') is-invalid @enderror" id="userPeminjam" name="user" required>
-                                    @foreach ($data_user as $user)
-                                        <option value="{{ $user->id }}">{{ $user->nama }}</option>
-                                    @endforeach
+                                <label for="inputUser">Peminjam</label>
+                                <select class="form-control @error('user') is-invalid @enderror" id="inputUser" name="user" @unlessrole('admin') disabled @endunlessrole required>
+                                    @hasrole('admin')
+                                        @foreach ($data_user as $user)
+                                            <option value="{{ $user->id }}">{{ $user->nama }}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="{{ auth()->user()->id }}">{{ auth()->user()->nama }}</option>
+                                    @endhasrole
                                 </select>
                                 @error('user')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-
-                            {{-- <div class="form-group">
-                                <label for="userPeminjam">Peminjam</label>
-                                <select class="form-control select2multiple" id="userPeminjam" name="user" multiple="multiple">
-                                    @foreach ($data_user as $user)
-                                        <option value="{{ $user->id }}">{{ $user->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <x-adminlte-select label="Test select" name="selBasic">
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
-                            </x-adminlte-select>
-
-                            <x-adminlte-select2 label="Test select2" name="sel2Basic">
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
-                            </x-adminlte-select2> --}}
-
                             <div class="form-group">
-                                <label>Kendaraan</label>
-                                <select class="form-control @error('kendaraan') is-invalid @enderror" name="kendaraan" required>
+                                <label for="inputKendaraan">Kendaraan</label>
+                                <select class="form-control @error('kendaraan') is-invalid @enderror" id="inputKendaraan" name="kendaraan" required>
                                     @foreach ($data_kendaraan as $kendaraan)
-                                        <option value="{{ $kendaraan->id }}">{{ $kendaraan->nopol . " - " . $kendaraan->jenisKendaraan->nama . " " . $kendaraan->merk . " " . $kendaraan->tipe . " " . $kendaraan->warna }}</option>
+                                        <option value="{{ $kendaraan->id }}">{{ $kendaraan->aset->kode_aset . " - " . $kendaraan->nopol . " - " . $kendaraan->jenisKendaraan->nama . " " . $kendaraan->merk . " " . $kendaraan->tipe . " " . $kendaraan->warna }}</option>
                                     @endforeach
                                 </select>
                                 @error('kendaraan')
@@ -149,26 +131,11 @@
     @endcan
 @stop
 
-@section('css')
-    {{-- <style>
-        .select2-container{
-            width: 1120.74px;
-            border: 1px solid #ccc!important;
-            padding: 5px;
-        }
-    </style> --}}
-
-    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
-@endsection
-
-
 @section('js')
-    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> --}}
-    {{-- <script>
+    <script>
         $(document).ready(function() {
-            $('.select2').select2();
-            $('.select2multiple').select2();
+            $('#inputUser').select2();
+            $('#inputKendaraan').select2();
         });
-    </script> --}}
+    </script>
 @stop
