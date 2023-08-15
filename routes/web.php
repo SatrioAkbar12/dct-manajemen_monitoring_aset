@@ -62,7 +62,7 @@ Route::middleware('auth')->controller(RolePermissionController::class)->prefix('
     Route::middleware('permission:rolePermission.index')->get('/', 'index')->name('index');
     Route::middleware('permission:rolePermission.detail')->get('/{id_role}', 'detail')->name('detail');
     Route::middleware('permission:rolePermission.store')->post('/{id_role}', 'store')->name('store');
-    Route::middleware('permission:rolePermission.del')->post('/{id_role}/del', 'del')->name('del');
+    Route::middleware('permission:rolePermission.del')->delete('/{id_role}/{id_permission}/del', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(JenisKendaraanController::class)->prefix('jenis-kendaraan')->name('jenisKendaraan.')->group(function() {
