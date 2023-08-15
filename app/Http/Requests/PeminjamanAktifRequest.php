@@ -37,7 +37,8 @@ class PeminjamanAktifRequest extends FormRequest
             return [
                 'status_kondisi' => 'required|in:Aman,Ada kerusakan',
                 'deskripsi' => 'required|string',
-                'km_terakhir' => 'required|integer',
+                'km_sebelumnya' => 'required|integer',
+                'km_terakhir' => 'required|integer|min:' . $this->km_sebelumnya,
                 'foto_depan' => 'required|image',
                 'foto_belakang' => 'required|image',
                 'foto_kanan' => 'required|image',
