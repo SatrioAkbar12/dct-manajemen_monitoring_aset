@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('kondisi_tools_transaksi_peminjaman', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->unsignedBigInteger('id_list_tools');
             $table->string('status_kondisi');
             $table->text('deskripsi');
