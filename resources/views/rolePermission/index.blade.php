@@ -13,7 +13,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>Id</th>
                             <th>Nama Role</th>
@@ -23,9 +23,9 @@
                     <tbody>
                         @foreach ($data_role as $role)
                             <tr>
-                                <td>{{ $role->id }}</td>
+                                <td class="text-center">{{ $role->id }}</td>
                                 <td>{{ $role->name }}</td>
-                                <td>
+                                <td class="text-center">
                                     @can('rolePermission.detail')
                                         <a href="{{ route('rolePermission.detail', $role->id) }}"><button type="button" class="btn btn-info">Detail</button>
                                     @endcan
