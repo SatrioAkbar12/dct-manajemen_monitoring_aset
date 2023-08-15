@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class PeminjamanAktifRequest extends FormRequest
@@ -42,6 +43,16 @@ class PeminjamanAktifRequest extends FormRequest
                 'foto_kanan' => 'required|image',
                 'foto_kiri' => 'required|image',
             ];
+        }
+    }
+
+    protected function prepareForValidation()
+    {
+        $user = Auth::user();
+        if( !($user->hasRole('admin')) ) {
+            $this->merge([
+                'user' => $user->id,
+            ]);
         }
     }
 }
