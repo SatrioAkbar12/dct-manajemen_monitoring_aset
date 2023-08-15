@@ -127,10 +127,10 @@ Route::middleware('auth')->controller(GudangController::class)->prefix('gudang')
 });
 
 Route::middleware('auth')->controller(ToolsGroupController::class)->prefix('tools-group')->name('toolsGroup.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::post('/', 'store')->name('store');
-    Route::post('/{id}', 'update')->name('update');
-    Route::delete('/{id}/delete', 'del')->name('del');
+    Route::middleware('permission:toolsGroup.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:toolsGroup.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:toolsGroup.update')->post('/{id}', 'update')->name('update');
+    Route::middleware('permission:toolsGroup.del')->delete('/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(ToolController::class)->prefix('tools')->name('tools.')->group(function() {
