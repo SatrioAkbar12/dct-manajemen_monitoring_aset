@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
@@ -30,6 +31,8 @@ class PermissionController extends Controller
                 ]);
             }
         }
+
+        Alert::success('Tersimpan!', 'Berhasil menyinkronisasi permission');
 
         return redirect(route('permission.index'));
     }
