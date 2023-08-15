@@ -43,7 +43,7 @@ Route::middleware('auth')->controller(UserController::class)->prefix('user')->na
     Route::middleware('permission:user.update')->get('/{id}', 'show')->name('show');
     Route::middleware('permission:user.update')->post('/{id}', 'update')->name('update');
     Route::middleware('permission:user.updateRole')->post('/{id}/role', 'updateRole')->name('updateRole');
-    Route::middleware('permission:user.del')->post('/{id}/delete', 'del')->name('del');
+    Route::middleware('permission:user.del')->delete('/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(RoleController::class)->prefix('roles')->name('roles.')->group(function() {
