@@ -36,10 +36,10 @@
                                             {{ csrf_field() }}
                                     @endcan
                                     @can('roles.update')
-                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $d->id }}">Update</button>
+                                            <button type="button" class="my-1 mx-2 btn btn-success" data-toggle="modal" data-target="#modalUpdate{{ $d->id }}">Update</button>
                                     @endcan
                                     @can('roles.del')
-                                            <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Hapus</button>
+                                            <a href="{{ route('roles.del', $d->id) }}" class="my-1 mx-2 btn btn-danger" data-confirm-delete="true">Hapus</button>
                                         </form>
                                     @endcan
                                 </td>
@@ -113,39 +113,4 @@
             </div>
         </div>
     @endcan
-@stop
-
-@section('css')
-@stop
-
-@section('js')
-    <script>
-        $(document).ready(function() {
-            @foreach ($data as $d)
-                $('#btnDeleteConfirm{{ $d->id }}').click(function() {
-                    var form = $(this).closest("form")
-
-                    Swal.fire({
-                        title: 'Apakah anda yakin?',
-                        text: "Anda akan menghapus data",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Ya',
-                        cancelButtonText: 'Tidak',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire(
-                                'Terhapus!',
-                                'Data telah terhapus',
-                                'success'
-                            )
-                            form.submit()
-                        }
-                    })
-                })
-            @endforeach
-        })
-    </script>
 @stop

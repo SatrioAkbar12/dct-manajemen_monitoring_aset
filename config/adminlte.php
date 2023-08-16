@@ -65,7 +65,7 @@ return [
 
     // 'logo' => '<b>Admin</b>LTE',
     'logo' => 'Manajemen<b>Aset</b>',
-    'logo_img' => 'aset/img/LOGO_MASTER-GRADASI.png',
+    'logo_img' => 'assets/img/LOGO_MASTER-GRADASI.png',
     'logo_img_class' => 'brand-image elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -87,7 +87,7 @@ return [
     'auth_logo' => [
         'enabled' => true,
         'img' => [
-            'path' => 'aset/img/LOGO_MASTER-GRADASI.png',
+            'path' => 'assets/img/LOGO_MASTER-GRADASI.png',
             'alt' => 'Auth Logo',
             'class' => 'mx-auto d-block',
             'width' => 50,
@@ -110,7 +110,7 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'aset/img/LOGO_MASTER-GRADASI.png',
+            'path' => 'assets/img/LOGO_MASTER-GRADASI.png',
             'alt' => 'DCT Total Solution',
             'effect' => 'animation__shake',
             'width' => 60,

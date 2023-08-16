@@ -54,6 +54,14 @@
             </div>
             <div class="row">
                 <div class="col-4 col-md-2">
+                    <p>KM saat ini</p>
+                </div>
+                <div class="col-8 col-md-10">
+                    <p>: {{ number_format($data_kendaraan->km_saat_ini, 0, ",", ".") }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-md-2">
                     <p>Jumlah servis rutin</p>
                 </div>
                 <div class="col-8 col-md-10">
@@ -70,7 +78,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <a href="{{ route('servisRutin.index') }}"><button type="button" class="btn btn-secondary">Kembali</button></a>
+            <a href="{{ url()->previous() }}"><button type="button" class="btn btn-secondary">Kembali</button></a>
         </div>
     </div>
 
@@ -141,7 +149,7 @@
                                     </div>
                                 </td> --}}
                                 <td>{{ $servis->detail_servis }}</td>
-                                <td>{{ $servis->km_target }}</td>
+                                <td>{{ number_format($servis->km_target, 0, ",", ".") }}</td>
                                 <td>{{ $servis->tanggal_target }}</td>
                             </tr>
                         @endforeach

@@ -43,14 +43,14 @@ Route::middleware('auth')->controller(UserController::class)->prefix('user')->na
     Route::middleware('permission:user.update')->get('/{id}', 'show')->name('show');
     Route::middleware('permission:user.update')->post('/{id}', 'update')->name('update');
     Route::middleware('permission:user.updateRole')->post('/{id}/role', 'updateRole')->name('updateRole');
-    Route::middleware('permission:user.del')->post('/{id}/delete', 'del')->name('del');
+    Route::middleware('permission:user.del')->delete('/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(RoleController::class)->prefix('roles')->name('roles.')->group(function() {
     Route::middleware('permission:user.index')->get('/', 'index')->name('index');
     Route::middleware('permission:user.store')->post('/', 'store')->name('store');
     Route::middleware('permission:user.update')->post('/{id}', 'update')->name('update');
-    Route::middleware('permission:user.del')->post('/{id}/delete', 'del')->name('del');
+    Route::middleware('permission:user.del')->delete('/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(PermissionController::class)->prefix('permission')->name('permission.')->group(function() {
@@ -62,14 +62,14 @@ Route::middleware('auth')->controller(RolePermissionController::class)->prefix('
     Route::middleware('permission:rolePermission.index')->get('/', 'index')->name('index');
     Route::middleware('permission:rolePermission.detail')->get('/{id_role}', 'detail')->name('detail');
     Route::middleware('permission:rolePermission.store')->post('/{id_role}', 'store')->name('store');
-    Route::middleware('permission:rolePermission.del')->post('/{id_role}/del', 'del')->name('del');
+    Route::middleware('permission:rolePermission.del')->delete('/{id_role}/{id_permission}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(JenisKendaraanController::class)->prefix('jenis-kendaraan')->name('jenisKendaraan.')->group(function() {
     Route::middleware('permission:jenisKendaraan.index')->get('/', 'index')->name('index');
     Route::middleware('permission:jenisKendaraan.store')->post('/', 'store')->name('store');
     Route::middleware('permission:jenisKendaraan.update')->post('/{id}', 'update')->name('update');
-    Route::middleware('permission:jenisKendaraan.del')->post('/{id}/del', 'del')->name('del');
+    Route::middleware('permission:jenisKendaraan.del')->delete('/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(KendaraanController::class)->prefix('kendaraan')->name('kendaraan.')->group(function() {
@@ -77,7 +77,7 @@ Route::middleware('auth')->controller(KendaraanController::class)->prefix('kenda
     Route::middleware('permission:kendaraan.store')->post('/', 'store')->name('store');
     Route::middleware('permission:kendaraan.show')->get('/{id}', 'show')->name('show');
     Route::middleware('permission:kendaraan.update')->post('/{id}', 'update')->name('update');
-    Route::middleware('permission:kendaraan.del')->post('/{id}/delete', 'del')->name('del');
+    Route::middleware('permission:kendaraan.del')->delete('/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(DokumenController::class)->prefix('tipe-dokumen')->name('tipeDokumen.')->group(function() {
@@ -85,7 +85,7 @@ Route::middleware('auth')->controller(DokumenController::class)->prefix('tipe-do
     Route::middleware('permission:tipeDokumen.store')->post('/', 'store')->name('store');
     Route::middleware('permission:tipeDokumen.show')->get('/{id}', 'show')->name('show');
     Route::middleware('permission:tipeDokumen.update')->post('/{id}', 'update')->name('update');
-    Route::middleware('permission:tipeDokumen.del')->post('/{id}/delete', 'del')->name('del');
+    Route::middleware('permission:tipeDokumen.del')->delete('/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(MasaAktifDokumenController::class)->prefix('masa-aktif-dokumen')->name('masaAktifDokumen.')->group(function() {

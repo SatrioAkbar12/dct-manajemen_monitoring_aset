@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RolePermissionRequest;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -24,6 +25,10 @@ class RolePermissionController extends Controller
         $data_role = Role::find($id_role);
         $data_permission = Permission::all();
 
+        $title = 'Hapus data';
+        $text = 'Apakah anda yakin menghapus data ini?';
+        confirmDelete($title, $text);
+
         return view('rolePermission.detail', ['data_role' => $data_role, 'data_permission' => $data_permission]);
     }
 
@@ -32,13 +37,18 @@ class RolePermissionController extends Controller
 
         $role->givePermissionTo($request->permission);
 
+        Alert::success('Tersimpan!', 'Berhasil menambakan permission baru');
+
         return redirect(route('rolePermission.detail', $id_role));
     }
 
-    public function del($id_role, RolePermissionRequest $request) {
+    public function del($id_role, $id_permission) {
         $role = Role::find($id_role);
+        $permission = Permission::find($id_permission);
 
-        $role->revokePermissionTo($request->permission);
+        $role->revokePermissionTo($permission->name);
+
+        Alert::success('Tersimpan!', 'Berhasil menghapus permission');
 
         return redirect(route('rolePermission.detail', $id_role));
     }

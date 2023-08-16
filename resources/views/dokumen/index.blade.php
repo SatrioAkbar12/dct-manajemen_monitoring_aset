@@ -18,7 +18,7 @@
 
             <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>Id</th>
                             <th>Nama Dokumen</th>
@@ -28,22 +28,43 @@
                     <tbody>
                         @foreach ($data as $d)
                             <tr>
-                                <td>{{ $d->id }}</td>
+                                <td class="text-center">{{ $d->id }}</td>
                                 <td>{{ $d->nama_dokumen }}</td>
                                 <td class="text-center">
-                                    @can('tipeDokumen.del')
-                                        <form action="{{ route('tipeDokumen.del', $d->id) }}" method="POST" id="deleteForm">
-                                            {{ csrf_field() }}
-                                    @endcan
                                     @can('tipeDokumen.update')
-                                            <a href="{{ route('tipeDokumen.show', $d->id) }}"><button type="button" class="btn btn-warning">Update</button></a>
+                                        <button type="button" class="mx-2 my-1 btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $d->id }}">Update</button>
                                     @endcan
                                     @can('tipeDokumen.del')
-                                            <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
-                                        </form>
+                                        <a href="{{ route('tipeDokumen.del', $d->id) }}" class="mx-2 my-1 btn btn-danger" data-confirm-delete="true">Delete</button>
                                     @endcan
                                 </td>
                             </tr>
+
+                            @can('tipeDokumen.update')
+                                <div class="modal fade" id="modalUpdate{{ $d->id }}" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Update data</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <form action="{{ route('tipeDokumen.update', $d->id) }}" method="POST">
+                                                {{ csrf_field() }}
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Nama dokumen</label>
+                                                        <input type="text" class="form-control" name="nama" value="{{ $d->nama_dokumen }}">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary">Simmpan</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endcan
                         @endforeach
                     </tbody>
                 </table>
@@ -84,83 +105,4 @@
             </div>
         </div>
     @endcan
-
-    {{-- <div class="modal fade" id="modalUpdate" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Update data</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <form>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Nama</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-
-    {{-- <div class="modal fade" id="modalDelete" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Hapus data</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Apakah ingin menghapus data?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-                    <a href="/tipe-dokumen/{{ $data->id }}/delete/">
-                        <button type="button" class="btn btn-primary">Ya</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-@stop
-
-
-@section('css')
-@stop
-
-@section('js')
-    <script>
-        $(document).ready(function() {
-            @foreach ($data as $d)
-                $('#btnDeleteConfirm{{ $d->id }}').click(function() {
-                    var form = $(this).closest("form")
-
-                    Swal.fire({
-                        title: 'Apakah anda yakin?',
-                        text: "Anda akan menghapus data",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Ya',
-                        cancelButtonText: 'Tidak',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire(
-                                'Terhapus!',
-                                'Data telah terhapus',
-                                'success'
-                            )
-                            form.submit()
-                        }
-                    })
-                })
-            @endforeach
-        })
-    </script>
 @stop

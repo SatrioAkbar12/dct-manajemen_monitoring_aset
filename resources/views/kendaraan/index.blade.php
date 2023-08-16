@@ -39,18 +39,13 @@
                                 <td>{{ $d->merk }}</td>
                                 <td>{{ $d->tipe }}</td>
                                 <td>{{ $d->warna }}</td>
-                                <td>{{ $d->km_saat_ini }}</td>
+                                <td class="text-center">{{ number_format($d->km_saat_ini, 0 , ".", ".") }}</td>
                                 <td class="text-center">
-                                    @can('kendaraan.del')
-                                        <form action="{{ route('kendaraan.del', $d->id) }}" method="POST">
-                                            {{ csrf_field() }}
-                                    @endcan
                                     @can('kendaraan.update')
-                                            <a href="{{ route('kendaraan.show', $d->id) }}"><button type="button" class="btn btn-warning">Update</button></a>
+                                        <a href="{{ route('kendaraan.show', $d->id) }}"><button type="button" class="mx-2 my-1 btn btn-info">Update</button></a>
                                     @endcan
                                     @can('kendaraan.del')
-                                            <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
-                                        </form>
+                                        <a href="{{ route('kendaraan.del', $d->id) }}" class="mx-2 my-1 btn btn-danger" data-confirm-delete="true">Delete</button>
                                     @endcan
                                 </td>
                             </tr>
@@ -153,39 +148,4 @@
             </div>
         </div>
     @endcan
-@stop
-
-@section('css')
-@stop
-
-@section('js')
-    <script>
-        $(document).ready(function() {
-            @foreach ($data as $d)
-                $('#btnDeleteConfirm{{ $d->id }}').click(function() {
-                    var form = $(this).closest("form")
-
-                    Swal.fire({
-                        title: 'Apakah anda yakin?',
-                        text: "Anda akan menghapus data",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Ya',
-                        cancelButtonText: 'Tidak',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire(
-                                'Terhapus!',
-                                'Data telah terhapus',
-                                'success'
-                            )
-                            form.submit()
-                        }
-                    })
-                })
-            @endforeach
-        })
-    </script>
 @stop

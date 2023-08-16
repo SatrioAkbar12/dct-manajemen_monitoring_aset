@@ -9,6 +9,7 @@ use App\Models\Kendaraan;
 use App\Models\ServisRutinKendaraan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KendaraanController extends Controller
 {
@@ -20,6 +21,10 @@ class KendaraanController extends Controller
     public function index() {
         $data = Kendaraan::orderBy('updated_at', 'desc')->paginate(10);
         $data_jenis_kendaraan = JenisKendaraan::all();
+
+        $title = 'Hapus data';
+        $text = 'Apakah anda yakin menghapus data ini?';
+        confirmDelete($title, $text);
 
         return view('kendaraan.index', ['data' => $data, 'data_jenis_kendaraan' => $data_jenis_kendaraan]);
     }
@@ -67,6 +72,8 @@ class KendaraanController extends Controller
             'detail_servis' => 'Awal input servis rutin kendaraan',
         ]);
 
+        Alert::success('Tersimpan!', 'Berhasil menambahkan kendaraan baru');
+
         return redirect(route('kendaraan.index'));
     }
 
@@ -87,11 +94,15 @@ class KendaraanController extends Controller
             'km_saat_ini' => $request->km_saat_ini,
         ]);
 
+        Alert::success('Tersimpan!', 'Berhasil mengubah data kendaraan');
+
         return redirect(route('kendaraan.index'));
     }
 
     public function del($id) {
         Kendaraan::where('id', $id)->delete();
+
+        Alert::success('Tersimpan!', 'Berhasil menghapus kendaraan');
 
         return redirect(route('kendaraan.index'));
     }

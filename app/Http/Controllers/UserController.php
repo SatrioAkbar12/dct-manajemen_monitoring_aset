@@ -6,6 +6,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -16,8 +17,12 @@ class UserController extends Controller
     }
 
     public function index() {
-        $data = User::paginate(10);
+        $data = User::orderBy('updated_at', 'desc')->paginate(10);
         $data_role = Role::all();
+
+        $title = 'Hapus data';
+        $text = 'Apakah anda yakin menghapus data ini?';
+        confirmDelete($title, $text);
 
         return view('user.index', ['data' => $data, 'data_role' => $data_role]);
     }
@@ -32,6 +37,8 @@ class UserController extends Controller
         ]);
 
         $user->assignRole($request->role);
+
+        Alert::success('Tersimpan!', 'Berhasil menambahkan data user');
 
         return redirect(route('user.index'));
     }
@@ -50,6 +57,8 @@ class UserController extends Controller
             'memiliki_sim' => $request->memiliki_sim
         ]);
 
+        Alert::success('Tersimpan!', 'Berhasil mengubah data user');
+
         return redirect(route('user.index'));
     }
 
@@ -60,11 +69,15 @@ class UserController extends Controller
         }
         $user->assignRole($request->role);
 
+        Alert::success('Tersimpan!', 'Berhasil mengubah role user');
+
         return redirect(route('user.index'));
     }
 
     public function del($id) {
         User::where('id', $id)->delete();
+
+        Alert::success('Tersimpan!', 'Berhasil menghapus user');
 
         return redirect(route('user.index'));
     }

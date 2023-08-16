@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TipeDokumenRequest;
 use Illuminate\Http\Request;
 use App\Models\TipeDokumenKendaraan;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DokumenController extends Controller
 {
@@ -14,7 +15,11 @@ class DokumenController extends Controller
     }
 
     public function index() {
-        $data = TipeDokumenKendaraan::paginate(10);
+        $data = TipeDokumenKendaraan::orderBy('updated_at', 'desc')->paginate(10);
+
+        $title = 'Hapus data';
+        $text = 'Apakah anda yakin menghapus data ini?';
+        confirmDelete($title, $text);
 
         return view('dokumen.index', ['data' => $data]);
     }
@@ -23,6 +28,8 @@ class DokumenController extends Controller
         TipeDokumenKendaraan::create([
             'nama_dokumen' => $request->nama
         ]);
+
+        Alert::success('Tersimpan!', 'Berhasil menambahkan tipe dokumen baru');
 
         return redirect(route('tipeDokumen.index'));
     }
@@ -38,11 +45,15 @@ class DokumenController extends Controller
             'nama_dokumen' => $request->nama
         ]);
 
+        Alert::success('Tersimpan!', 'Berhasil mengubah data tipe dokumen');
+
         return redirect(route('tipeDokumen.index'));
     }
 
     public function del($id) {
         TipeDokumenKendaraan::where('id', $id)->delete();
+
+        Alert::success('Tersimpan!', 'Berhasil menghapus tipe dokumen');
 
         return redirect(route('tipeDokumen.index'));
     }

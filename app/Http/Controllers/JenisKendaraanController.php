@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\JenisKendaraanRequest;
 use App\Models\JenisKendaraan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class JenisKendaraanController extends Controller
 {
@@ -16,6 +17,10 @@ class JenisKendaraanController extends Controller
     public function index() {
         $data = JenisKendaraan::paginate(10);
 
+        $title = 'Hapus data';
+        $text = 'Apakah anda yakin menghapus data ini?';
+        confirmDelete($title, $text);
+
         return view('jenisKendaraan.index', ['data' => $data]);
     }
 
@@ -23,6 +28,8 @@ class JenisKendaraanController extends Controller
         JenisKendaraan::create([
             'nama' => $request->nama
         ]);
+
+        Alert::success('Tersimpan!', 'Berhasil menambahkan jenis kendaraan baru');
 
         return redirect(route('jenisKendaraan.index'));
     }
@@ -32,11 +39,15 @@ class JenisKendaraanController extends Controller
             'nama' => $request->nama
         ]);
 
+        Alert::success('Tersimpan!', 'Berhasil mengubah data jenis kendaraan');
+
         return redirect(route('jenisKendaraan.index'));
     }
 
     public function del($id) {
         JenisKendaraan::where('id', $id)->delete();
+
+        Alert::success('Tersimpan!', 'Berhasil menghapus jenis kendaraan');
 
         return redirect(route('jenisKendaraan.index'));
     }

@@ -17,7 +17,7 @@
             @endcan
             <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>Id</th>
                             <th>Username</th>
@@ -30,10 +30,10 @@
                     <tbody>
                         @foreach ($data as $d)
                             <tr>
-                                <td>{{ $d->id }}</td>
+                                <td class="text-center">{{ $d->id }}</td>
                                 <td>{{ $d->username }}</td>
                                 <td>{{ $d->nama }}</td>
-                                <td>
+                                <td class="text-center">
                                     @foreach ($d->getRoleNames() as $role_name)
                                         @if( !($loop->first) )
                                             <br>
@@ -52,13 +52,13 @@
                                             {{ csrf_field() }}
                                     @endcan
                                     @can('user.updateRole')
-                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalUpdateRole{{ $d->id }}">Update role</button>
+                                            <button type="button" class="my-1 mx-2 btn btn-success" data-toggle="modal" data-target="#modalUpdateRole{{ $d->id }}">Update role</button>
                                     @endcan
                                     @can('user.update')
-                                            <a href="{{ route('user.show', $d->id) }}"><button type="button" class="btn btn-warning">Update data</button></a>
+                                            <a href="{{ route('user.show', $d->id) }}"><button type="button" class="my-1 mx-2 btn btn-info">Update data</button></a>
                                     @endcan
                                     @can('user.del')
-                                            <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $d->id }}">Delete</button>
+                                            <a href="{{ route('user.del', $d->id) }}" class="my-1 mx-2 btn btn-danger" data-confirm-delete="true">Hapus</a>
                                         </form>
                                     @endcan
                                 </td>
@@ -184,39 +184,4 @@
             </div>
         </div>
     @endcan
-@stop
-
-@section('css')
-@stop
-
-@section('js')
-<script>
-    $(document).ready(function() {
-        @foreach ($data as $d)
-            $('#btnDeleteConfirm{{ $d->id }}').click(function() {
-                var form = $(this).closest("form")
-
-                Swal.fire({
-                    title: 'Apakah anda yakin?',
-                    text: "Anda akan menghapus data",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya',
-                    cancelButtonText: 'Tidak',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                            'Terhapus!',
-                            'Data telah terhapus',
-                            'success'
-                        )
-                        form.submit()
-                    }
-                })
-            })
-        @endforeach
-    })
-</script>
 @stop

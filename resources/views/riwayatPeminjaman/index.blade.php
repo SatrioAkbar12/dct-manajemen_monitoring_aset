@@ -13,7 +13,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>Tanggal Waktu Pinjam</th>
                             <th>Tanggal Waktu Kembali</th>

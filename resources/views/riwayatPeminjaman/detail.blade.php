@@ -51,6 +51,22 @@
             </div>
             <div class="row">
                 <div class="col-4 col-md-2">
+                    <p>KM terakhir</p>
+                </div>
+                <div class="col-8 col-md-10">
+                    <p>: {{ $data_riwayat_peminjaman->kondisiKendaraan->km_terakhir }} KM</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-md-2">
+                    <p>Jumlah KM</p>
+                </div>
+                <div class="col-8 col-md-10">
+                    <p>: {{ $data_riwayat_peminjaman->kondisiKendaraan->jumlah_km }} KM</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-md-2">
                     <p>Status kondisi</p>
                 </div>
                 <div class="col-8 col-md-10">
