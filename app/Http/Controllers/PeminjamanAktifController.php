@@ -20,7 +20,7 @@ class PeminjamanAktifController extends Controller
     }
 
     public function index() {
-        $peminjaman_aktif = TransaksiPeminjaman::where('aktif', 1);
+        $peminjaman_aktif = TransaksiPeminjaman::where('aktif', 1)->orderBy('target_tanggal_waktu_kembali', 'asc');
         $user = User::all();
         $kendaraan = Kendaraan::all();
         $auth_user = Auth::user();
@@ -54,6 +54,8 @@ class PeminjamanAktifController extends Controller
             'aktif' => 1,
             'tanggal_waktu_pinjam' => $request->tanggal_waktu_pinjam,
         ]);
+
+        Alert::success('Tersimpan!', 'Berhasil melakukan peminjaman kendaraan');
 
         return redirect(route('peminjamanAktif.index'));
     }
@@ -93,6 +95,8 @@ class PeminjamanAktifController extends Controller
         $kendaraan->update([
             'km_saat_ini' => $request->km_terakhir,
         ]);
+
+        Alert::success('Tersimpan!', 'Berhasil menyelesaikan peminjaman kendaraan');
 
         return redirect(route('peminjamanAktif.index'));
     }
