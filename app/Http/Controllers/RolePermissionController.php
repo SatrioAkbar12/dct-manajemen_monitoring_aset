@@ -35,7 +35,9 @@ class RolePermissionController extends Controller
     public function store($id_role, RolePermissionRequest $request) {
         $role = Role::find($id_role);;
 
-        $role->givePermissionTo($request->permission);
+        foreach($request->permission as $permission) {
+            $role->givePermissionTo($permission);
+        }
 
         Alert::success('Tersimpan!', 'Berhasil menambakan permission baru');
 

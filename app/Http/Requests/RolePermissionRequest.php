@@ -24,7 +24,8 @@ class RolePermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'permission' => 'required|string|exists:Spatie\Permission\Models\Permission,name',
+            'permission' => 'required|array',
+            'permission.*' => 'exists:Spatie\Permission\Models\Permission,name'
         ];
     }
 }

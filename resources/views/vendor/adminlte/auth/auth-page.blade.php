@@ -41,7 +41,7 @@
                 @endif
 
                 {{-- Logo Label --}}
-                {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
+                {!! config('adminlte.auth_logo.title', '<b>Admin</b>LTE') !!}
 
             </a>
         </div>

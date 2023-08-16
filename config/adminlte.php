@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Manajemen Aset',
+    'title' => 'Assets Control Monitoring System',
     'title_prefix' => '',
     'title_postfix' => '| DCT Total Solution',
 
@@ -64,9 +64,10 @@ return [
     */
 
     // 'logo' => '<b>Admin</b>LTE',
-    'logo' => 'Manajemen<b>Aset</b>',
+    'logo' => 'Assets Control<br><b>Monitoring System</b>',
     'logo_img' => 'assets/img/LOGO_MASTER-GRADASI.png',
-    'logo_img_class' => 'brand-image elevation-3',
+    // 'logo_img_class' => 'brand-image elevation-3',
+    'logo_img_class' => 'img-fluid mx-auto my-auto d-block',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Logo DCT',
@@ -93,6 +94,7 @@ return [
             'width' => 50,
             'height' => 50,
         ],
+        'title' => 'Assets Control<br><b>Monitoring System</b>',
     ],
 
     /*
@@ -254,7 +256,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -398,24 +400,24 @@ return [
                     'active' => ['tipe-dokumen', 'regex:@^tipe-dokumen/[0-9]+$@'],
                     'can' => ['tipeDokumen.index', 'tipeDokumen.store', 'tipeDokumen.show', 'tipeDokumen.update', 'tipeDokumen.del'],
                 ],
-                [
-                    'text' => 'Gudang',
-                    'route' => 'gudang.index',
-                    'active' => ['gudang'],
-                    'can' => ['gudang.index', 'gudang.store', 'gudang.update', 'gudang.del'],
-                ],
-                [
-                    'text' => 'Tools Group',
-                    'route' => 'toolsGroup.index',
-                    'active' => ['tools-group'],
-                    'can' => ['toolsGroup.index', 'toolsGroup.store', 'toolsGroup.update', 'toolsGroup.del'],
-                ],
-                [
-                    'text' => 'Tools',
-                    'route' => 'tools.index',
-                    'active' => ['tools', 'regex:@^tools/[0-9]+$@', 'regex:@^tools/[0-9]+/edit$@'],
-                    'can' => ['tools.index', 'tools.store', 'tools.detail', 'tools.edit', 'tools.update', 'tools.del'],
-                ],
+                // [
+                //     'text' => 'Gudang',
+                //     'route' => 'gudang.index',
+                //     'active' => ['gudang'],
+                //     'can' => ['gudang.index', 'gudang.store', 'gudang.update', 'gudang.del'],
+                // ],
+                // [
+                //     'text' => 'Tools Group',
+                //     'route' => 'toolsGroup.index',
+                //     'active' => ['tools-group'],
+                //     'can' => ['toolsGroup.index', 'toolsGroup.store', 'toolsGroup.update', 'toolsGroup.del'],
+                // ],
+                // [
+                //     'text' => 'Tools',
+                //     'route' => 'tools.index',
+                //     'active' => ['tools', 'regex:@^tools/[0-9]+$@', 'regex:@^tools/[0-9]+/edit$@'],
+                //     'can' => ['tools.index', 'tools.store', 'tools.detail', 'tools.edit', 'tools.update', 'tools.del'],
+                // ],
             ],
         ],
         [
