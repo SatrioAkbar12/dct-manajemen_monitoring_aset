@@ -88,8 +88,8 @@
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Permission</label>
-                            <select class="form-control @error('permission') is-invalid @enderror" name="permission" required>
+                            <label for="inputPermission">Permission</label>
+                            <select class="form-control @error('permission') is-invalid @enderror" id="inputPermission" name="permission[]" multiple="multiple" required>
                                 @foreach ($data_permission as $permission)
                                     @if(!($data_role->hasPermissionTo($permission->name)))
                                         <option value="{{ $permission->name }}">{{ $permission->name }}</option>
@@ -109,4 +109,12 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('#inputPermission').select2();
+        });
+    </script>
 @stop
