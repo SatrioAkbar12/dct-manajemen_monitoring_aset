@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Manajemen Aset',
+    'title' => 'Assets Control Monitoring System',
     'title_prefix' => '',
     'title_postfix' => '| DCT Total Solution',
 
@@ -64,9 +64,10 @@ return [
     */
 
     // 'logo' => '<b>Admin</b>LTE',
-    'logo' => 'Manajemen<b>Aset</b>',
+    'logo' => 'Assets Control<br><b>Monitoring System</b>',
     'logo_img' => 'assets/img/LOGO_MASTER-GRADASI.png',
-    'logo_img_class' => 'brand-image elevation-3',
+    // 'logo_img_class' => 'brand-image elevation-3',
+    'logo_img_class' => 'img-fluid mx-auto my-auto d-block',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Logo DCT',
@@ -93,6 +94,7 @@ return [
             'width' => 50,
             'height' => 50,
         ],
+        'title' => 'Assets Control<br><b>Monitoring System</b>',
     ],
 
     /*
