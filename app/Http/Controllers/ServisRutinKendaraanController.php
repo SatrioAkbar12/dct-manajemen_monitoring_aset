@@ -17,7 +17,7 @@ class ServisRutinKendaraanController extends Controller
     }
 
     public function index() {
-        $kendaraan = Kendaraan::paginate(10);
+        $kendaraan = Kendaraan::orderBy('perlu_servis', 'desc')->paginate(10);
 
         return view('servisRutin.index', ['data_kendaraan' => $kendaraan]);
     }
@@ -48,6 +48,10 @@ class ServisRutinKendaraanController extends Controller
             'km_target' => $km_target,
             'tanggal_target' => $tanggal_target,
             'detail_servis' => $request->detail_servis,
+        ]);
+
+        Kendaraan::where('id', $id_kendaraan)->update([
+            'perlu_servis' => 0,
         ]);
 
         Alert::success('Tersimpan!', 'Berhasil menambahkan data servis rutin baru');
