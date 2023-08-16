@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PeminjamanAktifRequest;
 use App\Models\Kendaraan;
 use App\Models\KondisiKendaraanTransaksasiPeminjaman;
+use App\Models\ServisRutinKendaraan;
 use App\Models\TransaksiPeminjaman;
 use App\Models\User;
 use Carbon\Carbon;
@@ -74,6 +75,7 @@ class PeminjamanAktifController extends Controller
 
         $transaksi = TransaksiPeminjaman::find($id);
         $kendaraan = Kendaraan::find($transaksi->id_kendaraan);
+        $servis = ServisRutinKendaraan::where('id_kendaraan', $kendaraan->id)->first();
 
         KondisiKendaraanTransaksasiPeminjaman::create([
             'id_transaksi' => $id,
@@ -92,9 +94,17 @@ class PeminjamanAktifController extends Controller
             'tanggal_waktu_kembali' => Carbon::now('Asia/Jakarta'),
         ]);
 
-        $kendaraan->update([
-            'km_saat_ini' => $request->km_terakhir,
-        ]);
+        if($servis->km_target <= $request->km_terakhir) {
+            $kendaraan->update([
+                'km_saat_ini' => $request->km_terakhir,
+                'perlu_servis' => 1
+            ]);
+        }
+        else {
+            $kendaraan->update([
+                'km_saat_ini' => $request->km_terakhir,
+            ]);
+        }
 
         Alert::success('Tersimpan!', 'Berhasil menyelesaikan peminjaman kendaraan');
 

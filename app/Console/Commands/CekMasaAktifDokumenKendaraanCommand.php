@@ -14,7 +14,7 @@ class CekMasaAktifDokumenKendaraanCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'dokumen:cek-masa-aktif';
+    protected $signature = 'kendaraan:cek-masa-aktif-dokumen';
 
     /**
      * The console command description.

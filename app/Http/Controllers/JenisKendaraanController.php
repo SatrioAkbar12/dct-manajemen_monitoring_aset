@@ -15,7 +15,7 @@ class JenisKendaraanController extends Controller
     }
 
     public function index() {
-        $data = JenisKendaraan::paginate(10);
+        $data = JenisKendaraan::orderBy('updated_at', 'desc')->paginate(10);
 
         $title = 'Hapus data';
         $text = 'Apakah anda yakin menghapus data ini?';

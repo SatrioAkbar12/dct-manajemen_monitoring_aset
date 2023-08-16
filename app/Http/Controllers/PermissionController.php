@@ -15,7 +15,7 @@ class PermissionController extends Controller
     }
 
     public function index() {
-        $data = Permission::paginate(20);
+        $data = Permission::orderby('updated_at', 'desc')->paginate(20);
         $jumlah_permission = Permission::count();
 
         return view('permission.index', ['data' => $data, 'jumlah_permission' => $jumlah_permission]);
