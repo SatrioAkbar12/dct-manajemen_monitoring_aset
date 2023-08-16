@@ -3,6 +3,7 @@
 use App\Http\Controllers\AsetController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\GudangController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\MasaAktifDokumenController;
@@ -29,13 +30,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->controller(UserController::class)->prefix('user')->name('user.')->group(function() {
     Route::middleware('permission:user.index')->get('/', 'index')->name('index');
