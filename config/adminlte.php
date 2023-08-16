@@ -400,24 +400,24 @@ return [
                     'active' => ['tipe-dokumen', 'regex:@^tipe-dokumen/[0-9]+$@'],
                     'can' => ['tipeDokumen.index', 'tipeDokumen.store', 'tipeDokumen.show', 'tipeDokumen.update', 'tipeDokumen.del'],
                 ],
-                [
-                    'text' => 'Gudang',
-                    'route' => 'gudang.index',
-                    'active' => ['gudang'],
-                    'can' => ['gudang.index', 'gudang.store', 'gudang.update', 'gudang.del'],
-                ],
-                [
-                    'text' => 'Tools Group',
-                    'route' => 'toolsGroup.index',
-                    'active' => ['tools-group'],
-                    'can' => ['toolsGroup.index', 'toolsGroup.store', 'toolsGroup.update', 'toolsGroup.del'],
-                ],
-                [
-                    'text' => 'Tools',
-                    'route' => 'tools.index',
-                    'active' => ['tools', 'regex:@^tools/[0-9]+$@', 'regex:@^tools/[0-9]+/edit$@'],
-                    'can' => ['tools.index', 'tools.store', 'tools.detail', 'tools.edit', 'tools.update', 'tools.del'],
-                ],
+                // [
+                //     'text' => 'Gudang',
+                //     'route' => 'gudang.index',
+                //     'active' => ['gudang'],
+                //     'can' => ['gudang.index', 'gudang.store', 'gudang.update', 'gudang.del'],
+                // ],
+                // [
+                //     'text' => 'Tools Group',
+                //     'route' => 'toolsGroup.index',
+                //     'active' => ['tools-group'],
+                //     'can' => ['toolsGroup.index', 'toolsGroup.store', 'toolsGroup.update', 'toolsGroup.del'],
+                // ],
+                // [
+                //     'text' => 'Tools',
+                //     'route' => 'tools.index',
+                //     'active' => ['tools', 'regex:@^tools/[0-9]+$@', 'regex:@^tools/[0-9]+/edit$@'],
+                //     'can' => ['tools.index', 'tools.store', 'tools.detail', 'tools.edit', 'tools.update', 'tools.del'],
+                // ],
             ],
         ],
         [

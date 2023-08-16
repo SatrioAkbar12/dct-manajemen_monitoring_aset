@@ -120,32 +120,32 @@ Route::middleware('auth')->controller(AsetController::class)->prefix('aset')->na
     Route::middleware('permission:aset.detail')->get('/{id}', 'detail')->name('detail');
 });
 
-Route::middleware('auth')->controller(GudangController::class)->prefix('gudang')->name('gudang.')->group(function() {
-    Route::middleware('permission:gudang.index')->get('/', 'index')->name('index');
-    Route::middleware('permission:gudang.store')->post('/', 'store')->name('store');
-    Route::middleware('permission:gudang.update')->post('/{id}', 'update')->name('update');
-    Route::middleware('permission:gudang.del')->delete('/{id}/delete', 'del')->name('del');
-});
+// Route::middleware('auth')->controller(GudangController::class)->prefix('gudang')->name('gudang.')->group(function() {
+//     Route::middleware('permission:gudang.index')->get('/', 'index')->name('index');
+//     Route::middleware('permission:gudang.store')->post('/', 'store')->name('store');
+//     Route::middleware('permission:gudang.update')->post('/{id}', 'update')->name('update');
+//     Route::middleware('permission:gudang.del')->delete('/{id}/delete', 'del')->name('del');
+// });
 
-Route::middleware('auth')->controller(ToolsGroupController::class)->prefix('tools-group')->name('toolsGroup.')->group(function() {
-    Route::middleware('permission:toolsGroup.index')->get('/', 'index')->name('index');
-    Route::middleware('permission:toolsGroup.store')->post('/', 'store')->name('store');
-    Route::middleware('permission:toolsGroup.update')->post('/{id}', 'update')->name('update');
-    Route::middleware('permission:toolsGroup.del')->delete('/{id}/delete', 'del')->name('del');
-});
+// Route::middleware('auth')->controller(ToolsGroupController::class)->prefix('tools-group')->name('toolsGroup.')->group(function() {
+//     Route::middleware('permission:toolsGroup.index')->get('/', 'index')->name('index');
+//     Route::middleware('permission:toolsGroup.store')->post('/', 'store')->name('store');
+//     Route::middleware('permission:toolsGroup.update')->post('/{id}', 'update')->name('update');
+//     Route::middleware('permission:toolsGroup.del')->delete('/{id}/delete', 'del')->name('del');
+// });
 
-Route::middleware('auth')->controller(ToolController::class)->prefix('tools')->name('tools.')->group(function() {
-    Route::middleware('permission:tools.index')->get('/', 'index')->name('index');
-    Route::middleware('permission:tools.store')->post('/', 'store')->name('store');
-    Route::middleware('permission:tools.detail')->get('/{id}', 'detail')->name('detail');
-    Route::middleware('permission:tools.edit')->get('/{id}/edit', 'edit')->name('edit');
-    Route::middleware('permission:tools.update')->post('/{id}/update', 'update')->name('update');
-    Route::middleware('permission:tools.del')->delete('/{id}/delete', 'del')->name('del');
-});
+// Route::middleware('auth')->controller(ToolController::class)->prefix('tools')->name('tools.')->group(function() {
+//     Route::middleware('permission:tools.index')->get('/', 'index')->name('index');
+//     Route::middleware('permission:tools.store')->post('/', 'store')->name('store');
+//     Route::middleware('permission:tools.detail')->get('/{id}', 'detail')->name('detail');
+//     Route::middleware('permission:tools.edit')->get('/{id}/edit', 'edit')->name('edit');
+//     Route::middleware('permission:tools.update')->post('/{id}/update', 'update')->name('update');
+//     Route::middleware('permission:tools.del')->delete('/{id}/delete', 'del')->name('del');
+// });
 
-Route::middleware('auth')->controller(PeminjamanAktifToolController::class)->prefix('peminjaman-aktif-tools')->name('peminjamanAktifTools.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::post('/', 'store')->name('store');
-    Route::get('/{id}', 'returning')->name('returning');
-    Route::post('/{id}', 'update')->name('update');
-});
+// Route::middleware('auth')->controller(PeminjamanAktifToolController::class)->prefix('peminjaman-aktif-tools')->name('peminjamanAktifTools.')->group(function() {
+//     Route::get('/', 'index')->name('index');
+//     Route::post('/', 'store')->name('store');
+//     Route::get('/{id}', 'returning')->name('returning');
+//     Route::post('/{id}', 'update')->name('update');
+// });
