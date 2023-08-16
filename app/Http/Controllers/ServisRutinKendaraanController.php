@@ -7,6 +7,7 @@ use App\Models\Kendaraan;
 use App\Models\ServisRutinKendaraan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ServisRutinKendaraanController extends Controller
 {
@@ -48,6 +49,8 @@ class ServisRutinKendaraanController extends Controller
             'tanggal_target' => $tanggal_target,
             'detail_servis' => $request->detail_servis,
         ]);
+
+        Alert::success('Tersimpan!', 'Berhasil menambahkan data servis rutin baru');
 
         return redirect(route('servisRutin.getKendaraan', $id_kendaraan));
     }
