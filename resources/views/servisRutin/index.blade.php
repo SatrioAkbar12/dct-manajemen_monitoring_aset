@@ -16,6 +16,7 @@
                     <thead class="text-center">
                         <tr>
                             <th>Id</th>
+                            <th>Kode Aset</th>
                             <th>Nomor Polisi</th>
                             <th>Kendaraan</th>
                             <th>Deskripsi</th>
@@ -26,12 +27,13 @@
                         @foreach ($data_kendaraan as $kendaraan)
                             <tr>
                                 <td>{{ $kendaraan->id }}</td>
+                                <td>{{ $kendaraan->aset->kode_aset }}</td>
                                 <td>{{ $kendaraan->nopol }}</td>
                                 <td>{{ $kendaraan->jenisKendaraan->nama . " " . $kendaraan->merk . " " . $kendaraan->tipe . " " . $kendaraan->warna }}</td>
                                 <td class="text-center">
                                     @foreach ($kendaraan->servisRutin as $servis_rutin)
                                         @if($loop->first)
-                                            @if ( ($kendaraan->km_saat_ini >= $servis_rutin->km_target) || (\Carbon\Carbon::now()->greaterThan(\Carbon\Carbon::createFromFormat('Y-m-d', $servis_rutin->tanggal_target, 'Asia/Jakarta'))) )
+                                            @if($kendaraan->perlu_servis)
                                                 <div class="text-danger">Kendaraan perlu dilakukan servis rutin</div>
                                             @else
                                                 &minus;
