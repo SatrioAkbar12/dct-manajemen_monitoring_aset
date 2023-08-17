@@ -7,6 +7,7 @@ use App\Models\Kendaraan;
 use App\Models\MasaAktifDokumenKendaraan;
 use App\Models\TipeDokumenKendaraan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MasaAktifDokumenController extends Controller
 {
@@ -25,6 +26,10 @@ class MasaAktifDokumenController extends Controller
         $kendaraan = Kendaraan::find($id_kendaraan);
         $tipe_dokumen = TipeDokumenKendaraan::all();
 
+        $title = 'Hapus data';
+        $text = 'Apakah anda yakin menghapus data ini?';
+        confirmDelete($title, $text);
+
         return view('masaAktif.show', ['data_kendaraan' => $kendaraan, 'data_tipe_dokumen' => $tipe_dokumen]);
     }
 
@@ -34,6 +39,8 @@ class MasaAktifDokumenController extends Controller
             'id_tipe_dokumen' => $request->tipe_dokumen,
             'tanggal_masa_berlaku' => $request->masa_aktif
         ]);
+
+        Alert::success('Tersimpan!', 'Berhasil menambahkan dokumen kendaraan baru');
 
         return redirect(route('masaAktifDokumen.getKendaraan', $id_kendaraan));
     }
@@ -47,11 +54,15 @@ class MasaAktifDokumenController extends Controller
             'tanggal_perbarui_dokumen' => null,
         ]);
 
+        Alert::success('Tersimpan!', 'Berhasil memperbaru masa aktif dokumen');
+
         return redirect(route('masaAktifDokumen.getKendaraan', $id_kendaraan));
     }
 
     public function del($id_kendaraan, $id) {
         MasaAktifDokumenKendaraan::where('id', $id)->delete();
+
+        Alert::success('Tersimpan!', 'Berhasil menghapus dokumen kendaraan');
 
         return redirect(route('masaAktifDokumen.getKendaraan', $id_kendaraan));
     }
