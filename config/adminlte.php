@@ -323,7 +323,7 @@ return [
         // ],
         // ['header' => 'Master data'],
         [
-            'text'    => 'Transaksi Peminjaman',
+            'text'    => 'Transaksi Peminjaman Kendaraan',
             'icon'    => 'fas fa-fw fa-list',
             'can'     => [
                 'peminjamanAktif.index', 'peminjamanAktif.store', 'peminjamanAktif.returning', 'peminjamanAktif.update',
@@ -347,7 +347,7 @@ return [
             ]
         ],
         [
-            'text' => 'Servis Rutin',
+            'text' => 'Servis Rutin Kendaraan',
             'route' => 'servisRutin.index',
             'icon' => 'fas fa-fw fa-wrench',
             'active' => ['servis-rutin', 'regex:@^servis-rutin/[0-9]+$@'],
