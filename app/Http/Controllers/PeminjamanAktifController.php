@@ -6,7 +6,7 @@ use App\Http\Requests\PeminjamanAktifRequest;
 use App\Models\Kendaraan;
 use App\Models\KondisiKendaraanTransaksasiPeminjaman;
 use App\Models\ServisRutinKendaraan;
-use App\Models\TransaksiPeminjaman;
+use App\Models\TransaksiPeminjamanKendaraan;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class PeminjamanAktifController extends Controller
     }
 
     public function index() {
-        $peminjaman_aktif = TransaksiPeminjaman::where('aktif', 1)->orderBy('target_tanggal_waktu_kembali', 'asc');
+        $peminjaman_aktif = TransaksiPeminjamanKendaraan::where('aktif', 1)->orderBy('target_tanggal_waktu_kembali', 'asc');
         $user = User::all();
         $kendaraan = Kendaraan::all();
         $auth_user = Auth::user();
@@ -36,7 +36,7 @@ class PeminjamanAktifController extends Controller
     }
 
     public function store(PeminjamanAktifRequest $request) {
-        $peminjaman_aktif = TransaksiPeminjaman::where('id_kendaraan', $request->kendaraan)->where(function($query) use ($request) {
+        $peminjaman_aktif = TransaksiPeminjamanKendaraan::where('id_kendaraan', $request->kendaraan)->where(function($query) use ($request) {
             $query->where('aktif', 1)->Where(function($query) use ($request) {
                 $query->where('tanggal_waktu_pinjam', '<=', $request->tanggal_waktu_pinjam)->Where('target_tanggal_waktu_kembali', '>=', $request->tanggal_waktu_pinjam);
             });
@@ -48,7 +48,7 @@ class PeminjamanAktifController extends Controller
             return redirect()->back();
         }
 
-        TransaksiPeminjaman::create([
+        TransaksiPeminjamanKendaraan::create([
             'id_user' => $request->user,
             'id_kendaraan' => $request->kendaraan,
             'target_tanggal_waktu_kembali' => $request->target_tanggal_waktu_kembali,
@@ -62,7 +62,7 @@ class PeminjamanAktifController extends Controller
     }
 
     public function returning($id) {
-        $peminjaman_aktif = TransaksiPeminjaman::find($id);
+        $peminjaman_aktif = TransaksiPeminjamanKendaraan::find($id);
 
         return view('peminjamanAktif.returning', ['data_peminjaman_aktif' => $peminjaman_aktif]);
     }
@@ -73,7 +73,7 @@ class PeminjamanAktifController extends Controller
         $path_kanan = $request->file('foto_kanan')->storeAs('foto-kondisi', time() . "_foto_kanan" . $request->file('foto_kanan')->getClientOriginalExtension(), 'public');
         $path_kiri = $request->file('foto_kiri')->storeAs('foto-kondisi', time() . "_foto_kiri" . $request->file('foto_kiri')->getClientOriginalExtension(), 'public');
 
-        $transaksi = TransaksiPeminjaman::find($id);
+        $transaksi = TransaksiPeminjamanKendaraan::find($id);
         $kendaraan = Kendaraan::find($transaksi->id_kendaraan);
         $servis = ServisRutinKendaraan::where('id_kendaraan', $kendaraan->id)->first();
 
