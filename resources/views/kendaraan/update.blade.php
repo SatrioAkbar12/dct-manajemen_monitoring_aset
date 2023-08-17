@@ -19,8 +19,8 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="jenisKendaraan">Jenis Kendaraan</label>
-                    <select class="form-control @error('jenis_kendaraan') is-invalid @enderror" name="jenis_kendaraan" required>
+                    <label for="jenisKendaraanInput">Jenis Kendaraan</label>
+                    <select class="form-control @error('jenis_kendaraan') is-invalid @enderror" id="jenisKendaraanInput" name="jenis_kendaraan" required>
                         @foreach ($data_jenis_kendaraan as $jenis_kendaraan)
                             <option value="{{ $jenis_kendaraan->id }}" {{ $data->id_jenis_kendaraan == $jenis_kendaraan->id ? 'selected' : '' }}>{{ $jenis_kendaraan->nama }}</option>
                         @endforeach
@@ -66,5 +66,10 @@
     </div>
 @stop
 
-@section('css')
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('#jenisKendaraanInput').select2();
+        })
+    </script>
 @stop

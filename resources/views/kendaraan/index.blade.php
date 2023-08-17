@@ -84,7 +84,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Jenis kendaraan</label>
-                                <select class="form-control @error('jenis_kendaraan') is-invalid @enderror" name="jenis_kendaraan" required>
+                                <select class="form-control @error('jenis_kendaraan') is-invalid @enderror" id="jenisKendaraanInput" name="jenis_kendaraan" required>
                                     @foreach ($data_jenis_kendaraan as $jenis_kendaraan)
                                         <option value="{{ $jenis_kendaraan->id }}">{{ $jenis_kendaraan->nama }}</option>
                                     @endforeach
@@ -148,4 +148,12 @@
             </div>
         </div>
     @endcan
+@stop
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('#jenisKendaraanInput').select2();
+        })
+    </script>
 @stop
