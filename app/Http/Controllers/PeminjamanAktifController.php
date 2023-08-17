@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PeminjamanAktifRequest;
+use App\Http\Requests\PeminjamanAktifKendaraanRequest;
 use App\Models\Kendaraan;
 use App\Models\KondisiKendaraanTransaksasiPeminjaman;
 use App\Models\ServisRutinKendaraan;
@@ -35,7 +35,7 @@ class PeminjamanAktifController extends Controller
         return view('peminjamanAktifKendaraan.index', ['data_peminjaman_aktif' => $peminjaman_aktif, 'data_user' => $user, 'data_kendaraan' => $kendaraan]);
     }
 
-    public function store(PeminjamanAktifRequest $request) {
+    public function store(PeminjamanAktifKendaraanRequest $request) {
         $peminjaman_aktif = TransaksiPeminjamanKendaraan::where('id_kendaraan', $request->kendaraan)->where(function($query) use ($request) {
             $query->where('aktif', 1)->Where(function($query) use ($request) {
                 $query->where('tanggal_waktu_pinjam', '<=', $request->tanggal_waktu_pinjam)->Where('target_tanggal_waktu_kembali', '>=', $request->tanggal_waktu_pinjam);
@@ -67,7 +67,7 @@ class PeminjamanAktifController extends Controller
         return view('peminjamanAktifKendaraan.returning', ['data_peminjaman_aktif' => $peminjaman_aktif]);
     }
 
-    public function update($id, PeminjamanAktifRequest $request) {
+    public function update($id, PeminjamanAktifKendaraanRequest $request) {
         $path_depan = $request->file('foto_depan')->storeAs('foto-kondisi', time() . "_foto-depan." . $request->file('foto_depan')->getClientOriginalExtension(), 'public');
         $path_belakang = $request->file('foto_belakang')->storeAs('foto-kondisi', time() . "_foto-belakang." . $request->file('foto_belakang')->getClientOriginalExtension(), 'public');
         $path_kanan = $request->file('foto_kanan')->storeAs('foto-kondisi', time() . "_foto_kanan" . $request->file('foto_kanan')->getClientOriginalExtension(), 'public');
