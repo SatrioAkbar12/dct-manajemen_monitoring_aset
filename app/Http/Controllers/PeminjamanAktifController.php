@@ -32,7 +32,7 @@ class PeminjamanAktifController extends Controller
 
         $peminjaman_aktif = $peminjaman_aktif->paginate(10);
 
-        return view('peminjamanAktif.index', ['data_peminjaman_aktif' => $peminjaman_aktif, 'data_user' => $user, 'data_kendaraan' => $kendaraan]);
+        return view('peminjamanAktifKendaraan.index', ['data_peminjaman_aktif' => $peminjaman_aktif, 'data_user' => $user, 'data_kendaraan' => $kendaraan]);
     }
 
     public function store(PeminjamanAktifRequest $request) {
@@ -58,13 +58,13 @@ class PeminjamanAktifController extends Controller
 
         Alert::success('Tersimpan!', 'Berhasil melakukan peminjaman kendaraan');
 
-        return redirect(route('peminjamanAktif.index'));
+        return redirect(route('peminjamanAktifKendaraan.index'));
     }
 
     public function returning($id) {
         $peminjaman_aktif = TransaksiPeminjamanKendaraan::find($id);
 
-        return view('peminjamanAktif.returning', ['data_peminjaman_aktif' => $peminjaman_aktif]);
+        return view('peminjamanAktifKendaraan.returning', ['data_peminjaman_aktif' => $peminjaman_aktif]);
     }
 
     public function update($id, PeminjamanAktifRequest $request) {
@@ -108,6 +108,6 @@ class PeminjamanAktifController extends Controller
 
         Alert::success('Tersimpan!', 'Berhasil menyelesaikan peminjaman kendaraan');
 
-        return redirect(route('peminjamanAktif.index'));
+        return redirect(route('peminjamanAktifKendaraan.index'));
     }
 }
