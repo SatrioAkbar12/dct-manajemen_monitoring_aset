@@ -110,16 +110,16 @@ Route::middleware('auth')->controller(ServisRutinKendaraanController::class)->pr
     Route::middleware('permission:servisRutin.store')->post('/{id_kendaraan}', 'store')->name('store');
 });
 
-Route::middleware('auth')->controller(PeminjamanAktifController::class)->prefix('peminjaman-aktif-kendaraan')->name('peminjamanAktif.')->group(function() {
-    Route::middleware('permission:peminjamanAktif.index')->get('/', 'index')->name('index');
-    Route::middleware('permission:peminjamanAktif.store')->post('/', 'store')->name('store');
-    Route::middleware('permission:peminjamanAktif.returning')->get('/{id}', 'returning')->name('returning');
-    Route::middleware('permission:peminjamanAktif.update')->post('/{id}', 'update')->name('update');
+Route::middleware('auth')->controller(PeminjamanAktifController::class)->prefix('peminjaman-aktif-kendaraan')->name('peminjamanAktifKendaraan.')->group(function() {
+    Route::middleware('permission:peminjamanAktifKendaraan.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:peminjamanAktifKendaraan.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:peminjamanAktifKendaraan.returning')->get('/{id}', 'returning')->name('returning');
+    Route::middleware('permission:peminjamanAktifKendaraan.update')->post('/{id}', 'update')->name('update');
 });
 
-Route::middleware('auth')->controller(RiwayatPeminjamanController::class)->prefix('riwayat-peminjaman-kendaraan')->name('riwayatPeminjaman.')->group(function() {
-    Route::middleware('permission:riwayatPeminjaman.index')->get('/', 'index')->name('index');
-    Route::middleware('permission:riwayatPeminjaman.detail')->get('/{id}', 'detail')->name('detail');
+Route::middleware('auth')->controller(RiwayatPeminjamanController::class)->prefix('riwayat-peminjaman-kendaraan')->name('riwayatPeminjamanKendaraan.')->group(function() {
+    Route::middleware('permission:riwayatPeminjamanKendaraan.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:riwayatPeminjamanKendaraan.detail')->get('/{id}', 'detail')->name('detail');
 });
 
 Route::middleware('auth')->controller(AsetController::class)->prefix('aset')->name('aset.')->group(function() {
