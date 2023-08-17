@@ -32,7 +32,7 @@
                                 <td>{{ $d->nama_dokumen }}</td>
                                 <td class="text-center">
                                     @can('tipeDokumen.update')
-                                        <button type="button" class="mx-2 my-1 btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $d->id }}">Update</button>
+                                        <button type="button" class="mx-2 my-1 btn btn-info" data-toggle="modal" data-target="#modalUpdate{{ $d->id }}">Update</button>
                                     @endcan
                                     @can('tipeDokumen.del')
                                         <a href="{{ route('tipeDokumen.del', $d->id) }}" class="mx-2 my-1 btn btn-danger" data-confirm-delete="true">Delete</button>
