@@ -16,11 +16,20 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
-        $role = Role::where('name', 'Admin')->first();
+        $role_admin = Role::where('name', 'admin')->first();
+        $role_user = Role::where('name', 'user')->first();
         $permission = Permission::all();
 
         foreach($permission as $permission) {
-            $role->givePermissionTo($permission->name);
+            $role_admin->givePermissionTo($permission->name);
         }
+
+        $role_user->givePermissionTo('peminjamanAktifKendaraan.index');
+        $role_user->givePermissionTo('peminjamanAktifKendaraan.store');
+        $role_user->givePermissionTo('peminjamanAktifKendaraan.returning');
+        $role_user->givePermissionTo('peminjamanAktifKendaraan.update');
+
+        $role_user->givePermissionTo('riwayatPeminjamanKendaraan.index');
+        $role_user->givePermissionTo('riwayatPeminjamanKendaraan.detail');
     }
 }
