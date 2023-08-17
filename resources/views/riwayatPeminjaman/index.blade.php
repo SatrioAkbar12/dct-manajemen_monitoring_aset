@@ -32,8 +32,8 @@
                                 <td>{{ $riwayat_peminjaman->user->nama }}</td>
                                 <td>{{ $riwayat_peminjaman->kondisiKendaraan->jumlah_km }} KM</td>
                                 <td class="text-center">
-                                    @can('riwayatPeminjaman.detail')
-                                        <a href="{{ route('riwayatPeminjaman.detail', $riwayat_peminjaman->id) }}"><button type="button" class="btn btn-info">Detail</button></a>
+                                    @can('riwayatPeminjamanKendaraan.detail')
+                                        <a href="{{ route('riwayatPeminjamanKendaraan.detail', $riwayat_peminjaman->id) }}"><button type="button" class="btn btn-info">Detail</button></a>
                                     @endcan
                                 </td>
                             </tr>
