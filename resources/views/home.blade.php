@@ -25,12 +25,6 @@
 
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
-
-{{-- @section('content_header')
-    <h1>Dashboard</h1>
-@stop --}}
-
 @section('content')
     <div class="row mb-5">
         <div class="col-3 col-md-5"></div>

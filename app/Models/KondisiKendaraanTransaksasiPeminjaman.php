@@ -25,7 +25,7 @@ class KondisiKendaraanTransaksasiPeminjaman extends Model
         'jumlah_km',
     ];
 
-    public function transaksiPeminjaman(): BelongsTo {
-        return $this->belongsTo(TransaksiPeminjaman::class, 'id_transaksi', 'id');
+    public function transaksiPeminjamanKendaraan(): BelongsTo {
+        return $this->belongsTo(TransaksiPeminjamanKendaraan::class, 'id_transaksi', 'id');
     }
 }

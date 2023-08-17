@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-class PeminjamanAktifRequest extends FormRequest
+class PeminjamanAktifKendaraanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class PeminjamanAktifRequest extends FormRequest
      */
     public function rules()
     {
-        if(Route::currentRouteName() == 'peminjamanAktif.store') {
+        if(Route::currentRouteName() == 'peminjamanAktifKendaraan.store') {
             return [
                 'user' => 'required|exists:App\Models\User,id',
                 'kendaraan' => 'required|exists:App\Models\Kendaraan,id',
@@ -33,7 +33,7 @@ class PeminjamanAktifRequest extends FormRequest
                 'tanggal_waktu_pinjam' => 'required|date',
             ];
         }
-        elseif(Route::currentRouteName() == 'peminjamanAktif.update') {
+        elseif(Route::currentRouteName() == 'peminjamanAktifKendaraan.update') {
             return [
                 'status_kondisi' => 'required|in:Aman,Ada kerusakan',
                 'deskripsi' => 'required|string',

@@ -326,23 +326,23 @@ return [
             'text'    => 'Transaksi Peminjaman Kendaraan',
             'icon'    => 'fas fa-fw fa-list',
             'can'     => [
-                'peminjamanAktif.index', 'peminjamanAktif.store', 'peminjamanAktif.returning', 'peminjamanAktif.update',
-                'riwayatPeminjaman.index', 'riwayatPeminjaman.detail'
+                'peminjamanAktifKendaraan.index', 'peminjamanAktifKendaraan.store', 'peminjamanAktifKendaraan.returning', 'peminjamanAktifKendaraan.update',
+                'riwayatPeminjamanKendaraan.index', 'riwayatPeminjamanKendaraan.detail'
             ],
             'submenu' => [
                 [
                     'text' => 'Peminjaman Aktif',
-                    'route' => 'peminjamanAktif.index',
+                    'route' => 'peminjamanAktifKendaraan.index',
                     'icon' => 'fas fa-fw fa-route',
                     'active' => ['peminjaman-aktif', 'regex:@^peminjaman-aktif/[0-9]+$@'],
-                    'can' => ['peminjamanAktif.index', 'peminjamanAktif.store', 'peminjamanAktif.returning', 'peminjamanAktif.update'],
+                    'can' => ['peminjamanAktifKendaraan.index', 'peminjamanAktifKendaraan.store', 'peminjamanAktifKendaraan.returning', 'peminjamanAktifKendaraan.update'],
                 ],
                 [
                     'text' => 'Riwayat Peminjaman',
-                    'route' => 'riwayatPeminjaman.index',
+                    'route' => 'riwayatPeminjamanKendaraan.index',
                     'icon' => 'fas fa-fw fa-file-contract',
                     'active' => ['riwayat-peminjaman', 'regex:@^riwayat-peminjaman/[0-9]+$@'],
-                    'can' => ['riwayatPeminjaman.index', 'riwayatPeminjaman.detail'],
+                    'can' => ['riwayatPeminjamanKendaraan.index', 'riwayatPeminjamanKendaraan.detail'],
                 ],
             ]
         ],

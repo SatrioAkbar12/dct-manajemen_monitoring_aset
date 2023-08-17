@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TransaksiPeminjaman extends Model
+class TransaksiPeminjamanKendaraan extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'transaksi_peminjaman';
+    protected $table = 'transaksi_peminjaman_kendaraan';
 
     protected $fillable = [
         'id_kendaraan',

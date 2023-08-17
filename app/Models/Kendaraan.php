@@ -42,7 +42,7 @@ class Kendaraan extends Model
         return $this->hasMany(ServisRutinKendaraan::class, 'id_kendaraan', 'id')->orderBy('tanggal_servis', 'desc');
     }
 
-    public function transaksiPeminjaman(): HasMany {
-        return $this->hasMany(TransaksiPeminjaman::class, 'id_kendaraan', 'id');
+    public function transaksiPeminjamanKendaraan(): HasMany {
+        return $this->hasMany(TransaksiPeminjamanKendaraan::class, 'id_kendaraan', 'id');
     }
 }

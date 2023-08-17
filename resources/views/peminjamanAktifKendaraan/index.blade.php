@@ -13,7 +13,7 @@
 
     <div class="card">
         <div class="card-body">
-            @can('peminjamanAktif.store')
+            @can('peminjamanAktifKendaraan.store')
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah peminjaman</button>
                 <hr>
             @endcan
@@ -51,8 +51,8 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    @can('peminjamanAktif.returning')
-                                        <a href="{{ route('peminjamanAktif.returning', $peminjaman_aktif->id) }}"><button type="button" class="btn btn-success">Selesaikan</button></a>
+                                    @can('peminjamanAktifKendaraan.returning')
+                                        <a href="{{ route('peminjamanAktifKendaraan.returning', $peminjaman_aktif->id) }}"><button type="button" class="btn btn-success">Selesaikan</button></a>
                                     @endcan
                                 </td>
                             </tr>
@@ -68,7 +68,7 @@
         </div>
     </div>
 
-    @can('peminjamanAktif.store')
+    @can('peminjamanAktifKendaraan.store')
         <div class="modal fade" id="modalCreate" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -76,7 +76,7 @@
                         <h4 class="modal-title">Tambah peminjaman baru</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <form action="{{ route('peminjamanAktif.store') }}" method="POST">
+                    <form action="{{ route('peminjamanAktifKendaraan.store') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
