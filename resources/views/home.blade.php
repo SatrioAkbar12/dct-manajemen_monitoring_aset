@@ -27,12 +27,20 @@
 
 @section('title', 'Dashboard')
 
-@section('content_header')
+{{-- @section('content_header')
     <h1>Dashboard</h1>
-@stop
+@stop --}}
 
 @section('content')
-    <p>Welcome to Assets Control Monitoring System</p>
+    <div class="row mb-5">
+        <div class="col-3 col-md-5"></div>
+        <div class="col-6 col-md-2 pt-5">
+            <img src="{{ asset('assets/img/LOGO_MASTER-GRADASI.png') }}" class="img-fluid mt-5">
+        </div>
+        <div class="col-3 col-md-5"></div>
+    </div>
+    <h1 class="text-center display-5">Welcome to</h1>
+    <h1 class="text-center display-2">Assets Control Montoring System</h1>
 @stop
 
 @section('css')
