@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="card">
-        <form action="{{ route('peminjamanAktif.update', $data_peminjaman_aktif->id )}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('peminjamanAktifKendaraan.update', $data_peminjaman_aktif->id )}}" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="card-body">
                 <div class="form-group">
@@ -71,10 +71,10 @@
                 </div>
             </div>
             <div class="card-footer">
-                @can('peminjamanAktif.update')
+                @can('peminjamanAktifKendaraan.update')
                     <button type="submit" class="btn btn-success">Simpan</button>
                 @endcan
-                <a href="{{ route('peminjamanAktif.index') }}"><button type="button" class="btn btn-secondary">Kembali</button></a>
+                <a href="{{ route('peminjamanAktifKendaraan.index') }}"><button type="button" class="btn btn-secondary">Kembali</button></a>
             </div>
         </form>
     </div>
