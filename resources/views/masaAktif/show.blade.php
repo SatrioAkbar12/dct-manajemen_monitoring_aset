@@ -70,7 +70,7 @@
 
             <div class="table-responsive">
                 <table class="table">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>#</th>
                             <th>Dokumen</th>
@@ -80,21 +80,16 @@
                     </thead>
                     <tbody>
                         @foreach ($data_kendaraan->masaAktifDokumen as $dokumen)
-                            <tr>
+                            <tr class="text-center">
                                 <td>{{ $dokumen->tipeDokumen->id }}</td>
                                 <td>{{ $dokumen->tipeDokumen->nama_dokumen }}</td>
                                 <td>{{ $dokumen->tanggal_masa_berlaku }}</td>
                                 <td>
-                                    @can('masaAktifDokumen.del')
-                                        <form action="{{ route('masaAktifDokumen.del', ['id_kendaraan' => $dokumen->id_kendaraan, 'id' => $dokumen->id]) }}" method="POST">
-                                            {{ csrf_field() }}
-                                    @endcan
                                     @can('masaAktifDokumen.update')
-                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $dokumen->id_tipe_dokumen }}">Update</button>
+                                        <button type="button" class="mx-2 my-1 btn btn-info" data-toggle="modal" data-target="#modalUpdate{{ $dokumen->id_tipe_dokumen }}">Update</button>
                                     @endcan
                                     @can('masaAktifDokumen.del')
-                                        <button type="button" class="btn btn-danger" id="btnDeleteConfirm{{ $dokumen->id }}">Hapus</button>
-                                    </form>
+                                        <a href="{{ route('masaAktifDokumen.del', [ 'id_kendaraan' => $data_kendaraan->id,'id' => $dokumen->id]) }}" class="mx-2 my-1 btn btn-danger" data-confirm-delete="true">Hapus</button>
                                     @endcan
                                 </td>
                             </tr>
@@ -159,7 +154,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Dokumen</label>
-                                <select class="form-control @error('tipe_dokumen') is-invalid @enderror" name="tipe_dokumen" required>
+                                <select class="form-control @error('tipe_dokumen') is-invalid @enderror" id="dokumenInput" name="tipe_dokumen" required>
                                     @foreach ($data_tipe_dokumen as $dokumen)
                                         <option value="{{ $dokumen->id }}" {{ $dokumen->id == old('tipe_dokumen') ? 'selected' : '' }}>{{ $dokumen->nama_dokumen }}</option>
                                     @endforeach
@@ -187,37 +182,10 @@
     @endcan
 @stop
 
-@section('css')
-@stop
-
 @section('js')
     <script>
         $(document).ready(function() {
-            @foreach ($data_kendaraan->masaAktifDokumen as $d)
-                $('#btnDeleteConfirm{{ $d->id }}').click(function() {
-                    var form = $(this).closest("form")
-
-                    Swal.fire({
-                        title: 'Apakah anda yakin?',
-                        text: "Anda akan menghapus data",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Ya',
-                        cancelButtonText: 'Tidak',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire(
-                                'Terhapus!',
-                                'Data telah terhapus',
-                                'success'
-                            )
-                            form.submit()
-                        }
-                    })
-                })
-            @endforeach
+            $('#dokumenInput').select2();
         })
     </script>
 @stop

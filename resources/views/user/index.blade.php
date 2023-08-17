@@ -77,7 +77,7 @@
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label>Nama role</label>
-                                                        <select class="form-control @error('role') is-invalid @enderror" name="role">
+                                                        <select class="form-control @error('role') is-invalid @enderror" id="roleInputUpdate" name="role">
                                                             @foreach ($data_role as $role)
                                                                 <option value="{{ $role->name }}" {{ $d->hasRole( $role->name ) ? "selected" : "" }}>{{ $role->name }}</option>
                                                             @endforeach
@@ -155,7 +155,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Role</label>
-                                <select class="form-control @error('role') is-invalid @enderror" name="role" required>
+                                <select class="form-control @error('role') is-invalid @enderror" id="roleInputCreate" name="role" required>
                                     @foreach ($data_role as $role)
                                         <option value="{{ $role->name }}">{{ $role->name }}</option>
                                     @endforeach
@@ -184,4 +184,13 @@
             </div>
         </div>
     @endcan
+@stop
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('#roleInputUpdate').select2();
+            $('#roleInputCreate').select2();
+        })
+    </script>
 @stop

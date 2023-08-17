@@ -101,7 +101,7 @@ Route::middleware('auth')->controller(MasaAktifDokumenController::class)->prefix
     Route::middleware('permission:masaAktifDokumen.getKendaraan')->get('/{id_kendaraan}', 'getKendaraan')->name('getKendaraan');
     Route::middleware('permission:masaAktifDokumen.store')->post('/{id_kendaraan}', 'store')->name('store');
     Route::middleware('permission:masaAktifDokumen.update')->post('/{id_kendaraan}/{id}', 'update')->name('update');
-    Route::middleware('permission:masaAktifDokumen.del')->post('/{id_kendaraan}/{id}/delete', 'del')->name('del');
+    Route::middleware('permission:masaAktifDokumen.del')->delete('/{id_kendaraan}/{id}/delete', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(ServisRutinKendaraanController::class)->prefix('servis-rutin')->name('servisRutin.')->group(function() {
