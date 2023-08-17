@@ -10,6 +10,7 @@ use App\Http\Controllers\MasaAktifDokumenController;
 use App\Http\Controllers\PeminjamanAktifController;
 use App\Http\Controllers\PeminjamanAktifToolController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RiwayatPeminjamanController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
@@ -37,6 +38,12 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::middleware('auth')->get('/', [HomeController::class, 'index'])->name('home');
+
+Route::middleware('auth')->controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::post('/update', 'update')->name('update');
+    Route::post('/update-password', 'updatePassword')->name('updatePassword');
+});
 
 Route::middleware('auth')->controller(UserController::class)->prefix('user')->name('user.')->group(function() {
     Route::middleware('permission:user.index')->get('/', 'index')->name('index');
