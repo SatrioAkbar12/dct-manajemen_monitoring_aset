@@ -10,7 +10,7 @@ class RiwayatPeminjamanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:riwayatPeminjaman.index|riwayatPeminjaman.detail');
+        $this->middleware('permission:riwayatPeminjamanKendaraan.index|riwayatPeminjamanKendaraan.detail');
     }
 
     public function index() {

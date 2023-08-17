@@ -17,7 +17,7 @@ class PeminjamanAktifController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:peminjamanAktif.index|peminjamanAktif.store|peminjamanAktif.returning|peminjamanAktif.update');
+        $this->middleware('permission:peminjamanAktifKendaraan.index|peminjamanAktifKendaraan.store|peminjamanAktifKendaraan.returning|peminjamanAktifKendaraan.update');
     }
 
     public function index() {
