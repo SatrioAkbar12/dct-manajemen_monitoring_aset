@@ -27,10 +27,10 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             UserSeeder::class,
             JenisKendaraanSeeder::class,
-            KendaraanSeeder::class,
-            TipeDokumenSeeder::class,
-            MasaAktifDokumenSeeder::class,
-            ServisRutinSeeder::class,
+            // KendaraanSeeder::class,
+            // TipeDokumenSeeder::class,
+            // MasaAktifDokumenSeeder::class,
+            // ServisRutinSeeder::class,
         ]);
     }
 }

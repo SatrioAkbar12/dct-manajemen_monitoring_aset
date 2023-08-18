@@ -28,16 +28,16 @@ class UserSeeder extends Seeder
         ]);
         $user->assignRole($role->name);
 
-        $faker = Faker::create();;
+        // $faker = Faker::create();;
 
-        for($i = 0; $i < 10; $i++) {
-            User::create([
-                'username' => $faker->userName(),
-                'nama' => $faker->name(),
-                'email' => $faker->email(),
-                'password' => Hash::make($faker->password()),
-                'memiliki_sim' => $faker->boolean()
-            ]);
-        }
+        // for($i = 0; $i < 10; $i++) {
+        //     User::create([
+        //         'username' => $faker->userName(),
+        //         'nama' => $faker->name(),
+        //         'email' => $faker->email(),
+        //         'password' => Hash::make($faker->password()),
+        //         'memiliki_sim' => $faker->boolean()
+        //     ]);
+        // }
     }
 }
