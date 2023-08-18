@@ -47,8 +47,10 @@ class PeminjamanAktifToolController extends Controller
         return redirect(route('peminjamanAktifTools.index'));
     }
 
-    public function returning() {
+    public function returning($id) {
+        $peminjaman_aktif = TransaksiPeminjamanTool::find($id);
 
+        return view('peminjamanAktifTool.returning', ['data_peminjaman_aktif' => $peminjaman_aktif]);
     }
 
     public function del() {
