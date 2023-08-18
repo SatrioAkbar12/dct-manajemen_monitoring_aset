@@ -376,6 +376,7 @@ return [
                 [
                     'text' => 'Aset',
                     'route' => 'aset.index',
+                    'icon' => 'fas fa-fw fa-tag',
                     'active' => ['aset', 'regex:@^aset/[0-9]+$@'],
                     'can' => ['aset.index', 'aset.detail'],
                 ],
