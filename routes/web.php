@@ -12,6 +12,7 @@ use App\Http\Controllers\PeminjamanAktifToolController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RiwayatPeminjamanController;
+use App\Http\Controllers\RiwayatPeminjamanToolController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\ServisRutinKendaraanController;
@@ -155,4 +156,9 @@ Route::middleware('auth')->controller(PeminjamanAktifToolController::class)->pre
     Route::middleware('permission:peminjamanAktifTools.store')->post('/', 'store')->name('store');
     Route::middleware('permission:peminjamanAktifTools.returning')->get('/{id}', 'returning')->name('returning');
     Route::middleware('permission:peminjamanAktifTools.update')->post('/{id}', 'update')->name('update');
+});
+
+Route::middleware('auth')->controller(RiwayatPeminjamanToolController::class)->prefix('riwayat-peminjaman-tools')->name('riwayatPeminjamanTools.')->group(function() {
+    Route::middleware('permission:riwayatPeminjamanTools.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:riwayatPeminjamanTools.detail')->get('/{id}', 'detail')->name('detail');
 });
