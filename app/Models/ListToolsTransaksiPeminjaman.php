@@ -27,7 +27,7 @@ class ListToolsTransaksiPeminjaman extends Model
         return $this->belongsTo(Aset::class, 'id_aset', 'id');
     }
 
-    public function kondisiToolsTransaskiPeminjaman(): HasOne {
+    public function kondisiToolsTransaksiPeminjaman(): HasOne {
         return $this->hasOne(KondisiToolsTransaksiPeminjaman::class, 'id_list_tools', 'id');
     }
 }

@@ -11,8 +11,10 @@
 
     <div class="card">
         <div class="card-body">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah peminjaman</button>
-            <hr>
+            @can('peminjamanAktifTools.store')
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah peminjaman</button>
+                <hr>
+            @endcan
 
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -39,9 +41,23 @@
                                         @endforeach
                                     </ul>
                                 </td>
-                                <td></td>
                                 <td class="text-center">
-                                    <a href="{{ route('peminjamanAktifTools.returning', $peminjaman_aktif->id ) }}"><button type="button" class="btn btn-success">Kembalikan</button></a>
+                                    @if (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->lessThan(\Carbon\Carbon::now('Asia/Jakarta')))
+                                        <div class="text-danger">
+                                            @if(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->diffInDays(\Carbon\Carbon::now('Asia/Jakarta'), false) == 0)
+                                                Peminjaman tools sudah melebihi target tanggal waktu pengembalian
+                                            @else
+                                                Peminjaman tools sudah melebihi {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->diffInDays(\Carbon\Carbon::now('Asia/Jakarta'), false) }} hari dari target tanggal waktu pengembalian
+                                            @endif
+                                        </div>
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @can('peminjamanAktifTools.returning')
+                                        <a href="{{ route('peminjamanAktifTools.returning', $peminjaman_aktif->id ) }}"><button type="button" class="btn btn-success">Kembalikan</button></a>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -56,61 +72,67 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalCreate" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Tambah Peminjaman Baru</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    @can('peminjamanAktifTools.store')
+        <div class="modal fade" id="modalCreate" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tambah Peminjaman Baru</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <form action={{ route('peminjamanAktifTools.store') }} method="POST">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="userInput">Peminjam </label>
+                                <select class="form-control @error('user') is-invalid @enderror" id="userInput" name="user"  @unlessrole('admin') disabled @endunlessrole required>
+                                    @hasrole('admin')
+                                        @foreach ($data_user as $user)
+                                            <option value="{{ $user->id }}">{{ $user->nama }}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="{{ auth()->user()->id }}">{{ auth()->user()->nama }}</option>
+                                    @endhasrole
+                                </select>
+                                @error('user')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="toolsInput">Tools</label>
+                                <select class="form-control @error('tools') is-invalid @enderror" id="toolsInput" name="tools[]" multiple="multiple" required>
+                                    @foreach ($data_tools as $tools)
+                                        <option value="{{ $tools->id_aset }}">{{ $tools->aset->kode_aset . " - " . $tools->nama . " " . $tools->merk . " " . $tools->model }}</option>
+                                    @endforeach
+                                </select>
+                                @error('tools')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal waktu pinjam</label>
+                                <input type="datetime-local" class="form-control @error('tanggal_waktu_pinjam') is-invalid @enderror" name="tanggal_waktu_pinjam" required>
+                                @error('tanggal_waktu_pinjam')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Target tanggal waktu kembali</label>
+                                <input type="datetime-local" class="form-control @error('target_tanggal_waktu_kembali') is-invalid @enderror" name="target_tanggal_waktu_kembali" required>
+                                @error('target_tanggal_waktu_kembali')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
                 </div>
-                <form action={{ route('peminjamanAktifTools.store') }} method="POST">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="userInput">Peminjam </label>
-                            <select class="form-control @error('user') is-invalid @enderror" id="userInput" name="user" >
-                                @foreach ($data_user as $user)
-                                    <option value="{{ $user->id }}">{{ $user->nama }}</option>
-                                @endforeach
-                            </select>
-                            @error('user')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="toolsInput">Tools</label>
-                            <select class="form-control @error('tools') is-invalid @enderror" id="toolsInput" name="tools[]" multiple="multiple" >
-                                @foreach ($data_tools as $tools)
-                                    <option value="{{ $tools->id_aset }}">{{ $tools->aset->kode_aset . " - " . $tools->nama . " " . $tools->merk . " " . $tools->model }}</option>
-                                @endforeach
-                            </select>
-                            @error('tools')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Tanggal waktu pinjam</label>
-                            <input type="datetime-local" class="form-control @error('tanggal_waktu_pinjam') is-invalid @enderror" name="tanggal_waktu_pinjam">
-                            @error('tanggal_waktu_pinjam')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Target tanggal waktu kembali</label>
-                            <input type="datetime-local" class="form-control @error('target_tanggal_waktu_kembali') is-invalid @enderror" name="target_tanggal_waktu_kembali">
-                            @error('target_tanggal_waktu_kembali')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+    @endcan
 @stop
 
 @section('js')

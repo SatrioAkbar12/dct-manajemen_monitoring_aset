@@ -324,7 +324,7 @@ return [
         // ['header' => 'Master data'],
         [
             'text'    => 'Transaksi Peminjaman Kendaraan',
-            'icon'    => 'fas fa-fw fa-list',
+            'icon'    => 'fas fa-fw fa-truck',
             'can'     => [
                 'peminjamanAktifKendaraan.index', 'peminjamanAktifKendaraan.store', 'peminjamanAktifKendaraan.returning', 'peminjamanAktifKendaraan.update',
                 'riwayatPeminjamanKendaraan.index', 'riwayatPeminjamanKendaraan.detail'
@@ -334,15 +334,39 @@ return [
                     'text' => 'Peminjaman Aktif',
                     'route' => 'peminjamanAktifKendaraan.index',
                     'icon' => 'fas fa-fw fa-route',
-                    'active' => ['peminjaman-aktif', 'regex:@^peminjaman-aktif/[0-9]+$@'],
+                    'active' => ['peminjaman-aktif-kendaraan', 'regex:@^peminjaman-aktif-kendaraan/[0-9]+$@'],
                     'can' => ['peminjamanAktifKendaraan.index', 'peminjamanAktifKendaraan.store', 'peminjamanAktifKendaraan.returning', 'peminjamanAktifKendaraan.update'],
                 ],
                 [
                     'text' => 'Riwayat Peminjaman',
                     'route' => 'riwayatPeminjamanKendaraan.index',
                     'icon' => 'fas fa-fw fa-file-contract',
-                    'active' => ['riwayat-peminjaman', 'regex:@^riwayat-peminjaman/[0-9]+$@'],
+                    'active' => ['riwayat-peminjaman-kendaraan', 'regex:@^riwayat-peminjaman-kendaraan/[0-9]+$@'],
                     'can' => ['riwayatPeminjamanKendaraan.index', 'riwayatPeminjamanKendaraan.detail'],
+                ],
+            ]
+        ],
+        [
+            'text' => 'Transaksi Peminjaman Tools',
+            'icon' => 'fas fa-fw fa-hammer',
+            'can' => [
+                'peminjamanAktifTools.index', 'peminjamanAktifTools.store', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update',
+                'riwayatPeminjamanTools.index', 'riwayatPeminjamanTools.detail',
+            ],
+            'submenu' => [
+                [
+                    'text' => 'Peminjaman Aktif',
+                    'route' => 'peminjamanAktifTools.index',
+                    'icon' => 'fas fa-fw fa-route',
+                    'active' => ['peminjaman-aktif-tools', 'regex:@^peminjaman-aktif-tools/[0-9]+$@'],
+                    'can' => ['peminjamanAktifTools.index', 'peminjamanAktifTools.store', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update'],
+                ],
+                [
+                    'text' => 'Riwayat Peminjaman',
+                    'route' => 'riwayatPeminjamanTools.index',
+                    'icon' => 'fas fa-fw fa-file-contract',
+                    'active' => ['riwayat-peminjaman-tools', 'regex:@^riwayat-peminjaman-tools/[0-9]+$@'],
+                    'can' => ['riwayatPeminjamanTools.index', 'riwayatPeminjamanTools.detail'],
                 ],
             ]
         ],
@@ -401,24 +425,27 @@ return [
                     'active' => ['tipe-dokumen', 'regex:@^tipe-dokumen/[0-9]+$@'],
                     'can' => ['tipeDokumen.index', 'tipeDokumen.store', 'tipeDokumen.show', 'tipeDokumen.update', 'tipeDokumen.del'],
                 ],
-                // [
-                //     'text' => 'Gudang',
-                //     'route' => 'gudang.index',
-                //     'active' => ['gudang'],
-                //     'can' => ['gudang.index', 'gudang.store', 'gudang.update', 'gudang.del'],
-                // ],
-                // [
-                //     'text' => 'Tools Group',
-                //     'route' => 'toolsGroup.index',
-                //     'active' => ['tools-group'],
-                //     'can' => ['toolsGroup.index', 'toolsGroup.store', 'toolsGroup.update', 'toolsGroup.del'],
-                // ],
-                // [
-                //     'text' => 'Tools',
-                //     'route' => 'tools.index',
-                //     'active' => ['tools', 'regex:@^tools/[0-9]+$@', 'regex:@^tools/[0-9]+/edit$@'],
-                //     'can' => ['tools.index', 'tools.store', 'tools.detail', 'tools.edit', 'tools.update', 'tools.del'],
-                // ],
+                [
+                    'text' => 'Gudang',
+                    'route' => 'gudang.index',
+                    'icon' => 'fas fa-fw fa-warehouse',
+                    'active' => ['gudang'],
+                    'can' => ['gudang.index', 'gudang.store', 'gudang.update', 'gudang.del'],
+                ],
+                [
+                    'text' => 'Tools Group',
+                    'route' => 'toolsGroup.index',
+                    'icon' => 'fas fa-fw fa-ruler',
+                    'active' => ['tools-group'],
+                    'can' => ['toolsGroup.index', 'toolsGroup.store', 'toolsGroup.update', 'toolsGroup.del'],
+                ],
+                [
+                    'text' => 'Tools',
+                    'route' => 'tools.index',
+                    'icon' => 'fas fa-fw fa-screwdriver',
+                    'active' => ['tools', 'regex:@^tools/[0-9]+$@', 'regex:@^tools/[0-9]+/edit$@'],
+                    'can' => ['tools.index', 'tools.store', 'tools.detail', 'tools.edit', 'tools.update', 'tools.del'],
+                ],
             ],
         ],
         [

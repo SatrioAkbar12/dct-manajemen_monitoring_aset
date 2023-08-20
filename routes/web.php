@@ -12,6 +12,7 @@ use App\Http\Controllers\PeminjamanAktifToolController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RiwayatPeminjamanController;
+use App\Http\Controllers\RiwayatPeminjamanToolController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\ServisRutinKendaraanController;
@@ -127,32 +128,37 @@ Route::middleware('auth')->controller(AsetController::class)->prefix('aset')->na
     Route::middleware('permission:aset.detail')->get('/{id}', 'detail')->name('detail');
 });
 
-// Route::middleware('auth')->controller(GudangController::class)->prefix('gudang')->name('gudang.')->group(function() {
-//     Route::middleware('permission:gudang.index')->get('/', 'index')->name('index');
-//     Route::middleware('permission:gudang.store')->post('/', 'store')->name('store');
-//     Route::middleware('permission:gudang.update')->post('/{id}', 'update')->name('update');
-//     Route::middleware('permission:gudang.del')->delete('/{id}/delete', 'del')->name('del');
-// });
+Route::middleware('auth')->controller(GudangController::class)->prefix('gudang')->name('gudang.')->group(function() {
+    Route::middleware('permission:gudang.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:gudang.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:gudang.update')->post('/{id}', 'update')->name('update');
+    Route::middleware('permission:gudang.del')->delete('/{id}/delete', 'del')->name('del');
+});
 
-// Route::middleware('auth')->controller(ToolsGroupController::class)->prefix('tools-group')->name('toolsGroup.')->group(function() {
-//     Route::middleware('permission:toolsGroup.index')->get('/', 'index')->name('index');
-//     Route::middleware('permission:toolsGroup.store')->post('/', 'store')->name('store');
-//     Route::middleware('permission:toolsGroup.update')->post('/{id}', 'update')->name('update');
-//     Route::middleware('permission:toolsGroup.del')->delete('/{id}/delete', 'del')->name('del');
-// });
+Route::middleware('auth')->controller(ToolsGroupController::class)->prefix('tools-group')->name('toolsGroup.')->group(function() {
+    Route::middleware('permission:toolsGroup.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:toolsGroup.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:toolsGroup.update')->post('/{id}', 'update')->name('update');
+    Route::middleware('permission:toolsGroup.del')->delete('/{id}/delete', 'del')->name('del');
+});
 
-// Route::middleware('auth')->controller(ToolController::class)->prefix('tools')->name('tools.')->group(function() {
-//     Route::middleware('permission:tools.index')->get('/', 'index')->name('index');
-//     Route::middleware('permission:tools.store')->post('/', 'store')->name('store');
-//     Route::middleware('permission:tools.detail')->get('/{id}', 'detail')->name('detail');
-//     Route::middleware('permission:tools.edit')->get('/{id}/edit', 'edit')->name('edit');
-//     Route::middleware('permission:tools.update')->post('/{id}/update', 'update')->name('update');
-//     Route::middleware('permission:tools.del')->delete('/{id}/delete', 'del')->name('del');
-// });
+Route::middleware('auth')->controller(ToolController::class)->prefix('tools')->name('tools.')->group(function() {
+    Route::middleware('permission:tools.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:tools.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:tools.detail')->get('/{id}', 'detail')->name('detail');
+    Route::middleware('permission:tools.edit')->get('/{id}/edit', 'edit')->name('edit');
+    Route::middleware('permission:tools.update')->post('/{id}/update', 'update')->name('update');
+    Route::middleware('permission:tools.del')->delete('/{id}/delete', 'del')->name('del');
+});
 
-// Route::middleware('auth')->controller(PeminjamanAktifToolController::class)->prefix('peminjaman-aktif-tools')->name('peminjamanAktifTools.')->group(function() {
-//     Route::get('/', 'index')->name('index');
-//     Route::post('/', 'store')->name('store');
-//     Route::get('/{id}', 'returning')->name('returning');
-//     Route::post('/{id}', 'update')->name('update');
-// });
+Route::middleware('auth')->controller(PeminjamanAktifToolController::class)->prefix('peminjaman-aktif-tools')->name('peminjamanAktifTools.')->group(function() {
+    Route::middleware('permission:peminjamanAktifTools.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:peminjamanAktifTools.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:peminjamanAktifTools.returning')->get('/{id}', 'returning')->name('returning');
+    Route::middleware('permission:peminjamanAktifTools.update')->post('/{id}', 'update')->name('update');
+});
+
+Route::middleware('auth')->controller(RiwayatPeminjamanToolController::class)->prefix('riwayat-peminjaman-tools')->name('riwayatPeminjamanTools.')->group(function() {
+    Route::middleware('permission:riwayatPeminjamanTools.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:riwayatPeminjamanTools.detail')->get('/{id}', 'detail')->name('detail');
+});
