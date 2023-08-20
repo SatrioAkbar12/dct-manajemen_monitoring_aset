@@ -85,10 +85,14 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="userInput">Peminjam </label>
-                                <select class="form-control @error('user') is-invalid @enderror" id="userInput" name="user" >
-                                    @foreach ($data_user as $user)
-                                        <option value="{{ $user->id }}">{{ $user->nama }}</option>
-                                    @endforeach
+                                <select class="form-control @error('user') is-invalid @enderror" id="userInput" name="user"  @unlessrole('admin') disabled @endunlessrole required>
+                                    @hasrole('admin')
+                                        @foreach ($data_user as $user)
+                                            <option value="{{ $user->id }}">{{ $user->nama }}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="{{ auth()->user()->id }}">{{ auth()->user()->nama }}</option>
+                                    @endhasrole
                                 </select>
                                 @error('user')
                                     <div class="text-danger">{{ $message }}</div>
@@ -96,7 +100,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="toolsInput">Tools</label>
-                                <select class="form-control @error('tools') is-invalid @enderror" id="toolsInput" name="tools[]" multiple="multiple" >
+                                <select class="form-control @error('tools') is-invalid @enderror" id="toolsInput" name="tools[]" multiple="multiple" required>
                                     @foreach ($data_tools as $tools)
                                         <option value="{{ $tools->id_aset }}">{{ $tools->aset->kode_aset . " - " . $tools->nama . " " . $tools->merk . " " . $tools->model }}</option>
                                     @endforeach
@@ -107,14 +111,14 @@
                             </div>
                             <div class="form-group">
                                 <label>Tanggal waktu pinjam</label>
-                                <input type="datetime-local" class="form-control @error('tanggal_waktu_pinjam') is-invalid @enderror" name="tanggal_waktu_pinjam">
+                                <input type="datetime-local" class="form-control @error('tanggal_waktu_pinjam') is-invalid @enderror" name="tanggal_waktu_pinjam" required>
                                 @error('tanggal_waktu_pinjam')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label>Target tanggal waktu kembali</label>
-                                <input type="datetime-local" class="form-control @error('target_tanggal_waktu_kembali') is-invalid @enderror" name="target_tanggal_waktu_kembali">
+                                <input type="datetime-local" class="form-control @error('target_tanggal_waktu_kembali') is-invalid @enderror" name="target_tanggal_waktu_kembali" required>
                                 @error('target_tanggal_waktu_kembali')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
