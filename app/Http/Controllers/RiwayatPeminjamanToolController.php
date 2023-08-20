@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TransaksiPeminjamanTool;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RiwayatPeminjamanToolController extends Controller
 {
@@ -13,7 +14,14 @@ class RiwayatPeminjamanToolController extends Controller
     }
 
     public function index() {
-        $data_riwayat_peminjaman = TransaksiPeminjamanTool::where('aktif', 0)->orderBy('tanggal_waktu_kembali', 'desc')->paginate(10);
+        $data_riwayat_peminjaman = TransaksiPeminjamanTool::where('aktif', 0)->orderBy('tanggal_waktu_kembali', 'desc');
+        $auth_user = Auth::user();
+
+        if( !($auth_user->hasRole('admin')) ) {
+            $data_riwayat_peminjaman = $data_riwayat_peminjaman->where('id_user', $auth_user->id);
+        }
+
+        $data_riwayat_peminjaman = $data_riwayat_peminjaman->paginate(10);
 
         return view('riwayatPeminjamanTool.index', ['data_riwayat_peminjaman' => $data_riwayat_peminjaman]);
     }
