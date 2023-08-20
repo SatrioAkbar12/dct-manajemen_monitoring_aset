@@ -20,10 +20,15 @@ class TransaksiPeminjamanTool extends Model
         'id_user',
         'aktif',
         'tanggal_waktu_kembali',
+        'id_gudang_kembali',
     ];
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class, 'id_user', 'id');
+    }
+
+    public function gudang(): BelongsTo {
+        return $this->belongsTo(Gudang::class, 'id_gudang_kembali', 'id');
     }
 
     public function listTools(): HasMany {
