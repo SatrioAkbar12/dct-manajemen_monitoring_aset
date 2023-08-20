@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PeminjamanAktifToolRequest;
+use App\Models\Gudang;
+use App\Models\KondisiToolsTransaksiPeminjaman;
 use App\Models\ListToolsTransaksiPeminjaman;
 use App\Models\Tool;
 use App\Models\TransaksiPeminjamanTool;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PeminjamanAktifToolController extends Controller
 {
     public function __construct()
     {
-        // return $this->middleware('permission:peminjamanAktifTools.index|peminjamanAktifTools.store|peminjamanAktifTools.returning|peminjamanAktifTools.update');
+        return $this->middleware('permission:peminjamanAktifTools.index|peminjamanAktifTools.store|peminjamanAktifTools.returning|peminjamanAktifTools.update');
     }
 
     public function index() {
@@ -49,11 +52,32 @@ class PeminjamanAktifToolController extends Controller
 
     public function returning($id) {
         $peminjaman_aktif = TransaksiPeminjamanTool::find($id);
+        $gudang = Gudang::all();
 
-        return view('peminjamanAktifTool.returning', ['data_peminjaman_aktif' => $peminjaman_aktif]);
+        return view('peminjamanAktifTool.returning', ['data_peminjaman_aktif' => $peminjaman_aktif, 'data_gudang' => $gudang]);
     }
 
-    public function del() {
+    public function update($id, PeminjamanAktifToolRequest $request) {
+        for($i = 0; $i < count($request->id_list_tools); $i++) {
+            KondisiToolsTransaksiPeminjaman::create([
+                'id_list_tools' => $request->id_list_tools[$i],
+                'status_kondisi' => $request->status_kondisi[$i],
+                'deskripsi' => $request->deskripsi[$i],
+            ]);
 
+            $list_tools = ListToolsTransaksiPeminjaman::find($request->id_list_tools[$i]);
+
+            Tool::where('id_aset', $list_tools->id_aset)->update([
+                'status_saat_ini' => 'Digudang',
+                'id_gudang' => $request->gudang,
+            ]);
+        }
+
+        TransaksiPeminjamanTool::where('id', $id)->update([
+            'aktif' => 0,
+            'tanggal_waktu_kembali' => Carbon::now('Asia/Jakarta'),
+        ]);
+
+        return redirect(route('peminjamanAktifTools.index'));
     }
 }
