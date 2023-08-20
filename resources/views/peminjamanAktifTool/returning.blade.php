@@ -56,7 +56,9 @@
             </div>
             <div class="modal-footer">
                 <a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                @can('peminjamanAktifTools.update')
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                @endcan
             </div>
         </form>
     </div>
