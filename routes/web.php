@@ -151,8 +151,8 @@ Route::middleware('auth')->controller(ToolController::class)->prefix('tools')->n
 });
 
 Route::middleware('auth')->controller(PeminjamanAktifToolController::class)->prefix('peminjaman-aktif-tools')->name('peminjamanAktifTools.')->group(function() {
-    Route::middleware('peminjamanAktifTools.index')->get('/', 'index')->name('index');
-    Route::middleware('peminjamanAktifTools.store')->post('/', 'store')->name('store');
-    Route::middleware('peminjamanAktifTools.returning')->get('/{id}', 'returning')->name('returning');
-    Route::middleware('peminjamanAktifTools.update')->post('/{id}', 'update')->name('update');
+    Route::middleware('permission:peminjamanAktifTools.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:peminjamanAktifTools.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:peminjamanAktifTools.returning')->get('/{id}', 'returning')->name('returning');
+    Route::middleware('permission:peminjamanAktifTools.update')->post('/{id}', 'update')->name('update');
 });
