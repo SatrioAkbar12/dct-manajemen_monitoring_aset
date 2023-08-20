@@ -11,6 +11,7 @@ use App\Models\TransaksiPeminjamanTool;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PeminjamanAktifToolController extends Controller
 {
@@ -76,7 +77,10 @@ class PeminjamanAktifToolController extends Controller
         TransaksiPeminjamanTool::where('id', $id)->update([
             'aktif' => 0,
             'tanggal_waktu_kembali' => Carbon::now('Asia/Jakarta'),
+            'id_gudang_kembali' => $request->gudang,
         ]);
+
+        Alert::success('Tersimpan!', 'Berhasil menyelesaikan peminjaman tools');
 
         return redirect(route('peminjamanAktifTools.index'));
     }
