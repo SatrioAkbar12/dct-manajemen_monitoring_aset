@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class PeminjamanAktifToolRequest extends FormRequest
@@ -44,5 +45,17 @@ class PeminjamanAktifToolRequest extends FormRequest
             ];
         }
 
+    }
+
+    protected function prepareForValidation()
+    {
+        if(Route::currentRouteName() == 'peminjamanAktifTools.store') {
+            $user = Auth::user();
+            if( !($user->hasRole('admin')) ) {
+                $this->merge([
+                    'user' => $user->id,
+                ]);
+            }
+        }
     }
 }
