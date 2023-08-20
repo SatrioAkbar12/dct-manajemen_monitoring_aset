@@ -41,7 +41,7 @@
                     <p>Kembali di gudang</p>
                 </div>
                 <div class="col-8 col-md-10">
-                    <p>: </p>
+                    <p>: {{ $data_riwayat_peminjaman->gudang->nama }}</p>
                 </div>
             </div>
         </div>
