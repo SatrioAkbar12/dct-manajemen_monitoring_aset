@@ -7,6 +7,7 @@ use App\Models\Kendaraan;
 use App\Models\MasaAktifDokumenKendaraan;
 use App\Models\TipeDokumenKendaraan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MasaAktifDokumenController extends Controller
@@ -53,6 +54,8 @@ class MasaAktifDokumenController extends Controller
         Kendaraan::where('id', $id_kendaraan)->update([
             'tanggal_perbarui_dokumen' => null,
         ]);
+
+        Artisan::call('kendaraan:cek-masa-aktif-dokumen');
 
         Alert::success('Tersimpan!', 'Berhasil memperbaru masa aktif dokumen');
 
