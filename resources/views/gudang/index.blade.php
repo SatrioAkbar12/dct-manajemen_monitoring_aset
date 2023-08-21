@@ -32,10 +32,10 @@
                                 <td>{{ $gudang->nama }}</td>
                                 <td class="text-center">
                                     @can('gudang.update')
-                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $gudang->id }}">Update</button>
+                                        <button type="button" class="mx-2 my-1 btn btn-info" data-toggle="modal" data-target="#modalUpdate{{ $gudang->id }}">Update</button>
                                     @endcan
                                     @can('gudang.del')
-                                        <a href="{{ route('gudang.del', $gudang->id) }}" class="btn btn-danger" data-confirm-delete="true">Hapus</a>
+                                        <a href="{{ route('gudang.del', $gudang->id) }}" class="mx-2 my-1 btn btn-danger" data-confirm-delete="true">Hapus</a>
                                     @endcan
                                 </td>
                             </tr>
