@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GudangRequest;
 use App\Models\Gudang;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class GudangController extends Controller
 {
@@ -28,6 +29,8 @@ class GudangController extends Controller
             'nama' => $request->nama,
         ]);
 
+        Alert::success('Tersimpan!', 'Berhasil menambahkan gudang baru');
+
         return redirect(route('gudang.index'));
     }
 
@@ -36,11 +39,15 @@ class GudangController extends Controller
             'nama' => $request->nama,
         ]);
 
+        Alert::success('Tersimpan!', 'Berhasil mengubah data gudang');
+
         return redirect(route('gudang.index'));
     }
 
     public function del($id) {
         Gudang::where('id', $id)->delete();
+
+        Alert::success('Tersimpan!', 'Berhasil menghapus gudang');
 
         return redirect(route('gudang.index'));
     }
