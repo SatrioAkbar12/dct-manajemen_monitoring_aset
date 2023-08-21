@@ -8,6 +8,7 @@ use App\Models\Gudang;
 use App\Models\Tool;
 use App\Models\ToolsGroup;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ToolController extends Controller
 {
@@ -64,6 +65,8 @@ class ToolController extends Controller
             'id_gudang' => $request->gudang,
         ]);
 
+        Alert::success('Tersimpan!', 'Berhasil menambahkan tool baru');
+
         return redirect(route('tools.index'));
     }
 
@@ -92,11 +95,15 @@ class ToolController extends Controller
             'id_gudang' => $request->gudang,
         ]);
 
+        Alert::success('Tersimpan!', 'Berhasil mengubah data tool');
+
         return redirect(route('tools.index'));
     }
 
     public function del($id) {
         Tool::where('id', $id)->delete();
+
+        Alert::success('Tersimpan!', 'Berhasil menghapus tool');
 
         return redirect(route('tools.index'));
     }
