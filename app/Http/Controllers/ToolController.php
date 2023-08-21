@@ -59,7 +59,7 @@ class ToolController extends Controller
             'merk' => $request->merk,
             'model' => $request->model,
             'deskripsi' => $request->deskripsi,
-            'status_saat_ini' => 'Digudang',
+            'status_saat_ini' => 'Di gudang',
             'id_tools_group' => $request->tools_group,
             'id_gudang' => $request->gudang,
         ]);

@@ -104,7 +104,7 @@ class PeminjamanAktifToolController extends Controller
             $list_tools = ListToolsTransaksiPeminjaman::find($request->id_list_tools[$i]);
 
             Tool::where('id_aset', $list_tools->id_aset)->update([
-                'status_saat_ini' => 'Digudang',
+                'status_saat_ini' => 'Di gudang',
                 'id_gudang' => $request->gudang,
             ]);
         }
