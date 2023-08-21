@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ToolsGroupRequest;
 use App\Models\ToolsGroup;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ToolsGroupController extends Controller
 {
@@ -28,6 +29,8 @@ class ToolsGroupController extends Controller
             'nama' => $request->nama,
         ]);
 
+        Alert::success('Tersimpan!', 'Berhasil menambahkan tools group baru');
+
         return redirect(route('toolsGroup.index'));
     }
 
@@ -36,11 +39,15 @@ class ToolsGroupController extends Controller
             'nama' => $request->nama,
         ]);
 
+        Alert::success('Tersimpan!', 'Berhasil mengubah tools group');
+
         return redirect(route('toolsGroup.index'));
     }
 
     public function del($id) {
         ToolsGroup::where('id', $id)->delete();
+
+        Alert::success('Tersimpan!', 'Berhasil menghapus tools group');
 
         return redirect(route('toolsGroup.index'));
     }

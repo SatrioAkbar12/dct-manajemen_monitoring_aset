@@ -40,13 +40,13 @@
                                 <td class="text-center">{{ $tool->status_saat_ini }}</td>
                                 <td class="text-center">
                                     @can('tools.detail')
-                                        <a href="{{ route('tools.detail', $tool->id) }}"><button type="button" class="btn btn-info">Detail</button></a>
+                                        <a href="{{ route('tools.detail', $tool->id) }}"><button type="button" class="mx-2 my-1 btn btn-info">Detail</button></a>
                                     @endcan
                                     @can('tools.update')
-                                        <a href="{{ route('tools.edit', $tool->id) }}"><button type="button" class="btn btn-warning">Update</button></a>
+                                        <a href="{{ route('tools.edit', $tool->id) }}"><button type="button" class="mx-2 my-1 btn btn-info">Update</button></a>
                                     @endcan
                                     @can('tools.del')
-                                        <a href="{{ route('tools.del', $tool->id) }}" class="btn btn-danger" data-confirm-delete="true">Hapus</a>
+                                        <a href="{{ route('tools.del', $tool->id) }}" class="mx-2 my-1 btn btn-danger" data-confirm-delete="true">Hapus</a>
                                     @endcan
                                 </td>
                             </tr>

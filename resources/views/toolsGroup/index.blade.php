@@ -32,10 +32,10 @@
                                 <td>{{ $grup->nama }}</td>
                                 <td class="text-center">
                                     @can('toolsGroup.update')
-                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate{{ $grup->id }}">Update</button>
+                                        <button type="button" class="mx-2 my-1 btn btn-info" data-toggle="modal" data-target="#modalUpdate{{ $grup->id }}">Update</button>
                                     @endcan
                                     @can('toolsGroup.del')
-                                        <a href="{{ route('toolsGroup.del', $grup->id) }}" class="btn btn-danger" data-confirm-delete="true">Hapus</a>
+                                        <a href="{{ route('toolsGroup.del', $grup->id) }}" class="mx-2 my-1 btn btn-danger" data-confirm-delete="true">Hapus</a>
                                     @endcan
                                 </td>
                             </tr>
