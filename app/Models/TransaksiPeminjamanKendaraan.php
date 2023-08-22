@@ -21,6 +21,8 @@ class TransaksiPeminjamanKendaraan extends Model
         'aktif',
         'tanggal_waktu_pinjam',
         'tanggal_waktu_kembali',
+        'keperluan',
+        'lokasi_tujuan',
     ];
 
     public function kendaraan(): BelongsTo {

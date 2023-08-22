@@ -23,6 +23,8 @@ class KondisiKendaraanTransaksasiPeminjaman extends Model
         'foto_kiri',
         'km_terakhir',
         'jumlah_km',
+        'foto_speedometer_sebelum',
+        'foto_speedometer_sesudah',
     ];
 
     public function transaksiPeminjamanKendaraan(): BelongsTo {
