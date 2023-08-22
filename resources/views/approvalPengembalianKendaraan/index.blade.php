@@ -32,7 +32,9 @@
                                 <td>{{ $peminjaman->user->nama }}</td>
                                 <td>{{ $peminjaman->keperluan}}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('approvalPengembalianKendaraan.review', $peminjaman->id) }}" class="btn btn-info">Review</a>
+                                    @can('approvalPengembalianKendaraan.review')
+                                        <a href="{{ route('approvalPengembalianKendaraan.review', $peminjaman->id) }}" class="btn btn-info">Review</a>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

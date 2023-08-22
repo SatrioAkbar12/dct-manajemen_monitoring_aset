@@ -173,44 +173,48 @@
         </div>
         <div class="card-footer">
             <a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalApproval">Approval</button>
+            @can('approvalPengembalianKendaraan.approval')
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalApproval">Approval</button>
+            @endcan
         </div>
     </div>
 
-    <div class="modal fade" id="modalApproval" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Approval Data Pengembalian Kendaraan</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    @can('approvalPengembalianKendaraan.approval')
+        <div class="modal fade" id="modalApproval" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Approval Data Pengembalian Kendaraan</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <form action="{{ route('approvalPengembalianKendaraan.approval', $data_peminjaman->id) }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Approved?</label>
+                                <select class="form-control @error('approved') is-invalid @enderror" name="approved" required>
+                                    <option value="1">Ya</option>
+                                    <option value="0">Tidak</option>
+                                </select>
+                                @error('approved')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Keterangan</label>
+                                <textarea class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"></textarea>
+                                @error('keterangan')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
                 </div>
-                <form action="{{ route('approvalPengembalianKendaraan.approval', $data_peminjaman->id) }}" method="POST">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Approved?</label>
-                            <select class="form-control @error('approved') is-invalid @enderror" name="approved" required>
-                                <option value="1">Ya</option>
-                                <option value="0">Tidak</option>
-                            </select>
-                            @error('approved')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Keterangan</label>
-                            <textarea class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"></textarea>
-                            @error('keterangan')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+    @endcan
 @stop
