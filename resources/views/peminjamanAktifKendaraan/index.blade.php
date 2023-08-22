@@ -76,7 +76,7 @@
                         <h4 class="modal-title">Tambah peminjaman baru</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <form action="{{ route('peminjamanAktifKendaraan.store') }}" method="POST">
+                    <form action="{{ route('peminjamanAktifKendaraan.store') }}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
