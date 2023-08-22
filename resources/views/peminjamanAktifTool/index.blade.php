@@ -24,7 +24,7 @@
                             <th>Target Tanggal Waktu Kembali</th>
                             <th>Peminjam</th>
                             <th>Tools</th>
-                            <th>Deskripsi</th>
+                            <th>Keterangan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>

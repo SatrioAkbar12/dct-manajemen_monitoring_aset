@@ -28,7 +28,7 @@
                             <th>Target Tanggal Waktu Kembali</th>
                             <th>Keperluan</th>
                             <th>Lokasi Tujuan</th>
-                            <th>Deskripsi</th>
+                            <th>Keterangan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
