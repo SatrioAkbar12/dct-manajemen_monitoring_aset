@@ -41,15 +41,17 @@
                                 <td>{{ $peminjaman_aktif->target_tanggal_waktu_kembali }}</td>
                                 <td>{{ $peminjaman_aktif->keperluan }}</td>
                                 <td>{{ $peminjaman_aktif->lokasi_tujuan }}</td>
-                                <td class="text-center">
+                                <td class="text-center text-danger">
+                                    <div>
+                                        {{ $peminjaman_aktif->keterangan_approved }}
+                                    </div>
+
                                     @if (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->lessThan(\Carbon\Carbon::now('Asia/Jakarta')))
-                                        <div class="text-danger">
-                                            @if(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->diffInDays(\Carbon\Carbon::now('Asia/Jakarta'), false) == 0)
-                                                Kendaraan sudah melebihi target tanggal waktu pengembalian
-                                            @else
-                                                Kendaraan sudah melebihi {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->diffInDays(\Carbon\Carbon::now('Asia/Jakarta'), false) }} hari dari target tanggal waktu pengembalian
-                                            @endif
-                                        </div>
+                                        @if(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->diffInDays(\Carbon\Carbon::now('Asia/Jakarta'), false) == 0)
+                                            Kendaraan sudah melebihi target tanggal waktu pengembalian
+                                        @else
+                                            Kendaraan sudah melebihi {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->diffInDays(\Carbon\Carbon::now('Asia/Jakarta'), false) }} hari dari target tanggal waktu pengembalian
+                                        @endif
                                     @else
                                         -
                                     @endif
