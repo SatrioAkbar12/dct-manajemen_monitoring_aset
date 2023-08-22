@@ -54,6 +54,8 @@ class PeminjamanAktifController extends Controller
             'target_tanggal_waktu_kembali' => $request->target_tanggal_waktu_kembali,
             'aktif' => 1,
             'tanggal_waktu_pinjam' => $request->tanggal_waktu_pinjam,
+            'keperluan' => $request->keperluan,
+            'lokasi_tujuan' => $request->lokasi_tujuan,
         ]);
 
         $path_speedometer = $request->file('foto_speedometer')->storeAs('foto-speedometer', time() . "_speedometer-sebelum." . $request->file('foto_speedometer')->getClientOriginalExtension(), 'public');
