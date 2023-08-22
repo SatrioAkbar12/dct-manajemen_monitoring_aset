@@ -51,6 +51,22 @@
             </div>
             <div class="row">
                 <div class="col-4 col-md-2">
+                    <p>Keperluan</p>
+                </div>
+                <div class="col-8 col-md-10">
+                    <p>: {{ $data_riwayat_peminjaman->keperluan }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-md-2">
+                    <p>Lokasi tujuan</p>
+                </div>
+                <div class="col-8 col-md-10">
+                    <p>: {{ $data_riwayat_peminjaman->lokasi_tujuan }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-md-2">
                     <p>KM terakhir</p>
                 </div>
                 <div class="col-8 col-md-10">
@@ -83,6 +99,32 @@
             </div>
             <div class="row">
                 <div class="col-4 col-md-2">
+                    <p>Foto speedometer</p>
+                </div>
+                <div class="col-8 col-md-10">
+                    :
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_speedometer_sebelum) }}">
+                        <div class="card-body">
+                            <h6 class="text-center">Foto speedometer sebelum</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_speedometer_sesudah) }}">
+                        <div class="card-body">
+                            <h6 class="text-center">Foto speedometer sesudah</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-4 col-md-2">
                     <p>Foto kondisi</p>
                 </div>
                 <div class="col-8 col-md-10">
@@ -91,22 +133,38 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_depan) }}">
-                    <p class="text-center">Foto Depan</p>
+                    <div class="card">
+                        <img class="card-img-top" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_depan) }}">
+                        <div class="card-body">
+                            <h6 class="text-center">Foto Depan</h6>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
-                    <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_belakang) }}">
-                    <p class="text-center">Foto Belakang</p>
+                    <div class="card">
+                        <img class="card-img-top" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_belakang) }}">
+                        <div class="card-body">
+                            <h6 class="text-center">Foto Belakang</h6>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_kanan) }}">
-                    <p class="text-center">Foto Kanan</p>
+                    <div class="card">
+                        <img class="card-img-top" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_kanan) }}">
+                        <div class="card-body">
+                            <h6 class="text-center">Foto Kanan</h6>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
-                    <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_kiri) }}">
-                    <p class="text-center">Foto Kiri</p>
+                    <div class="card">
+                        <img class="card-img-top" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_kiri) }}">
+                        <div class="card-body">
+                            <h6 class="text-center">Foto Kiri</h6>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
