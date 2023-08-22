@@ -162,3 +162,7 @@ Route::middleware('auth')->controller(RiwayatPeminjamanToolController::class)->p
     Route::middleware('permission:riwayatPeminjamanTools.index')->get('/', 'index')->name('index');
     Route::middleware('permission:riwayatPeminjamanTools.detail')->get('/{id}', 'detail')->name('detail');
 });
+
+Route::get('/test-kamera', function() {
+    return view('testKamera');
+});
