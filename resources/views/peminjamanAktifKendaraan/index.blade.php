@@ -26,6 +26,8 @@
                             <th>Kendaraan</th>
                             <th>Peminjam</th>
                             <th>Target Tanggal Waktu Kembali</th>
+                            <th>Keperluan</th>
+                            <th>Lokasi Tujuan</th>
                             <th>Deskripsi</th>
                             <th>Aksi</th>
                         </tr>
@@ -37,6 +39,8 @@
                                 <td>{{ $peminjaman_aktif->kendaraan->nopol . " - " . $peminjaman_aktif->kendaraan->jenisKendaraan->nama . " " . $peminjaman_aktif->kendaraan->merk . " " . $peminjaman_aktif->kendaraan->tipe . " " . $peminjaman_aktif->kendaraan->warna }}</td>
                                 <td>{{ $peminjaman_aktif->user->nama }}</td>
                                 <td>{{ $peminjaman_aktif->target_tanggal_waktu_kembali }}</td>
+                                <td>{{ $peminjaman_aktif->keperluan }}</td>
+                                <td>{{ $peminjaman_aktif->lokasi_tujuan }}</td>
                                 <td class="text-center">
                                     @if (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->lessThan(\Carbon\Carbon::now('Asia/Jakarta')))
                                         <div class="text-danger">
@@ -116,6 +120,20 @@
                                 <label>Target tanggal waktu kembali</label>
                                 <input type="datetime-local" class="form-control @error('target_tanggal_waktu_kembali') is-invalid @enderror" name="target_tanggal_waktu_kembali" required>
                                 @error('target_tanggal_waktu_kembali')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Keperluan</label>
+                                <input type="text" class="form-control @error('keperluan') is-invalid @enderror" name="keperluan" required>
+                                @error('keperluan')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Lokasi tujuan</label>
+                                <input type="text" class="form-control @error('lokasi_tujuan') is-invalid @enderror" name="lokasi_tujuan" required>
+                                @error('lokasi_tujuan')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
