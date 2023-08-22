@@ -5,6 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PeminjamanAktifKendaraanRequest extends FormRequest
 {
@@ -30,7 +32,7 @@ class PeminjamanAktifKendaraanRequest extends FormRequest
                 'user' => 'required|exists:App\Models\User,id',
                 'kendaraan' => 'required|exists:App\Models\Kendaraan,id',
                 'target_tanggal_waktu_kembali' => 'required|date',
-                'tanggal_waktu_pinjam' => 'required|date',
+                'tanggal_waktu_pinjam' => 'required|date|after_or_equal:now',
             ];
         }
         elseif(Route::currentRouteName() == 'peminjamanAktifKendaraan.update') {
@@ -56,4 +58,13 @@ class PeminjamanAktifKendaraanRequest extends FormRequest
             ]);
         }
     }
+
+    public function withValidator(Validator $validator): void
+    {
+        $validator->after(function () {
+            Alert::error('Gagal tersimpan!', 'Gagal menyimpan data karena input salah');
+        });
+    }
+
+
 }
