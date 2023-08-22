@@ -77,15 +77,15 @@ class PeminjamanAktifController extends Controller
     public function update($id, PeminjamanAktifKendaraanRequest $request) {
         $path_depan = $request->file('foto_depan')->storeAs('foto-kondisi', time() . "_foto-depan." . $request->file('foto_depan')->getClientOriginalExtension(), 'public');
         $path_belakang = $request->file('foto_belakang')->storeAs('foto-kondisi', time() . "_foto-belakang." . $request->file('foto_belakang')->getClientOriginalExtension(), 'public');
-        $path_kanan = $request->file('foto_kanan')->storeAs('foto-kondisi', time() . "_foto_kanan" . $request->file('foto_kanan')->getClientOriginalExtension(), 'public');
-        $path_kiri = $request->file('foto_kiri')->storeAs('foto-kondisi', time() . "_foto_kiri" . $request->file('foto_kiri')->getClientOriginalExtension(), 'public');
+        $path_kanan = $request->file('foto_kanan')->storeAs('foto-kondisi', time() . "_foto-kanan." . $request->file('foto_kanan')->getClientOriginalExtension(), 'public');
+        $path_kiri = $request->file('foto_kiri')->storeAs('foto-kondisi', time() . "_foto-kiri." . $request->file('foto_kiri')->getClientOriginalExtension(), 'public');
+        $path_speedometer = $request->file('foto_speedometer')->storeAs('foto-speedometer', time() . "_speedometer-sesudah." . $request->file('foto_speedometer')->getClientOriginalExtension(), 'public');
 
         $transaksi = TransaksiPeminjamanKendaraan::find($id);
         $kendaraan = Kendaraan::find($transaksi->id_kendaraan);
         $servis = ServisRutinKendaraan::where('id_kendaraan', $kendaraan->id)->first();
 
-        KondisiKendaraanTransaksasiPeminjaman::create([
-            'id_transaksi' => $id,
+        KondisiKendaraanTransaksasiPeminjaman::where('id_transaksi', $id)->update([
             'status_kondisi' => $request->status_kondisi,
             'deskripsi' => $request->deskripsi,
             'km_terakhir' => $request->km_terakhir,
@@ -94,6 +94,7 @@ class PeminjamanAktifController extends Controller
             'foto_belakang' => $path_belakang,
             'foto_kanan' => $path_kanan,
             'foto_kiri' => $path_kiri,
+            'foto_speedometer_sesudah' => $path_speedometer
         ]);
 
         $transaksi->update([
