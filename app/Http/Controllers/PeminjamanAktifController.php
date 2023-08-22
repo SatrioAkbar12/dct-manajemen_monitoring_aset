@@ -48,12 +48,19 @@ class PeminjamanAktifController extends Controller
             return redirect()->back();
         }
 
-        TransaksiPeminjamanKendaraan::create([
+        $transaksi = TransaksiPeminjamanKendaraan::create([
             'id_user' => $request->user,
             'id_kendaraan' => $request->kendaraan,
             'target_tanggal_waktu_kembali' => $request->target_tanggal_waktu_kembali,
             'aktif' => 1,
             'tanggal_waktu_pinjam' => $request->tanggal_waktu_pinjam,
+        ]);
+
+        $path_speedometer = $request->file('foto_speedometer')->storeAs('foto-speedometer', time() . "_speedometer-sebelum." . $request->file('foto_speedometer')->getClientOriginalExtension(), 'public');
+
+        KondisiKendaraanTransaksasiPeminjaman::create([
+            'id_transaksi' => $transaksi->id,
+            'foto_speedometer_sebelum' => $path_speedometer,
         ]);
 
         Alert::success('Tersimpan!', 'Berhasil melakukan peminjaman kendaraan');
