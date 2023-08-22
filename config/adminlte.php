@@ -341,7 +341,7 @@ return [
                 [
                     'text' => 'Approval Pengembalian',
                     'route' => 'approvalPengembalianKendaraan.index',
-                    'icon' => null,
+                    'icon' => 'fas fa-fw fa-check',
                     'active' => ['approval-pengembalian-kendaraan', 'regex:@^approval-pengembalian-kendaraan/[0-9]+$@'],
                     'can' => ['approvalPengembalianKendaraan.index', 'approvalPengembalianKendaraan.review', 'approvalPengembalianKendaraan.approval'],
                 ],
