@@ -33,6 +33,7 @@ class PeminjamanAktifKendaraanRequest extends FormRequest
                 'kendaraan' => 'required|exists:App\Models\Kendaraan,id',
                 'target_tanggal_waktu_kembali' => 'required|date',
                 'tanggal_waktu_pinjam' => 'required|date|after_or_equal:now',
+                'foto_speedometer' => 'required|image',
             ];
         }
         elseif(Route::currentRouteName() == 'peminjamanAktifKendaraan.update') {
@@ -45,6 +46,7 @@ class PeminjamanAktifKendaraanRequest extends FormRequest
                 'foto_belakang' => 'required|image',
                 'foto_kanan' => 'required|image',
                 'foto_kiri' => 'required|image',
+                'foto_speedometer' => 'required|image',
             ];
         }
     }
