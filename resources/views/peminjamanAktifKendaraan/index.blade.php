@@ -119,6 +119,13 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                <label>Foto speedometer</label>
+                                <input type="file" class="form-control-file @error('foto_speedometer') is-invalid @enderror" accept="image/*" capture="camera" name="foto_speedometer" required>
+                                @error('foto_speedometer')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
