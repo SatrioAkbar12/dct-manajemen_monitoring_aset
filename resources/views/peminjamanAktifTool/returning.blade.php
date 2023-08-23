@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="card">
-        <form action="{{ route('peminjamanAktifTools.update', $data_peminjaman_aktif->id) }}" method="POST">
+        <form action="{{ route('peminjamanAktifTools.update', $data_peminjaman_aktif->id) }}" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="card-body">
                 <div class="form-group">
@@ -48,6 +48,13 @@
                             <label>Deskripsi</label>
                             <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi[]" required></textarea>
                             @error('deskripsi')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Foto tool</label>
+                            <input type="file" class="form-control-file @error('foto_tool') is-invalid @enderror" name="foto_tool[]" accept="image/*" capture="camera" required>
+                            @error('foto_tool')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
