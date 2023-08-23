@@ -15,7 +15,7 @@ class ApprovalPengembalianToolController extends Controller
     }
 
     public function index() {
-        $data_peminjaman = TransaksiPeminjamanTool::where('aktif', 0)->where('approved', 0)->paginate(10);
+        $data_peminjaman = TransaksiPeminjamanTool::where('aktif', 0)->where('approved', 0)->orderBy('updated_at', 'desc')->paginate(10);
 
         return view('approvalPengembalianTool.index', ['data_peminjaman' => $data_peminjaman]);
     }
