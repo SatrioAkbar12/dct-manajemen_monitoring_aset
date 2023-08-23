@@ -44,7 +44,7 @@
 
             <br>
             <div class="d-flex justify-content-center">
-                {{ $data_peminjaman_aktif->links() }}
+                {{ $data_peminjaman->links() }}
             </div>
         </div>
     </div>
