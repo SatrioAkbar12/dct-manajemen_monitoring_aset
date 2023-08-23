@@ -358,7 +358,7 @@ return [
             'text' => 'Transaksi Peminjaman Tools',
             'icon' => 'fas fa-fw fa-hammer',
             'can' => [
-                'peminjamanAktifTools.index', 'peminjamanAktifTools.store', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update',
+                'peminjamanAktifTools.index', 'peminjamanAktifTools.create', 'peminjamanAktifTools.store', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update',
                 'riwayatPeminjamanTools.index', 'riwayatPeminjamanTools.detail',
             ],
             'submenu' => [
@@ -367,7 +367,7 @@ return [
                     'route' => 'peminjamanAktifTools.index',
                     'icon' => 'fas fa-fw fa-route',
                     'active' => ['peminjaman-aktif-tools', 'regex:@^peminjaman-aktif-tools/[0-9]+$@'],
-                    'can' => ['peminjamanAktifTools.index', 'peminjamanAktifTools.store', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update'],
+                    'can' => ['peminjamanAktifTools.index', 'peminjamanAktifTools.create', 'peminjamanAktifTools.store', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update'],
                 ],
                 [
                     'text' => 'Riwayat Peminjaman',
@@ -487,7 +487,7 @@ return [
                 [
                     'text' => 'Role Permission',
                     'route' => 'rolePermission.index',
-                    'active' => ['role-permisison'],
+                    'active' => ['role-permisison', 'regex:@^role-permission/[0-9]+$@'],
                     'can' => ['rolePermission.index', 'rolePermission.detail', 'rolePermission.store', 'rolePermission.del'],
                 ],
             ]
