@@ -41,6 +41,11 @@
                     </tbody>
                 </table>
             </div>
+
+            <br>
+            <div class="d-flex justify-content-center">
+                {{ $data_peminjaman_aktif->links() }}
+            </div>
         </div>
     </div>
 @stop
