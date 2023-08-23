@@ -91,7 +91,7 @@ class PeminjamanAktifToolController extends Controller
                 'id_aset' => $request->tools[$key],
             ]);
 
-            $path_foto = $foto_tool->storeAs('foto-kondisi/tools', time() . '_tools-sesudah.' . $foto_tool->getClientOriginalExtension(), 'public');
+            $path_foto = $foto_tool->storeAs('foto-kondisi/tools', time() . '_tools-sebelum.' . $foto_tool->getClientOriginalExtension(), 'public');
 
             KondisiToolsTransaksiPeminjaman::create([
                 'id_list_tools' => $list_tools->id,
