@@ -327,6 +327,7 @@ return [
             'icon'    => 'fas fa-fw fa-truck',
             'can'     => [
                 'peminjamanAktifKendaraan.index', 'peminjamanAktifKendaraan.store', 'peminjamanAktifKendaraan.returning', 'peminjamanAktifKendaraan.update',
+                'approvalPengembalianKendaraan.index', 'approvalPengembalianKendaraan.review', 'approvalPengembalianKendaraan.approval',
                 'riwayatPeminjamanKendaraan.index', 'riwayatPeminjamanKendaraan.detail'
             ],
             'submenu' => [
@@ -336,6 +337,13 @@ return [
                     'icon' => 'fas fa-fw fa-route',
                     'active' => ['peminjaman-aktif-kendaraan', 'regex:@^peminjaman-aktif-kendaraan/[0-9]+$@'],
                     'can' => ['peminjamanAktifKendaraan.index', 'peminjamanAktifKendaraan.store', 'peminjamanAktifKendaraan.returning', 'peminjamanAktifKendaraan.update'],
+                ],
+                [
+                    'text' => 'Approval Pengembalian',
+                    'route' => 'approvalPengembalianKendaraan.index',
+                    'icon' => 'fas fa-fw fa-check',
+                    'active' => ['approval-pengembalian-kendaraan', 'regex:@^approval-pengembalian-kendaraan/[0-9]+$@'],
+                    'can' => ['approvalPengembalianKendaraan.index', 'approvalPengembalianKendaraan.review', 'approvalPengembalianKendaraan.approval'],
                 ],
                 [
                     'text' => 'Riwayat Peminjaman',

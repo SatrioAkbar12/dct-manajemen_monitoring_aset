@@ -18,7 +18,7 @@
                             <th>Id</th>
                             <th>Nomor Polisi</th>
                             <th>Kendaraan</th>
-                            <th>Deskripsi</th>
+                            <th>Keterangan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>

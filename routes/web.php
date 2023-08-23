@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApprovalPengembalianKendaraanController;
 use App\Http\Controllers\AsetController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\GudangController;
@@ -116,6 +117,12 @@ Route::middleware('auth')->controller(PeminjamanAktifController::class)->prefix(
     Route::middleware('permission:peminjamanAktifKendaraan.store')->post('/', 'store')->name('store');
     Route::middleware('permission:peminjamanAktifKendaraan.returning')->get('/{id}', 'returning')->name('returning');
     Route::middleware('permission:peminjamanAktifKendaraan.update')->post('/{id}', 'update')->name('update');
+});
+
+Route::middleware('auth')->controller(ApprovalPengembalianKendaraanController::class)->prefix('approval-pengembalian-kendaraan')->name('approvalPengembalianKendaraan.')->group(function() {
+    Route::middleware('permission:approvalPengembalianKendaraan.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:approvalPengembalianKendaraan.review')->get('/{id}', 'review')->name('review');
+    Route::middleware('permission:approvalPengembalianKendaraan.approval')->post('/{id}', 'approval')->name('approval');
 });
 
 Route::middleware('auth')->controller(RiwayatPeminjamanController::class)->prefix('riwayat-peminjaman-kendaraan')->name('riwayatPeminjamanKendaraan.')->group(function() {
