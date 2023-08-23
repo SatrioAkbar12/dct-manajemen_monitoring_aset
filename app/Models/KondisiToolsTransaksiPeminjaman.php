@@ -17,6 +17,8 @@ class KondisiToolsTransaksiPeminjaman extends Model
         'id_list_tools',
         'status_kondisi',
         'deskripsi',
+        'foto_sebelum',
+        'foto_sesudah',
     ];
 
     public function listTools(): BelongsTo {

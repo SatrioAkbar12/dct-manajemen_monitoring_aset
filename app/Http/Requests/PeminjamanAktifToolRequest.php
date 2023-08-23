@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PeminjamanAktifToolRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class PeminjamanAktifToolRequest extends FormRequest
      */
     public function rules()
     {
-        if(Route::currentRouteName() == 'peminjamanAktifTools.store') {
+        if(Route::currentRouteName() == 'peminjamanAktifTools.create') {
             return [
                 'user' => 'required|integer|exists:\App\Models\User,id',
                 'tools' => 'required|array',
@@ -33,6 +34,18 @@ class PeminjamanAktifToolRequest extends FormRequest
                 'target_tanggal_waktu_kembali' => 'required|date',
                 'keperluan' => 'required|string',
                 'lokasi_tujuan' => 'required|string',
+            ];
+        }
+        elseif(Route::currentRouteName() == 'peminjamanAktifTools.store') {
+            return [
+                'user' => 'required|integer|exists:\App\Models\User,id',
+                'tools' => 'required|array',
+                'tanggal_waktu_pinjam' => 'required|date',
+                'target_tanggal_waktu_kembali' => 'required|date',
+                'keperluan' => 'required|string',
+                'lokasi_tujuan' => 'required|string',
+                'foto_tool' => 'required|array',
+                'foto_tool.*' => 'required|image',
             ];
         }
         elseif(Route::currentRouteName() == 'peminjamanAktifTools.update') {
@@ -44,9 +57,10 @@ class PeminjamanAktifToolRequest extends FormRequest
                 'status_kondisi.*' => 'required|in:Tidak ada kerusakan,Ada kerusakan',
                 'deskripsi' => 'required|array',
                 'deskripsi.*' => 'required',
+                'foto_tool' => 'required|array',
+                'foto_tool.*' => 'required|image',
             ];
         }
-
     }
 
     protected function prepareForValidation()
@@ -59,5 +73,16 @@ class PeminjamanAktifToolRequest extends FormRequest
                 ]);
             }
         }
+    }
+
+    public function after(): array
+    {
+        return [
+            function () {
+                if ($this->somethingElseIsInvalid()) {
+                    Alert::error('Gagal tersimpan!', 'Gagal menyimpan data karena input salah');
+                }
+            }
+        ];
     }
 }
