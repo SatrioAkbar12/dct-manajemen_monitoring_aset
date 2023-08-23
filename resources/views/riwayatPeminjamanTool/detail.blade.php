@@ -38,6 +38,22 @@
             </div>
             <div class="row">
                 <div class="col-4 col-md-2">
+                    <p>Keperluan</p>
+                </div>
+                <div class="col-8 col-md-10">
+                    <p>: {{ $data_riwayat_peminjaman->keperluan }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-md-2">
+                    <p>Lokasi tujuan</p>
+                </div>
+                <div class="col-8 col-md-10">
+                    <p>: {{ $data_riwayat_peminjaman->lokasi_tujuan }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-md-2">
                     <p>Kembali di gudang</p>
                 </div>
                 <div class="col-8 col-md-10">
