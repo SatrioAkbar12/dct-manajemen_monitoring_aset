@@ -21,6 +21,8 @@ class TransaksiPeminjamanTool extends Model
         'aktif',
         'tanggal_waktu_kembali',
         'id_gudang_kembali',
+        'keperluan',
+        'lokasi_tujuan',
     ];
 
     public function user(): BelongsTo {

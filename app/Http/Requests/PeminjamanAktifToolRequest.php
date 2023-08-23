@@ -31,6 +31,8 @@ class PeminjamanAktifToolRequest extends FormRequest
                 'tools' => 'required|array',
                 'tanggal_waktu_pinjam' => 'required|date',
                 'target_tanggal_waktu_kembali' => 'required|date',
+                'keperluan' => 'required|string',
+                'lokasi_tujuan' => 'required|string',
             ];
         }
         elseif(Route::currentRouteName() == 'peminjamanAktifTools.update') {
