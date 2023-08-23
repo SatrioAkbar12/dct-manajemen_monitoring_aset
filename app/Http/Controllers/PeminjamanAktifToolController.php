@@ -69,6 +69,8 @@ class PeminjamanAktifToolController extends Controller
             'target_tanggal_waktu_kembali' => $request->target_tanggal_waktu_kembali,
             'id_user' => $request->user,
             'aktif' => 1,
+            'keperluan' => $request->keperluan,
+            'lokasi_tujuan' => $request->lokasi_tujuan,
         ]);
 
         foreach($request->tools as $aset) {
