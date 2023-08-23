@@ -23,6 +23,8 @@ class TransaksiPeminjamanTool extends Model
         'id_gudang_kembali',
         'keperluan',
         'lokasi_tujuan',
+        'approved',
+        'keterangan_approved',
     ];
 
     public function user(): BelongsTo {
