@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApprovalPengembalianKendaraanController;
+use App\Http\Controllers\ApprovalPengembalianToolController;
 use App\Http\Controllers\AsetController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\GudangController;
@@ -164,6 +165,12 @@ Route::middleware('auth')->controller(PeminjamanAktifToolController::class)->pre
     Route::middleware('permission:peminjamanAktifTools.store')->post('/create', 'store')->name('store');
     Route::middleware('permission:peminjamanAktifTools.returning')->get('/{id}', 'returning')->name('returning');
     Route::middleware('permission:peminjamanAktifTools.update')->post('/{id}', 'update')->name('update');
+});
+
+Route::middleware('auth')->controller(ApprovalPengembalianToolController::class)->prefix('approval-pengembalian-tools')->name('approvalPengembalianTools.')->group(function() {
+    Route::middleware('permission:approvalPengembalianTools.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:approvalPengembalianTools.review')->get('/{id}', 'review')->name('review');
+    Route::middleware('permission:approvalPengembalianTools.approval')->post('/{id}', 'approval')->name('approval');
 });
 
 Route::middleware('auth')->controller(RiwayatPeminjamanToolController::class)->prefix('riwayat-peminjaman-tools')->name('riwayatPeminjamanTools.')->group(function() {

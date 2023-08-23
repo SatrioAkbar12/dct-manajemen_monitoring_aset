@@ -359,6 +359,7 @@ return [
             'icon' => 'fas fa-fw fa-hammer',
             'can' => [
                 'peminjamanAktifTools.index', 'peminjamanAktifTools.create', 'peminjamanAktifTools.store', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update',
+                'approvalPengembalianTools.index', 'approvalPengembalianTools.review', 'approvalPengembalianTools.approval',
                 'riwayatPeminjamanTools.index', 'riwayatPeminjamanTools.detail',
             ],
             'submenu' => [
@@ -368,6 +369,13 @@ return [
                     'icon' => 'fas fa-fw fa-route',
                     'active' => ['peminjaman-aktif-tools', 'regex:@^peminjaman-aktif-tools/[0-9]+$@'],
                     'can' => ['peminjamanAktifTools.index', 'peminjamanAktifTools.create', 'peminjamanAktifTools.store', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update'],
+                ],
+                [
+                    'text' => 'Approval Pengembalian',
+                    'route' => 'approvalPengembalianTools.index',
+                    'icon' => 'fas fa-fw fa-check',
+                    'active' => ['approval-pengembalian-tools', 'regex:@^approval-pengembalian-tools/[0-9]+$@'],
+                    'can' => ['approvalPengembalianTools.index', 'approvalPengembalianTools.review', 'approvalPengembalianTools.approval'],
                 ],
                 [
                     'text' => 'Riwayat Peminjaman',

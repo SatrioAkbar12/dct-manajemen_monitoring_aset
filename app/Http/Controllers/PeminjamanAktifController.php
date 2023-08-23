@@ -77,10 +77,10 @@ class PeminjamanAktifController extends Controller
     }
 
     public function update($id, PeminjamanAktifKendaraanRequest $request) {
-        $path_depan = $request->file('foto_depan')->storeAs('foto-kondisi', time() . "_foto-depan." . $request->file('foto_depan')->getClientOriginalExtension(), 'public');
-        $path_belakang = $request->file('foto_belakang')->storeAs('foto-kondisi', time() . "_foto-belakang." . $request->file('foto_belakang')->getClientOriginalExtension(), 'public');
-        $path_kanan = $request->file('foto_kanan')->storeAs('foto-kondisi', time() . "_foto-kanan." . $request->file('foto_kanan')->getClientOriginalExtension(), 'public');
-        $path_kiri = $request->file('foto_kiri')->storeAs('foto-kondisi', time() . "_foto-kiri." . $request->file('foto_kiri')->getClientOriginalExtension(), 'public');
+        $path_depan = $request->file('foto_depan')->storeAs('foto-kondisi/kendaraan', time() . "_foto-depan." . $request->file('foto_depan')->getClientOriginalExtension(), 'public');
+        $path_belakang = $request->file('foto_belakang')->storeAs('foto-kondisi/kendaraan', time() . "_foto-belakang." . $request->file('foto_belakang')->getClientOriginalExtension(), 'public');
+        $path_kanan = $request->file('foto_kanan')->storeAs('foto-kondisi/kendaraan', time() . "_foto-kanan." . $request->file('foto_kanan')->getClientOriginalExtension(), 'public');
+        $path_kiri = $request->file('foto_kiri')->storeAs('foto-kondisi/kendaraan', time() . "_foto-kiri." . $request->file('foto_kiri')->getClientOriginalExtension(), 'public');
         $path_speedometer = $request->file('foto_speedometer')->storeAs('foto-speedometer', time() . "_speedometer-sesudah." . $request->file('foto_speedometer')->getClientOriginalExtension(), 'public');
 
         $transaksi = TransaksiPeminjamanKendaraan::find($id);
