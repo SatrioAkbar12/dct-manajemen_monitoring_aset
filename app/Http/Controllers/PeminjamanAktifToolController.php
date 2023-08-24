@@ -82,7 +82,9 @@ class PeminjamanAktifToolController extends Controller
         ]);
 
         foreach($request->file('foto_tool') as $key => $foto_tool) {
-            Tool::where('id_aset', $request->tools[$key])->update([
+            $tool = Tool::with('aset')->where('id_aset', $request->tools[$key])->first();
+
+            $tool->update([
                 'status_saat_ini' => 'Keluar',
                 'id_gudang' => null
             ]);
@@ -92,7 +94,7 @@ class PeminjamanAktifToolController extends Controller
                 'id_aset' => $request->tools[$key],
             ]);
 
-            $path_foto = $foto_tool->storeAs('foto-kondisi/tools', time() . '_tools-sebelum.' . $foto_tool->getClientOriginalExtension(), 'public');
+            $path_foto = $foto_tool->storeAs('foto-kondisi/tools', time() . '_' . $tool->aset->kode_aset . '_tools-sebelum.' . $foto_tool->getClientOriginalExtension(), 'public');
 
             KondisiToolsTransaksiPeminjaman::create([
                 'id_list_tools' => $list_tools->id,
@@ -114,7 +116,10 @@ class PeminjamanAktifToolController extends Controller
 
     public function update($id, PeminjamanAktifToolRequest $request) {
         foreach($request->file('foto_tool') as $key => $foto_tool) {
-            $path_foto = $foto_tool->storeAs('foto-kondisi/tools', time() . '_tools-sesudah.' . $foto_tool->getClientOriginalExtension(), 'public');
+            $list_tools = ListToolsTransaksiPeminjaman::find($request->id_list_tools[$key]);
+            $tool = Tool::where('id_aset', $list_tools->id_aset)->first();
+
+            $path_foto = $foto_tool->storeAs('foto-kondisi/tools', time() . '_' . $tool->aset->kode_aset . '_tools-sesudah.' . $foto_tool->getClientOriginalExtension(), 'public');
 
             KondisiToolsTransaksiPeminjaman::where('id_list_tools', $request->id_list_tools[$key])->update([
                 'id_list_tools' => $request->id_list_tools[$key],
@@ -123,9 +128,7 @@ class PeminjamanAktifToolController extends Controller
                 'foto_sesudah' => $path_foto,
             ]);
 
-            $list_tools = ListToolsTransaksiPeminjaman::find($request->id_list_tools[$key]);
-
-            Tool::where('id_aset', $list_tools->id_aset)->update([
+            $tool->update([
                 'status_saat_ini' => 'Di gudang',
                 'id_gudang' => $request->gudang,
             ]);
