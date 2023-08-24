@@ -20,7 +20,12 @@
                             <th>Peminjam</th>
                             <th>Tools</th>
                             <th>Keperluan</th>
-                            <th>Aksi</th>
+                            @unlessrole('admin')
+                                <th>Keterangan</th>
+                            @endunlessrole
+                            @hasrole('admin')
+                                <th>Aksi</th>
+                            @endhasrole
                         </tr>
                     </thead>
                     <tbody>
@@ -37,11 +42,16 @@
                                     </ul>
                                 </td>
                                 <td>{{ $peminjaman->keperluan }}</td>
-                                <td class="text-center">
-                                    @can('approvalPengembalianTools.review')
-                                        <a href="{{ route('approvalPengembalianTools.review', $peminjaman->id) }}" class="btn btn-info">Review</a>
-                                    @endcan
-                                </td>
+                                @unlessrole('admin')
+                                    <td class="text-center text-info">Sedang proses approval oleh admin</td>
+                                @endunlessrole
+                                @hasrole('admin')
+                                    <td class="text-center">
+                                        @can('approvalPengembalianTools.review')
+                                            <a href="{{ route('approvalPengembalianTools.review', $peminjaman->id) }}" class="btn btn-info">Review</a>
+                                        @endcan
+                                    </td>
+                                @endhasrole
                             </tr>
                         @endforeach
                     </tbody>

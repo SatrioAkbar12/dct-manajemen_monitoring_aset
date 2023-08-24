@@ -20,7 +20,12 @@
                             <th>Kendaraan</th>
                             <th>Peminjam</th>
                             <th>Keperluan</th>
-                            <th>Aksi</th>
+                            @unlessrole('admin')
+                                <th>Keterangan</th>
+                            @endunlessrole
+                            @hasrole('admin')
+                                <th>Aksi</th>
+                            @endhasrole
                         </tr>
                     </thead>
                     <tbody>
@@ -31,11 +36,16 @@
                                 <td>{{ $peminjaman->kendaraan->nopol . " - " . $peminjaman->kendaraan->merk . " " . $peminjaman->kendaraan->tipe . " " . $peminjaman->kendaraan->warna }}</td>
                                 <td>{{ $peminjaman->user->nama }}</td>
                                 <td>{{ $peminjaman->keperluan}}</td>
-                                <td class="text-center">
-                                    @can('approvalPengembalianKendaraan.review')
-                                        <a href="{{ route('approvalPengembalianKendaraan.review', $peminjaman->id) }}" class="btn btn-info">Review</a>
-                                    @endcan
-                                </td>
+                                @unlessrole('admin')
+                                    <td class="text-center text-info">Sedang proses approval oleh admin</td>
+                                @endunlessrole
+                                @hasrole('admin')
+                                    <td class="text-center">
+                                        @can('approvalPengembalianKendaraan.review')
+                                            <a href="{{ route('approvalPengembalianKendaraan.review', $peminjaman->id) }}" class="btn btn-info">Review</a>
+                                        @endcan
+                                    </td>
+                                @endhasrole
                             </tr>
                         @endforeach
                     </tbody>

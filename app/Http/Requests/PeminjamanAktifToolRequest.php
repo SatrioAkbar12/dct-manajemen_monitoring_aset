@@ -30,7 +30,7 @@ class PeminjamanAktifToolRequest extends FormRequest
             return [
                 'user' => 'required|integer|exists:\App\Models\User,id',
                 'tools' => 'required|array',
-                'tanggal_waktu_pinjam' => 'required|date',
+                'tanggal_waktu_pinjam' => 'required|date|after_or_equal:now',
                 'target_tanggal_waktu_kembali' => 'required|date',
                 'keperluan' => 'required|string',
                 'lokasi_tujuan' => 'required|string',
@@ -71,7 +71,7 @@ class PeminjamanAktifToolRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        if(Route::currentRouteName() == 'peminjamanAktifTools.store') {
+        if(Route::currentRouteName() == 'peminjamanAktifTools.create' || Route::currentRouteName() == 'peminjamanAktifTools.store') {
             $user = Auth::user();
             if( !($user->hasRole('admin')) ) {
                 $this->merge([
