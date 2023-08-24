@@ -29,6 +29,8 @@ class RolePermissionSeeder extends Seeder
         $role_user->givePermissionTo('peminjamanAktifKendaraan.returning');
         $role_user->givePermissionTo('peminjamanAktifKendaraan.update');
 
+        $role_user->givePermissionTo('approvalPengembalianKendaraan.index');
+
         $role_user->givePermissionTo('riwayatPeminjamanKendaraan.index');
         $role_user->givePermissionTo('riwayatPeminjamanKendaraan.detail');
 
@@ -36,6 +38,8 @@ class RolePermissionSeeder extends Seeder
         $role_user->givePermissionTo('peminjamanAktifTools.store');
         $role_user->givePermissionTo('peminjamanAktifTools.returning');
         $role_user->givePermissionTo('peminjamanAktifTools.update');
+
+        $role_user->givePermissionTo('approvalPengembalianTools.index');
 
         $role_user->givePermissionTo('riwayatPeminjamanTools.index');
         $role_user->givePermissionTo('riwayatPeminjamanTools.detail');
