@@ -70,7 +70,7 @@ class PeminjamanAktifToolController extends Controller
         return view('peminjamanAktifTool.create', ['data_peminjaman_aktif' => $request->all(), 'user' => $user, 'tools' => $tools]);
     }
 
-    public function store(Request $request) {
+    public function store(PeminjamanAktifToolRequest $request) {
         $peminjaman_tools = TransaksiPeminjamanTool::create([
             'tanggal_waktu_pinjam' => $request->tanggal_waktu_pinjam,
             'target_tanggal_waktu_kembali' => $request->target_tanggal_waktu_kembali,
@@ -78,6 +78,7 @@ class PeminjamanAktifToolController extends Controller
             'aktif' => 1,
             'keperluan' => $request->keperluan,
             'lokasi_tujuan' => $request->lokasi_tujuan,
+            'geolocation_pinjam' => $request->geo_latitude . ',' . $request->geo_longitude,
         ]);
 
         foreach($request->file('foto_tool') as $key => $foto_tool) {
@@ -134,6 +135,7 @@ class PeminjamanAktifToolController extends Controller
             'aktif' => 0,
             'tanggal_waktu_kembali' => Carbon::now('Asia/Jakarta'),
             'id_gudang_kembali' => $request->gudang,
+            'geolocation_kembali' => $request->geo_latitude . ',' . $request->geo_longitude,
         ]);
 
         Alert::success('Tersimpan!', 'Berhasil menyelesaikan peminjaman tools');
