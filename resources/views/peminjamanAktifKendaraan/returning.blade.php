@@ -82,6 +82,12 @@
                     <input type="hidden" id="geoLatitude" name="geo_latitude">
                     <input type="hidden" id="geoLongitude" name="geo_longitude">
                     <p id="geoNotification"></p>
+                    @error('geo_latitude')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    @error('geo_longitude')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="card-footer">
