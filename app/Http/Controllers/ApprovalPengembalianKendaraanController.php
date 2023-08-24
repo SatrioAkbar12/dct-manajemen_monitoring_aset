@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ApprovalPengembalianKendaraanRequest;
 use App\Models\TransaksiPeminjamanKendaraan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ApprovalPengembalianKendaraanController extends Controller
@@ -15,7 +16,14 @@ class ApprovalPengembalianKendaraanController extends Controller
     }
 
     public function index() {
-        $data_peminjaman = TransaksiPeminjamanKendaraan::where('aktif', 0)->where('approved', 0)->orderBy('updated_at', 'desc')->paginate(10);
+        $data_peminjaman = TransaksiPeminjamanKendaraan::where('aktif', 0)->where('approved', 0)->orderBy('updated_at', 'desc');
+        $auth_user = Auth::user();
+
+        if( !($auth_user->hasRole('admin')) ) {
+            $data_peminjaman = $data_peminjaman->where('id_user', $auth_user->id);
+        }
+
+        $data_peminjaman = $data_peminjaman->paginate(10);
 
         return view('approvalPengembalianKendaraan.index', ['data_peminjaman' => $data_peminjaman]);
     }
