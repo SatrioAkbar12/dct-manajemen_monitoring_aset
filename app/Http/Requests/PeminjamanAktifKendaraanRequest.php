@@ -67,12 +67,14 @@ class PeminjamanAktifKendaraanRequest extends FormRequest
         }
     }
 
-    public function withValidator(Validator $validator): void
+    public function after(): array
     {
-        $validator->after(function () {
-            Alert::error('Gagal tersimpan!', 'Gagal menyimpan data karena input salah');
-        });
+        return [
+            function () {
+                if ($this->somethingElseIsInvalid()) {
+                    Alert::error('Gagal tersimpan!', 'Gagal menyimpan data karena input salah');
+                }
+            }
+        ];
     }
-
-
 }
