@@ -34,7 +34,7 @@
         <div class="col-3 col-md-5"></div>
     </div>
     <h1 class="text-center display-5">Welcome to</h1>
-    <h1 class="text-center display-2">Assets Control Montoring System</h1>
+    <h1 class="text-center display-2">Assets Control Monitoring System</h1>
 @stop
 
 @section('css')
