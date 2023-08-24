@@ -50,17 +50,15 @@
                                         @if($peminjaman_aktif->keterangan_approved != null && $peminjaman_aktif->approved == 0)
                                             <li>{{ $peminjaman_aktif->keterangan_approved }}</li>
                                         @endif
-                                        <li>
-                                            @if (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->lessThan(\Carbon\Carbon::now('Asia/Jakarta')))
+                                        @if (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->lessThan(\Carbon\Carbon::now('Asia/Jakarta')))
+                                            <li>
                                                 @if(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->diffInDays(\Carbon\Carbon::now('Asia/Jakarta'), false) == 0)
                                                     Peminjaman tools sudah melebihi target tanggal waktu pengembalian
                                                 @else
                                                     Peminjaman tools sudah melebihi {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->diffInDays(\Carbon\Carbon::now('Asia/Jakarta'), false) }} hari dari target tanggal waktu pengembalian
                                                 @endif
-                                            @else
-                                                -
-                                            @endif
-                                        </li>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </td>
                                 <td class="text-center">
@@ -146,6 +144,19 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                <label>Lokasi saat ini</label><br>
+                                <button type="button" class="btn btn-info" onclick="getLocation()">Aktifkan Geolocation</button>
+                                <input type="hidden" id="geoLatitude" name="geo_latitude">
+                                <input type="hidden" id="geoLongitude" name="geo_longitude">
+                                <p id="geoNotification"></p>
+                                @error('geo_latitude')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                                @error('geo_longitude')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
@@ -168,5 +179,40 @@
                 placeholder: "Pilih tools yang akan dipinjam"
             });
         });
+
+        var x = document.getElementById("geoNotification");
+        var lat = document.getElementById("geoLatitude");
+        var longi = document.getElementById("geoLongitude");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            lat.value = position.coords.latitude;
+            longi.value = position.coords.longitude;
+            x.innerHTML = "Lokasi berhasil didapatkan";
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    x.innerHTML = "User denied the request for Geolocation."
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    x.innerHTML = "Location information is unavailable."
+                    break;
+                case error.TIMEOUT:
+                    x.innerHTML = "The request to get user location timed out."
+                    break;
+                case error.UNKNOWN_ERROR:
+                    x.innerHTML = "An unknown error occurred."
+                    break;
+            }
+        }
     </script>
 @stop
