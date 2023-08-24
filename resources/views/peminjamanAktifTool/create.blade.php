@@ -48,6 +48,8 @@
                         @endforeach
                     </ul>
                 </div>
+                <input type="hidden" name="geo_latitude" value="{{ $data_peminjaman_aktif['geo_latitude'] }}">
+                <input type="hidden" name="geo_longitude" value="{{ $data_peminjaman_aktif['geo_longitude'] }}">
             </div>
             <div class="card-footer">
                 <a href="{{ url()->previous() }}" class="btn btn-secondary">Batal</a>

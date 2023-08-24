@@ -34,6 +34,8 @@ class PeminjamanAktifToolRequest extends FormRequest
                 'target_tanggal_waktu_kembali' => 'required|date',
                 'keperluan' => 'required|string',
                 'lokasi_tujuan' => 'required|string',
+                'geo_latitude' => 'required|string',
+                'geo_longitude' => 'required|string',
             ];
         }
         elseif(Route::currentRouteName() == 'peminjamanAktifTools.store') {
@@ -46,6 +48,8 @@ class PeminjamanAktifToolRequest extends FormRequest
                 'lokasi_tujuan' => 'required|string',
                 'foto_tool' => 'required|array',
                 'foto_tool.*' => 'required|image',
+                'geo_latitude' => 'required|string',
+                'geo_longitude' => 'required|string',
             ];
         }
         elseif(Route::currentRouteName() == 'peminjamanAktifTools.update') {
@@ -59,6 +63,8 @@ class PeminjamanAktifToolRequest extends FormRequest
                 'deskripsi.*' => 'required',
                 'foto_tool' => 'required|array',
                 'foto_tool.*' => 'required|image',
+                'geo_latitude' => 'required|string',
+                'geo_longitude' => 'required|string',
             ];
         }
     }

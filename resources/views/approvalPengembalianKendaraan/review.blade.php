@@ -102,6 +102,32 @@
             </div>
             <div class="row">
                 <div class="col-4 col-md-2">
+                    <p>Lokasi peminjaman</p>
+                </div>
+                <div class="col-8 col-md-10">
+                    <p>:</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <iframe width="100%" height="250px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q={{ $data_peminjaman->geolocation_pinjam }}&z=15&output=embed"></iframe>
+                        <div class="card-body">
+                            <h6 class="text-center">Lokasi pinjam</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <iframe width="100%" height="250px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q={{ $data_peminjaman->geolocation_kembali }}&z=15&output=embed"></iframe>
+                        <div class="card-body">
+                            <h6 class="text-center">Lokasi kembali</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-md-2">
                     <p>Foto speedometer</p>
                 </div>
                 <div class="col-8 col-md-10">

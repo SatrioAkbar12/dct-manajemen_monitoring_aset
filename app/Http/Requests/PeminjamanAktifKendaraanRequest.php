@@ -36,6 +36,8 @@ class PeminjamanAktifKendaraanRequest extends FormRequest
                 'foto_speedometer' => 'required|image',
                 'keperluan' => 'required|string',
                 'lokasi_tujuan' => 'required|string',
+                'geo_latitude' => 'required|string',
+                'geo_longitude' => 'required|string',
             ];
         }
         elseif(Route::currentRouteName() == 'peminjamanAktifKendaraan.update') {
@@ -49,6 +51,8 @@ class PeminjamanAktifKendaraanRequest extends FormRequest
                 'foto_kanan' => 'required|image',
                 'foto_kiri' => 'required|image',
                 'foto_speedometer' => 'required|image',
+                'geo_latitude' => 'required|string',
+                'geo_longitude' => 'required|string',
             ];
         }
     }
@@ -63,12 +67,14 @@ class PeminjamanAktifKendaraanRequest extends FormRequest
         }
     }
 
-    public function withValidator(Validator $validator): void
+    public function after(): array
     {
-        $validator->after(function () {
-            Alert::error('Gagal tersimpan!', 'Gagal menyimpan data karena input salah');
-        });
+        return [
+            function () {
+                if ($this->somethingElseIsInvalid()) {
+                    Alert::error('Gagal tersimpan!', 'Gagal menyimpan data karena input salah');
+                }
+            }
+        ];
     }
-
-
 }

@@ -56,6 +56,7 @@ class PeminjamanAktifController extends Controller
             'tanggal_waktu_pinjam' => $request->tanggal_waktu_pinjam,
             'keperluan' => $request->keperluan,
             'lokasi_tujuan' => $request->lokasi_tujuan,
+            'geolocation_pinjam' => $request->geo_latitude . ',' . $request->geo_longitude,
         ]);
 
         $path_speedometer = $request->file('foto_speedometer')->storeAs('foto-speedometer', time() . "_speedometer-sebelum." . $request->file('foto_speedometer')->getClientOriginalExtension(), 'public');
@@ -102,6 +103,7 @@ class PeminjamanAktifController extends Controller
         $transaksi->update([
             'aktif' => 0,
             'tanggal_waktu_kembali' => Carbon::now('Asia/Jakarta'),
+            'geolocation_kembali' => $request->geo_latitude . ',' . $request->geo_longitude,
         ]);
 
         if($servis->km_target <= $request->km_terakhir) {
