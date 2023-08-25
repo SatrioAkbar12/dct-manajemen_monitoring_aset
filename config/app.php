@@ -194,6 +194,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\AsetServiceProvider::class,
 
         Spatie\Permission\PermissionServiceProvider::class,
 
@@ -212,6 +213,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'AsetHelper' => App\Helpers\AsetHelper::class,
     ])->toArray(),
 
 ];
