@@ -8,6 +8,7 @@ use App\Http\Controllers\GudangController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\KepemilikanAsetController;
 use App\Http\Controllers\MasaAktifDokumenController;
 use App\Http\Controllers\PeminjamanAktifController;
 use App\Http\Controllers\PeminjamanAktifToolController;
@@ -129,6 +130,13 @@ Route::middleware('auth')->controller(ApprovalPengembalianKendaraanController::c
 Route::middleware('auth')->controller(RiwayatPeminjamanController::class)->prefix('riwayat-peminjaman-kendaraan')->name('riwayatPeminjamanKendaraan.')->group(function() {
     Route::middleware('permission:riwayatPeminjamanKendaraan.index')->get('/', 'index')->name('index');
     Route::middleware('permission:riwayatPeminjamanKendaraan.detail')->get('/{id}', 'detail')->name('detail');
+});
+
+Route::middleware('auth')->controller(KepemilikanAsetController::class)->prefix('kepemilikan-aset')->name('kepemilikanAset.')->group(function() {
+    Route::middleware('permission:kepemilikanAset.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:kepemilikanAset.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:kepemilikanAset.update')->post('/{id}', 'update')->name('update');
+    Route::middleware('permission:kepemilikanAset.del')->delete('/{id}', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(AsetController::class)->prefix('aset')->name('aset.')->group(function() {
