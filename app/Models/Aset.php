@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,7 +17,12 @@ class Aset extends Model
     protected $fillable = [
         'kode_aset',
         'tipe_aset',
+        'id_kepemilikan_aset',
     ];
+
+    public function kepemilikanAset(): BelongsTo {
+        return $this->belongsTo(KepemilikanAset::class, 'id_kepemilikan_aset', 'id');
+    }
 
     public function kendaraan(): HasOne {
         return $this->hasOne(Kendaraan::class, 'id_aset', 'id');
