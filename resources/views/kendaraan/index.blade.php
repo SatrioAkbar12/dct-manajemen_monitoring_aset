@@ -76,6 +76,17 @@
                                 <h5 class="lead">Data Kendaraan</h5>
                             </div>
                             <div class="form-group">
+                                <label>Kepemilikan aset</label>
+                                <select class="form-control @error('kepemilikan_aset') is-invalid @enderror" id="kepemilikanAsetInput" name="kepemilikan_aset" required>
+                                    @foreach ($data_kepemilikan_aset as $kepemilikan_aset)
+                                        <option value={{ $kepemilikan_aset->id }}>{{ $kepemilikan_aset->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('kepemilikan_aset')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label>Nomor Polisi</label>
                                 <input type="text" class="form-control @error('nopol') is-invalid @enderror" name="nopol" required>
                                 @error('nopol')
@@ -153,6 +164,7 @@
 @section('js')
     <script>
         $(document).ready(function() {
+            $('#kepemilikanAsetInput').select2();
             $('#jenisKendaraanInput').select2();
         })
     </script>
