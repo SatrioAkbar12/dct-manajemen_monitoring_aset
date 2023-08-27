@@ -30,6 +30,7 @@ class ToolRequest extends FormRequest
             'deskripsi' => 'string',
             'tools_group' => 'required|integer|exists:\App\Models\ToolsGroup,id',
             'gudang' => 'required|integer|exists:\App\Models\Gudang,id',
+            'kepemilikan_aset' => 'required|integer|exists:\App\Models\KepemilikanAset,id',
         ];
     }
 }

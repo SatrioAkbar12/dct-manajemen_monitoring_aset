@@ -74,6 +74,17 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
+                                <label>Kepemilikan Aset</label>
+                                <select class="form-control @error('kepemilikan_aset') is-invalid @enderror" id="kepemilikanAsetInput" name="kepemilikan_aset" required>
+                                    @foreach ($data_kepemilikan_aset as $kepemilikan_aset)
+                                        <option value="{{ $kepemilikan_aset->id }}">{{ $kepemilikan_aset->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('kepemilikan_aset')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label>Nama</label>
                                 <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required>
                                 @error('nama')
@@ -103,7 +114,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="toolsGroup">Tools Group</label>
-                                <select class="form-control @error('tools_group') is-invalid @enderror" id="toolsGroup" name="tools_group" required>
+                                <select class="form-control @error('tools_group') is-invalid @enderror" id="toolsGroupInput" name="tools_group" required>
                                     @foreach ($data_tools_group as $grup)
                                         <option value="{{ $grup->id }}">{{ $grup->nama }}</option>
                                     @endforeach
@@ -111,7 +122,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="gudang">Tersimpan di gudang</label>
-                                <select class="form-control @error('gudang') is-invalid @enderror" id="gudang" name="gudang" required>
+                                <select class="form-control @error('gudang') is-invalid @enderror" id="gudangInput" name="gudang" required>
                                     @foreach ($data_gudang as $gudang)
                                         <option value="{{ $gudang->id }}">{{ $gudang->nama }}</option>
                                     @endforeach
@@ -127,4 +138,14 @@
             </div>
         </div>
     @endcan
+@stop
+
+@section('js')
+    <script>
+        $('document').ready(function() {
+            $('#kepemilikanAsetInput').select2();
+            $('#toolsGroupInput').select2();
+            $('#gudangInput').select2();
+        })
+    </script>
 @stop
