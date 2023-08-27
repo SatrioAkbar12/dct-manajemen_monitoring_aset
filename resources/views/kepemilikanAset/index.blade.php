@@ -58,13 +58,6 @@
                                                             <div class="text-danger">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>Prefix kode aset</label>
-                                                        <input type="text" class="form-control @error('prefix') is-invalid @enderror" name="prefix" value="{{ $kepemilikan_aset->prefix }}">
-                                                        @error('prefix')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

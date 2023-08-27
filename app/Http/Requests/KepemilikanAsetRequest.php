@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
 
 class KepemilikanAsetRequest extends FormRequest
 {
@@ -24,17 +25,14 @@ class KepemilikanAsetRequest extends FormRequest
      */
     public function rules()
     {
-        if(Route::currentRouteName() == 'kepemilikanAset.store') {
-            return [
-                'nama' => 'required|string',
-                'prefix' => 'required|string|unique:\App\Models\KepemilikanAset,prefix',
-            ];
-        }
-        elseif(Route::currentRouteName() == 'kepemilikanAset.update') {
-            return [
-                'nama' => 'required|string',
-                'prefix' => 'required|string',
-            ];
-        }
+        return [
+            'nama' => 'required|string',
+            'prefix' => [
+                Rule::excludeIf(Route::currentRouteName() == 'kepemilikanAset.update'),
+                'required',
+                'string',
+                'unique:\App\Models\KepemilikanAset,prefix',
+            ]
+        ];
     }
 }
