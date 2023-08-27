@@ -404,6 +404,7 @@ return [
             'text'    => 'Master Data',
             'icon'    => 'fas fa-fw fa-share',
             'can'     => [
+                'kepemilikanAset.index', 'kepemilikanAset.store', 'kepemilikan.update', 'kepemilikanAset.del',
                 'aset.index', 'aset.detail',
                 'jenisKendaraan.index', 'jenisKendaraan.store', 'jenisKendaraan.update', 'jenisKendaraan.del',
                 'kendaraan.index', 'kendaraan.store', 'kendaraan.show', 'kendaraan.update', 'kendaraan.del',
@@ -413,6 +414,13 @@ return [
                 'tools.index', 'tools.store', 'tools.detail', 'tools.edit', 'tools.update', 'tools.del',
             ],
             'submenu' => [
+                [
+                    'text' => 'Kepemilikan Aset',
+                    'route' => 'kepemilikanAset.index',
+                    'icon' => 'fas fa-fw fa-building',
+                    'active' => ['kepemilikan-aset'],
+                    'can' => ['kepemilikanAset.index', 'kepemilikanAset.store', 'kepemilikan.update', 'kepemilikanAset.del']
+                ],
                 [
                     'text' => 'Aset',
                     'route' => 'aset.index',
