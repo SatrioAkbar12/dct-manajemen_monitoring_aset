@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AsetHelper;
 use App\Http\Requests\ToolRequest;
 use App\Models\Aset;
 use App\Models\Gudang;
+use App\Models\KepemilikanAset;
 use App\Models\Tool;
 use App\Models\ToolsGroup;
 use Illuminate\Http\Request;
@@ -20,38 +22,23 @@ class ToolController extends Controller
     public function index() {
         $data_tools_group = ToolsGroup::all();
         $data_gudang = Gudang::all();
+        $data_kepemilikan_aset = KepemilikanAset::all();
         $data_tool = Tool::orderBy('updated_at', 'desc')->paginate(10);
 
         $title = 'Hapus data';
         $text = 'Apakah anda yakin menghapus data ini?';
         confirmDelete($title, $text);
 
-        return view('tool.index', ['data_tool' => $data_tool, 'data_tools_group' => $data_tools_group, 'data_gudang' => $data_gudang]);
+        return view('tool.index', ['data_tool' => $data_tool, 'data_tools_group' => $data_tools_group, 'data_gudang' => $data_gudang, 'data_kepemilikan_aset' => $data_kepemilikan_aset]);
     }
 
     public function store(ToolRequest $request) {
-        $prefix_grup = $request->tools_group;
-        if(intval($prefix_grup) < 10) {
-            $prefix_grup = '0' . $prefix_grup;
-        }
-        $kode_aset = 'TOOL' . $prefix_grup;
-
-        $aset = Aset::where('kode_aset', 'like',  $kode_aset . '%')->orderBy('id', 'desc')->first();
-        $id = 1;
-        if($aset != null) {
-            $id = intval(substr($aset->kode_aset, -3)) + 1;
-        }
-
-        if($id < 10) {
-            $kode_aset = $kode_aset . "00" . $id;
-        }
-        else {
-            $kode_aset = $kode_aset . "0" . $id;
-        }
+        $kode_aset = AsetHelper::createKodeAset($request->kepemilikan_aset);
 
         $aset = Aset::create([
             'kode_aset' => $kode_aset,
             'tipe_aset' => 'tool',
+            'id_kepemilikan_aset' => $request->kepemilikan_aset,
         ]);
 
         Tool::create([

@@ -3,8 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
 
-class ToolRequest extends FormRequest
+class KepemilikanAsetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +27,12 @@ class ToolRequest extends FormRequest
     {
         return [
             'nama' => 'required|string',
-            'merk' => 'required|string',
-            'model' => 'string',
-            'deskripsi' => 'string',
-            'tools_group' => 'required|integer|exists:\App\Models\ToolsGroup,id',
-            'gudang' => 'required|integer|exists:\App\Models\Gudang,id',
-            'kepemilikan_aset' => 'required|integer|exists:\App\Models\KepemilikanAset,id',
+            'prefix' => [
+                Rule::excludeIf(Route::currentRouteName() == 'kepemilikanAset.update'),
+                'required',
+                'string',
+                'unique:\App\Models\KepemilikanAset,prefix',
+            ]
         ];
     }
 }

@@ -42,6 +42,7 @@ class KendaraanRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'kepemilikan_aset' => 'required|integer|exists:\App\Models\KepemilikanAset,id',
         ];
     }
 }

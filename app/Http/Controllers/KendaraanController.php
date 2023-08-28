@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AsetHelper;
 use App\Http\Requests\KendaraanRequest;
 use App\Models\Aset;
 use App\Models\JenisKendaraan;
 use App\Models\Kendaraan;
+use App\Models\KepemilikanAset;
 use App\Models\ServisRutinKendaraan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,37 +23,22 @@ class KendaraanController extends Controller
     public function index() {
         $data = Kendaraan::orderBy('updated_at', 'desc')->paginate(10);
         $data_jenis_kendaraan = JenisKendaraan::all();
+        $data_kepemilikan_aset = KepemilikanAset::all();
 
         $title = 'Hapus data';
         $text = 'Apakah anda yakin menghapus data ini?';
         confirmDelete($title, $text);
 
-        return view('kendaraan.index', ['data' => $data, 'data_jenis_kendaraan' => $data_jenis_kendaraan]);
+        return view('kendaraan.index', ['data' => $data, 'data_jenis_kendaraan' => $data_jenis_kendaraan, 'data_kepemilikan_aset' => $data_kepemilikan_aset]);
     }
 
     public function store(KendaraanRequest $request) {
-        $prefix_jenis_kendaraan = $request->jenis_kendaraan;
-        if(intval($prefix_jenis_kendaraan) < 10) {
-            $prefix_jenis_kendaraan = '0' . $prefix_jenis_kendaraan;
-        }
-        $kode_aset = 'TRAN' . $prefix_jenis_kendaraan;
-
-        $aset = Aset::where('kode_aset', 'like',  $kode_aset . '%')->orderBy('id', 'desc')->first();
-        $id = 1;
-        if($aset != null) {
-            $id = intval(substr($aset->kode_aset, -3)) + 1;
-        }
-
-        if($id < 10) {
-            $kode_aset = $kode_aset . "00" . $id;
-        }
-        else {
-            $kode_aset = $kode_aset . "0" . $id;
-        }
+        $kode_aset = AsetHelper::createKodeAset($request->kepemilikan_aset);
 
         $aset = Aset::create([
             'kode_aset' => $kode_aset,
             'tipe_aset' => 'kendaraan',
+            'id_kepemilikan_aset' => $request->kepemilikan_aset,
         ]);
 
         $kendaraan = Kendaraan::create([
