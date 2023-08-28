@@ -15,8 +15,8 @@
                 <table class="table table-bordered">
                     <thead class="text-center">
                         <tr>
-                            <th>Id</th>
                             <th>Kode Aset</th>
+                            <th>Kepemilikan Aset</th>
                             <th>Tipe Aset</th>
                             <th>Aksi</th>
                         </tr>
@@ -24,8 +24,12 @@
                     <tbody>
                         @foreach ($data_aset as $aset)
                             <tr>
-                                <td class="text-center">{{ $aset->id }}</td>
                                 <td>{{ $aset->kode_aset }}</td>
+                                @if ($aset->kepemilikanAset != null)
+                                    <td>{{ $aset->kepemilikanAset->nama }}</td>
+                                @else
+                                    <td class="text-center">&minus;</td>
+                                @endif
                                 <td>{{ ucfirst($aset->tipe_aset) }}</td>
                                 <td class="text-center">
                                     @can('aset.detail')
