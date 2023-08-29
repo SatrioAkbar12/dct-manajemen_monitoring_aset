@@ -87,7 +87,10 @@ class KendaraanController extends Controller
     }
 
     public function del($id) {
-        Kendaraan::where('id', $id)->delete();
+        $kendaraan = Kendaraan::where('id', $id)->first();
+
+        Aset::where('id', $kendaraan->id_aset)->delete();
+        $kendaraan->delete();
 
         Alert::success('Tersimpan!', 'Berhasil menghapus kendaraan');
 

@@ -13,7 +13,7 @@ class AsetController extends Controller
     }
 
     public function index() {
-        $data_aset = Aset::paginate(10);
+        $data_aset = Aset::with('kepemilikanAset')->orderby('updated_at', 'desc')->paginate(10);
 
         return view('aset.index', ['data_aset' => $data_aset]);
     }

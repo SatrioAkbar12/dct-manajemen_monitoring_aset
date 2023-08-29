@@ -11,7 +11,7 @@ class AsetHelper {
         $today = Carbon::now();
         $kepemilikan_aset = KepemilikanAset::find($id_kepemilikan_aset);
 
-        $aset = Aset::where('kode_aset', 'like', '%'.$kepemilikan_aset->prefix."%")->whereDate('created_at', Carbon::today())->count();
+        $aset = Aset::where('kode_aset', 'like', '%'.$kepemilikan_aset->prefix."%")->whereMonth('created_at', Carbon::now('m'))->count();
         $urutan = 1;
 
         if($aset != 0) {

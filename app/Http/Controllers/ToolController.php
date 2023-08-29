@@ -88,7 +88,10 @@ class ToolController extends Controller
     }
 
     public function del($id) {
-        Tool::where('id', $id)->delete();
+        $tool = Tool::where('id', $id)->first();
+
+        Aset::where('id', $tool->id_aset)->delete();
+        $tool->delete();
 
         Alert::success('Tersimpan!', 'Berhasil menghapus tool');
 
