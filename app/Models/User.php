@@ -25,7 +25,8 @@ class User extends Authenticatable
         'nama',
         'email',
         'password',
-        'memiliki_sim'
+        'memiliki_sim',
+        'first_login',
     ];
 
     /**
