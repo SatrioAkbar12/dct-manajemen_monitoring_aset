@@ -42,6 +42,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::middleware('auth')->get('/', [HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->post('/first-login', [HomeController::class, 'firstLogin'])->name('firstLogin');
 
 Route::middleware('auth')->controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function() {
     Route::get('/', 'index')->name('index');

@@ -36,11 +36,6 @@ class UserRequest extends FormRequest
             'nama' => 'required|string',
             'username' => 'required|string',
             'email' => 'required|string|email',
-            'password' => [
-                Rule::excludeIf(Route::currentRouteName() == 'user.update'),
-                'required',
-                'string',
-            ],
             'role' => [
                 Rule::excludeIf(Route::currentRouteName() == 'user.update'),
                 'required',

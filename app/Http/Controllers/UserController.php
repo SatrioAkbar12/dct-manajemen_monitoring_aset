@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Faker\Factory as Faker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Role;
-
 class UserController extends Controller
 {
     public function __construct()
@@ -28,19 +28,23 @@ class UserController extends Controller
     }
 
     public function store(UserRequest $request) {
+        $faker = Faker::create();
+        $password = $faker->password(20,20);
+
         $user = User::create([
             'username' => $request->username,
             'nama' => $request->nama,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'memiliki_sim' => $request->memiliki_sim
+            'password' => Hash::make($password),
+            'memiliki_sim' => $request->memiliki_sim,
+            'first_login' => 1,
         ]);
 
         $user->assignRole($request->role);
 
         Alert::success('Tersimpan!', 'Berhasil menambahkan data user');
 
-        return redirect(route('user.index'));
+        return view('user.create', ['data_user' => $user,'generate_password' => $password]);
     }
 
     public function show($id) {

@@ -147,13 +147,6 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
-                                @error('password')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
                                 <label>Role</label>
                                 <select class="form-control @error('role') is-invalid @enderror" id="roleInputCreate" name="role" required>
                                     @foreach ($data_role as $role)
