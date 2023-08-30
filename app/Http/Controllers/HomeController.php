@@ -31,10 +31,10 @@ class HomeController extends Controller
         $auth = Auth::user();
 
         if($auth->first_login == 1) {
-            return view('renewPassword');
+            return view('firstLogin');
         }
 
-        return view('firstLogin');
+        return view('home');
     }
 
     public function firstLogin(FirstLoginRequest $request) {
