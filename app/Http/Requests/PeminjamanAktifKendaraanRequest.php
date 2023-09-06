@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PeminjamanAktifKendaraanRequest extends FormRequest
@@ -67,10 +68,11 @@ class PeminjamanAktifKendaraanRequest extends FormRequest
         }
     }
 
-    protected function getValidatorInstance()
+    protected function failedValidation(Validator $validator)
     {
-        return parent::getValidatorInstance()->after(function () {
-            Alert::error('Gagal tersimpan!', 'Gagal menyimpan data');
-        });
+        Alert::error('Gagal tersimpan!', 'Gagal menyimpan data');
+        throw (new ValidationException($validator))
+                    ->errorBag($this->errorBag)
+                    ->redirectTo($this->getRedirectUrl());
     }
 }
