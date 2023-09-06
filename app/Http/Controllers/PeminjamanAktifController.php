@@ -86,7 +86,6 @@ class PeminjamanAktifController extends Controller
 
         $transaksi = TransaksiPeminjamanKendaraan::find($id);
         $kendaraan = Kendaraan::find($transaksi->id_kendaraan);
-        $servis = ServisRutinKendaraan::where('id_kendaraan', $kendaraan->id)->first();
 
         KondisiKendaraanTransaksasiPeminjaman::where('id_transaksi', $id)->update([
             'status_kondisi' => $request->status_kondisi,
@@ -105,18 +104,6 @@ class PeminjamanAktifController extends Controller
             'tanggal_waktu_kembali' => Carbon::now('Asia/Jakarta'),
             'geolocation_kembali' => $request->geo_latitude . ',' . $request->geo_longitude,
         ]);
-
-        if($servis->km_target <= $request->km_terakhir) {
-            $kendaraan->update([
-                'km_saat_ini' => $request->km_terakhir,
-                'perlu_servis' => 1
-            ]);
-        }
-        else {
-            $kendaraan->update([
-                'km_saat_ini' => $request->km_terakhir,
-            ]);
-        }
 
         Alert::success('Tersimpan!', 'Berhasil menyelesaikan peminjaman kendaraan');
 
