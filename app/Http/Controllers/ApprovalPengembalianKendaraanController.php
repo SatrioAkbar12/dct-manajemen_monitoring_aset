@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ApprovalPengembalianKendaraanRequest;
+use App\Models\Kendaraan;
+use App\Models\ServisRutinKendaraan;
 use App\Models\TransaksiPeminjamanKendaraan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +43,20 @@ class ApprovalPengembalianKendaraanController extends Controller
             $data_peminjaman->update([
                 'approved' => 1,
             ]);
+
+            $kendaraan = Kendaraan::find($data_peminjaman->id_kendaraan);
+            $servis = ServisRutinKendaraan::where('id_kendaraan', $data_peminjaman->id_kendaraan)->first();
+            if($data_peminjaman->kondisiKendaraan->km_terakhir >= $servis->km_target) {
+                $kendaraan->update([
+                    'km_saat_ini' => $data_peminjaman->kondisiKendaraan->km_terakhir,
+                    'perlu_servis' => 1,
+                ]);
+            }
+            else {
+                $kendaraan->update([
+                    'km_saat_ini' => $data_peminjaman->kondisiKendaraan->km_terakhir,
+                ]);
+            }
         }
         else {
             $data_peminjaman->update([

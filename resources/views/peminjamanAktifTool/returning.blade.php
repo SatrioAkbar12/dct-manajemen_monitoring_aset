@@ -23,7 +23,7 @@
                     <label>Kembali di gudang</label>
                     <select class="form-control @error('gudang') is-invalid @enderror" id="inputGudang" name="gudang">
                         @foreach ($data_gudang as $gudang)
-                            <option value="{{ $gudang->id }}">{{ $gudang->nama }}</option>
+                            <option value="{{ $gudang->id }}" {{ old('gudang') == $gudang->id ? 'selected' : '' }}>{{ $gudang->nama }}</option>
                         @endforeach
                     </select>
                     @error('gudang')
@@ -37,8 +37,8 @@
                         <div class="form-group">
                             <label>Status kondisi</label>
                             <select class="form-control @error('status_kondisi') is-invalid @enderror" name="status_kondisi[]" required>
-                                <option value="Tidak ada kerusakan">Tidak ada kerusakan</option>
-                                <option value="Ada kerusakan">Ada kerusakan</option>
+                                <option value="Tidak ada kerusakan" {{ old('status_kondisi[' . $loop->index . ']') == 'Tidak ada kerusakan' ? 'selected' : '' }}>Tidak ada kerusakan</option>
+                                <option value="Ada kerusakan" {{ old('status_kondisi[' . $loop->index . ']') == 'Ada kerusakan' ? 'selected' : '' }}>Ada kerusakan</option>
                             </select>
                             @error('status_kondisi')
                                 <div class="text-danger">{{ $message }}</div>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group">
                             <label>Deskripsi</label>
-                            <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi[]" required></textarea>
+                            <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi[]" required>{{ old('deskripsi[' . $loop->index . ']') }}</textarea>
                             @error('deskripsi')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror

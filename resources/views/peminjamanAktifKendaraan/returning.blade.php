@@ -18,8 +18,8 @@
                 <div class="form-group">
                     <label>Status kondisi kendaraan</label>
                     <select class="form-control @error('status_kondisi') is-invalid @enderror" name="status_kondisi" required>
-                        <option value="Aman">Aman</option>
-                        <option value="Ada kerusakan">Ada kerusakan</option>
+                        <option value="Tidak ada kerusakan" {{ old('status_kondisi') == 'Tidak ada kerusakan' ? 'selected' : '' }}>Tidak ada kerusakan</option>
+                        <option value="Ada kerusakan" {{ old('status_kondisi') == 'Ada kerusakan' ? 'selected' : '' }}>Ada kerusakan</option>
                     </select>
                     @error('status_kondisi')
                         <div class="text-danger">{{ $message }}</div>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label>Deskripsi kondisi kendaraan</label>
-                    <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" required></textarea>
+                    <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
                     @error('deskripsi')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label>KM terakhir kendaraan</label>
                     <input type="hidden" name="km_sebelumnya" value="{{ $data_peminjaman_aktif->kendaraan->km_saat_ini }}">
-                    <input type="number" class="form-control @error('km_terakhir') is-invalid @enderror" name="km_terakhir" required>
+                    <input type="number" class="form-control @error('km_terakhir') is-invalid @enderror" name="km_terakhir" value="{{ old('km_terakhir') }}" required>
                     *KM peminjaman terakhir : {{ $data_peminjaman_aktif->kendaraan->km_saat_ini }}
                     @error('km_terakhir')
                         <div class="text-danger">{{ $message }}</div>
