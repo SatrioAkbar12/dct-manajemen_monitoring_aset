@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KendaraanRequest extends FormRequest
 {
@@ -44,5 +47,13 @@ class KendaraanRequest extends FormRequest
             ],
             'kepemilikan_aset' => 'required|integer|exists:\App\Models\KepemilikanAset,id',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        Alert::error('Gagal tersimpan!', 'Gagal menyimpan data');
+        throw (new ValidationException($validator))
+                    ->errorBag($this->errorBag)
+                    ->redirectTo($this->getRedirectUrl());
     }
 }

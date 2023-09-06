@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RoleRequest extends FormRequest
 {
@@ -26,5 +29,13 @@ class RoleRequest extends FormRequest
         return [
             'nama' => 'required|string',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        Alert::error('Gagal tersimpan!', 'Gagal menyimpan data');
+        throw (new ValidationException($validator))
+                    ->errorBag($this->errorBag)
+                    ->redirectTo($this->getRedirectUrl());
     }
 }

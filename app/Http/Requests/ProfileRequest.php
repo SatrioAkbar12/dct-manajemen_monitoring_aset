@@ -3,8 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Rules\MatchOldPassword;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\ValidationException;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfileRequest extends FormRequest
 {
@@ -40,5 +43,13 @@ class ProfileRequest extends FormRequest
                 'password_baru_confirmation' => 'required',
             ];
         }
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        Alert::error('Gagal tersimpan!', 'Gagal menyimpan data');
+        throw (new ValidationException($validator))
+                    ->errorBag($this->errorBag)
+                    ->redirectTo($this->getRedirectUrl());
     }
 }
