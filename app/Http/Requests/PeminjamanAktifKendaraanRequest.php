@@ -31,7 +31,7 @@ class PeminjamanAktifKendaraanRequest extends FormRequest
             return [
                 'user' => 'required|exists:App\Models\User,id',
                 'kendaraan' => 'required|exists:App\Models\Kendaraan,id',
-                'target_tanggal_waktu_kembali' => 'required|date',
+                'target_tanggal_waktu_kembali' => 'required|date|after_or_equal:' . $this->tanggal_waktu_pinjam,
                 'tanggal_waktu_pinjam' => 'required|date|after_or_equal:now',
                 'foto_speedometer' => 'required|image',
                 'keperluan' => 'required|string',
@@ -42,7 +42,7 @@ class PeminjamanAktifKendaraanRequest extends FormRequest
         }
         elseif(Route::currentRouteName() == 'peminjamanAktifKendaraan.update') {
             return [
-                'status_kondisi' => 'required|in:Aman,Ada kerusakan',
+                'status_kondisi' => 'required|in:Tidak ada kerusakan,Ada kerusakan',
                 'deskripsi' => 'required|string',
                 'km_sebelumnya' => 'required|integer',
                 'km_terakhir' => 'required|integer|min:' . $this->km_sebelumnya,
@@ -67,14 +67,10 @@ class PeminjamanAktifKendaraanRequest extends FormRequest
         }
     }
 
-    public function after(): array
+    protected function getValidatorInstance()
     {
-        return [
-            function () {
-                if ($this->somethingElseIsInvalid()) {
-                    Alert::error('Gagal tersimpan!', 'Gagal menyimpan data karena input salah');
-                }
-            }
-        ];
+        return parent::getValidatorInstance()->after(function () {
+            Alert::error('Gagal tersimpan!', 'Gagal menyimpan data');
+        });
     }
 }
