@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PeminjamanAktifToolRequest extends FormRequest
@@ -31,7 +33,7 @@ class PeminjamanAktifToolRequest extends FormRequest
                 'user' => 'required|integer|exists:\App\Models\User,id',
                 'tools' => 'required|array',
                 'tanggal_waktu_pinjam' => 'required|date|after_or_equal:now',
-                'target_tanggal_waktu_kembali' => 'required|date',
+                'target_tanggal_waktu_kembali' => 'required|date|after_or_equal:' . $this->tanggal_waktu_pinjam,
                 'keperluan' => 'required|string',
                 'lokasi_tujuan' => 'required|string',
                 'geo_latitude' => 'required|string',
@@ -81,14 +83,11 @@ class PeminjamanAktifToolRequest extends FormRequest
         }
     }
 
-    public function after(): array
+    protected function failedValidation(Validator $validator)
     {
-        return [
-            function () {
-                if ($this->somethingElseIsInvalid()) {
-                    Alert::error('Gagal tersimpan!', 'Gagal menyimpan data karena input salah');
-                }
-            }
-        ];
+        Alert::error('Gagal tersimpan!', 'Gagal menyimpan data');
+        throw (new ValidationException($validator))
+                    ->errorBag($this->errorBag)
+                    ->redirectTo($this->getRedirectUrl());
     }
 }
