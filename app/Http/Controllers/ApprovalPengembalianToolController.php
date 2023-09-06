@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ApprovalPengembalianToolRequest;
+use App\Models\Tool;
 use App\Models\TransaksiPeminjamanTool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +42,13 @@ class ApprovalPengembalianToolController extends Controller
             $data_peminjaman->update([
                 'approved' => 1,
             ]);
+
+            foreach($data_peminjaman->listTools as $list_tools) {
+                Tool::where('id_aset', $list_tools->id_aset)->update([
+                    'status_saat_ini' => 'Di gudang',
+                    'id_gudang' => $data_peminjaman->id_gudang_kembali,
+                ]);
+            }
         }
         else {
             $data_peminjaman->update([

@@ -127,11 +127,6 @@ class PeminjamanAktifToolController extends Controller
                 'deskripsi' => $request->deskripsi[$key],
                 'foto_sesudah' => $path_foto,
             ]);
-
-            $tool->update([
-                'status_saat_ini' => 'Di gudang',
-                'id_gudang' => $request->gudang,
-            ]);
         }
 
         TransaksiPeminjamanTool::where('id', $id)->update([
