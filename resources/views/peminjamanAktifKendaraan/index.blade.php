@@ -92,7 +92,7 @@
                                 <select class="form-control @error('user') is-invalid @enderror" id="inputUser" name="user" @unlessrole('admin') disabled @endunlessrole required>
                                     @hasrole('admin')
                                         @foreach ($data_user as $user)
-                                            <option value="{{ $user->id }}">{{ $user->nama }}</option>
+                                            <option value="{{ $user->id }}" {{ old('user') == $user->id ? 'selected' : '' }}>{{ $user->nama }}</option>
                                         @endforeach
                                     @else
                                         <option value="{{ auth()->user()->id }}">{{ auth()->user()->nama }}</option>
@@ -106,7 +106,7 @@
                                 <label for="inputKendaraan">Kendaraan</label>
                                 <select class="form-control @error('kendaraan') is-invalid @enderror" id="inputKendaraan" name="kendaraan" required>
                                     @foreach ($data_kendaraan as $kendaraan)
-                                        <option value="{{ $kendaraan->id }}">{{ $kendaraan->aset->kode_aset . " - " . $kendaraan->nopol . " - " . $kendaraan->jenisKendaraan->nama . " " . $kendaraan->merk . " " . $kendaraan->tipe . " " . $kendaraan->warna }}</option>
+                                        <option value="{{ $kendaraan->id }}" {{ old('kendaraan') == $kendaraan->id ? 'selected' : '' }}>{{ $kendaraan->aset->kode_aset . " - " . $kendaraan->nopol . " - " . $kendaraan->jenisKendaraan->nama . " " . $kendaraan->merk . " " . $kendaraan->tipe . " " . $kendaraan->warna }}</option>
                                     @endforeach
                                 </select>
                                 @error('kendaraan')
@@ -115,28 +115,28 @@
                             </div>
                             <div class="form-group">
                                 <label>Tanggal waktu pinjam</label>
-                                <input type="datetime-local" class="form-control @error('tanggal_waktu_pinjam') is-invalid @enderror" name="tanggal_waktu_pinjam" required>
+                                <input type="datetime-local" class="form-control @error('tanggal_waktu_pinjam') is-invalid @enderror" name="tanggal_waktu_pinjam" value="{{ old('tanggal_waktu_pinjam') }}" required>
                                 @error('tanggal_waktu_pinjam')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label>Target tanggal waktu kembali</label>
-                                <input type="datetime-local" class="form-control @error('target_tanggal_waktu_kembali') is-invalid @enderror" name="target_tanggal_waktu_kembali" required>
+                                <input type="datetime-local" class="form-control @error('target_tanggal_waktu_kembali') is-invalid @enderror" name="target_tanggal_waktu_kembali" value="{{ old('target_tanggal_Waktu_kembali') }}" required>
                                 @error('target_tanggal_waktu_kembali')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label>Keperluan</label>
-                                <input type="text" class="form-control @error('keperluan') is-invalid @enderror" name="keperluan" required>
+                                <input type="text" class="form-control @error('keperluan') is-invalid @enderror" name="keperluan" value="{{ old('keperluan') }}" required>
                                 @error('keperluan')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label>Lokasi tujuan</label>
-                                <input type="text" class="form-control @error('lokasi_tujuan') is-invalid @enderror" name="lokasi_tujuan" required>
+                                <input type="text" class="form-control @error('lokasi_tujuan') is-invalid @enderror" name="lokasi_tujuan" value="{{ old('lokasi_tujuan') }}" required>
                                 @error('lokasi_tujuan')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
