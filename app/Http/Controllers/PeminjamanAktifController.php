@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PeminjamanAktifKendaraanRequest;
 use App\Models\Kendaraan;
 use App\Models\KondisiKendaraanTransaksasiPeminjaman;
-use App\Models\ServisRutinKendaraan;
 use App\Models\TransaksiPeminjamanKendaraan;
 use App\Models\User;
+use App\Notifications\PeminjamanAktifKendaraanNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PeminjamanAktifController extends Controller
@@ -65,6 +66,8 @@ class PeminjamanAktifController extends Controller
             'id_transaksi' => $transaksi->id,
             'foto_speedometer_sebelum' => $path_speedometer,
         ]);
+
+        Notification::send('-941911320', (new PeminjamanAktifKendaraanNotification($transaksi))->delay(Carbon::parse($transaksi->target_tanggal_waktu_kembali)));
 
         Alert::success('Tersimpan!', 'Berhasil melakukan peminjaman kendaraan');
 
