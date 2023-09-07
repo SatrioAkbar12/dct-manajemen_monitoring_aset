@@ -67,7 +67,7 @@ class PeminjamanAktifController extends Controller
             'foto_speedometer_sebelum' => $path_speedometer,
         ]);
 
-        Notification::send('-941911320', (new PeminjamanAktifKendaraanNotification($transaksi))->delay(Carbon::parse($transaksi->target_tanggal_waktu_kembali)));
+        Notification::send(env('TELEGRAM_CHAT_ID'), (new PeminjamanAktifKendaraanNotification($transaksi))->delay(Carbon::parse($transaksi->target_tanggal_waktu_kembali)));
 
         Alert::success('Tersimpan!', 'Berhasil melakukan peminjaman kendaraan');
 

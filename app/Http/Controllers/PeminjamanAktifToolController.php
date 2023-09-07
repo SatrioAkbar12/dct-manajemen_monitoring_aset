@@ -104,7 +104,7 @@ class PeminjamanAktifToolController extends Controller
             ]);
         }
 
-        Notification::send('-941911320', (new PeminjamanAktifToolNotification($peminjaman_tools))->delay(Carbon::parse($peminjaman_tools->target_tanggal_waktu_kembali)));
+        Notification::send(env('TELEGRAM_CHAT_ID'), (new PeminjamanAktifToolNotification($peminjaman_tools))->delay(Carbon::parse($peminjaman_tools->target_tanggal_waktu_kembali)));
 
         Alert::success('Tersimpan!', 'Berhasil menambahkan peminjaman aktif tools');
 
