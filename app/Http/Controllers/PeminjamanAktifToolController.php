@@ -9,9 +9,11 @@ use App\Models\ListToolsTransaksiPeminjaman;
 use App\Models\Tool;
 use App\Models\TransaksiPeminjamanTool;
 use App\Models\User;
+use App\Notifications\PeminjamanAktifToolNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PeminjamanAktifToolController extends Controller
@@ -101,6 +103,8 @@ class PeminjamanAktifToolController extends Controller
                 'foto_sebelum' => $path_foto,
             ]);
         }
+
+        Notification::send('-941911320', (new PeminjamanAktifToolNotification($peminjaman_tools))->delay(Carbon::parse($peminjaman_tools->target_tanggal_waktu_kembali)));
 
         Alert::success('Tersimpan!', 'Berhasil menambahkan peminjaman aktif tools');
 
