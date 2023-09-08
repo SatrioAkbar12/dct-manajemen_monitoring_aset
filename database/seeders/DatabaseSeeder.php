@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             // TipeDokumenSeeder::class,
             // MasaAktifDokumenSeeder::class,
             // ServisRutinSeeder::class,
+            TelegramDataSeeder::class,
         ]);
     }
 }
