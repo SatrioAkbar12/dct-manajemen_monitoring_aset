@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PeminjamanAktifKendaraanRequest;
 use App\Models\Kendaraan;
 use App\Models\KondisiKendaraanTransaksasiPeminjaman;
+use App\Models\TelegramData;
 use App\Models\TransaksiPeminjamanKendaraan;
 use App\Models\User;
 use App\Notifications\PeminjamanAktifKendaraanNotification;
@@ -67,7 +68,9 @@ class PeminjamanAktifController extends Controller
             'foto_speedometer_sebelum' => $path_speedometer,
         ]);
 
-        Notification::send(env('TELEGRAM_CHAT_ID'), (new PeminjamanAktifKendaraanNotification($transaksi))->delay(Carbon::parse($transaksi->target_tanggal_waktu_kembali)));
+        $telegram = TelegramData::where('tipe', 'group')->first();
+
+        Notification::send($telegram->id_telegram, (new PeminjamanAktifKendaraanNotification($transaksi))->delay(Carbon::parse($transaksi->target_tanggal_waktu_kembali)));
 
         Alert::success('Tersimpan!', 'Berhasil melakukan peminjaman kendaraan');
 

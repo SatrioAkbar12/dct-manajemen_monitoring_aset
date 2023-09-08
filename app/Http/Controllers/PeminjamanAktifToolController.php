@@ -6,6 +6,7 @@ use App\Http\Requests\PeminjamanAktifToolRequest;
 use App\Models\Gudang;
 use App\Models\KondisiToolsTransaksiPeminjaman;
 use App\Models\ListToolsTransaksiPeminjaman;
+use App\Models\TelegramData;
 use App\Models\Tool;
 use App\Models\TransaksiPeminjamanTool;
 use App\Models\User;
@@ -104,7 +105,9 @@ class PeminjamanAktifToolController extends Controller
             ]);
         }
 
-        Notification::send(env('TELEGRAM_CHAT_ID'), (new PeminjamanAktifToolNotification($peminjaman_tools))->delay(Carbon::parse($peminjaman_tools->target_tanggal_waktu_kembali)));
+        $telegram = TelegramData::where('tipe', 'channel')->first();
+
+        Notification::send($telegram->id_telegram, (new PeminjamanAktifToolNotification($peminjaman_tools))->delay(Carbon::parse($peminjaman_tools->target_tanggal_waktu_kembali)));
 
         Alert::success('Tersimpan!', 'Berhasil menambahkan peminjaman aktif tools');
 
