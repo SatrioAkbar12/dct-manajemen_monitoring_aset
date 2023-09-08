@@ -36,7 +36,7 @@ class CekMasaAktifDokumenKendaraanCommand extends Command
             $dokumen = MasaAktifDokumenKendaraan::where('id_kendaraan', $k->id)->orderBy('tanggal_masa_berlaku', 'asc')->first();
 
             if($dokumen != null) {
-                if(Carbon::parse($dokumen->tanggal_masa_berlaku, 'Asia/Jakarta')->diffInDays(Carbon::now('Asia/Jakarta'), false) >= -7) {
+                if(Carbon::parse($dokumen->tanggal_masa_berlaku, 'Asia/Jakarta')->diffInDays(Carbon::today('Asia/Jakarta'), false) >= -7) {
                     $k->update([
                         'tanggal_perbarui_dokumen' => $dokumen->tanggal_masa_berlaku,
                     ]);
