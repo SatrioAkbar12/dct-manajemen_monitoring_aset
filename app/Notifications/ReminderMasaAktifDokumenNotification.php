@@ -5,13 +5,13 @@ namespace App\Notifications;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Queue\SerializesModels;
 use NotificationChannels\Telegram\TelegramMessage;
 
 class ReminderMasaAktifDokumenNotification extends Notification implements ShouldQueue
 {
-    use Queueable;
+    use Queueable, SerializesModels;
 
     protected $masa_aktif_dokumen_kendaraan;
 
@@ -44,7 +44,7 @@ class ReminderMasaAktifDokumenNotification extends Notification implements Shoul
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return \NotificationChannels\Telegram\TelegramMessage
      */
     public function toTelegram($notifiable)
     {

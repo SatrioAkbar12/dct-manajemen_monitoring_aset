@@ -5,11 +5,12 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
+use Illuminate\Queue\SerializesModels;
 use NotificationChannels\Telegram\TelegramMessage;
 
 class PeminjamanAktifKendaraanNotification extends Notification implements ShouldQueue
 {
-    use Queueable;
+    use Queueable, SerializesModels;
 
     protected $transaksi_peminjaman;
 
@@ -31,6 +32,10 @@ class PeminjamanAktifKendaraanNotification extends Notification implements Shoul
      */
     public function via($notifiable)
     {
+        if($this->dontSend($notifiable)) {
+            return [];
+        }
+
         return ['telegram'];
     }
 
@@ -38,7 +43,7 @@ class PeminjamanAktifKendaraanNotification extends Notification implements Shoul
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return \NotificationChannels\Telegram\TelegramMessage
      */
     public function toTelegram($notifiable)
     {
@@ -67,5 +72,10 @@ class PeminjamanAktifKendaraanNotification extends Notification implements Shoul
         return [
             //
         ];
+    }
+
+    public function dontSend($notifiable)
+    {
+        return $this->transaksi_peminjaman->aktif == 0;
     }
 }
