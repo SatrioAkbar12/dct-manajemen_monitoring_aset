@@ -169,6 +169,7 @@ Route::middleware('auth')->controller(ToolsGroupController::class)->prefix('tool
 Route::middleware('auth')->controller(ToolController::class)->prefix('tools')->name('tools.')->group(function() {
     Route::middleware('permission:tools.index')->get('/', 'index')->name('index');
     Route::middleware('permission:tools.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:tools.storeExist')->post('/exist', 'storeExist')->name('storeExist');
     Route::middleware('permission:tools.detail')->get('/{id}', 'detail')->name('detail');
     Route::middleware('permission:tools.edit')->get('/{id}/edit', 'edit')->name('edit');
     Route::middleware('permission:tools.update')->post('/{id}/update', 'update')->name('update');

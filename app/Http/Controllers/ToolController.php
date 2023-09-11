@@ -16,7 +16,7 @@ class ToolController extends Controller
 {
     public function __construct()
     {
-        return $this->middleware('permission:tools.index|tools.store|tools.detail|tools.edit|tools.update|tools.del');
+        return $this->middleware('permission:tools.index|tools.store|tools.storeExist|tools.detail|tools.edit|tools.update|tools.del');
     }
 
     public function index() {
@@ -53,6 +53,35 @@ class ToolController extends Controller
         ]);
 
         Alert::success('Tersimpan!', 'Berhasil menambahkan tool baru');
+
+        return redirect(route('tools.index'));
+    }
+
+    public function storeExist(ToolRequest $request) {
+        $prefix = explode('-', $request->kode_aset);
+        $kepemilikan_aset = null;
+        if(isset($prefix[1])) {
+            $kepemilikan_aset = KepemilikanAset::where('prefix', $prefix[1])->first()->id;
+        }
+
+        $aset = Aset::create([
+            'kode_aset' => $request->kode_aset,
+            'tipe_aset' => 'tool',
+            'id_kepemilikan_aset' => $kepemilikan_aset,
+        ]);
+
+        Tool::create([
+            'id_aset' => $aset->id,
+            'nama' => $request->nama,
+            'merk' => $request->merk,
+            'model' => $request->model,
+            'deskripsi' => $request->deskripsi,
+            'status_saat_ini' => 'Di gudang',
+            'id_tools_group' => $request->tools_group,
+            'id_gudang' => $request->gudang,
+        ]);
+
+        Alert::success('Tersimpan!', 'Berhasil menambahkan tool');
 
         return redirect(route('tools.index'));
     }

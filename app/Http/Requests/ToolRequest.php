@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -33,7 +35,18 @@ class ToolRequest extends FormRequest
             'deskripsi' => 'string',
             'tools_group' => 'required|integer|exists:\App\Models\ToolsGroup,id',
             'gudang' => 'required|integer|exists:\App\Models\Gudang,id',
-            'kepemilikan_aset' => 'required|integer|exists:\App\Models\KepemilikanAset,id',
+            'kepemilikan_aset' => [
+                Rule::excludeIf((Route::currentRouteName() == 'tools.storeExist') || (Route::currentRouteName() == 'tools.update')),
+                'required',
+                'integer',
+                'exists:\App\Models\KepemilikanAset,id'
+            ],
+            'kode_aset' => [
+                Rule::excludeIf(Route::currentRouteName() == 'tools.store'),
+                'required',
+                'string',
+                'unique:\App\Models\Aset,kode_aset',
+            ]
         ];
     }
 
