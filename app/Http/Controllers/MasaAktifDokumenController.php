@@ -7,7 +7,7 @@ use App\Models\Kendaraan;
 use App\Models\MasaAktifDokumenKendaraan;
 use App\Models\TelegramData;
 use App\Models\TipeDokumenKendaraan;
-use App\Notifications\DeadlineMAsaAktifDokumenNotification;
+use App\Notifications\DeadlineMasaAktifDokumenNotification;
 use App\Notifications\ReminderMasaAktifDokumenNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -76,11 +76,11 @@ class MasaAktifDokumenController extends Controller
         $telegram = TelegramData::where('tipe', 'channel')->first();
         if($telegram->id_telegram != null) {
             Notification::send($telegram->id_telegram, (new ReminderMasaAktifDokumenNotification($masa_aktif_dokumen))->delay(Carbon::parse($masa_aktif_dokumen->tanggal_masa_berlaku)->subDays(7)));
-            Notification::send($telegram->id_telegram, (new DeadlineMAsaAktifDokumenNotification($masa_aktif_dokumen))->delay(Carbon::parse($masa_aktif_dokumen->tanggal_masa_berlaku)));
+            Notification::send($telegram->id_telegram, (new DeadlineMasaAktifDokumenNotification($masa_aktif_dokumen))->delay(Carbon::parse($masa_aktif_dokumen->tanggal_masa_berlaku)));
         }
         else {
             Notification::send($telegram->username, (new ReminderMasaAktifDokumenNotification($masa_aktif_dokumen))->delay(Carbon::parse($masa_aktif_dokumen->tanggal_masa_berlaku)->subDays(7)));
-            Notification::send($telegram->username, (new DeadlineMAsaAktifDokumenNotification($masa_aktif_dokumen))->delay(Carbon::parse($masa_aktif_dokumen->tanggal_masa_berlaku)));
+            Notification::send($telegram->username, (new DeadlineMasaAktifDokumenNotification($masa_aktif_dokumen))->delay(Carbon::parse($masa_aktif_dokumen->tanggal_masa_berlaku)));
         }
 
         Alert::success('Tersimpan!', 'Berhasil memperbaru masa aktif dokumen');
