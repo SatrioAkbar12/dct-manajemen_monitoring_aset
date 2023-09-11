@@ -28,6 +28,8 @@ class KendaraanRequest extends FormRequest
      */
     public function rules()
     {
+        if(Route::currentRouteName() == 'kendaraan.storeExist')
+
         return [
             'nopol' => 'required|string',
             'merk' => 'required|string',
@@ -35,17 +37,28 @@ class KendaraanRequest extends FormRequest
             'jenis_kendaraan' => 'required|integer|exists:\App\Models\JenisKendaraan,id',
             'tipe' => 'required|string',
             'km_saat_ini' => 'required|integer',
-            'tanggal_servis_terakhir' => [
-                Rule::excludeIf(Route::currentRouteName() == 'kendaraan.update'),
-                'required',
-                'date',
-            ],
-            'km_target_servis' => [
-                Rule::excludeIf(Route::currentRouteName() == 'kendaraan.update'),
+            // 'tanggal_servis_terakhir' => [
+            //     Rule::excludeIf(Route::currentRouteName() == 'kendaraan.update'),
+            //     'required',
+            //     'date',
+            // ],
+            // 'km_target_servis' => [
+            //     Rule::excludeIf(Route::currentRouteName() == 'kendaraan.update'),
+            //     'required',
+            //     'integer',
+            // ],
+            'kepemilikan_aset' => [
+                Rule::excludeIf((Route::currentRouteName() == 'kendaraan.storeExist') || (Route::currentRouteName() == 'kendaraan.update')),
                 'required',
                 'integer',
+                'exists:\App\Models\KepemilikanAset,id'
             ],
-            'kepemilikan_aset' => 'required|integer|exists:\App\Models\KepemilikanAset,id',
+            'kode_aset' => [
+                Rule::excludeIf(Route::currentRouteName() == 'kendaraan.store'),
+                'required',
+                'string',
+                'unique:\App\Models\Aset,kode_aset',
+            ]
         ];
     }
 

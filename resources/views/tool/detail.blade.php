@@ -57,7 +57,7 @@
                     <p>Tersimpan di</p>
                 </div>
                 <div class="col-8 col-md-10">
-                    <p>: {{ $data_tool->gudang->nama }}</p>
+                    <p>: {{ $data_tool->status_saat_ini == 'Keluar' ? '-' : $data_tool->gudang->nama  }}</p>
                 </div>
             </div>
             <div class="row">

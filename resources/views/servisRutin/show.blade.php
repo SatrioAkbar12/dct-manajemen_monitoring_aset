@@ -209,6 +209,15 @@
                                 <label>Detail servis</label>
                                 <textarea class="form-control @error('detail_servis') is-invalid @enderror" name="detail_servis" required></textarea>
                             </div>
+                            @if ($jumlah_servis == 0)
+                                <div class="form-group">
+                                    <label>KM target</label>
+                                    <input type="number" class="form-control @error('km_target') is-invalid @enderror" name="km_target" required>
+                                    @error('km_target')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            @endif
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

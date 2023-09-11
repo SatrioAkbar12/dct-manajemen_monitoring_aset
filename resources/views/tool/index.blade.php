@@ -12,9 +12,12 @@
     <div class="card">
         <div class="card-body">
             @can('tools.store')
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
-                <hr>
+                <button type="button" class="mx-1 btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
             @endcan
+            @can('tools.storeExist')
+                <button type="button" class="mx-1 btn btn-primary" data-toggle="modal" data-target="#modalCreateExist">Tambah data yang telah ada</button>
+            @endcan
+            <hr>
 
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -81,6 +84,79 @@
                                     @endforeach
                                 </select>
                                 @error('kepemilikan_aset')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Nama</label>
+                                <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required>
+                                @error('nama')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Merk</label>
+                                <input type="text" class="form-control @error('merk') is-invalid @enderror" name="merk" value="{{ old('merk') }}" required>
+                                @error('merk')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Model</label>
+                                <input type="text" class="form-control @error('model') is-invalid @enderror" name="model" value="{{ old('model')}}">
+                                @error('model')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Deskripsi</label>
+                                <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
+                                @error('deskripsi')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="toolsGroup">Tools Group</label>
+                                <select class="form-control @error('tools_group') is-invalid @enderror" id="toolsGroupInput" name="tools_group" required>
+                                    @foreach ($data_tools_group as $grup)
+                                        <option value="{{ $grup->id }}">{{ $grup->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="gudang">Tersimpan di gudang</label>
+                                <select class="form-control @error('gudang') is-invalid @enderror" id="gudangInput" name="gudang" required>
+                                    @foreach ($data_gudang as $gudang)
+                                        <option value="{{ $gudang->id }}">{{ $gudang->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endcan
+
+    @can('tools.storeExist')
+        <div class="modal fade" id="modalCreateExist" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tambah Data Yang Telah Ada</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <form action="{{ route('tools.storeExist') }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Kode aset</label>
+                                <input type="text" class="form-control @error('kode_aset') is-invalid @enderror" name="kode_aset" value="{{ old('kode_aset') }}" required>
+                                @error('kode_aset')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

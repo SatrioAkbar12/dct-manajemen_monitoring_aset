@@ -6,6 +6,7 @@ use App\Models\ServisRutinKendaraan;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -35,10 +36,19 @@ class ServisRutinKendaraanRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'tanggal_servis' => 'required|date|after:' . $this->last_servis->tanggal_servis,
-            'detail_servis' => 'required',
-        ];
+        if($this->last_servis == null) {
+            return [
+                'tanggal_servis' => 'required|date',
+                'detail_servis' => 'required',
+                'km_target' => 'required|numeric',
+            ];
+        }
+        else {
+            return [
+                'tanggal_servis' => 'required|date|after:' . $this->last_servis->tanggal_servis,
+                'detail_servis' => 'required',
+            ];
+        }
     }
 
     protected function failedValidation(Validator $validator)
