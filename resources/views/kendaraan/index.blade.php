@@ -12,7 +12,8 @@
     <div class="card">
         <div class="card-body">
             @can('kendaraan.index')
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
+                <button type="button" class="mx-1 btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
+                <button type="button" class="mx-1 btn btn-primary" data-toggle="modal" data-target="#modalCreateExist">Tambah data yang telah ada</button>
                 <hr>
             @endcan
 
@@ -132,7 +133,7 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <h5 class="lead">Servis Rutin Kendaraan</h5>
                             </div>
                             <div class="form-group">
@@ -148,7 +149,102 @@
                                 @error('km_target_servis')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
+                            </div> --}}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endcan
+
+    @can('kendaraan.storeExist')
+        <div class="modal fade" id="modalCreateExist" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tambah data yang telah ada</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <form action="{{ route('kendaraan.storeExist') }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <h5 class="lead">Data Kendaraan</h5>
                             </div>
+                            <div class="form-group">
+                                <label>Kode aset</label>
+                                <input type="text" class="form-control @error('kode_aset') is-invalid @enderror" name="kode_aset" required>
+                                @error('kode_aset')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Nomor Polisi</label>
+                                <input type="text" class="form-control @error('nopol') is-invalid @enderror" name="nopol" required>
+                                @error('nopol')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Jenis kendaraan</label>
+                                <select class="form-control @error('jenis_kendaraan') is-invalid @enderror" id="jenisKendaraanInput" name="jenis_kendaraan" required>
+                                    @foreach ($data_jenis_kendaraan as $jenis_kendaraan)
+                                        <option value="{{ $jenis_kendaraan->id }}">{{ $jenis_kendaraan->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('jenis_kendaraan')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Merk</label>
+                                <input type="text" class="form-control @error('merk') is-invalid @enderror" name="merk" required>
+                                @error('merk')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Tipe</label>
+                                <input type="text" class="form-control @error('tipe') is-invalid @enderror" name="tipe" required>
+                                @error('tipe')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Warna</label>
+                                <input type="text" class="form-control @error('warna') is-invalid @enderror" name="warna" required>
+                                @error('warna')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>KM saat ini</label>
+                                <input type="number" class="form-control @error('km_saat_ini') is-invalid @enderror" name="km_saat_ini" required>
+                                @error('km_saat_ini')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            {{-- <div class="form-group">
+                                <h5 class="lead">Servis Rutin Kendaraan</h5>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal servis rutin terakhir</label>
+                                <input type="date" class="form-control @error('tanggal_servis_terakhir') is-invalid @enderror" name="tanggal_servis_terakhir" required>
+                                @error('tanggal_servis_terakhir')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>KM target servis</label>
+                                <input type="number" class="form-control @error('km_target_servis') is-invalid @enderror" name="km_target_servis" required>
+                                @error('km_target_servis')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div> --}}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
