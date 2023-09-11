@@ -17,7 +17,7 @@ class KendaraanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:kendaraan.index|kendaraan.store|kendaraan.show|kendaraan.update|kendaraan.del');
+        $this->middleware('permission:kendaraan.index|kendaraan.store|kendaraan.storeExist|kendaraan.show|kendaraan.update|kendaraan.del');
     }
 
     public function index() {
@@ -60,6 +60,34 @@ class KendaraanController extends Controller
         ]);
 
         Alert::success('Tersimpan!', 'Berhasil menambahkan kendaraan baru');
+
+        return redirect(route('kendaraan.index'));
+    }
+
+    public function storeExist(KendaraanRequest $request) {
+        $prefix = explode('-', $request->kode_aset);
+        $kepemilikan_aset = null;
+        if(isset($prefix[1])) {
+            $kepemilikan_aset = KepemilikanAset::where('prefix', $prefix[1])->first()->id;
+        }
+
+        $aset = Aset::create([
+            'kode_aset' => $request->kode_aset,
+            'tipe_aset' => 'kendaraan',
+            'id_kepemilikan_aset' => $kepemilikan_aset,
+        ]);
+
+        Kendaraan::create([
+            'nopol' => $request->nopol,
+            'merk' => $request->merk,
+            'id_jenis_kendaraan' => $request->jenis_kendaraan,
+            'warna' => $request->warna,
+            'tipe' => $request->tipe,
+            'km_saat_ini' => $request->km_saat_ini,
+            'id_aset' => $aset->id,
+        ]);
+
+        Alert::success('Tersimpan!', 'Berhasil menambahkan kendaraan');
 
         return redirect(route('kendaraan.index'));
     }
