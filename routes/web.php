@@ -19,6 +19,7 @@ use App\Http\Controllers\RiwayatPeminjamanToolController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\ServisRutinKendaraanController;
+use App\Http\Controllers\TelegramDataController;
 use App\Http\Controllers\ToolController;
 use App\Http\Controllers\ToolsGroupController;
 use App\Http\Controllers\UserController;
@@ -76,6 +77,11 @@ Route::middleware('auth')->controller(RolePermissionController::class)->prefix('
     Route::middleware('permission:rolePermission.detail')->get('/{id_role}', 'detail')->name('detail');
     Route::middleware('permission:rolePermission.store')->post('/{id_role}', 'store')->name('store');
     Route::middleware('permission:rolePermission.del')->delete('/{id_role}/{id_permission}/delete', 'del')->name('del');
+});
+
+Route::middleware('auth')->controller(TelegramDataController::class)->prefix('telegram-data')->name('telegramData.')->group(function() {
+    Route::middleware('permission:telegramData.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:telegramData.update')->post('/{id}', 'update')->name('update');
 });
 
 Route::middleware('auth')->controller(JenisKendaraanController::class)->prefix('jenis-kendaraan')->name('jenisKendaraan.')->group(function() {

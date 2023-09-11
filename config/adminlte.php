@@ -480,6 +480,7 @@ return [
                 'roles.index', 'roles.store', 'roles.update', 'roles.del',
                 'permission.index.', 'permission.permissionSync',
                 'rolePermission.index', 'rolePermission.detail', 'rolePermission.store', 'rolePermission.del',
+                'telegramData.index', 'telegramData.update',
             ],
             'submenu' => [
                 [
@@ -506,6 +507,12 @@ return [
                     'active' => ['role-permisison', 'regex:@^role-permission/[0-9]+$@'],
                     'can' => ['rolePermission.index', 'rolePermission.detail', 'rolePermission.store', 'rolePermission.del'],
                 ],
+                [
+                    'text' => 'Telegram Data',
+                    'route' => 'telegramData.index',
+                    'active' => ['telegram-data'],
+                    'can' => ['telegramData.index', 'telegramData.update'],
+                ]
             ]
         ]
         // ['header' => 'labels'],

@@ -31,6 +31,9 @@
                                 <td>{{ $kendaraan->nopol }}</td>
                                 <td>{{ $kendaraan->jenisKendaraan->nama . " " . $kendaraan->merk . " " . $kendaraan->tipe . " " . $kendaraan->warna }}</td>
                                 <td class="text-center">
+                                    @if ($kendaraan->servisRutin->count() == 0)
+                                        <div class="text-center">Kendaraan perlu dilengkapi data servis rutin kendaraan</div>
+                                    @endif
                                     @foreach ($kendaraan->servisRutin as $servis_rutin)
                                         @if($loop->first)
                                             @if($kendaraan->perlu_servis)

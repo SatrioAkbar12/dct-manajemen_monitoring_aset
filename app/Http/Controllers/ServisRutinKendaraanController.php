@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ServisRutinKendaraanRequest;
 use App\Models\Kendaraan;
 use App\Models\ServisRutinKendaraan;
+use App\Models\TelegramData;
+use App\Notifications\TanggalServisRutinKendaraanNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ServisRutinKendaraanController extends Controller
@@ -35,16 +38,9 @@ class ServisRutinKendaraanController extends Controller
 
         $tanggal_target = Carbon::parse($request->tanggal_servis, 'Asia/Jakarta')->addMonths(6);
 
-        ServisRutinKendaraan::create([
+        $servis = ServisRutinKendaraan::create([
             'id_kendaraan' => $id_kendaraan,
             'tanggal_servis' => $request->tanggal_servis,
-            // 'penggantian_oli' => $request->penggantian_oli == 'on' ? 1 : 0,
-            // 'cek_aki' => $request->cek_aki == 'on' ? 1 : 0,
-            // 'cek_rem' => $request->cek_rem == 'on' ? 1 : 0,
-            // 'cek_kopling' => $request->cek_kopling == 'on' ? 1 : 0,
-            // 'cek_ban' => $request->cek_ban == 'on' ? 1 : 0,
-            // 'cek_lampu' => $request->cek_lampu == 'on' ? 1 : 0,
-            // 'cek_ac' => $request->cek_ac == 'on' ? 1 : 0,
             'km_target' => $km_target,
             'tanggal_target' => $tanggal_target,
             'detail_servis' => $request->detail_servis,
@@ -53,6 +49,14 @@ class ServisRutinKendaraanController extends Controller
         Kendaraan::where('id', $id_kendaraan)->update([
             'perlu_servis' => 0,
         ]);
+
+        $telegram = TelegramData::where('tipe', 'channel')->first();
+        if($telegram->id_telegram != null) {
+            Notification::send($telegram->id_telegram, (new TanggalServisRutinKendaraanNotification($servis))->delay(Carbon::parse($servis->tanggal_target)));
+        }
+        else {
+            Notification::send($telegram->username, (new TanggalServisRutinKendaraanNotification($servis))->delay(Carbon::parse($servis->tanggal_target)));
+        }
 
         Alert::success('Tersimpan!', 'Berhasil menambahkan data servis rutin baru');
 

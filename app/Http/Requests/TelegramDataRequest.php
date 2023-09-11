@@ -2,22 +2,14 @@
 
 namespace App\Http\Requests;
 
-use App\Models\ServisRutinKendaraan;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class ServisRutinKendaraanRequest extends FormRequest
+class TelegramDataRequest extends FormRequest
 {
-    protected $last_servis;
-
-    public function __construct()
-    {
-        $this->last_servis = ServisRutinKendaraan::where('id_kendaraan', Route::getCurrentRoute()->id_kendaraan)->orderBy('created_at', 'desc')->first();
-    }
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -36,9 +28,29 @@ class ServisRutinKendaraanRequest extends FormRequest
     public function rules()
     {
         return [
-            'tanggal_servis' => 'required|date|after:' . $this->last_servis->tanggal_servis,
-            'detail_servis' => 'required',
+            'id_telegram' => [
+                'nullable',
+                Rule::requiredIf($this->tipe == 'group'),
+                'regex:/-[0-9]+/i',
+                'unique:\App\Models\TelegramData,id_telegram',
+            ],
+            'username' => 'nullable|unique:\App\Models\TelegramData,username|regex:/@[A-Za-z]+/i',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        if($this->id_telegram == '') {
+            $this->merge([
+                'id_telegram' => null,
+            ]);
+        }
+
+        if($this->username == '') {
+            $this->merge([
+                'username' => null,
+            ]);
+        }
     }
 
     protected function failedValidation(Validator $validator)
@@ -48,4 +60,6 @@ class ServisRutinKendaraanRequest extends FormRequest
                     ->errorBag($this->errorBag)
                     ->redirectTo($this->getRedirectUrl());
     }
+
+
 }

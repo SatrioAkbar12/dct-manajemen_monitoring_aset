@@ -34,7 +34,7 @@
                                     @endif
                                     <ul class="text-danger">
                                         @foreach ($kendaraan->masaAktifDokumen as $dokumen)
-                                            @if(\Carbon\Carbon::createFromFormat('Y-m-d', $dokumen->tanggal_masa_berlaku, 'Asia/Jakarta')->diffInDays(\Carbon\Carbon::now('Asia/Jakarta'), false) >= -7)
+                                            @if(\Carbon\Carbon::parse($dokumen->tanggal_masa_berlaku, 'Asia/Jakarta')->diffInDays(\Carbon\Carbon::today('Asia/Jakarta'), false) >= -7)
                                                 <li>{{ $dokumen->tipeDokumen->nama_dokumen }} perlu diperpanjang sebelum tanggal {{ $dokumen->tanggal_masa_berlaku }}</li>
                                             @endif
                                         @endforeach
