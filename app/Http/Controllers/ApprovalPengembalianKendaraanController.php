@@ -45,7 +45,7 @@ class ApprovalPengembalianKendaraanController extends Controller
             ]);
 
             $kendaraan = Kendaraan::find($data_peminjaman->id_kendaraan);
-            $servis = ServisRutinKendaraan::where('id_kendaraan', $data_peminjaman->id_kendaraan)->first();
+            $servis = ServisRutinKendaraan::where('id_kendaraan', $data_peminjaman->id_kendaraan)->orderBy('created_at', 'desc')->first();
             if($data_peminjaman->kondisiKendaraan->km_terakhir >= $servis->km_target) {
                 $kendaraan->update([
                     'km_saat_ini' => $data_peminjaman->kondisiKendaraan->km_terakhir,
