@@ -2,13 +2,22 @@
 
 namespace App\Http\Requests;
 
+use App\Models\ServisRutinKendaraan;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ServisRutinKendaraanRequest extends FormRequest
 {
+    protected $last_servis;
+
+    public function __construct()
+    {
+        $this->last_servis = ServisRutinKendaraan::where('id_kendaraan', Route::getCurrentRoute()->id_kendaraan)->orderBy('created_at', 'desc')->first();
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,7 +36,7 @@ class ServisRutinKendaraanRequest extends FormRequest
     public function rules()
     {
         return [
-            'tanggal_servis' => 'required|date',
+            'tanggal_servis' => 'required|date|after:' . $this->last_servis->tanggal_servis,
             'detail_servis' => 'required',
         ];
     }
