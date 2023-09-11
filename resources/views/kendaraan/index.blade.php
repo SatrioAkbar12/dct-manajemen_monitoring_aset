@@ -13,9 +13,11 @@
         <div class="card-body">
             @can('kendaraan.index')
                 <button type="button" class="mx-1 btn btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah data</button>
-                <button type="button" class="mx-1 btn btn-primary" data-toggle="modal" data-target="#modalCreateExist">Tambah data yang telah ada</button>
-                <hr>
             @endcan
+            @can('kendaraan.storeExist')
+                <button type="button" class="mx-1 btn btn-primary" data-toggle="modal" data-target="#modalCreateExist">Tambah data yang telah ada</button>
+            @endcan
+            <hr>
 
             <div class="table-responsive">
                 <table class="table table-bordered">
