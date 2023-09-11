@@ -94,6 +94,7 @@ Route::middleware('auth')->controller(JenisKendaraanController::class)->prefix('
 Route::middleware('auth')->controller(KendaraanController::class)->prefix('kendaraan')->name('kendaraan.')->group(function() {
     Route::middleware('permission:kendaraan.index')->get('/', 'index')->name('index');
     Route::middleware('permission:kendaraan.store')->post('/', 'store')->name('store');
+    Route::middleware('permission:kendaraan.storeExist')->post('/exist', 'storeExist')->name('storeExist');
     Route::middleware('permission:kendaraan.show')->get('/{id}', 'show')->name('show');
     Route::middleware('permission:kendaraan.update')->post('/{id}', 'update')->name('update');
     Route::middleware('permission:kendaraan.del')->delete('/{id}/delete', 'del')->name('del');
