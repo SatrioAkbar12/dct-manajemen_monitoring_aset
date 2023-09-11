@@ -407,11 +407,11 @@ return [
                 'kepemilikanAset.index', 'kepemilikanAset.store', 'kepemilikan.update', 'kepemilikanAset.del',
                 'aset.index', 'aset.detail',
                 'jenisKendaraan.index', 'jenisKendaraan.store', 'jenisKendaraan.update', 'jenisKendaraan.del',
-                'kendaraan.index', 'kendaraan.store', 'kendaraan.show', 'kendaraan.update', 'kendaraan.del',
+                'kendaraan.index', 'kendaraan.store', 'kendaraan.storeExist', 'kendaraan.show', 'kendaraan.update', 'kendaraan.del',
                 'tipeDokumen.index', 'tipeDokumen.store', 'tipeDokumen.show', 'tipeDokumen.update', 'tipeDokumen.del',
                 'gudang.index', 'gudang.store', 'gudang.update', 'gudang.del',
                 'toolsGroup.index', 'toolsGroup.store', 'toolsGroup.update', 'toolsGroup.del',
-                'tools.index', 'tools.store', 'tools.detail', 'tools.edit', 'tools.update', 'tools.del',
+                'tools.index', 'tools.store', 'tools.storeExist', 'tools.detail', 'tools.edit', 'tools.update', 'tools.del',
             ],
             'submenu' => [
                 [
@@ -440,7 +440,7 @@ return [
                     'route' => 'kendaraan.index',
                     'icon' => 'fas fa-fw fa-car',
                     'active' => ['kendaraan', 'regex:@^kendaraan/[0-9]+$@'],
-                    'can' => ['kendaraan.index', 'kendaraan.store', 'kendaraan.show', 'kendaraan.update', 'kendaraan.del'],
+                    'can' => ['kendaraan.index', 'kendaraan.store', 'kendaraan.storeExist', 'kendaraan.show', 'kendaraan.update', 'kendaraan.del'],
                 ],
                 [
                     'text' => 'Jenis Dokumen Kendaraan',
@@ -468,7 +468,7 @@ return [
                     'route' => 'tools.index',
                     'icon' => 'fas fa-fw fa-screwdriver',
                     'active' => ['tools', 'regex:@^tools/[0-9]+$@', 'regex:@^tools/[0-9]+/edit$@'],
-                    'can' => ['tools.index', 'tools.store', 'tools.detail', 'tools.edit', 'tools.update', 'tools.del'],
+                    'can' => ['tools.index', 'tools.store', 'tools.storeExist', 'tools.detail', 'tools.edit', 'tools.update', 'tools.del'],
                 ],
             ],
         ],
