@@ -20,6 +20,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\ServisRutinKendaraanController;
 use App\Http\Controllers\TelegramDataController;
+use App\Http\Controllers\TestTelegramBotController;
 use App\Http\Controllers\ToolController;
 use App\Http\Controllers\ToolsGroupController;
 use App\Http\Controllers\UserController;
@@ -41,6 +42,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Auth::routes();
+
+Route::middleware('auth')->controller(TestTelegramBotController::class)->prefix('test-telegram')->name('testTelegram.')->group(function() {
+    Route::middleware('permission:testTelegram.getUpdates')->get('/get-updates', 'getUpdates')->name('getUpdates');
+});
 
 Route::middleware('auth')->get('/', [HomeController::class, 'index'])->name('home');
 Route::middleware('auth')->post('/first-login', [HomeController::class, 'firstLogin'])->name('firstLogin');
@@ -194,3 +199,4 @@ Route::middleware('auth')->controller(RiwayatPeminjamanToolController::class)->p
     Route::middleware('permission:riwayatPeminjamanTools.index')->get('/', 'index')->name('index');
     Route::middleware('permission:riwayatPeminjamanTools.detail')->get('/{id}', 'detail')->name('detail');
 });
+
