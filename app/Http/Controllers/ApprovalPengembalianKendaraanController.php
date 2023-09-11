@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ApprovalPengembalianKendaraanRequest;
 use App\Models\Kendaraan;
 use App\Models\ServisRutinKendaraan;
+use App\Models\TelegramData;
 use App\Models\TransaksiPeminjamanKendaraan;
+use App\Notifications\KmTargetPassedServisRutinKendaraanNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ApprovalPengembalianKendaraanController extends Controller
@@ -51,6 +54,14 @@ class ApprovalPengembalianKendaraanController extends Controller
                     'km_saat_ini' => $data_peminjaman->kondisiKendaraan->km_terakhir,
                     'perlu_servis' => 1,
                 ]);
+
+                $telegram = TelegramData::where('tipe', 'channel')->first();
+                if($telegram->id_telegram != null) {
+                    Notification::sendNow($telegram->id_telegram, new KmTargetPassedServisRutinKendaraanNotification($servis));
+                }
+                else {
+                    Notification::sendNow($telegram->username, new KmTargetPassedServisRutinKendaraanNotification($servis));
+                }
             }
             else {
                 $kendaraan->update([
