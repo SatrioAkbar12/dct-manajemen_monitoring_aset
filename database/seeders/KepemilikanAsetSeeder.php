@@ -15,7 +15,7 @@ class KepemilikanAsetSeeder extends Seeder
      */
     public function run()
     {
-        KepemilikanAset::create(['nama' => 'PT. DCT Total Solution', 'prefix' => 'DCT']);
+        KepemilikanAset::create(['nama' => 'PT. DCT Total Solutions', 'prefix' => 'DCT']);
         KepemilikanAset::create(['nama' => 'PT. Dakara Citra Tangguh', 'prefix' => 'DKR']);
     }
 }
