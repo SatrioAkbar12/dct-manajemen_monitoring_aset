@@ -47,8 +47,13 @@ Route::middleware('auth')->controller(TestTelegramBotController::class)->prefix(
     Route::middleware('permission:testTelegram.getUpdates')->get('/get-updates', 'getUpdates')->name('getUpdates');
 });
 
-Route::middleware('auth')->get('/', [HomeController::class, 'index'])->name('home');
-Route::middleware('auth')->post('/first-login', [HomeController::class, 'firstLogin'])->name('firstLogin');
+Route::middleware('auth')->controller(HomeController::class)->group(function() {
+    Route::get('/','index')->name('home');
+    Route::prefix('first-login')->name('firstLogin.')->group(function() {
+        Route::get('/', 'formFirstLogin')->name('form');
+        Route::post('/', 'storeFirstLogin')->name('store');
+    });
+});
 
 Route::middleware('auth')->controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function() {
     Route::get('/', 'index')->name('index');

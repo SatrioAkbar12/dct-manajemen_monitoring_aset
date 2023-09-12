@@ -2,7 +2,7 @@
 
 @section('auth_body')
     <p>Perbarui password anda</p>
-    <form action="{{ route('firstLogin') }}" method="post">
+    <form action="{{ route('firstLogin.store') }}" method="post">
         @csrf
 
         {{-- Password field --}}

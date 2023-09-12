@@ -31,13 +31,17 @@ class HomeController extends Controller
         $auth = Auth::user();
 
         if($auth->first_login == 1) {
-            return view('firstLogin');
+            return redirect(route('firstLogin.form'));
         }
 
         return view('home');
     }
 
-    public function firstLogin(FirstLoginRequest $request) {
+    public function formFirstLogin() {
+        return view('firstLogin');
+    }
+
+    public function storeFirstLogin(FirstLoginRequest $request) {
         $auth = Auth::id();
 
         User::where('id', $auth)->update([
