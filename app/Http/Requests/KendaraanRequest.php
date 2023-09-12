@@ -28,8 +28,6 @@ class KendaraanRequest extends FormRequest
      */
     public function rules()
     {
-        if(Route::currentRouteName() == 'kendaraan.storeExist')
-
         return [
             'nopol' => 'required|string',
             'merk' => 'required|string',

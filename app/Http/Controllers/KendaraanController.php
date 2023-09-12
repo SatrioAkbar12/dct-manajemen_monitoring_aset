@@ -41,7 +41,7 @@ class KendaraanController extends Controller
             'id_kepemilikan_aset' => $request->kepemilikan_aset,
         ]);
 
-        $kendaraan = Kendaraan::create([
+        Kendaraan::create([
             'nopol' => $request->nopol,
             'merk' => $request->merk,
             'id_jenis_kendaraan' => $request->jenis_kendaraan,
@@ -51,13 +51,13 @@ class KendaraanController extends Controller
             'id_aset' => $aset->id,
         ]);
 
-        ServisRutinKendaraan::create([
-            'id_kendaraan' => $kendaraan->id,
-            'tanggal_servis' => $request->tanggal_servis_terakhir,
-            'km_target' => $request->km_target_servis,
-            'tanggal_target' => Carbon::parse($request->tanggal_servis_terakhir, 'Asia/Jakarta')->addMonths(6),
-            'detail_servis' => 'Awal input servis rutin kendaraan',
-        ]);
+        // ServisRutinKendaraan::create([
+        //     'id_kendaraan' => $kendaraan->id,
+        //     'tanggal_servis' => $request->tanggal_servis_terakhir,
+        //     'km_target' => $request->km_target_servis,
+        //     'tanggal_target' => Carbon::parse($request->tanggal_servis_terakhir, 'Asia/Jakarta')->addMonths(6),
+        //     'detail_servis' => 'Awal input servis rutin kendaraan',
+        // ]);
 
         Alert::success('Tersimpan!', 'Berhasil menambahkan kendaraan baru');
 
