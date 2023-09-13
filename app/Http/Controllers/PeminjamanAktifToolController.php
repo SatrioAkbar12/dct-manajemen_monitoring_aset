@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Notifications\PeminjamanAktifToolNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -102,6 +103,11 @@ class PeminjamanAktifToolController extends Controller
             KondisiToolsTransaksiPeminjaman::create([
                 'id_list_tools' => $list_tools->id,
                 'foto_sebelum' => $path_foto,
+            ]);
+
+            Artisan::call('reporting:statistik-peminjaman-tools-user', [
+                '--user' => $request->user,
+                '--tools' => $tool->id,
             ]);
         }
 
