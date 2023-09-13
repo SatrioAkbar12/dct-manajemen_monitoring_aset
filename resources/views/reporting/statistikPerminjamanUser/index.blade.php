@@ -29,7 +29,9 @@
                                     @can('reporting.statistikPeminjamanUser.kendaraan')
                                         <a href="{{ route('reporting.statistikPeminjamanUser.kendaraan', $user->id) }}" class="mx-2 my-1 btn btn-info">Statistik Kendaraan</a>
                                     @endcan
-                                    <a href="" class="mx-2 my-1 btn btn-info">Statistik Tools</a>
+                                    @can('reporting.statistikPeminjamanUser.tools')
+                                        <a href="{{ route('reporting.statistikPeminjamanUser.tools', $user->id) }}" class="mx-2 my-1 btn btn-info">Statistik Tools</a>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
