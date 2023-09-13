@@ -207,8 +207,8 @@ Route::middleware('auth')->controller(RiwayatPeminjamanToolController::class)->p
 });
 
 Route::middleware('auth')->prefix('reporting')->name('reporting.')->group(function() {
-    Route::prefix('statistik-peminjaman-user')->name('statistikPeminjamanUser.')->group(function() {
-        Route::middleware('permission:reporting.statistikPeminjamanUser.index')->get('/', [StatistikPeminjamanUserController::class, 'index'])->name('index');
-
+    Route::controller(StatistikPeminjamanUserController::class)->prefix('statistik-peminjaman-user')->name('statistikPeminjamanUser.')->group(function() {
+        Route::middleware('permission:reporting.statistikPeminjamanUser.index')->get('/', 'index')->name('index');
+        Route::middleware('permission:reporting.statistikPeminjamanUser.kendaraan')->get('/{id_user}/kendaraan', 'kendaraan')->name('kendaraan');
     });
 });
