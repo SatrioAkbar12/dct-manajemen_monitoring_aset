@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Notifications\PeminjamanAktifKendaraanNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -66,6 +67,11 @@ class PeminjamanAktifController extends Controller
         KondisiKendaraanTransaksasiPeminjaman::create([
             'id_transaksi' => $transaksi->id,
             'foto_speedometer_sebelum' => $path_speedometer,
+        ]);
+
+        Artisan::call('reporting:statistik-peminjaman-kendaraan-user', [
+            '--user' => $request->user,
+            '--kendaraan' => $request->kendaraan,
         ]);
 
         $telegram = TelegramData::where('tipe', 'group')->first();
