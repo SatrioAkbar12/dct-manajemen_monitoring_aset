@@ -34,9 +34,15 @@ class StatistikPeminjamanKendaraanUserCommand extends Command
     public function handle()
     {
         $user = User::all();
+        if($this->option('user')) {
+            $user = User::where('id', $this->option('user'))->get();
+        }
 
         foreach($user as $user) {
             $kendaraan = Kendaraan::all();
+            if($this->option('kendaraan')) {
+                $kendaraan = Kendaraan::where('id', $this->option('kendaraan'))->get();
+            }
 
             foreach($kendaraan as $kendaraan) {
                 $jumlah = TransaksiPeminjamanKendaraan::where('id_user', $user->id)->where('id_kendaraan', $kendaraan->id)->count();
