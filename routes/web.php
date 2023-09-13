@@ -210,5 +210,6 @@ Route::middleware('auth')->prefix('reporting')->name('reporting.')->group(functi
     Route::controller(StatistikPeminjamanUserController::class)->prefix('statistik-peminjaman-user')->name('statistikPeminjamanUser.')->group(function() {
         Route::middleware('permission:reporting.statistikPeminjamanUser.index')->get('/', 'index')->name('index');
         Route::middleware('permission:reporting.statistikPeminjamanUser.kendaraan')->get('/{id_user}/kendaraan', 'kendaraan')->name('kendaraan');
+        Route::middleware('permission:reporting.statistikPeminjamanUser.tools')->get('/{id_user}/tools', 'tools')->name('tools');
     });
 });
