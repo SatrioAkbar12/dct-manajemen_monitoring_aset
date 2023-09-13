@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(TransaksiPeminjamanTool::class, 'id_user', 'id');
     }
+
+    public function statistikPeminjamanKendaraanUser(): HasMany
+    {
+        return $this->hasMany(StatistikPeminjamanKendaraanUser::class, 'id_user', 'id');
+    }
 }
