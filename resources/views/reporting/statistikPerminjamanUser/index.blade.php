@@ -26,7 +26,9 @@
                                 <td class="text-center">{{ $user->transaksiPeminjamanKendaraan->count() }}</td>
                                 <td class="text-center">{{ $user->transaksiPeminjamanTools->count() }}</td>
                                 <td class="text-center">
-                                    <a href="" class="mx-2 my-1 btn btn-info">Statistik Kendaraan</a>
+                                    @can('reporting.statistikPeminjamanUser.kendaraan')
+                                        <a href="{{ route('reporting.statistikPeminjamanUser.kendaraan', $user->id) }}" class="mx-2 my-1 btn btn-info">Statistik Kendaraan</a>
+                                    @endcan
                                     <a href="" class="mx-2 my-1 btn btn-info">Statistik Tools</a>
                                 </td>
                             </tr>
