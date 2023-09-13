@@ -19,6 +19,7 @@ use App\Http\Controllers\RiwayatPeminjamanToolController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\ServisRutinKendaraanController;
+use App\Http\Controllers\StatistikPeminjamanUserController;
 use App\Http\Controllers\TelegramDataController;
 use App\Http\Controllers\TestTelegramBotController;
 use App\Http\Controllers\ToolController;
@@ -205,3 +206,9 @@ Route::middleware('auth')->controller(RiwayatPeminjamanToolController::class)->p
     Route::middleware('permission:riwayatPeminjamanTools.detail')->get('/{id}', 'detail')->name('detail');
 });
 
+Route::middleware('auth')->prefix('reporting')->name('reporting.')->group(function() {
+    Route::prefix('statistik-peminjaman-user')->name('statistikPeminjamanUser.')->group(function() {
+        Route::middleware('permission:reporting.statistikPeminjamanUser.index')->get('/', [StatistikPeminjamanUserController::class, 'index'])->name('index');
+
+    });
+});
