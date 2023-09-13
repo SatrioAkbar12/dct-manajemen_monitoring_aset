@@ -401,6 +401,21 @@ return [
             'can' => ['masaAktifDokumen.index', 'masaAktifDokumen.getKendaraan', 'masaAktifDokumen.store', 'masaAktifDokumen.update', 'masaAktifDokumen.update', 'masaAktifDokumen.del'],
         ],
         [
+            'text' => 'Reporting',
+            'icon' => 'fas fa-fw fa-paperclip',
+            'can' =>  [
+                'reporting.statistikPeminjamanUser.index', 'reporting.statistikPeminjamanUser.kendaraan', 'reporting.statistikPeminjamanUser.tools',
+            ],
+            'submenu' => [
+                [
+                    'text' => 'Statistik Peminjaman User',
+                    'route' => 'reporting.statistikPeminjamanUser.index',
+                    'active' => ['reporting/statistik-peminjaman-user', 'regex:@^reporting/statistik-peminjaman-user/[0-9]+/kendaraan$@', 'regex:@^reporting/statistik-peminjaman-user/[0-9]+/tools$@'],
+                    'can' => ['reporting.statistikPeminjamanUser.index', 'reporting.statistikPeminjamanUser.kendaraan', 'reporting.statistikPeminjamanUser.tools'],
+                ]
+            ]
+        ],
+        [
             'text'    => 'Master Data',
             'icon'    => 'fas fa-fw fa-share',
             'can'     => [
