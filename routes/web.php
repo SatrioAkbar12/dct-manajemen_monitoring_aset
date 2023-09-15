@@ -16,6 +16,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Reporting\StatistikPeminjamanUserController;
 use App\Http\Controllers\Reporting\StatistikPenggunaanKendaraanController;
+use App\Http\Controllers\Reporting\StatistikPenggunaanToolsController;
 use App\Http\Controllers\RiwayatPeminjamanController;
 use App\Http\Controllers\RiwayatPeminjamanToolController;
 use App\Http\Controllers\RoleController;
@@ -217,5 +218,10 @@ Route::middleware('auth')->prefix('reporting')->name('reporting.')->group(functi
     Route::controller(StatistikPenggunaanKendaraanController::class)->prefix('statistik-penggunaan-kendaraan')->name('statistikPenggunaanKendaraan.')->group(function() {
         Route::middleware('permission:reporting.statistikPenggunaanKendaraan.index')->get('/', 'index')->name('index');
         Route::middleware('permission:reporting.statistikPenggunaanKendaraan.detail')->get('/{id}', 'detail')->name('detail');
+    });
+
+    Route::controller(StatistikPenggunaanToolsController::class)->prefix('statistik-penggunaan-tools')->name('statistikPenggunaanTools.')->group(function() {
+        Route::middleware('permission:reporting.statistikPenggunaanTools.index')->get('/', 'index')->name('index');
+        Route::middleware('permission:reporting.statistikPenggunaanTools.detail')->get('/{id}', 'detail')->name('detail');
     });
 });
