@@ -105,9 +105,9 @@ class PeminjamanAktifToolController extends Controller
                 'foto_sebelum' => $path_foto,
             ]);
 
-            Artisan::call('reporting:statistik-peminjaman-tools-user', [
+            Artisan::call('reporting:statistik-penggunaan-aset', [
                 '--user' => $request->user,
-                '--tools' => $tool->id,
+                '--aset' => $tool->id_aset,
             ]);
         }
 

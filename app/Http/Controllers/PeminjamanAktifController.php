@@ -69,9 +69,11 @@ class PeminjamanAktifController extends Controller
             'foto_speedometer_sebelum' => $path_speedometer,
         ]);
 
-        Artisan::call('reporting:statistik-peminjaman-kendaraan-user', [
+        $kendaraan = Kendaraan::find($request->kendaraan);
+
+        Artisan::call('reporting:statistik-penggunaan-aset', [
             '--user' => $request->user,
-            '--kendaraan' => $request->kendaraan,
+            '--aset' => $kendaraan->id_aset,
         ]);
 
         $telegram = TelegramData::where('tipe', 'group')->first();
