@@ -65,7 +65,7 @@
                     Total penggunaan
                 </div>
                 <div class="col-8 col-md-10">
-                    : {{ $data_aset->statistikPenggunaanAset->count() }}
+                    : {{ $data_aset->kendaraan->transaksiPeminjamanKendaraan->count() }}
                 </div>
             </div>
             <div class="row">

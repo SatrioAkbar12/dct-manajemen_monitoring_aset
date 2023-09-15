@@ -24,7 +24,7 @@
                             <tr>
                                 <td class="text-center">{{ $aset->kode_aset }}</td>
                                 <td>{{ $aset->kendaraan->nopol . ' - ' . $aset->kendaraan->merk . ' ' . $aset->kendaraan->tipe . ' ' . $aset->kendaraan->warna }}</td>
-                                <td class="text-center">{{ $aset->statistikPenggunaanAset->count() }}</td>
+                                <td class="text-center">{{ $aset->kendaraan->transaksiPeminjamanKendaraan->count() }}</td>
                                 <td class="text-center">
                                     @can('reporting.statistikPenggunaanKendaraan.detail')
                                         <a href="{{ route('reporting.statistikPenggunaanKendaraan.detail', $aset->id) }}" class="btn btn-info">Detail</a>
