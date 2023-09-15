@@ -405,6 +405,7 @@ return [
             'icon' => 'fas fa-fw fa-paperclip',
             'can' =>  [
                 'reporting.statistikPeminjamanUser.index', 'reporting.statistikPeminjamanUser.kendaraan', 'reporting.statistikPeminjamanUser.tools',
+                'reporting.statistikPenggunaanKendaraan.index', 'reporting.statistikPenggunaanKendaraan.detail',
             ],
             'submenu' => [
                 [
@@ -412,6 +413,12 @@ return [
                     'route' => 'reporting.statistikPeminjamanUser.index',
                     'active' => ['reporting/statistik-peminjaman-user', 'regex:@^reporting/statistik-peminjaman-user/[0-9]+/kendaraan$@', 'regex:@^reporting/statistik-peminjaman-user/[0-9]+/tools$@'],
                     'can' => ['reporting.statistikPeminjamanUser.index', 'reporting.statistikPeminjamanUser.kendaraan', 'reporting.statistikPeminjamanUser.tools'],
+                ],
+                [
+                    'text' => 'Statistik Penggunaan Kendaraan',
+                    'route' => 'reporting.statistikPenggunaanKendaraan.index',
+                    'active' => ['reporting/statistik-penggunaan-kendaraan', 'regex:@^reporting/statistik-penggunaan-kendaraan/[0-9]+$@'],
+                    'can' => ['reporting.statistikPenggunaanKendaraan.index', 'reporting.statistikPenggunaanKendaraan.detail'],
                 ]
             ]
         ],
