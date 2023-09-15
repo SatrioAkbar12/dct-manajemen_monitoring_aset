@@ -58,13 +58,8 @@ class User extends Authenticatable
         return $this->hasMany(TransaksiPeminjamanTool::class, 'id_user', 'id');
     }
 
-    public function statistikPeminjamanKendaraanUser(): HasMany
+    public function statistikPenggunaanAset(): HasMany
     {
-        return $this->hasMany(StatistikPeminjamanKendaraanUser::class, 'id_user', 'id');
-    }
-
-    public function statistikPeminjamanToolsUser(): HasMany
-    {
-        return $this->hasMany(StatistikPeminjamanToolsUser::class, 'id_user', 'id');
+        return $this->hasMany(StatistikPenggunaanAset::class, 'id_user', 'id');
     }
 }

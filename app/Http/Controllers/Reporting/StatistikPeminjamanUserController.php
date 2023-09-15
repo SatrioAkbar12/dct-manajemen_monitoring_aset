@@ -25,7 +25,7 @@ class StatistikPeminjamanUserController extends Controller
 
     public function kendaraan($id_user)
     {
-        $data_user = User::with('statistikPeminjamanKendaraanUser')->find($id_user);
+        $data_user = User::with('statistikPenggunaanAset')->find($id_user);
         $jumlah_peminjaman_bulan_ini = TransaksiPeminjamanKendaraan::where('id_user', $id_user)->whereMonth('created_at', Carbon::now()->month)->count();
         $jumlah_peminjaman_aktif = TransaksiPeminjamanKendaraan::where('id_user', $id_user)->where('aktif', 1)->count();
 
@@ -34,7 +34,7 @@ class StatistikPeminjamanUserController extends Controller
 
     public function tools($id_user)
     {
-        $data_user = User::with('statistikPeminjamanToolsUser')->find($id_user);
+        $data_user = User::with('statistikPenggunaanAset')->find($id_user);
         $jumlah_peminjaman_bulan_ini = TransaksiPeminjamanTool::where('id_user', $id_user)->whereMonth('created_at', Carbon::now()->month)->count();
         $jumlah_peminjaman_aktif = TransaksiPeminjamanTool::where('id_user', $id_user)->where('aktif', 1)->count();
 

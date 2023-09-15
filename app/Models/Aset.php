@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -30,5 +31,13 @@ class Aset extends Model
 
     public function tool(): HasOne {
         return $this->hasOne(Tool::class, 'id_aset', 'id');
+    }
+
+    public function listToolsTransaksiPeminjaman(): HasMany {
+        return $this->hasMany(ListToolsTransaksiPeminjaman::class, 'id_aset', 'id');
+    }
+
+    public function statistikPenggunaanAset(): HasMany {
+        return $this->hasMany(StatistikPenggunaanAset::class, 'id_aset', 'id');
     }
 }
