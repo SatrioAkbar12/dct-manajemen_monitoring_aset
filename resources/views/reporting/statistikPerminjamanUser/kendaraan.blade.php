@@ -64,11 +64,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data_user->statistikPeminjamanKendaraanUser as $statistik)
-                            <tr>
-                                <td>{{ $statistik->kendaraan->nopol . ' - ' . $statistik->kendaraan->merk . ' ' . $statistik->kendaraan->tipe . ' ' . $statistik->kendaraan->warna }}</td>
-                                <td class="text-center">{{ $statistik->jumlah }}</td>
-                            </tr>
+                        @foreach ($data_user->statistikPenggunaanAset as $statistik)
+                            @if ($statistik->aset->tipe_aset == 'kendaraan')
+                                <tr>
+                                    <td>{{ $statistik->aset->kendaraan->nopol . ' - ' . $statistik->aset->kendaraan->merk . ' ' . $statistik->aset->kendaraan->tipe . ' ' . $statistik->aset->kendaraan->warna }}</td>
+                                    <td class="text-center">{{ $statistik->jumlah }}</td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
