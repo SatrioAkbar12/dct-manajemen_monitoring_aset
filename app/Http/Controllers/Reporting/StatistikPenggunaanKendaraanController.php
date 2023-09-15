@@ -20,7 +20,7 @@ class StatistikPenggunaanKendaraanController extends Controller
     {
         $data_aset = Aset::with(['kendaraan', 'statistikPenggunaanAset'])->where('tipe_aset', 'like', '%kendaraan%')->paginate(20);
 
-        return view('reporting.statistikPengunaanKendaraan.index', ['data_aset' => $data_aset]);
+        return view('reporting.statistikPenggunaanKendaraan.index', ['data_aset' => $data_aset]);
     }
 
     public function detail($id)
@@ -28,6 +28,6 @@ class StatistikPenggunaanKendaraanController extends Controller
         $data_aset = Aset::with(['kendaraan', 'statistikPenggunaanAset'])->find($id);
         $jumlah_penggunaan_bulan_ini = TransaksiPeminjamanKendaraan::where('id_kendaraan', $data_aset->kendaraan->id)->whereMonth('created_at', Carbon::now()->month)->count();
 
-        return view('reporting.statistikPengunaanKendaraan.detail', ['data_aset' => $data_aset, 'jumlah_penggunaan_bulan_ini' => $jumlah_penggunaan_bulan_ini]);
+        return view('reporting.statistikPenggunaanKendaraan.detail', ['data_aset' => $data_aset, 'jumlah_penggunaan_bulan_ini' => $jumlah_penggunaan_bulan_ini]);
     }
 }
