@@ -36,13 +36,13 @@ class StatistikPenggunaanAsetCommand extends Command
     {
         $user = User::all();
         if($this->option('user')) {
-            $user = User::where($this->option('user'))->get();
+            $user = User::where('id', $this->option('user'))->get();
         }
 
         foreach($user as $user) {
             $aset = Aset::all();
             if($this->option('aset')) {
-                $aset = Aset::where($this->option('aset'))->get();
+                $aset = Aset::where('id', $this->option('aset'))->get();
             }
 
             foreach($aset as $aset) {
