@@ -33,6 +33,10 @@ class Aset extends Model
         return $this->hasOne(Tool::class, 'id_aset', 'id');
     }
 
+    public function listToolsTransaksiPeminjaman(): HasMany {
+        return $this->hasMany(ListToolsTransaksiPeminjaman::class, 'id_aset', 'id');
+    }
+
     public function statistikPenggunaanAset(): HasMany {
         return $this->hasMany(StatistikPenggunaanAset::class, 'id_aset', 'id');
     }
