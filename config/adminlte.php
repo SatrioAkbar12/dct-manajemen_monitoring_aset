@@ -406,6 +406,7 @@ return [
             'can' =>  [
                 'reporting.statistikPeminjamanUser.index', 'reporting.statistikPeminjamanUser.kendaraan', 'reporting.statistikPeminjamanUser.tools',
                 'reporting.statistikPenggunaanKendaraan.index', 'reporting.statistikPenggunaanKendaraan.detail',
+                'reporting.statistikPenggunaanTools.index', 'reporting.statistikPenggunaanTools.detail',
             ],
             'submenu' => [
                 [
@@ -419,7 +420,13 @@ return [
                     'route' => 'reporting.statistikPenggunaanKendaraan.index',
                     'active' => ['reporting/statistik-penggunaan-kendaraan', 'regex:@^reporting/statistik-penggunaan-kendaraan/[0-9]+$@'],
                     'can' => ['reporting.statistikPenggunaanKendaraan.index', 'reporting.statistikPenggunaanKendaraan.detail'],
-                ]
+                ],
+                [
+                    'text' => 'Statistik Penggunaan Tools',
+                    'route' => 'reporting.statistikPenggunaanTools.index',
+                    'active' => ['reporting/statistik-penggunaan-tools', 'regex:@^reporting/statistik-penggunaan-tools/[0-9]+$@'],
+                    'can' => ['reporting.statistikPenggunaanTools.index', 'reporting.statistikPenggunaanTools.detail'],
+                ],
             ]
         ],
         [
