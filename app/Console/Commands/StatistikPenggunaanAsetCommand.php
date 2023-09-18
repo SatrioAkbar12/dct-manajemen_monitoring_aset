@@ -40,9 +40,9 @@ class StatistikPenggunaanAsetCommand extends Command
         }
 
         foreach($user as $user) {
-            $aset = Aset::all();
+            $aset = Aset::with(['kendaraan, tool'])->get();
             if($this->option('aset')) {
-                $aset = Aset::where('id', $this->option('aset'))->get();
+                $aset = Aset::with(['kendaraan, tool'])->where('id', $this->option('aset'))->get();
             }
 
             foreach($aset as $aset) {
@@ -66,8 +66,6 @@ class StatistikPenggunaanAsetCommand extends Command
                     'jumlah' => $jumlah
                 ]);
             }
-
-            $aset = null;
         }
 
         $this->info('Berhasil melakukan perhitungan statistik penggunaan aset!');
