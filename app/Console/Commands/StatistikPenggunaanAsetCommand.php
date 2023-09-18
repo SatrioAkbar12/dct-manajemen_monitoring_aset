@@ -66,6 +66,8 @@ class StatistikPenggunaanAsetCommand extends Command
                     'jumlah' => $jumlah
                 ]);
             }
+
+            $aset = null;
         }
 
         $this->info('Berhasil melakukan perhitungan statistik penggunaan aset!');
