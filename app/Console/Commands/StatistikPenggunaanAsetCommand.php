@@ -48,10 +48,15 @@ class StatistikPenggunaanAsetCommand extends Command
             foreach($aset as $aset) {
                 $jumlah = 0;
                 if($aset->tipe_aset == 'kendaraan') {
-                    $jumlah = TransaksiPeminjamanKendaraan::where('id_user', $user->id)->where('id_kendaraan', $aset->kendaraan->id)->count();
+                    $jumlah = TransaksiPeminjamanKendaraan::where('id_user', $user->id)
+                        ->where('id_kendaraan', $aset->kendaraan->id)
+                        ->count();
                 }
                 elseif($aset->tipe_aset == 'tool') {
-                    $jumlah = ListToolsTransaksiPeminjaman::join('transaksi_peminjaman_tool', 'transaksi_peminjaman_tool.id', '=', 'list_tools_transaksi_peminjaman.id_peminjaman_tool')->where('list_tools_transaksi_peminjaman.id_aset', $aset->id)->where('transaksi_peminjaman_tool.id_user', $user->id)->count();
+                    $jumlah = ListToolsTransaksiPeminjaman::join('transaksi_peminjaman_tool', 'transaksi_peminjaman_tool.id', '=', 'list_tools_transaksi_peminjaman.id_peminjaman_tool')
+                        ->where('list_tools_transaksi_peminjaman.id_aset', $aset->id)
+                        ->where('transaksi_peminjaman_tool.id_user', $user->id
+                        )->count();
                 }
 
                 StatistikPenggunaanAset::updateOrCreate([
