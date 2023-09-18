@@ -40,9 +40,9 @@ class StatistikPenggunaanAsetCommand extends Command
         }
 
         foreach($user as $user) {
-            $aset = Aset::with(['kendaraan, tool'])->get();
+            $aset = Aset::with(['kendaraan', 'tool'])->get();
             if($this->option('aset')) {
-                $aset = Aset::with(['kendaraan, tool'])->where('id', $this->option('aset'))->get();
+                $aset = Aset::with(['kendaraan', 'tool'])->where('id', $this->option('aset'))->get();
             }
 
             foreach($aset as $aset) {
