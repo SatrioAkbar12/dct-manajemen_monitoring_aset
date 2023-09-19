@@ -11,6 +11,7 @@ use App\Models\KepemilikanAset;
 use App\Models\ServisRutinKendaraan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class KendaraanController extends Controller
@@ -59,6 +60,8 @@ class KendaraanController extends Controller
         //     'detail_servis' => 'Awal input servis rutin kendaraan',
         // ]);
 
+        $this->updateStatistik($aset->id);
+
         Alert::success('Tersimpan!', 'Berhasil menambahkan kendaraan baru');
 
         return redirect(route('kendaraan.index'));
@@ -86,6 +89,8 @@ class KendaraanController extends Controller
             'km_saat_ini' => $request->km_saat_ini,
             'id_aset' => $aset->id,
         ]);
+
+        $this->updateStatistik($aset->id);
 
         Alert::success('Tersimpan!', 'Berhasil menambahkan kendaraan');
 
@@ -123,5 +128,12 @@ class KendaraanController extends Controller
         Alert::success('Tersimpan!', 'Berhasil menghapus kendaraan');
 
         return redirect(route('kendaraan.index'));
+    }
+
+    protected function updateStatistik($id_aset)
+    {
+        Artisan::call('reporting:statistik-penggunaan-aset', [
+            '--aset' => $id_aset,
+        ]);
     }
 }
