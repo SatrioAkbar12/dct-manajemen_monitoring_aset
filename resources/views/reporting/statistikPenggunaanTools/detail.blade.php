@@ -89,10 +89,12 @@
                     </thead>
                     <tbody>
                         @foreach ($data_aset->statistikPenggunaanAset as $statistik)
-                            <tr>
-                                <td>{{ $statistik->user->nama }}</td>
-                                <td class="text-center">{{ $statistik->jumlah }}</td>
-                            </tr>
+                            @if ($statistik->user != null)
+                                <tr>
+                                    <td>{{ $statistik->user->nama }}</td>
+                                    <td class="text-center">{{ $statistik->jumlah }}</td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
