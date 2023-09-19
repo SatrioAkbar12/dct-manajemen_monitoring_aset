@@ -26,11 +26,11 @@ class Aset extends Model
     }
 
     public function kendaraan(): HasOne {
-        return $this->hasOne(Kendaraan::class, 'id_aset', 'id');
+        return $this->hasOne(Kendaraan::class, 'id_aset', 'id')->withTrashed();
     }
 
     public function tool(): HasOne {
-        return $this->hasOne(Tool::class, 'id_aset', 'id');
+        return $this->hasOne(Tool::class, 'id_aset', 'id')->withTrashed();
     }
 
     public function listToolsTransaksiPeminjaman(): HasMany {

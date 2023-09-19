@@ -30,7 +30,7 @@ class TransaksiPeminjamanKendaraan extends Model
     ];
 
     public function kendaraan(): BelongsTo {
-        return $this->belongsTo(Kendaraan::class, 'id_kendaraan', 'id');
+        return $this->belongsTo(Kendaraan::class, 'id_kendaraan', 'id')->withTrashed();
     }
 
     public function user(): BelongsTo {
