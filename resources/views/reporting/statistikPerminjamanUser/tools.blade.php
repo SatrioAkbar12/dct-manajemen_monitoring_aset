@@ -65,7 +65,7 @@
                     </thead>
                     <tbody>
                         @foreach ($data_user->statistikPenggunaanAset as $statistik)
-                            @if ($statistik->aset->tipe_aset == 'tool')
+                            @if ($statistik->aset != null && $statistik->aset->tipe_aset == 'tool')
                                 <tr>
                                     <td>{{ $statistik->aset->kode_aset . ' - ' . $statistik->aset->tool->merk . ' ' . $statistik->aset->tool->model . ' ' . $statistik->aset->tool->nama }}</td>
                                     <td class="text-center">{{ $statistik->jumlah }}</td>
