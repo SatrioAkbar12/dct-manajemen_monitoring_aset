@@ -12,6 +12,10 @@
             {{ csrf_field() }}
             <div class="card-body">
                 <div class="form-group">
+                    <label>Kode Aset</label>
+                    <input type="text" class="form-control" value="{{ $data->aset->kode_aset }}" readonly>
+                </div>
+                <div class="form-group">
                     <label for="nomorPolisi">Nomor Polisi</label>
                     <input type="text" class="form-control @error('nopol') is-invalid @enderror" id="nomorPolisi" name="nopol" value="{{ $data->nopol }}" required>
                     @error('nopol')
