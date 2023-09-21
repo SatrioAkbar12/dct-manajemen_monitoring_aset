@@ -34,26 +34,28 @@ class ToolController extends Controller
     }
 
     public function store(ToolRequest $request) {
-        $kode_aset = AsetHelper::createKodeAset($request->kepemilikan_aset);
+        for($i=0; $i<$request->jumlah; $i++) {
+            $kode_aset = AsetHelper::createKodeAset($request->kepemilikan_aset);
 
-        $aset = Aset::create([
-            'kode_aset' => $kode_aset,
-            'tipe_aset' => 'tool',
-            'id_kepemilikan_aset' => $request->kepemilikan_aset,
-        ]);
+            $aset = Aset::create([
+                'kode_aset' => $kode_aset,
+                'tipe_aset' => 'tool',
+                'id_kepemilikan_aset' => $request->kepemilikan_aset,
+            ]);
 
-        Tool::create([
-            'id_aset' => $aset->id,
-            'nama' => $request->nama,
-            'merk' => $request->merk,
-            'model' => $request->model,
-            'deskripsi' => $request->deskripsi,
-            'status_saat_ini' => 'Di gudang',
-            'id_tools_group' => $request->tools_group,
-            'id_gudang' => $request->gudang,
-        ]);
+            Tool::create([
+                'id_aset' => $aset->id,
+                'nama' => $request->nama,
+                'merk' => $request->merk,
+                'model' => $request->model,
+                'deskripsi' => $request->deskripsi,
+                'status_saat_ini' => 'Di gudang',
+                'id_tools_group' => $request->tools_group,
+                'id_gudang' => $request->gudang,
+            ]);
 
-        $this->updateStatistik($aset->id);
+            $this->updateStatistik($aset->id);
+        }
 
         Alert::success('Tersimpan!', 'Berhasil menambahkan tool baru');
 

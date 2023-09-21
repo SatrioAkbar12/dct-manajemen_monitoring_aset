@@ -131,6 +131,14 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label>Jumlah barang</label>
+                                <input type="number" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah" required>
+                                <span>* data akan diduplikasi dengan kode aset yang berbeda</span>
+                                @error('jumlah')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
