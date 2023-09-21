@@ -52,7 +52,7 @@ class KendaraanRequest extends FormRequest
                 'exists:\App\Models\KepemilikanAset,id'
             ],
             'kode_aset' => [
-                Rule::excludeIf(Route::currentRouteName() == 'kendaraan.store'),
+                Rule::excludeIf(Route::currentRouteName() == 'kendaraan.store'  || (Route::currentRouteName() == 'kendaraan.update')),
                 'required',
                 'string',
                 'unique:\App\Models\Aset,kode_aset',

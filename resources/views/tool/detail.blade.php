@@ -46,6 +46,14 @@
             </div>
             <div class="row">
                 <div class="col-4 col-md-2">
+                    <p>Deskripsi</p>
+                </div>
+                <div class="col-8 col-md-10">
+                    <p>: {{ $data_tool->deskripsi }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-md-2">
                     <p>Status saat ini</p>
                 </div>
                 <div class="col-8 col-md-10">
@@ -62,10 +70,18 @@
             </div>
             <div class="row">
                 <div class="col-4 col-md-2">
-                    <p>Deskripsi</p>
+                    <p>List Peminjaman Aktif</p>
                 </div>
                 <div class="col-8 col-md-10">
-                    <p>: {{ $data_tool->deskripsi }}</p>
+                    <ul>
+                        @foreach ($data_tool->aset->listToolsTransaksiPeminjaman as $listToolTransaksi)
+                            @if ($listToolTransaksi->transaksiPeminjamanTool->aktif == 1)
+                                <li>
+                                    {{ $listToolTransaksi->transaksiPeminjamanTool->keperluan . " - " . $listToolTransaksi->transaksiPeminjamanTool->lokasi_tujuan . " - " . $listToolTransaksi->transaksiPeminjamanTool->user->nama  . " - " . $listToolTransaksi->transaksiPeminjamanTool->tanggal_waktu_pinjam }}
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
