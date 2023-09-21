@@ -34,7 +34,12 @@ class ToolRequest extends FormRequest
             'model' => 'string',
             'deskripsi' => 'string',
             'tools_group' => 'required|integer|exists:\App\Models\ToolsGroup,id',
-            'gudang' => 'required|integer|exists:\App\Models\Gudang,id',
+            'gudang' => [
+                Rule::excludeIf($this->get('status_saat_ini') == 'Keluar'),
+                'required',
+                'integer',
+                'exists:\App\Models\Gudang,id',
+            ],
             'kepemilikan_aset' => [
                 Rule::excludeIf((Route::currentRouteName() == 'tools.storeExist') || (Route::currentRouteName() == 'tools.update')),
                 'required',
@@ -42,7 +47,7 @@ class ToolRequest extends FormRequest
                 'exists:\App\Models\KepemilikanAset,id'
             ],
             'kode_aset' => [
-                Rule::excludeIf(Route::currentRouteName() == 'tools.store'),
+                Rule::excludeIf(Route::currentRouteName() == 'tools.store' || (Route::currentRouteName() == 'tools.update')),
                 'required',
                 'string',
                 'unique:\App\Models\Aset,kode_aset',
