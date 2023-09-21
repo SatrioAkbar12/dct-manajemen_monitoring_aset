@@ -46,7 +46,13 @@ class ToolRequest extends FormRequest
                 'required',
                 'string',
                 'unique:\App\Models\Aset,kode_aset',
-            ]
+            ],
+            'jumlah' => [
+                Rule::excludeIf((Route::currentRouteName() == 'tools.storeExist') || (Route::currentRouteName() == 'tools.update')),
+                'required',
+                'integer',
+                'min:1',
+            ],
         ];
     }
 
