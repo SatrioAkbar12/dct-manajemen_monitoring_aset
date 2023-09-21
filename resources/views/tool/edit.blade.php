@@ -11,9 +11,6 @@
         <form action="{{ route('tools.update', $data_tool->id) }}" method="POST">
             {{ csrf_field() }}
             <div class="card-body">
-                @if($errors->any())
-                    {!! implode('', $errors->all('<div>:message</div>')) !!}
-                @endif
                 <div class="form-group">
                     <label>Kode Aset</label>
                     <input type="text" class="form-control" value="{{ $data_tool->aset->kode_aset }}" readonly>
