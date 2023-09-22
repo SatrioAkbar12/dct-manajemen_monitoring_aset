@@ -157,38 +157,136 @@
                     :
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_depan) }}">
-                        <div class="card-body">
-                            <h6 class="text-center">Foto Depan</h6>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Fase</th>
+                            <th>Foto kondisi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Peminjaman</td>
+                            <td class="text-center">
+                                <button type="button" class="mx-2 my-1 btn btn-info" data-toggle="modal" data-target="#modalFotoKondisiPinjamDepan">Foto depan</button>
+                                <button type="button" class="mx-2 my-1 btn btn-info" data-toggle="modal" data-target="#modalFotoKondisiPinjamBelakang">Foto belakang</button>
+                                <button type="button" class="mx-2 my-1 btn btn-info" data-toggle="modal" data-target="#modalFotoKondisiPinjamKanan">Foto kanan</button>
+                                <button type="button" class="mx-2 my-1 btn btn-info" data-toggle="modal" data-target="#modalFotoKondisiPinjamKiri">Foto kiri</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pengembalian</td>
+                            <td class="text-center">
+                                <button type="button" class="mx-2 my-1 btn btn-info" data-toggle="modal" data-target="#modalFotoKondisiKembaliDepan">Foto depan</button>
+                                <button type="button" class="mx-2 my-1 btn btn-info" data-toggle="modal" data-target="#modalFotoKondisiKembaliBelakang">Foto belakang</button>
+                                <button type="button" class="mx-2 my-1 btn btn-info" data-toggle="modal" data-target="#modalFotoKondisiKembaliKanan">Foto kanan</button>
+                                <button type="button" class="mx-2 my-1 btn btn-info" data-toggle="modal" data-target="#modalFotoKondisiKembaliKiri">Foto kiri</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal fade" id="modalFotoKondisiPinjamDepan" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Foto Kondisi Peminjaman - Depan</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_belakang) }}">
-                        <div class="card-body">
-                            <h6 class="text-center">Foto Belakang</h6>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_depan_pinjam) }}">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_kanan) }}">
-                        <div class="card-body">
-                            <h6 class="text-center">Foto Kanan</h6>
+            <div class="modal fade" id="modalFotoKondisiPinjamBelakang" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Foto Kondisi Peminjaman - Belakang</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_belakang_pinjam) }}">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_kiri) }}">
-                        <div class="card-body">
-                            <h6 class="text-center">Foto Kiri</h6>
+            </div>
+            <div class="modal fade" id="modalFotoKondisiPinjamKanan" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Foto Kondisi Peminjaman - Kanan</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_kanan_pinjam) }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalFotoKondisiPinjamKiri" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Foto Kondisi Peminjaman - Kiri</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_kiri_pinjam) }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalFotoKondisiKembaliDepan" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Foto Kondisi Peminjaman - Depan</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_depan_kembali) }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalFotoKondisiKembaliBelakang" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Foto Kondisi Peminjaman - Belakang</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_belakang_kembali) }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalFotoKondisiKembaliKanan" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Foto Kondisi Peminjaman - Kanan</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_kanan_kembali) }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalFotoKondisiKembaliKiri" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Foto Kondisi Peminjaman - Kiri</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img class="img-fluid" src="{{ url('storage/' . $data_riwayat_peminjaman->kondisiKendaraan->foto_kiri_kembali) }}">
                         </div>
                     </div>
                 </div>

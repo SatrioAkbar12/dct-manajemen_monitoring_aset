@@ -14,7 +14,7 @@ class RiwayatPeminjamanController extends Controller
     }
 
     public function index() {
-        $riwayat_peminjaman = TransaksiPeminjamanKendaraan::where('aktif', 0)->where('approved', 1)->orderBy('tanggal_waktu_kembali', 'desc');
+        $riwayat_peminjaman = TransaksiPeminjamanKendaraan::where('aktif', 0)->where('approval_pengembalian', 1)->orderBy('tanggal_waktu_kembali', 'desc');
         $auth_user = Auth::user();
 
         if( !($auth_user->hasRole('admin')) ) {
