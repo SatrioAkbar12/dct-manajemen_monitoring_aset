@@ -21,7 +21,7 @@ class ApprovalPengembalianKendaraanController extends Controller
     }
 
     public function index() {
-        $data_peminjaman = TransaksiPeminjamanKendaraan::where('aktif', 0)->where('approved', 0)->orderBy('updated_at', 'desc');
+        $data_peminjaman = TransaksiPeminjamanKendaraan::where('aktif', 0)->where('approval_pengembalian', 0)->orderBy('updated_at', 'asc');
         $auth_user = Auth::user();
 
         if( !($auth_user->hasRole('admin')) ) {
@@ -44,7 +44,7 @@ class ApprovalPengembalianKendaraanController extends Controller
 
         if($request->approved == 1) {
             $data_peminjaman->update([
-                'approved' => 1,
+                'approval_pengembalian' => 1,
             ]);
 
             $kendaraan = Kendaraan::find($data_peminjaman->id_kendaraan);
@@ -72,7 +72,7 @@ class ApprovalPengembalianKendaraanController extends Controller
         else {
             $data_peminjaman->update([
                 'aktif' => 1,
-                'keterangan_approved' => $request->keterangan,
+                'keterangan_approval_pengembalian' => $request->keterangan,
             ]);
         }
 
