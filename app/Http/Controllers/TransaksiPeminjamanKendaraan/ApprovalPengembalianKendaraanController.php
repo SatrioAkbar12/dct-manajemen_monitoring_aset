@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\TransaksiPeminjamanKendaraan;
 
-use App\Http\Requests\ApprovalPengembalianKendaraanRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\TransaksiPeminjamanKendaraan\ApprovalPengembalianKendaraanRequest;
 use App\Models\Kendaraan;
 use App\Models\ServisRutinKendaraan;
 use App\Models\TelegramData;
@@ -30,13 +31,13 @@ class ApprovalPengembalianKendaraanController extends Controller
 
         $data_peminjaman = $data_peminjaman->paginate(10);
 
-        return view('approvalPengembalianKendaraan.index', ['data_peminjaman' => $data_peminjaman]);
+        return view('transaksiPeminjamanKendaraan.approvalPengembalianKendaraan.index', ['data_peminjaman' => $data_peminjaman]);
     }
 
     public function review($id) {
         $data_peminjaman = TransaksiPeminjamanKendaraan::find($id);
 
-        return view('approvalPengembalianKendaraan.review', ['data_peminjaman' => $data_peminjaman]);
+        return view('transaksiPeminjamanKendaraan.approvalPengembalianKendaraan.review', ['data_peminjaman' => $data_peminjaman]);
     }
 
     public function approval($id, ApprovalPengembalianKendaraanRequest $request) {

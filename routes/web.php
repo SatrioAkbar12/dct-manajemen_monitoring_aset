@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ApprovalPengembalianKendaraanController;
 use App\Http\Controllers\ApprovalPengembalianToolController;
 use App\Http\Controllers\AsetController;
 use App\Http\Controllers\DokumenController;
@@ -25,6 +24,7 @@ use App\Http\Controllers\TelegramDataController;
 use App\Http\Controllers\TestTelegramBotController;
 use App\Http\Controllers\ToolController;
 use App\Http\Controllers\ToolsGroupController;
+use App\Http\Controllers\TransaksiPeminjamanKendaraan\ApprovalPengembalianKendaraanController;
 use App\Http\Controllers\TransaksiPeminjamanKendaraan\PeminjamanAktifKendaraanController;
 use App\Http\Controllers\TransaksiPeminjamanKendaraan\PeminjamanBaruKendaraanController;
 use App\Http\Controllers\UserController;
