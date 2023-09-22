@@ -326,11 +326,19 @@ return [
             'text'    => 'Transaksi Peminjaman Kendaraan',
             'icon'    => 'fas fa-fw fa-truck',
             'can'     => [
+                'peminjamanBaruKendaraan.index', 'peminjamanBaruKendaraan.create', 'peminjamanBaruKendaraan.store', 'peminjamanBaruKendaraan.review', 'peminjamanBaruKendaraan.approval', 'peminjamanBaruKendaraan.del',
                 'peminjamanAktifKendaraan.index', 'peminjamanAktifKendaraan.store', 'peminjamanAktifKendaraan.returning', 'peminjamanAktifKendaraan.update',
                 'approvalPengembalianKendaraan.index', 'approvalPengembalianKendaraan.review', 'approvalPengembalianKendaraan.approval',
-                'riwayatPeminjamanKendaraan.index', 'riwayatPeminjamanKendaraan.detail'
+                'riwayatPeminjamanKendaraan.index', 'riwayatPeminjamanKendaraan.detail',
             ],
             'submenu' => [
+                [
+                    'text' => 'Peminjaman Baru',
+                    'route' => 'peminjamanBaruKendaraan.index',
+                    'icon' => 'fas fa-fw fa-plus',
+                    'active' => ['peminjaman-baru-kendaraan'],
+                    'can' => ['peminjamanBaruKendaraan.index', 'peminjamanBaruKendaraan.create', 'peminjamanBaruKendaraan.store', 'peminjamanBaruKendaraan.review', 'peminjamanBaruKendaraan.approval', 'peminjamanBaruKendaraan.del'],
+                ],
                 [
                     'text' => 'Peminjaman Aktif',
                     'route' => 'peminjamanAktifKendaraan.index',
