@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\TransaksiPeminjamanKendaraan;
 
+use App\Http\Controllers\Controller;
 use App\Models\TransaksiPeminjamanKendaraan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RiwayatPeminjamanController extends Controller
+class RiwayatPeminjamanKendaraanController extends Controller
 {
     public function __construct()
     {
@@ -23,12 +24,12 @@ class RiwayatPeminjamanController extends Controller
 
         $riwayat_peminjaman = $riwayat_peminjaman->paginate(10);
 
-        return view('riwayatPeminjaman.index', ['data_riwayat_peminjaman' => $riwayat_peminjaman]);
+        return view('transaksiPeminjamanKendaraan.riwayatPeminjaman.index', ['data_riwayat_peminjaman' => $riwayat_peminjaman]);
     }
 
     public function detail($id) {
         $riwayat_peminjaman = TransaksiPeminjamanKendaraan::find($id);
 
-        return view('riwayatPeminjaman.detail', ['data_riwayat_peminjaman' => $riwayat_peminjaman]);
+        return view('transaksiPeminjamanKendaraan.riwayatPeminjaman.detail', ['data_riwayat_peminjaman' => $riwayat_peminjaman]);
     }
 }

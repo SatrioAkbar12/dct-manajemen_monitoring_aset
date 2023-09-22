@@ -15,7 +15,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Reporting\StatistikPeminjamanUserController;
 use App\Http\Controllers\Reporting\StatistikPenggunaanKendaraanController;
 use App\Http\Controllers\Reporting\StatistikPenggunaanToolsController;
-use App\Http\Controllers\RiwayatPeminjamanController;
 use App\Http\Controllers\RiwayatPeminjamanToolController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
@@ -27,6 +26,7 @@ use App\Http\Controllers\ToolsGroupController;
 use App\Http\Controllers\TransaksiPeminjamanKendaraan\ApprovalPengembalianKendaraanController;
 use App\Http\Controllers\TransaksiPeminjamanKendaraan\PeminjamanAktifKendaraanController;
 use App\Http\Controllers\TransaksiPeminjamanKendaraan\PeminjamanBaruKendaraanController;
+use App\Http\Controllers\TransaksiPeminjamanKendaraan\RiwayatPeminjamanKendaraanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -157,7 +157,7 @@ Route::middleware('auth')->controller(ApprovalPengembalianKendaraanController::c
     Route::middleware('permission:approvalPengembalianKendaraan.approval')->post('/{id}', 'approval')->name('approval');
 });
 
-Route::middleware('auth')->controller(RiwayatPeminjamanController::class)->prefix('riwayat-peminjaman-kendaraan')->name('riwayatPeminjamanKendaraan.')->group(function() {
+Route::middleware('auth')->controller(RiwayatPeminjamanKendaraanController::class)->prefix('riwayat-peminjaman-kendaraan')->name('riwayatPeminjamanKendaraan.')->group(function() {
     Route::middleware('permission:riwayatPeminjamanKendaraan.index')->get('/', 'index')->name('index');
     Route::middleware('permission:riwayatPeminjamanKendaraan.detail')->get('/{id}', 'detail')->name('detail');
 });
