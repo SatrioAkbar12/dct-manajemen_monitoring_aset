@@ -30,6 +30,9 @@
                     </thead>
                     <tbody>
                         @foreach ($data_peminjaman as $peminjaman)
+                            @if ($peminjaman->approval_peminjaman === 0 && $peminjaman->id_user != auth()->user()->id)
+                                @continue
+                            @endif
                             <tr>
                                 <td class="align-middle">{{ $peminjaman->tanggal_waktu_pinjam }}</td>
                                 <td class="align-middle">{{ $peminjaman->target_tanggal_waktu_kembali }}</td>
@@ -56,7 +59,9 @@
                                         @endif
                                     @endcan
                                     @can('peminjamanBaruKendaraan.del')
-                                        <a href="{{ route('peminjamanBaruKendaraan.del', $peminjaman->id) }}" class="mx-2 my-1 {{ $peminjaman->approval_peminjaman === null ? 'btn btn-warning' : 'btn btn-danger'}}" data-confirm-delete="true">{{ $peminjaman->approval_peminjaman === null ? 'Batalkan' : 'Hapus'}}</a>
+                                        @if ($peminjaman->id_user == auth()->user()->id)
+                                            <a href="{{ route('peminjamanBaruKendaraan.del', $peminjaman->id) }}" class="mx-2 my-1 {{ $peminjaman->approval_peminjaman === null ? 'btn btn-warning' : 'btn btn-danger'}}" data-confirm-delete="true">{{ $peminjaman->approval_peminjaman === null ? 'Batalkan' : 'Hapus'}}</a>
+                                        @endif
                                     @endcan
                                 </td>
                             </tr>
