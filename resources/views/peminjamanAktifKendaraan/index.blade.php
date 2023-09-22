@@ -38,8 +38,8 @@
                                 <td>{{ $peminjaman_aktif->lokasi_tujuan }}</td>
                                 <td class="text-danger">
                                     <ul>
-                                        @if($peminjaman_aktif->keterangan_approved != null && $peminjaman_aktif->approved == 0)
-                                            <li>{{ $peminjaman_aktif->keterangan_approved }}</li>
+                                        @if($peminjaman_aktif->keterangan_approval_pengembalian != null && $peminjaman_aktif->approval_pengembalian == 0)
+                                            <li>Pengembalian tidak diapproved :<br>{{ $peminjaman_aktif->keterangan_approval_pengembalian }}</li>
                                         @endif
                                         @if (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $peminjaman_aktif->target_tanggal_waktu_kembali, 'Asia/Jakarta')->lessThan(\Carbon\Carbon::now('Asia/Jakarta')))
                                             <li>
