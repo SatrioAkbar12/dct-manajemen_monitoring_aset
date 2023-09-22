@@ -26,6 +26,7 @@ use App\Http\Controllers\TelegramDataController;
 use App\Http\Controllers\TestTelegramBotController;
 use App\Http\Controllers\ToolController;
 use App\Http\Controllers\ToolsGroupController;
+use App\Http\Controllers\TransaksiPeminjamanKendaraan\PeminjamanBaruKendaraanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -133,6 +134,15 @@ Route::middleware('auth')->controller(ServisRutinKendaraanController::class)->pr
     Route::middleware('permission:servisRutin.index')->get('/', 'index')->name('index');
     Route::middleware('permission:servisRutin.getKendaraan')->get('/{id_kendaraan}', 'getKendaraan')->name('getKendaraan');
     Route::middleware('permission:servisRutin.store')->post('/{id_kendaraan}', 'store')->name('store');
+});
+
+Route::middleware('auth')->controller(PeminjamanBaruKendaraanController::class)->prefix('peminjaman-baru-kendaraan')->name('peminjamanBaruKendaraan.')->group(function() {
+    Route::middleware('permission:peminjamanBaruKendaraan.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:peminjamanBaruKendaraan.create')->post('/', 'create')->name('create');
+    Route::middleware('permission:peminjamanBaruKendaraan.store')->post('/store', 'store')->name('store');
+    Route::middleware('permission:peminjamanBaruKendaraan.review')->get('/{id}/review', 'review')->name('review');
+    Route::middleware('permission:peminjamanBaruKendaraan.approval')->post('/{id}/approval', 'approval')->name('approval');
+    Route::middleware('permission:peminjamanBaruKendaraan.del')->delete('/{id}', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(PeminjamanAktifController::class)->prefix('peminjaman-aktif-kendaraan')->name('peminjamanAktifKendaraan.')->group(function() {
