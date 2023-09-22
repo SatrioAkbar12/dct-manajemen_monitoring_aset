@@ -23,10 +23,12 @@ class TransaksiPeminjamanKendaraan extends Model
         'tanggal_waktu_kembali',
         'keperluan',
         'lokasi_tujuan',
-        'approved',
-        'keterangan_approved',
         'geolocation_pinjam',
         'geolocation_kembali',
+        'approval_peminjaman',
+        'keterangan_approval_peminjaman',
+        'approval_pengembalian',
+        'keterangan_approval_pengembalian',
     ];
 
     public function kendaraan(): BelongsTo {
