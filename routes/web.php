@@ -147,7 +147,6 @@ Route::middleware('auth')->controller(PeminjamanBaruKendaraanController::class)-
 
 Route::middleware('auth')->controller(PeminjamanAktifController::class)->prefix('peminjaman-aktif-kendaraan')->name('peminjamanAktifKendaraan.')->group(function() {
     Route::middleware('permission:peminjamanAktifKendaraan.index')->get('/', 'index')->name('index');
-    Route::middleware('permission:peminjamanAktifKendaraan.store')->post('/', 'store')->name('store');
     Route::middleware('permission:peminjamanAktifKendaraan.returning')->get('/{id}', 'returning')->name('returning');
     Route::middleware('permission:peminjamanAktifKendaraan.update')->post('/{id}', 'update')->name('update');
 });

@@ -38,53 +38,6 @@ class PeminjamanAktifController extends Controller
         return view('peminjamanAktifKendaraan.index', ['data_peminjaman_aktif' => $peminjaman_aktif, 'data_user' => $user, 'data_kendaraan' => $kendaraan]);
     }
 
-    public function store(PeminjamanAktifKendaraanRequest $request) {
-        $peminjaman_aktif = TransaksiPeminjamanKendaraan::where('id_kendaraan', $request->kendaraan)->where(function($query) use ($request) {
-            $query->where('aktif', 1)->Where(function($query) use ($request) {
-                $query->where('tanggal_waktu_pinjam', '<=', $request->tanggal_waktu_pinjam)->Where('target_tanggal_waktu_kembali', '>=', $request->tanggal_waktu_pinjam);
-            });
-        })->first();
-
-        if($peminjaman_aktif != null) {
-            Alert::error('Gagal menyimpan!', 'Kendaraan ' . $peminjaman_aktif->kendaraan->aset->kode_aset . " - ". $peminjaman_aktif->kendaraan->nopol . " - " . $peminjaman_aktif->kendaraan->jenisKendaraan->nama . " " . $peminjaman_aktif->kendaraan->merk . " " . $peminjaman_aktif->kendaraan->tipe . " " . $peminjaman_aktif->kendaraan->warna . " sedang digunakan!");
-
-            return redirect()->back();
-        }
-
-        $transaksi = TransaksiPeminjamanKendaraan::create([
-            'id_user' => $request->user,
-            'id_kendaraan' => $request->kendaraan,
-            'target_tanggal_waktu_kembali' => $request->target_tanggal_waktu_kembali,
-            'aktif' => 1,
-            'tanggal_waktu_pinjam' => $request->tanggal_waktu_pinjam,
-            'keperluan' => $request->keperluan,
-            'lokasi_tujuan' => $request->lokasi_tujuan,
-            'geolocation_pinjam' => $request->geo_latitude . ',' . $request->geo_longitude,
-        ]);
-
-        $path_speedometer = $request->file('foto_speedometer')->storeAs('foto-speedometer', time() . "_speedometer-sebelum." . $request->file('foto_speedometer')->getClientOriginalExtension(), 'public');
-
-        KondisiKendaraanTransaksasiPeminjaman::create([
-            'id_transaksi' => $transaksi->id,
-            'foto_speedometer_sebelum' => $path_speedometer,
-        ]);
-
-        $kendaraan = Kendaraan::find($request->kendaraan);
-
-        Artisan::call('reporting:statistik-penggunaan-aset', [
-            '--user' => $request->user,
-            '--aset' => $kendaraan->id_aset,
-        ]);
-
-        $telegram = TelegramData::where('tipe', 'group')->first();
-
-        Notification::send($telegram->id_telegram, (new PeminjamanAktifKendaraanNotification($transaksi))->delay(Carbon::parse($transaksi->target_tanggal_waktu_kembali)));
-
-        Alert::success('Tersimpan!', 'Berhasil melakukan peminjaman kendaraan');
-
-        return redirect(route('peminjamanAktifKendaraan.index'));
-    }
-
     public function returning($id) {
         $peminjaman_aktif = TransaksiPeminjamanKendaraan::find($id);
 
@@ -92,10 +45,10 @@ class PeminjamanAktifController extends Controller
     }
 
     public function update($id, PeminjamanAktifKendaraanRequest $request) {
-        $path_depan = $request->file('foto_depan')->storeAs('foto-kondisi/kendaraan', time() . "_foto-depan." . $request->file('foto_depan')->getClientOriginalExtension(), 'public');
-        $path_belakang = $request->file('foto_belakang')->storeAs('foto-kondisi/kendaraan', time() . "_foto-belakang." . $request->file('foto_belakang')->getClientOriginalExtension(), 'public');
-        $path_kanan = $request->file('foto_kanan')->storeAs('foto-kondisi/kendaraan', time() . "_foto-kanan." . $request->file('foto_kanan')->getClientOriginalExtension(), 'public');
-        $path_kiri = $request->file('foto_kiri')->storeAs('foto-kondisi/kendaraan', time() . "_foto-kiri." . $request->file('foto_kiri')->getClientOriginalExtension(), 'public');
+        $path_depan = $request->file('foto_depan')->storeAs('foto-kondisi/kendaraan', time() . "_foto-depan-sesudah." . $request->file('foto_depan')->getClientOriginalExtension(), 'public');
+        $path_belakang = $request->file('foto_belakang')->storeAs('foto-kondisi/kendaraan', time() . "_foto-belakang-sesudah." . $request->file('foto_belakang')->getClientOriginalExtension(), 'public');
+        $path_kanan = $request->file('foto_kanan')->storeAs('foto-kondisi/kendaraan', time() . "_foto-kanan-sesudah." . $request->file('foto_kanan')->getClientOriginalExtension(), 'public');
+        $path_kiri = $request->file('foto_kiri')->storeAs('foto-kondisi/kendaraan', time() . "_foto-kiri-sesudah." . $request->file('foto_kiri')->getClientOriginalExtension(), 'public');
         $path_speedometer = $request->file('foto_speedometer')->storeAs('foto-speedometer', time() . "_speedometer-sesudah." . $request->file('foto_speedometer')->getClientOriginalExtension(), 'public');
 
         $transaksi = TransaksiPeminjamanKendaraan::find($id);
@@ -106,10 +59,10 @@ class PeminjamanAktifController extends Controller
             'deskripsi' => $request->deskripsi,
             'km_terakhir' => $request->km_terakhir,
             'jumlah_km' => $request->km_terakhir - $kendaraan->km_saat_ini,
-            'foto_depan' => $path_depan,
-            'foto_belakang' => $path_belakang,
-            'foto_kanan' => $path_kanan,
-            'foto_kiri' => $path_kiri,
+            'foto_depan_kembali' => $path_depan,
+            'foto_belakang_kembali' => $path_belakang,
+            'foto_kanan_kembali' => $path_kanan,
+            'foto_kiri_kembali' => $path_kiri,
             'foto_speedometer_sesudah' => $path_speedometer
         ]);
 
