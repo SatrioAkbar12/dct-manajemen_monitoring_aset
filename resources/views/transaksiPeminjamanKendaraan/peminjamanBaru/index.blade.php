@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Peminjaman Baru Kendaraan');
+@section('title', 'Peminjaman Baru Kendaraan')
 
 @section('content_header')
     <h1>Peminjaman Baru Kendaraan</h1>
