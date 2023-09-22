@@ -111,6 +111,7 @@ class PeminjamanBaruKendaraanController extends Controller
         $peminjaman->keterangan_approval_peminjaman = $request->keterangan;
         if($request->approved == 1) {
             $peminjaman->aktif = 1;
+            $peminjaman->approval_pengembalian = 0;
 
             $kendaraan = Kendaraan::find($peminjaman->id_kendaraan);
             Artisan::call('reporting:statistik-penggunaan-aset', [
