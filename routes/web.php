@@ -10,7 +10,6 @@ use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\KepemilikanAsetController;
 use App\Http\Controllers\MasaAktifDokumenController;
-use App\Http\Controllers\PeminjamanAktifController;
 use App\Http\Controllers\PeminjamanAktifToolController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
@@ -26,6 +25,7 @@ use App\Http\Controllers\TelegramDataController;
 use App\Http\Controllers\TestTelegramBotController;
 use App\Http\Controllers\ToolController;
 use App\Http\Controllers\ToolsGroupController;
+use App\Http\Controllers\TransaksiPeminjamanKendaraan\PeminjamanAktifKendaraanController;
 use App\Http\Controllers\TransaksiPeminjamanKendaraan\PeminjamanBaruKendaraanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -145,7 +145,7 @@ Route::middleware('auth')->controller(PeminjamanBaruKendaraanController::class)-
     Route::middleware('permission:peminjamanBaruKendaraan.del')->delete('/{id}', 'del')->name('del');
 });
 
-Route::middleware('auth')->controller(PeminjamanAktifController::class)->prefix('peminjaman-aktif-kendaraan')->name('peminjamanAktifKendaraan.')->group(function() {
+Route::middleware('auth')->controller(PeminjamanAktifKendaraanController::class)->prefix('peminjaman-aktif-kendaraan')->name('peminjamanAktifKendaraan.')->group(function() {
     Route::middleware('permission:peminjamanAktifKendaraan.index')->get('/', 'index')->name('index');
     Route::middleware('permission:peminjamanAktifKendaraan.returning')->get('/{id}', 'returning')->name('returning');
     Route::middleware('permission:peminjamanAktifKendaraan.update')->post('/{id}', 'update')->name('update');

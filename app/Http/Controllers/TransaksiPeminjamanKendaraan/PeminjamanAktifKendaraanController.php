@@ -1,22 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\TransaksiPeminjamanKendaraan;
 
-use App\Http\Requests\PeminjamanAktifKendaraanRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\TransaksiPeminjamanKendaraan\PeminjamanAktifKendaraanRequest;
 use App\Models\Kendaraan;
 use App\Models\KondisiKendaraanTransaksasiPeminjaman;
-use App\Models\TelegramData;
 use App\Models\TransaksiPeminjamanKendaraan;
 use App\Models\User;
-use App\Notifications\PeminjamanAktifKendaraanNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class PeminjamanAktifController extends Controller
+class PeminjamanAktifKendaraanController extends Controller
 {
     public function __construct()
     {
@@ -35,13 +32,13 @@ class PeminjamanAktifController extends Controller
 
         $peminjaman_aktif = $peminjaman_aktif->paginate(10);
 
-        return view('peminjamanAktifKendaraan.index', ['data_peminjaman_aktif' => $peminjaman_aktif, 'data_user' => $user, 'data_kendaraan' => $kendaraan]);
+        return view('transaksiPeminjamanKendaraan.peminjamanAktifKendaraan.index', ['data_peminjaman_aktif' => $peminjaman_aktif, 'data_user' => $user, 'data_kendaraan' => $kendaraan]);
     }
 
     public function returning($id) {
         $peminjaman_aktif = TransaksiPeminjamanKendaraan::find($id);
 
-        return view('peminjamanAktifKendaraan.returning', ['data_peminjaman_aktif' => $peminjaman_aktif]);
+        return view('transaksiPeminjamanKendaraan.peminjamanAktifKendaraan.returning', ['data_peminjaman_aktif' => $peminjaman_aktif]);
     }
 
     public function update($id, PeminjamanAktifKendaraanRequest $request) {
