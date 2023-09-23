@@ -106,13 +106,13 @@
                             </tr>
 
                             <div class="modal fade" id="modalFotoKondisiSebelum{{ $list_tools->id }}" role="dialog">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title">Foto Kondisi Sebelum</h4>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body text-center">
                                             <img class="img-fluid" src="{{ url('storage/' . $list_tools->kondisiToolsTransaksiPeminjaman->foto_sebelum) }}">
                                         </div>
                                     </div>
@@ -120,13 +120,13 @@
                             </div>
 
                             <div class="modal fade" id="modalFotoKondisiSesudah{{ $list_tools->id }}" role="dialog">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title">Foto Kondisi Sesudah</h4>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body text-center">
                                             <img class="img-fluid" src="{{ url('storage/' . $list_tools->kondisiToolsTransaksiPeminjaman->foto_sesudah) }}">
                                         </div>
                                     </div>

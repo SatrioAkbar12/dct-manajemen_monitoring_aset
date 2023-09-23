@@ -17,7 +17,7 @@ class ApprovalPengembalianToolController extends Controller
     }
 
     public function index() {
-        $data_peminjaman = TransaksiPeminjamanTool::where('aktif', 0)->where('approved', 0)->orderBy('updated_at', 'desc');
+        $data_peminjaman = TransaksiPeminjamanTool::where('aktif', 0)->where('approval_pengembalian', 0)->orderBy('updated_at', 'asc');
         $auth_user = Auth::user();
 
         if( !($auth_user->hasRole('admin')) ) {
@@ -40,7 +40,7 @@ class ApprovalPengembalianToolController extends Controller
 
         if($request->approved == 1) {
             $data_peminjaman->update([
-                'approved' => 1,
+                'approval_pengembalian' => 1,
             ]);
 
             foreach($data_peminjaman->listTools as $list_tools) {
@@ -53,7 +53,7 @@ class ApprovalPengembalianToolController extends Controller
         else {
             $data_peminjaman->update([
                 'aktif' => 1,
-                'keterangan_approved' => $request->keterangan,
+                'keterangan_approval_pengembalian' => $request->keterangan,
             ]);
         }
 
