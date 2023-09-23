@@ -90,11 +90,6 @@ class PeminjamanBaruToolController extends Controller
         foreach($request->file('foto_tool') as $key => $foto_tool) {
             $tool = Tool::with('aset')->where('id_aset', $request->tools[$key])->first();
 
-            $tool->update([
-                'status_saat_ini' => 'Keluar',
-                'id_gudang' => null
-            ]);
-
             $list_tools = ListToolsTransaksiPeminjaman::create([
                 'id_peminjaman_tool' => $peminjaman_tools->id,
                 'id_aset' => $request->tools[$key],
@@ -131,6 +126,13 @@ class PeminjamanBaruToolController extends Controller
             $peminjaman->approval_pengembalian = 0;
 
             foreach($peminjaman->listTools as $list_tools) {
+                $tool = Tool::where('id_aset', $list_tools->id_aset)->first();
+
+                $tool->update([
+                    'status_saat_ini' => 'Keluar',
+                    'id_gudang' => null
+                ]);
+
                 Artisan::call('reporting:statistik-penggunaan-aset', [
                     '--user' => $request->user,
                     '--aset' => $list_tools->id_aset,
