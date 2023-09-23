@@ -24,7 +24,7 @@ class PeminjamanBaruKendaraanController extends Controller
         return $this->middleware('permission:peminjamanBaruKendaraan.index|peminjamanBaruKendaraan.create|peminjamanBaruKendaraan.store|peminjamanBaruKendaraan.review|peminjamanBaruKendaraan.approval|peminjamanBaruKendaraan.del');
     }
 
-    public function indeX()
+    public function index()
     {
         $peminjaman = TransaksiPeminjamanKendaraan::where('aktif', null)->where('approval_pengembalian', null)->orderBy('created_at', 'asc');
         $user = User::all();
