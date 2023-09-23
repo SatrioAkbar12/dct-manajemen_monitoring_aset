@@ -14,7 +14,7 @@ class RiwayatPeminjamanToolController extends Controller
     }
 
     public function index() {
-        $data_riwayat_peminjaman = TransaksiPeminjamanTool::where('aktif', 0)->where('approved', 1)->orderBy('tanggal_waktu_kembali', 'desc');
+        $data_riwayat_peminjaman = TransaksiPeminjamanTool::where('aktif', 0)->where('approval_pengembalian', 1)->orderBy('tanggal_waktu_kembali', 'desc');
         $auth_user = Auth::user();
 
         if( !($auth_user->hasRole('admin')) ) {

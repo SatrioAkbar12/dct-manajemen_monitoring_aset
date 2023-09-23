@@ -19,6 +19,7 @@
                             <th>Tanggal Waktu Kembali</th>
                             <th>Peminjam</th>
                             <th>Tools</th>
+                            <th>Keperluan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -35,6 +36,7 @@
                                         @endforeach
                                     </ul>
                                 </td>
+                                <td>{{ $riwayat_peminjaman->keperluan }}</td>
                                 <td class="text-center">
                                     @can('riwayatPeminjamanTools.detail')
                                         <a href="{{ route('riwayatPeminjamanTools.detail', $riwayat_peminjaman->id) }}" class="btn btn-info">Detail</a>
