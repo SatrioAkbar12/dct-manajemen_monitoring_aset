@@ -384,7 +384,7 @@ return [
                     'route' => 'peminjamanAktifTools.index',
                     'icon' => 'fas fa-fw fa-route',
                     'active' => ['peminjaman-aktif-tools', 'regex:@^peminjaman-aktif-tools/[0-9]+$@'],
-                    'can' => ['peminjamanAktifTools.index', 'peminjamanAktifTools.create', 'peminjamanAktifTools.store', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update'],
+                    'can' => ['peminjamanAktifTools.index', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update'],
                 ],
                 [
                     'text' => 'Approval Pengembalian',
