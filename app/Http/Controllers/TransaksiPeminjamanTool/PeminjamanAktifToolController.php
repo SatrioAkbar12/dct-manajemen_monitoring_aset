@@ -1,21 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\TransaksiPeminjamanTool;
 
-use App\Http\Requests\PeminjamanAktifToolRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\TransaksiPeminjamanTool\PeminjamanAktifToolRequest;
 use App\Models\Gudang;
 use App\Models\KondisiToolsTransaksiPeminjaman;
 use App\Models\ListToolsTransaksiPeminjaman;
-use App\Models\TelegramData;
 use App\Models\Tool;
 use App\Models\TransaksiPeminjamanTool;
 use App\Models\User;
-use App\Notifications\PeminjamanAktifToolNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PeminjamanAktifToolController extends Controller
@@ -37,14 +34,14 @@ class PeminjamanAktifToolController extends Controller
 
         $data_peminjaman_aktif = $data_peminjaman_aktif->paginate(10);
 
-        return view('peminjamanAktifTool.index', ['data_peminjaman_aktif' => $data_peminjaman_aktif, 'data_user' => $data_user, 'data_tools' => $data_tools]);
+        return view('transaksiPeminjamanTool.peminjamanAktifTool.index', ['data_peminjaman_aktif' => $data_peminjaman_aktif, 'data_user' => $data_user, 'data_tools' => $data_tools]);
     }
 
     public function returning($id) {
         $peminjaman_aktif = TransaksiPeminjamanTool::find($id);
         $gudang = Gudang::all();
 
-        return view('peminjamanAktifTool.returning', ['data_peminjaman_aktif' => $peminjaman_aktif, 'data_gudang' => $gudang]);
+        return view('transaksiPeminjamanTool.peminjamanAktifTool.returning', ['data_peminjaman_aktif' => $peminjaman_aktif, 'data_gudang' => $gudang]);
     }
 
     public function update($id, PeminjamanAktifToolRequest $request) {

@@ -9,7 +9,7 @@ use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\KepemilikanAsetController;
 use App\Http\Controllers\MasaAktifDokumenController;
-use App\Http\Controllers\PeminjamanAktifToolController;
+use App\Http\Controllers\TransaksiPeminjamanTool\PeminjamanAktifToolController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Reporting\StatistikPeminjamanUserController;

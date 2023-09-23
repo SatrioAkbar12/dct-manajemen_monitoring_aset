@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\TransaksiPeminjamanTool;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 
