@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\TransaksiPeminjamanTool;
 
-use App\Http\Requests\ApprovalPengembalianToolRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\TransaksiPeminjamanTool\ApprovalPengembalianToolRequest;
 use App\Models\Tool;
 use App\Models\TransaksiPeminjamanTool;
 use Illuminate\Http\Request;
@@ -26,13 +27,13 @@ class ApprovalPengembalianToolController extends Controller
 
         $data_peminjaman = $data_peminjaman->paginate(10);
 
-        return view('approvalPengembalianTool.index', ['data_peminjaman' => $data_peminjaman]);
+        return view('transaksiPeminjamanTool.approvalPengembalianTool.index', ['data_peminjaman' => $data_peminjaman]);
     }
 
     public function review($id) {
         $data_peminjaman = TransaksiPeminjamanTool::find($id);
 
-        return view('approvalPengembalianTool.review', ['data_peminjaman' => $data_peminjaman]);
+        return view('transaksiPeminjamanTool.approvalPengembalianTool.review', ['data_peminjaman' => $data_peminjaman]);
     }
 
     public function approval($id, ApprovalPengembalianToolRequest $request) {

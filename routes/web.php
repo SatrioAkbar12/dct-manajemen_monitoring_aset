@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ApprovalPengembalianToolController;
 use App\Http\Controllers\AsetController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\GudangController;
@@ -9,7 +8,6 @@ use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\KepemilikanAsetController;
 use App\Http\Controllers\MasaAktifDokumenController;
-use App\Http\Controllers\TransaksiPeminjamanTool\PeminjamanAktifToolController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Reporting\StatistikPeminjamanUserController;
@@ -27,6 +25,8 @@ use App\Http\Controllers\TransaksiPeminjamanKendaraan\ApprovalPengembalianKendar
 use App\Http\Controllers\TransaksiPeminjamanKendaraan\PeminjamanAktifKendaraanController;
 use App\Http\Controllers\TransaksiPeminjamanKendaraan\PeminjamanBaruKendaraanController;
 use App\Http\Controllers\TransaksiPeminjamanKendaraan\RiwayatPeminjamanKendaraanController;
+use App\Http\Controllers\TransaksiPeminjamanTool\ApprovalPengembalianToolController;
+use App\Http\Controllers\TransaksiPeminjamanTool\PeminjamanAktifToolController;
 use App\Http\Controllers\TransaksiPeminjamanTool\PeminjamanBaruToolController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
