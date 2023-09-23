@@ -19,7 +19,8 @@
                             <th>Tanggal Waktu Kembali</th>
                             <th>Kendaraan</th>
                             <th>Peminjam</th>
-                            <th>Jumlah KM</th>
+                            <th>Keperluan</th>
+                            <th>Lokasi Tujuan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -30,7 +31,8 @@
                                 <td>{{ $riwayat_peminjaman->tanggal_waktu_kembali }}</td>
                                 <td>{{ $riwayat_peminjaman->kendaraan->aset->kode_aset . " - " . $riwayat_peminjaman->kendaraan->nopol . " - " . $riwayat_peminjaman->kendaraan->jenisKendaraan->nama . " " . $riwayat_peminjaman->kendaraan->merk . " " . $riwayat_peminjaman->kendaraan->tipe . " " . $riwayat_peminjaman->kendaraan->warna }}</td>
                                 <td>{{ $riwayat_peminjaman->user->nama }}</td>
-                                <td>{{ $riwayat_peminjaman->kondisiKendaraan->jumlah_km }} KM</td>
+                                <td>{{ $riwayat_peminjaman->keperluan }}</td>
+                                <td>{{ $riwayat_peminjaman->lokasi_tujuan }} KM</td>
                                 <td class="text-center">
                                     @can('riwayatPeminjamanKendaraan.detail')
                                         <a href="{{ route('riwayatPeminjamanKendaraan.detail', $riwayat_peminjaman->id) }}"><button type="button" class="btn btn-info">Detail</button></a>
