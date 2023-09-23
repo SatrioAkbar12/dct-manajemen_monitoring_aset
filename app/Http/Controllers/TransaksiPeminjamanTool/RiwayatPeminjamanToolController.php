@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\TransaksiPeminjamanTool;
 
+use App\Http\Controllers\Controller;
 use App\Models\TransaksiPeminjamanTool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,12 +24,12 @@ class RiwayatPeminjamanToolController extends Controller
 
         $data_riwayat_peminjaman = $data_riwayat_peminjaman->paginate(10);
 
-        return view('riwayatPeminjamanTool.index', ['data_riwayat_peminjaman' => $data_riwayat_peminjaman]);
+        return view('transaksiPeminjamanTool.riwayatPeminjamanTool.index', ['data_riwayat_peminjaman' => $data_riwayat_peminjaman]);
     }
 
     public function detail($id) {
         $data_riwayat_peminjaman = TransaksiPeminjamanTool::find($id);
 
-        return view('riwayatPeminjamanTool.detail', ['data_riwayat_peminjaman' => $data_riwayat_peminjaman]);
+        return view('transaksiPeminjamanTool.riwayatPeminjamanTool.detail', ['data_riwayat_peminjaman' => $data_riwayat_peminjaman]);
     }
 }

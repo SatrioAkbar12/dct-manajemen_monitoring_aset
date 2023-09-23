@@ -13,7 +13,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Reporting\StatistikPeminjamanUserController;
 use App\Http\Controllers\Reporting\StatistikPenggunaanKendaraanController;
 use App\Http\Controllers\Reporting\StatistikPenggunaanToolsController;
-use App\Http\Controllers\RiwayatPeminjamanToolController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\ServisRutinKendaraanController;
@@ -28,6 +27,7 @@ use App\Http\Controllers\TransaksiPeminjamanKendaraan\RiwayatPeminjamanKendaraan
 use App\Http\Controllers\TransaksiPeminjamanTool\ApprovalPengembalianToolController;
 use App\Http\Controllers\TransaksiPeminjamanTool\PeminjamanAktifToolController;
 use App\Http\Controllers\TransaksiPeminjamanTool\PeminjamanBaruToolController;
+use App\Http\Controllers\TransaksiPeminjamanTool\RiwayatPeminjamanToolController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
