@@ -27,6 +27,7 @@ use App\Http\Controllers\TransaksiPeminjamanKendaraan\ApprovalPengembalianKendar
 use App\Http\Controllers\TransaksiPeminjamanKendaraan\PeminjamanAktifKendaraanController;
 use App\Http\Controllers\TransaksiPeminjamanKendaraan\PeminjamanBaruKendaraanController;
 use App\Http\Controllers\TransaksiPeminjamanKendaraan\RiwayatPeminjamanKendaraanController;
+use App\Http\Controllers\TransaksiPeminjamanTool\PeminjamanBaruToolController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -196,6 +197,15 @@ Route::middleware('auth')->controller(ToolController::class)->prefix('tools')->n
     Route::middleware('permission:tools.edit')->get('/{id}/edit', 'edit')->name('edit');
     Route::middleware('permission:tools.update')->post('/{id}/update', 'update')->name('update');
     Route::middleware('permission:tools.del')->delete('/{id}/delete', 'del')->name('del');
+});
+
+Route::middleware('auth')->controller(PeminjamanBaruToolController::class)->prefix('peminjaman-baru-tools')->name('peminjamanBaruTools.')->group(function() {
+    Route::middleware('permission:peminjamanBaruTools.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:peminjamanBaruTools.create')->post('/', 'create')->name('create');
+    Route::middleware('permission:peminjamanBaruTools.store')->post('/store', 'store')->name('store');
+    Route::middleware('permission:peminjamanBaruTools.review')->get('/{id}/review', 'review')->name('review');
+    Route::middleware('permission:peminjamanBaruTools.approval')->post('/{id}/approval', 'approval')->name('approval');
+    Route::middleware('permission:peminjamanBaruTools.del')->delete('/{id}', 'del')->name('del');
 });
 
 Route::middleware('auth')->controller(PeminjamanAktifToolController::class)->prefix('peminjaman-aktif-tools')->name('peminjamanAktifTools.')->group(function() {

@@ -336,7 +336,7 @@ return [
                     'text' => 'Peminjaman Baru',
                     'route' => 'peminjamanBaruKendaraan.index',
                     'icon' => 'fas fa-fw fa-plus',
-                    'active' => ['peminjaman-baru-kendaraan'],
+                    'active' => ['peminjaman-baru-kendaraan', 'regex:@^peminjaman-baru-kendaraan/[0-9]+/review$@'],
                     'can' => ['peminjamanBaruKendaraan.index', 'peminjamanBaruKendaraan.create', 'peminjamanBaruKendaraan.store', 'peminjamanBaruKendaraan.review', 'peminjamanBaruKendaraan.approval', 'peminjamanBaruKendaraan.del'],
                 ],
                 [
@@ -366,11 +366,19 @@ return [
             'text' => 'Transaksi Peminjaman Tools',
             'icon' => 'fas fa-fw fa-hammer',
             'can' => [
+                'peminjamanBaruTools.index', 'peminjamanBaruTools.create', 'peminjamanBaruTools.store', 'peminjamanBaruTools.review', 'peminjamanBaruTools.approval', 'peminjamanBaruTools.del',
                 'peminjamanAktifTools.index', 'peminjamanAktifTools.create', 'peminjamanAktifTools.store', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update',
                 'approvalPengembalianTools.index', 'approvalPengembalianTools.review', 'approvalPengembalianTools.approval',
                 'riwayatPeminjamanTools.index', 'riwayatPeminjamanTools.detail',
             ],
             'submenu' => [
+                [
+                    'text' => 'Peminjaman Baru',
+                    'route' => 'peminjamanBaruTools.index',
+                    'icon' => 'fas fa-fw fa-plus',
+                    'active' => ['peminjaman-baru-tools', 'regex:@^peminjaman-baru-tools/[0-9]+/review$@'],
+                    'can' => ['peminjamanBaruTools.index', 'peminjamanBaruTools.create', 'peminjamanBaruTools.store', 'peminjamanBaruTools.review', 'peminjamanBaruTools.approval', 'peminjamanBaruTools.del'],
+                ],
                 [
                     'text' => 'Peminjaman Aktif',
                     'route' => 'peminjamanAktifTools.index',
