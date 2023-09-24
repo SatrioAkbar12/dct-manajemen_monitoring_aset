@@ -31,7 +31,7 @@ class Kendaraan extends Model
     }
 
     public function aset(): BelongsTo {
-        return $this->belongsTo(Aset::class, 'id_aset', 'id');
+        return $this->belongsTo(Aset::class, 'id_aset', 'id')->withTrashed();
     }
 
     public function masaAktifDokumen(): HasMany {
