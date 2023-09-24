@@ -24,8 +24,13 @@ class RolePermissionSeeder extends Seeder
             $role_admin->givePermissionTo($permission->name);
         }
 
+        $role_user->givePermissionTo('peminjamanBaruKendaraan.index');
+        $role_user->givePermissionTo('peminjamanBaruKendaraan.create');
+        $role_user->givePermissionTo('peminjamanBaruKendaraan.store');
+        $role_user->givePermissionTo('peminjamanBaruKendaraan.del');
+
         $role_user->givePermissionTo('peminjamanAktifKendaraan.index');
-        $role_user->givePermissionTo('peminjamanAktifKendaraan.store');
+        // $role_user->givePermissionTo('peminjamanAktifKendaraan.store');
         $role_user->givePermissionTo('peminjamanAktifKendaraan.returning');
         $role_user->givePermissionTo('peminjamanAktifKendaraan.update');
 
@@ -37,6 +42,11 @@ class RolePermissionSeeder extends Seeder
         $role_user->givePermissionTo('peminjamanAktifTools.index');
         $role_user->givePermissionTo('peminjamanAktifTools.create');
         $role_user->givePermissionTo('peminjamanAktifTools.store');
+        $role_user->givePermissionTo('peminjamanAktifTools.del');
+
+        $role_user->givePermissionTo('peminjamanAktifTools.index');
+        // $role_user->givePermissionTo('peminjamanAktifTools.create');
+        // $role_user->givePermissionTo('peminjamanAktifTools.store');
         $role_user->givePermissionTo('peminjamanAktifTools.returning');
         $role_user->givePermissionTo('peminjamanAktifTools.update');
 
