@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Http\Controllers\TransaksiPeminjamanKendaraan;
+
+use App\Http\Controllers\Controller;
+use App\Models\TransaksiPeminjamanKendaraan;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class RiwayatPeminjamanKendaraanController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('permission:riwayatPeminjamanKendaraan.index|riwayatPeminjamanKendaraan.detail');
+    }
+
+    public function index() {
+        $riwayat_peminjaman = TransaksiPeminjamanKendaraan::where('aktif', 0)->where('approval_pengembalian', 1)->orderBy('tanggal_waktu_kembali', 'desc');
+        $auth_user = Auth::user();
+
+        if( !($auth_user->hasRole('admin')) ) {
+            $riwayat_peminjaman = $riwayat_peminjaman->where('id_user', $auth_user->id);
+        }
+
+        $riwayat_peminjaman = $riwayat_peminjaman->paginate(10);
+
+        return view('transaksiPeminjamanKendaraan.riwayatPeminjaman.index', ['data_riwayat_peminjaman' => $riwayat_peminjaman]);
+    }
+
+    public function detail($id) {
+        $riwayat_peminjaman = TransaksiPeminjamanKendaraan::find($id);
+
+        return view('transaksiPeminjamanKendaraan.riwayatPeminjaman.detail', ['data_riwayat_peminjaman' => $riwayat_peminjaman]);
+    }
+}

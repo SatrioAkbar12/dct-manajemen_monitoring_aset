@@ -326,17 +326,25 @@ return [
             'text'    => 'Transaksi Peminjaman Kendaraan',
             'icon'    => 'fas fa-fw fa-truck',
             'can'     => [
-                'peminjamanAktifKendaraan.index', 'peminjamanAktifKendaraan.store', 'peminjamanAktifKendaraan.returning', 'peminjamanAktifKendaraan.update',
+                'peminjamanBaruKendaraan.index', 'peminjamanBaruKendaraan.create', 'peminjamanBaruKendaraan.store', 'peminjamanBaruKendaraan.review', 'peminjamanBaruKendaraan.approval', 'peminjamanBaruKendaraan.del',
+                'peminjamanAktifKendaraan.index', 'peminjamanAktifKendaraan.returning', 'peminjamanAktifKendaraan.update',
                 'approvalPengembalianKendaraan.index', 'approvalPengembalianKendaraan.review', 'approvalPengembalianKendaraan.approval',
-                'riwayatPeminjamanKendaraan.index', 'riwayatPeminjamanKendaraan.detail'
+                'riwayatPeminjamanKendaraan.index', 'riwayatPeminjamanKendaraan.detail',
             ],
             'submenu' => [
+                [
+                    'text' => 'Peminjaman Baru',
+                    'route' => 'peminjamanBaruKendaraan.index',
+                    'icon' => 'fas fa-fw fa-plus',
+                    'active' => ['peminjaman-baru-kendaraan', 'regex:@^peminjaman-baru-kendaraan/[0-9]+/review$@'],
+                    'can' => ['peminjamanBaruKendaraan.index', 'peminjamanBaruKendaraan.create', 'peminjamanBaruKendaraan.store', 'peminjamanBaruKendaraan.review', 'peminjamanBaruKendaraan.approval', 'peminjamanBaruKendaraan.del'],
+                ],
                 [
                     'text' => 'Peminjaman Aktif',
                     'route' => 'peminjamanAktifKendaraan.index',
                     'icon' => 'fas fa-fw fa-route',
                     'active' => ['peminjaman-aktif-kendaraan', 'regex:@^peminjaman-aktif-kendaraan/[0-9]+$@'],
-                    'can' => ['peminjamanAktifKendaraan.index', 'peminjamanAktifKendaraan.store', 'peminjamanAktifKendaraan.returning', 'peminjamanAktifKendaraan.update'],
+                    'can' => ['peminjamanAktifKendaraan.index', 'peminjamanAktifKendaraan.returning', 'peminjamanAktifKendaraan.update'],
                 ],
                 [
                     'text' => 'Approval Pengembalian',
@@ -358,17 +366,25 @@ return [
             'text' => 'Transaksi Peminjaman Tools',
             'icon' => 'fas fa-fw fa-hammer',
             'can' => [
+                'peminjamanBaruTools.index', 'peminjamanBaruTools.create', 'peminjamanBaruTools.store', 'peminjamanBaruTools.review', 'peminjamanBaruTools.approval', 'peminjamanBaruTools.del',
                 'peminjamanAktifTools.index', 'peminjamanAktifTools.create', 'peminjamanAktifTools.store', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update',
                 'approvalPengembalianTools.index', 'approvalPengembalianTools.review', 'approvalPengembalianTools.approval',
                 'riwayatPeminjamanTools.index', 'riwayatPeminjamanTools.detail',
             ],
             'submenu' => [
                 [
+                    'text' => 'Peminjaman Baru',
+                    'route' => 'peminjamanBaruTools.index',
+                    'icon' => 'fas fa-fw fa-plus',
+                    'active' => ['peminjaman-baru-tools', 'regex:@^peminjaman-baru-tools/[0-9]+/review$@'],
+                    'can' => ['peminjamanBaruTools.index', 'peminjamanBaruTools.create', 'peminjamanBaruTools.store', 'peminjamanBaruTools.review', 'peminjamanBaruTools.approval', 'peminjamanBaruTools.del'],
+                ],
+                [
                     'text' => 'Peminjaman Aktif',
                     'route' => 'peminjamanAktifTools.index',
                     'icon' => 'fas fa-fw fa-route',
                     'active' => ['peminjaman-aktif-tools', 'regex:@^peminjaman-aktif-tools/[0-9]+$@'],
-                    'can' => ['peminjamanAktifTools.index', 'peminjamanAktifTools.create', 'peminjamanAktifTools.store', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update'],
+                    'can' => ['peminjamanAktifTools.index', 'peminjamanAktifTools.returning', 'peminjamanAktifTools.update'],
                 ],
                 [
                     'text' => 'Approval Pengembalian',

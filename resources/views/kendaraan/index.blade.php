@@ -48,7 +48,7 @@
                                         <a href="{{ route('kendaraan.show', $d->id) }}"><button type="button" class="mx-2 my-1 btn btn-info">Update</button></a>
                                     @endcan
                                     @can('kendaraan.del')
-                                        <a href="{{ route('kendaraan.del', $d->id) }}" class="mx-2 my-1 btn btn-danger" data-confirm-delete="true">Delete</button>
+                                        <a href="{{ route('kendaraan.del', $d->id) }}" class="mx-2 my-1 btn btn-danger" data-confirm-delete="true">Delete</a>
                                     @endcan
                                 </td>
                             </tr>

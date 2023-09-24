@@ -17,14 +17,18 @@ class KondisiKendaraanTransaksasiPeminjaman extends Model
         'id_transaksi',
         'status_kondisi',
         'deskripsi',
-        'foto_depan',
-        'foto_belakang',
-        'foto_kanan',
-        'foto_kiri',
         'km_terakhir',
         'jumlah_km',
         'foto_speedometer_sebelum',
         'foto_speedometer_sesudah',
+        'foto_depan_kembali',
+        'foto_belakang_kembali',
+        'foto_kanan_kembali',
+        'foto_kiri_kembali',
+        'foto_depan_pinjam',
+        'foto_belakang_pinjam',
+        'foto_kanan_pinjam',
+        'foto_kiri_pinjam',
     ];
 
     public function transaksiPeminjamanKendaraan(): BelongsTo {

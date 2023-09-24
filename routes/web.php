@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\ApprovalPengembalianKendaraanController;
-use App\Http\Controllers\ApprovalPengembalianToolController;
 use App\Http\Controllers\AsetController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\GudangController;
@@ -10,15 +8,11 @@ use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\KepemilikanAsetController;
 use App\Http\Controllers\MasaAktifDokumenController;
-use App\Http\Controllers\PeminjamanAktifController;
-use App\Http\Controllers\PeminjamanAktifToolController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Reporting\StatistikPeminjamanUserController;
 use App\Http\Controllers\Reporting\StatistikPenggunaanKendaraanController;
 use App\Http\Controllers\Reporting\StatistikPenggunaanToolsController;
-use App\Http\Controllers\RiwayatPeminjamanController;
-use App\Http\Controllers\RiwayatPeminjamanToolController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\ServisRutinKendaraanController;
@@ -26,6 +20,14 @@ use App\Http\Controllers\TelegramDataController;
 use App\Http\Controllers\TestTelegramBotController;
 use App\Http\Controllers\ToolController;
 use App\Http\Controllers\ToolsGroupController;
+use App\Http\Controllers\TransaksiPeminjamanKendaraan\ApprovalPengembalianKendaraanController;
+use App\Http\Controllers\TransaksiPeminjamanKendaraan\PeminjamanAktifKendaraanController;
+use App\Http\Controllers\TransaksiPeminjamanKendaraan\PeminjamanBaruKendaraanController;
+use App\Http\Controllers\TransaksiPeminjamanKendaraan\RiwayatPeminjamanKendaraanController;
+use App\Http\Controllers\TransaksiPeminjamanTool\ApprovalPengembalianToolController;
+use App\Http\Controllers\TransaksiPeminjamanTool\PeminjamanAktifToolController;
+use App\Http\Controllers\TransaksiPeminjamanTool\PeminjamanBaruToolController;
+use App\Http\Controllers\TransaksiPeminjamanTool\RiwayatPeminjamanToolController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -135,9 +137,17 @@ Route::middleware('auth')->controller(ServisRutinKendaraanController::class)->pr
     Route::middleware('permission:servisRutin.store')->post('/{id_kendaraan}', 'store')->name('store');
 });
 
-Route::middleware('auth')->controller(PeminjamanAktifController::class)->prefix('peminjaman-aktif-kendaraan')->name('peminjamanAktifKendaraan.')->group(function() {
+Route::middleware('auth')->controller(PeminjamanBaruKendaraanController::class)->prefix('peminjaman-baru-kendaraan')->name('peminjamanBaruKendaraan.')->group(function() {
+    Route::middleware('permission:peminjamanBaruKendaraan.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:peminjamanBaruKendaraan.create')->post('/', 'create')->name('create');
+    Route::middleware('permission:peminjamanBaruKendaraan.store')->post('/store', 'store')->name('store');
+    Route::middleware('permission:peminjamanBaruKendaraan.review')->get('/{id}/review', 'review')->name('review');
+    Route::middleware('permission:peminjamanBaruKendaraan.approval')->post('/{id}/approval', 'approval')->name('approval');
+    Route::middleware('permission:peminjamanBaruKendaraan.del')->delete('/{id}', 'del')->name('del');
+});
+
+Route::middleware('auth')->controller(PeminjamanAktifKendaraanController::class)->prefix('peminjaman-aktif-kendaraan')->name('peminjamanAktifKendaraan.')->group(function() {
     Route::middleware('permission:peminjamanAktifKendaraan.index')->get('/', 'index')->name('index');
-    Route::middleware('permission:peminjamanAktifKendaraan.store')->post('/', 'store')->name('store');
     Route::middleware('permission:peminjamanAktifKendaraan.returning')->get('/{id}', 'returning')->name('returning');
     Route::middleware('permission:peminjamanAktifKendaraan.update')->post('/{id}', 'update')->name('update');
 });
@@ -148,7 +158,7 @@ Route::middleware('auth')->controller(ApprovalPengembalianKendaraanController::c
     Route::middleware('permission:approvalPengembalianKendaraan.approval')->post('/{id}', 'approval')->name('approval');
 });
 
-Route::middleware('auth')->controller(RiwayatPeminjamanController::class)->prefix('riwayat-peminjaman-kendaraan')->name('riwayatPeminjamanKendaraan.')->group(function() {
+Route::middleware('auth')->controller(RiwayatPeminjamanKendaraanController::class)->prefix('riwayat-peminjaman-kendaraan')->name('riwayatPeminjamanKendaraan.')->group(function() {
     Route::middleware('permission:riwayatPeminjamanKendaraan.index')->get('/', 'index')->name('index');
     Route::middleware('permission:riwayatPeminjamanKendaraan.detail')->get('/{id}', 'detail')->name('detail');
 });
@@ -189,10 +199,17 @@ Route::middleware('auth')->controller(ToolController::class)->prefix('tools')->n
     Route::middleware('permission:tools.del')->delete('/{id}/delete', 'del')->name('del');
 });
 
+Route::middleware('auth')->controller(PeminjamanBaruToolController::class)->prefix('peminjaman-baru-tools')->name('peminjamanBaruTools.')->group(function() {
+    Route::middleware('permission:peminjamanBaruTools.index')->get('/', 'index')->name('index');
+    Route::middleware('permission:peminjamanBaruTools.create')->post('/', 'create')->name('create');
+    Route::middleware('permission:peminjamanBaruTools.store')->post('/store', 'store')->name('store');
+    Route::middleware('permission:peminjamanBaruTools.review')->get('/{id}/review', 'review')->name('review');
+    Route::middleware('permission:peminjamanBaruTools.approval')->post('/{id}/approval', 'approval')->name('approval');
+    Route::middleware('permission:peminjamanBaruTools.del')->delete('/{id}', 'del')->name('del');
+});
+
 Route::middleware('auth')->controller(PeminjamanAktifToolController::class)->prefix('peminjaman-aktif-tools')->name('peminjamanAktifTools.')->group(function() {
     Route::middleware('permission:peminjamanAktifTools.index')->get('/', 'index')->name('index');
-    Route::middleware('permission:peminjamanAktifTools.create')->post('/', 'create')->name('create');
-    Route::middleware('permission:peminjamanAktifTools.store')->post('/create', 'store')->name('store');
     Route::middleware('permission:peminjamanAktifTools.returning')->get('/{id}', 'returning')->name('returning');
     Route::middleware('permission:peminjamanAktifTools.update')->post('/{id}', 'update')->name('update');
 });
